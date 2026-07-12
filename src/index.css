@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0e1a2b;
+  --gold: #c79a3e;
+  --gold-lt: #e6c87a;
+  --ivory: #f7f1e6;
+  --cream: #fbf7ef;
+  --rose: #b4506b;
+  --text: #23282f;
+  --muted: #6b6256;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Spectral', Georgia, serif;
+  background-color: var(--ivory);
+  color: var(--text);
+  background-image: var(--paper-noise, none);
+  background-repeat: repeat;
+}
+
+::selection {
+  background: rgba(199, 154, 62, 0.28);
+  color: var(--ink);
+}
+
+/* Small-caps eyebrow / label */
+.eyebrow,
+.label-caps,
+.btn-caps {
+  font-family: 'Spectral', Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-weight: 500;
+  font-size: 0.7rem;
+}
+
+.label-caps {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+}
+
+/* Display headings */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+/* Gold hairline */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(199, 154, 62, 0.5),
+    transparent
+  );
+}
+
+.hairline-solid {
+  height: 1px;
+  background: rgba(199, 154, 62, 0.35);
+}
+
+/* Ornamental divider */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(199, 154, 62, 0.7);
+  font-size: 0.95rem;
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  max-width: 120px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(199, 154, 62, 0.45),
+    transparent
+  );
+}
+
+/* Buttons */
+.btn-gold {
+  background: linear-gradient(180deg, #d4ad52 0%, #c79a3e 100%);
+  color: #0e1a2b;
+  border: 1px solid rgba(199, 154, 62, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -10px rgba(199, 154, 62, 0.7);
+  filter: brightness(1.04);
+}
+
+.btn-gold-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(199, 154, 62, 0.55);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.btn-gold-outline:hover {
+  background: rgba(199, 154, 62, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Book cover hover */
+.book-tilt {
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.book-tilt:hover {
+  transform: translateY(-10px) rotate(-0.6deg);
+  box-shadow: 0 30px 50px -16px rgba(14, 26, 43, 0.55);
+}
+
+/* Paper grain overlay sections */
+.paper-grain {
+  position: relative;
+}
+.paper-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--paper-noise, none);
+  background-repeat: repeat;
+  pointer-events: none;
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+
+/* Focus ring (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(199, 154, 62, 0.4);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(199, 154, 62, 0.6);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility: staggered fade-up (used with inline animation-delay) */
+.fade-up {
+  opacity: 0;
+  animation: rise 0.8s ease forwards;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Prose tweaks */
+.prose-literary p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+.prose-literary p + p {
+  margin-top: 1.1rem;
+}
