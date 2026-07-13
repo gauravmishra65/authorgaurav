@@ -45,11 +45,11 @@ export default function Books() {
               {list.map((b) => (
                 <article key={b.id} className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
                   <div className="flex justify-center md:justify-start">
-                    <BookCover {...b} size="md" />
+                    <BookCover {...b} size="md" href={`/books/${b.slug}`} />
                   </div>
                   <div>
                     <div className="flex items-center gap-3 flex-wrap mb-2">
-                      <h2 className="font-display text-2xl md:text-3xl text-ink">{b.title}</h2>
+                      <Link to={`/books/${b.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold transition-colors">{b.title}</Link>
                       {b.isHindi && (
                         <span className="label-caps text-2xs text-rose border border-rose/40 rounded-full px-2.5 py-0.5">Hindi</span>
                       )}
@@ -74,6 +74,30 @@ export default function Books() {
           </section>
         );
       })}
+
+      {/* MICROSITES */}
+      <section className="bg-ink-soft text-ivory">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="text-center mb-10">
+            <p className="eyebrow text-gold-lt mb-3">Explore the Dedicated Worlds</p>
+            <h2 className="font-display text-2xl md:text-3xl">Two books, two microsites</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer"
+              className="group rounded-md border border-gold/25 bg-ink p-8 text-center transition-all hover:-translate-y-1 hover:border-gold/50">
+              <p className="font-display text-xl mb-2 group-hover:text-gold-lt transition-colors">Offbeat Love</p>
+              <p className="text-sm text-ivory/70 mb-4">Visit the dedicated site for music, extras, and the world of the novel.</p>
+              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">off-beat-love.com <ExternalLink size={13} /></span>
+            </a>
+            <a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer"
+              className="group rounded-md border border-gold/25 bg-ink p-8 text-center transition-all hover:-translate-y-1 hover:border-gold/50">
+              <p className="font-display text-xl mb-2 group-hover:text-gold-lt transition-colors">Shadow Code</p>
+              <p className="text-sm text-ivory/70 mb-4">Visit the dedicated site for behind-the-scenes and the world of the thriller.</p>
+              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">the-shadow-code.com <ExternalLink size={13} /></span>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <EmailStrip />
 

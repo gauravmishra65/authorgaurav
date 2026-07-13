@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import SocialLinks from './SocialLinks';
 
 const links = [
   { label: 'Home', to: '/' },
@@ -47,7 +48,8 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-5">
+          <SocialLinks size={15} className="hidden lg:flex" iconClassName="text-text/50 hover:text-gold transition-colors" />
           <a href="#free-chapter" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
         </div>
 
@@ -67,6 +69,9 @@ export default function Nav() {
           ))}
           <li className="pt-3">
             <a href="#free-chapter" className="btn-caps btn-gold inline-block rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
+          </li>
+          <li className="pt-4">
+            <SocialLinks size={17} iconClassName="text-text/60 hover:text-gold transition-colors" />
           </li>
         </ul>
       </div>

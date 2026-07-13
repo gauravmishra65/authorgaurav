@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Mail, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
+import { socialLinks } from '../data/social';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', circle: false });
@@ -100,8 +101,8 @@ export default function Contact() {
             <div className="rounded-md border border-gold/20 bg-cream p-6">
               <p className="label-caps text-gold mb-4">Social</p>
               <div className="flex gap-4">
-                {['Instagram', 'Facebook', 'X', 'YouTube'].map((s) => (
-                  <a key={s} href="#" aria-label={s} className="label-caps text-2xs text-muted hover:text-gold transition-colors border border-gold/25 rounded-full px-3 py-2">{s}</a>
+                {socialLinks.map((s) => (
+                  <a key={s.label} href={s.href} aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
                 ))}
               </div>
             </div>
