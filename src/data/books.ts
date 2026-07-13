@@ -3,15 +3,16 @@ export type Genre = 'Fiction' | 'Memoir' | 'Devotional';
 export interface Book {
   id: string;
   title: string;
-  titleHtml?: string; // for mixed-color titles
+  titleHtml?: string;
   author: string;
   tagline: string;
   synopsis: string;
   genre: Genre;
   isHindi?: boolean;
-  gradient: string; // tailwind gradient classes
+  gradient: string;
   textOnDark?: boolean;
-  bookWebsite?: string; // external
+  imageSrc?: string;
+  bookWebsite?: string;
   buyLinks: { label: string; href: string }[];
 }
 
@@ -26,6 +27,7 @@ export const books: Book[] = [
     genre: 'Fiction',
     gradient: 'from-ink via-rose to-amber-400',
     textOnDark: true,
+    imageSrc: '/images/book-covers/generated-image.png',
     bookWebsite: 'https://off-beat-love.com',
     buyLinks: [
       { label: 'Amazon', href: '#' },
@@ -44,6 +46,7 @@ export const books: Book[] = [
     isHindi: true,
     gradient: 'from-ink via-rose to-amber-400',
     textOnDark: true,
+    imageSrc: '/images/book-covers/generated-image.png',
     bookWebsite: 'https://off-beat-love.com',
     buyLinks: [
       { label: 'Amazon', href: '#' },
@@ -54,15 +57,34 @@ export const books: Book[] = [
   {
     id: 'shadow-code',
     title: 'Shadow Code',
-    titleHtml: '<span class="text-slate-200">SHADOW</span> <span class="text-gold-lt">CODE</span>',
+    titleHtml: '<span style="color:#e2e8f0">SHADOW</span> <span style="color:#E6C87A">CODE</span>',
     author: 'Gaurav Mishra',
     tagline: 'In a world of algorithms and lies, the truth hides in the shadows.',
     synopsis:
-      'A taut techno-thriller that moves between Mumbai’s financial district and the dark architecture of the internet. When a whistleblower uncovers a pattern buried in code, the chase that follows blurs the line between watcher and watched.',
+      "A taut techno-thriller that moves between Mumbai's financial district and the dark architecture of the internet. When a whistleblower uncovers a pattern buried in code, the chase that follows blurs the line between watcher and watched.",
     genre: 'Fiction',
     gradient: 'from-[#0a1424] via-[#0e1a2b] to-[#16243a]',
     textOnDark: true,
+    imageSrc: '/images/book-covers/Shadow_Code-1.jpg',
     bookWebsite: 'https://the-shadow-code.com',
+    buyLinks: [
+      { label: 'Amazon', href: '#' },
+      { label: 'Flipkart', href: '#' },
+      { label: 'Kindle', href: '#' },
+    ],
+  },
+  {
+    id: 'nirdosh-gangster',
+    title: 'निर्दोष गैंगस्टर',
+    author: 'गौरव मिश्रा',
+    tagline: 'Innocent on the inside. Dangerous on the outside.',
+    synopsis:
+      "A gripping crime thriller in Hindi — the story of a man trapped between two worlds, forced to wear a gangster's face while carrying an innocent heart. Tension, loyalty, and survival collide.",
+    genre: 'Fiction',
+    isHindi: true,
+    gradient: 'from-[#111] via-[#1a1a1a] to-[#222]',
+    textOnDark: true,
+    imageSrc: '/images/book-covers/generated-image_(4).png',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
@@ -79,6 +101,7 @@ export const books: Book[] = [
     genre: 'Memoir',
     gradient: 'from-amber-200 via-gold-lt to-cream',
     textOnDark: false,
+    imageSrc: '/images/book-covers/generated-image-1.jpg',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
@@ -95,6 +118,7 @@ export const books: Book[] = [
     genre: 'Devotional',
     gradient: 'from-[#0d1b46] via-[#10245e] to-[#0a1438]',
     textOnDark: true,
+    imageSrc: '/images/book-covers/MAA-Lalita.jpeg',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
@@ -111,6 +135,7 @@ export const books: Book[] = [
     genre: 'Devotional',
     gradient: 'from-[#3a0d1a] via-[#5a1026] to-[#2a0810]',
     textOnDark: true,
+    imageSrc: '/images/book-covers/MAA-Lalita.jpeg',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },

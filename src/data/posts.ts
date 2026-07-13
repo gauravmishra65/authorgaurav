@@ -15,19 +15,14 @@ export interface Post {
 }
 
 export const blogCategories = [
-  'All',
-  'Writing Craft',
-  'Behind the Books',
-  'Spiritual Reflections',
-  'Book Updates',
+  'All', 'Writing Craft', 'Behind the Books', 'Spiritual Reflections', 'Book Updates',
 ] as const;
 
 export const posts: Post[] = [
   {
     id: 'vishnu-sahasranama-daily-life',
     title: 'Vishnu Sahasranama in daily life',
-    excerpt:
-      'How a thousand-year-old hymn can become a daily anchor — not as ritual, but as a way of seeing the world with steadier eyes.',
+    excerpt: 'How a thousand-year-old hymn can become a daily anchor — not as ritual, but as a way of seeing the world with steadier eyes.',
     category: 'Spiritual Reflections',
     date: 'May 12, 2026',
     readTime: '6 min',
@@ -36,8 +31,7 @@ export const posts: Post[] = [
   {
     id: 'writing-love-across-two-worlds',
     title: 'Writing love across two worlds',
-    excerpt:
-      'On building Offbeat Love — the music, the Mumbai backdrop, and the quiet courage it takes to let characters choose each other across a divide.',
+    excerpt: 'On building Offbeat Love — the music, the Mumbai backdrop, and the quiet courage it takes to let characters choose each other across a divide.',
     category: 'Behind the Books',
     date: 'Apr 28, 2026',
     readTime: '7 min',
@@ -46,8 +40,7 @@ export const posts: Post[] = [
   {
     id: 'idea-to-finished-manuscript',
     title: 'From idea to finished manuscript',
-    excerpt:
-      'A practical, honest map of the writing process — from the first half-formed thought to the final polished draft you can hand to a reader.',
+    excerpt: 'A practical, honest map of the writing process — from the first half-formed thought to the final polished draft you can hand to a reader.',
     category: 'Writing Craft',
     date: 'Apr 14, 2026',
     readTime: '9 min',
@@ -56,8 +49,7 @@ export const posts: Post[] = [
   {
     id: 'why-i-explain-the-hymns',
     title: "Why I explain the hymns, not just recite them",
-    excerpt:
-      "Devotional texts shouldn't be museums. Here's why I translate, unpack, and connect them to everyday life instead of leaving them on a high shelf.",
+    excerpt: "Devotional texts shouldn't be museums. Here's why I translate, unpack, and connect them to everyday life instead of leaving them on a high shelf.",
     category: 'Spiritual Reflections',
     date: 'Mar 30, 2026',
     readTime: '5 min',
@@ -66,8 +58,7 @@ export const posts: Post[] = [
   {
     id: 'road-that-became-journey-of-grace',
     title: 'The road that became A Journey of Grace',
-    excerpt:
-      'The real trips, detours, and quiet conversations that shaped my travel memoir — and what I learned about faith while moving through unfamiliar places.',
+    excerpt: 'The real trips, detours, and quiet conversations that shaped my travel memoir — and what I learned about faith while moving through unfamiliar places.',
     category: 'Behind the Books',
     date: 'Mar 16, 2026',
     readTime: '8 min',
@@ -76,8 +67,7 @@ export const posts: Post[] = [
   {
     id: 'advice-for-beginner-self',
     title: "Advice I'd give my beginner self",
-    excerpt:
-      'A letter to the writer I was at the start — the habits, the patience, the community, and the stubbornness that actually mattered.',
+    excerpt: 'A letter to the writer I was at the start — the habits, the patience, the community, and the stubbornness that actually mattered.',
     category: 'Writing Craft',
     date: 'Mar 2, 2026',
     readTime: '6 min',

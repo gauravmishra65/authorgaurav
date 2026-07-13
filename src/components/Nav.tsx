@@ -16,9 +16,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setOpen(false); }, [location.pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -28,34 +26,17 @@ export default function Nav() {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-ivory/85 backdrop-blur-md shadow-[0_1px_0_0_rgba(199,154,62,0.25)]'
-          : 'bg-ivory/60 backdrop-blur-sm'
-      }`}
-    >
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-ivory/85 backdrop-blur-md shadow-[0_1px_0_0_rgba(199,154,62,0.25)]' : 'bg-ivory/60 backdrop-blur-sm'}`}>
       <div className="hairline-solid w-full opacity-60" />
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-        {/* Brand */}
-        <Link
-          to="/"
-          className="font-display text-xl tracking-tight text-ink"
-          aria-label="Gaurav Mishra — home"
-        >
+        <Link to="/" className="font-display text-xl tracking-tight text-ink" aria-label="Gaurav Mishra — home">
           Gaurav<span className="text-gold">Mishra</span>
         </Link>
 
-        {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <li key={l.to}>
-              <Link
-                to={l.to}
-                className={`label-caps transition-colors hover:text-gold ${
-                  location.pathname === l.to ? 'text-gold' : 'text-text/80'
-                }`}
-              >
+              <Link to={l.to} className={`label-caps transition-colors hover:text-gold ${location.pathname === l.to ? 'text-gold' : 'text-text/80'}`}>
                 {l.label}
               </Link>
             </li>
@@ -63,51 +44,25 @@ export default function Nav() {
         </ul>
 
         <div className="hidden md:block">
-          <a
-            href="#free-chapter"
-            className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs"
-          >
-            Free Chapter
-          </a>
+          <a href="#free-chapter" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-ink p-2 -mr-2"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-        >
+        <button className="md:hidden text-ink p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-[max-height] duration-300 ease-out ${
-          open ? 'max-h-96' : 'max-h-0'
-        }`}
-      >
+      <div className={`md:hidden overflow-hidden transition-[max-height] duration-300 ease-out ${open ? 'max-h-96' : 'max-h-0'}`}>
         <ul className="flex flex-col gap-1 px-6 pb-5 pt-1 bg-ivory/95 backdrop-blur-md">
           {links.map((l) => (
             <li key={l.to}>
-              <Link
-                to={l.to}
-                className={`label-caps block py-2.5 border-b border-gold/15 ${
-                  location.pathname === l.to ? 'text-gold' : 'text-text/80'
-                }`}
-              >
+              <Link to={l.to} className={`label-caps block py-2.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold' : 'text-text/80'}`}>
                 {l.label}
               </Link>
             </li>
           ))}
           <li className="pt-3">
-            <a
-              href="#free-chapter"
-              className="btn-caps btn-gold inline-block rounded-sm px-4 py-2 text-2xs"
-            >
-              Free Chapter
-            </a>
+            <a href="#free-chapter" className="btn-caps btn-gold inline-block rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
           </li>
         </ul>
       </div>

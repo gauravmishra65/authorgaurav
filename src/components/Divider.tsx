@@ -1,6 +1,4 @@
-interface DividerProps {
-  className?: string;
-}
+interface DividerProps { className?: string; }
 
 export default function Divider({ className = '' }: DividerProps) {
   return (

@@ -8,9 +8,7 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col bg-ivory">
       <ScrollToTop />
       <Nav />
-      <main className="flex-1">
-        <Outlet />
-      </main>
+      <main className="flex-1"><Outlet /></main>
       <Footer />
     </div>
   );
