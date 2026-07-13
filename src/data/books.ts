@@ -46,7 +46,7 @@ export const books: Book[] = [
     isHindi: true,
     gradient: 'from-ink via-rose to-amber-400',
     textOnDark: true,
-    imageSrc: '/images/book-covers/generated-image.png',
+    imageSrc: '/images/book-covers/generated-image-1.png',
     bookWebsite: 'https://off-beat-love.com',
     buyLinks: [
       { label: 'Amazon', href: '#' },
@@ -84,7 +84,7 @@ export const books: Book[] = [
     isHindi: true,
     gradient: 'from-[#111] via-[#1a1a1a] to-[#222]',
     textOnDark: true,
-    imageSrc: '/images/book-covers/generated-image_(4).png',
+    imageSrc: '/images/book-covers/innocent.png',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
@@ -118,7 +118,7 @@ export const books: Book[] = [
     genre: 'Devotional',
     gradient: 'from-[#0d1b46] via-[#10245e] to-[#0a1438]',
     textOnDark: true,
-    imageSrc: '/images/book-covers/MAA-Lalita.jpeg',
+    imageSrc: '/images/book-covers/VS.jpeg',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
