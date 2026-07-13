@@ -62,7 +62,7 @@ export default function Home() {
                 <BookCover {...shadowCode} size="sm" href={`/books/${shadowCode.slug}`} />
               </div>
               <div className="relative z-10 fade-up" style={{ animationDelay: '0.25s' }}>
-                <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} />
+                <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} priority />
               </div>
               <div className="hidden sm:block fade-up md:-ml-9 md:rotate-[8deg]" style={{ animationDelay: '0.55s' }}>
                 <BookCover {...journey} size="sm" href={`/books/${journey.slug}`} />

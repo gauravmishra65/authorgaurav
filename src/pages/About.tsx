@@ -24,6 +24,8 @@ export default function About() {
                   <img
                     src="/images/author/GM-Photo.jpg"
                     alt="Gaurav Mishra — author portrait"
+                    width={1824}
+                    height={2736}
                     className="w-full h-full object-cover object-top"
                     onError={() => setImgError(true)}
                   />

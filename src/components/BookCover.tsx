@@ -15,6 +15,8 @@ interface BookCoverProps {
   href?: string;
   external?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /** Set for the one above-the-fold cover (e.g. the hero) so it isn't lazy-loaded. */
+  priority?: boolean;
 }
 
 const pixelSizes = {
@@ -25,7 +27,7 @@ const pixelSizes = {
 
 export default function BookCover({
   title, titleHtml, author, tagline, gradient, textOnDark = true,
-  imageSrc, imageWidth, imageHeight, href, external = false, size = 'md',
+  imageSrc, imageWidth, imageHeight, href, external = false, size = 'md', priority = false,
 }: BookCoverProps) {
   const [imgError, setImgError] = useState(false);
 
@@ -47,7 +49,7 @@ export default function BookCover({
           height={imageHeight ?? pixelSizes[size].h}
           className="w-full h-full object-contain object-center"
           onError={() => setImgError(true)}
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
         />
       ) : (
         <div className={`w-full h-full bg-gradient-to-br ${gradient} flex flex-col items-center justify-between p-4 text-center`}>

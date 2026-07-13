@@ -17,6 +17,19 @@ export default function BookDetail() {
       <Seo
         title={`${book.title} — Gaurav Mishra`}
         description={book.tagline || book.synopsis.slice(0, 155)}
+        path={`/books/${book.slug}`}
+        image={book.imageSrc}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Book',
+          name: book.title,
+          author: { '@type': 'Person', name: 'Gaurav Mishra' },
+          description: book.synopsis,
+          genre: book.genre,
+          inLanguage: book.language === 'Hindi' ? 'hi' : 'en',
+          image: book.imageSrc ? `https://authorgaurav.com${book.imageSrc}` : undefined,
+          url: `https://authorgaurav.com/books/${book.slug}`,
+        }}
       />
 
       <section className="bg-ink text-ivory">

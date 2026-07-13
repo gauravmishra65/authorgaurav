@@ -15,8 +15,11 @@ export default function AboutTeaser() {
                 <img
                   src="/images/author/GM-Photo.jpg"
                   alt="Gaurav Mishra — author portrait"
+                  width={1824}
+                  height={2736}
                   className="w-full h-full object-cover object-top"
                   onError={() => setImgError(true)}
+                  loading="lazy"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-center px-6">
