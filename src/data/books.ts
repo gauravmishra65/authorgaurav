@@ -101,7 +101,7 @@ export const books: Book[] = [
     genre: 'Memoir',
     gradient: 'from-amber-200 via-gold-lt to-cream',
     textOnDark: false,
-    imageSrc: '/images/book-covers/generated-image (4).png',
+    imageSrc: '/images/book-covers/generated-image_(4).png',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
