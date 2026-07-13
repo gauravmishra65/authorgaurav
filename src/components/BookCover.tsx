@@ -10,30 +10,42 @@ interface BookCoverProps {
   gradient: string;
   textOnDark?: boolean;
   imageSrc?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   href?: string;
   external?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
 
+const pixelSizes = {
+  sm: { w: 150, h: 225 },
+  md: { w: 200, h: 300 },
+  lg: { w: 240, h: 360 },
+};
+
 export default function BookCover({
   title, titleHtml, author, tagline, gradient, textOnDark = true,
-  imageSrc, href, external = false, size = 'md',
+  imageSrc, imageWidth, imageHeight, href, external = false, size = 'md',
 }: BookCoverProps) {
   const [imgError, setImgError] = useState(false);
 
   const sizes = {
     sm: 'w-[150px] h-[225px]',
-    md: 'w-[200px] h-[300px]',
+    // Shrinks to fit narrow multi-column grids (e.g. the 2-up mobile bookshelf)
+    // before growing to its full size once the grid gives it more room.
+    md: 'w-[110px] h-[165px] sm:w-[160px] sm:h-[240px] lg:w-[200px] lg:h-[300px]',
     lg: 'w-[240px] h-[360px]',
   };
 
   const inner = (
-    <div className={`book-tilt relative ${sizes[size]} rounded-md shadow-book overflow-hidden border border-black/10 flex-shrink-0`}>
+    <div className={`book-tilt relative ${sizes[size]} rounded-md shadow-book overflow-hidden border border-black/10 flex-shrink-0 bg-gradient-to-br ${gradient}`}>
       {imageSrc && !imgError ? (
         <img
           src={imageSrc}
           alt={`${title} book cover`}
-          className="w-full h-full object-cover object-center"
+          width={imageWidth ?? pixelSizes[size].w}
+          height={imageHeight ?? pixelSizes[size].h}
+          className="w-full h-full object-contain object-center"
           onError={() => setImgError(true)}
           loading="lazy"
         />

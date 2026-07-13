@@ -7,7 +7,7 @@ export default function AboutTeaser() {
 
   return (
     <section className="bg-cream">
-      <div className="mx-auto max-w-5xl px-6 py-20">
+      <div className="mx-auto max-w-5xl px-6 pt-10 pb-20">
         <div className="grid items-center gap-10 md:grid-cols-[1fr_1.4fr]">
           <div className="relative">
             <div className="aspect-[3/4] rounded-md border border-gold/25 shadow-book overflow-hidden bg-gradient-to-br from-ink-soft via-ink to-[#16243a]">

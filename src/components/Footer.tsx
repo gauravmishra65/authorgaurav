@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Youtube, Mail } from 'lucide-react';
+import { Instagram, Facebook, Youtube } from 'lucide-react';
+import NewsletterForm from './NewsletterForm';
 
 function XIcon() {
   return (
@@ -11,16 +11,6 @@ function XIcon() {
 }
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [done, setDone] = useState(false);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    // // Connect: MailerLite/ConvertKit subscribe endpoint here.
-    setDone(true);
-  };
-
   return (
     <footer className="relative bg-ink text-ivory">
       <div className="hairline-solid w-full opacity-30" />
@@ -53,26 +43,7 @@ export default function Footer() {
 
           <div>
             <p className="label-caps text-gold mb-4">Newsletter</p>
-            {done ? (
-              <p className="text-sm text-gold-lt">Thank you — you're subscribed.</p>
-            ) : (
-              <form onSubmit={submit} className="flex flex-col gap-2.5">
-                <label htmlFor="foot-email" className="sr-only">Email address</label>
-                <div className="flex items-center gap-2 border-b border-gold/40 pb-2">
-                  <Mail size={16} className="text-gold/70" />
-                  <input
-                    id="foot-email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
-                    className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-none"
-                  />
-                </div>
-                <button type="submit" className="btn-caps btn-gold-outline self-start px-4 py-2 text-2xs rounded-sm">Subscribe</button>
-              </form>
-            )}
+            <NewsletterForm id="foot-email" layout="compact" />
           </div>
         </div>
 
