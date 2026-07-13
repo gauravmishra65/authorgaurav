@@ -46,7 +46,7 @@ export const books: Book[] = [
     isHindi: true,
     gradient: 'from-ink via-rose to-amber-400',
     textOnDark: true,
-    imageSrc: '/images/book-covers/generated-image-1.png',
+    imageSrc: '/images/book-covers/generated-image-1.jpg',
     bookWebsite: 'https://off-beat-love.com',
     buyLinks: [
       { label: 'Amazon', href: '#' },
@@ -101,7 +101,7 @@ export const books: Book[] = [
     genre: 'Memoir',
     gradient: 'from-amber-200 via-gold-lt to-cream',
     textOnDark: false,
-    imageSrc: '/images/book-covers/generated-image-1.jpg',
+    imageSrc: '/images/book-covers/generated-image (4).png',
     buyLinks: [
       { label: 'Amazon', href: '#' },
       { label: 'Flipkart', href: '#' },
