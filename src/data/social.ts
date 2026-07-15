@@ -3,10 +3,9 @@ export interface SocialLink {
   href: string;
 }
 
-// TODO: replace with real handles once confirmed.
 export const socialLinks: SocialLink[] = [
-  { label: 'Instagram', href: '#' },
-  { label: 'Facebook', href: '#' },
-  { label: 'X', href: '#' },
-  { label: 'YouTube', href: '#' },
+  { label: 'Instagram', href: 'https://www.instagram.com/gauravmishrawrites/' },
+  { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61591772941621' },
+  { label: 'X', href: 'https://x.com/writetogetherh' },
+  { label: 'YouTube', href: '#' }, // TODO: real link
 ];
