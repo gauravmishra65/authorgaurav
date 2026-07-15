@@ -5,7 +5,7 @@ import Divider from './Divider';
 export default function BlogPreview() {
   const latest = posts.slice(0, 3);
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
+    <section className="mx-auto max-w-6xl px-6 pt-10 pb-10">
       <div className="text-center">
         <p className="eyebrow text-gold mb-3">Journal</p>
         <h2 className="font-display text-3xl md:text-4xl text-ink">From the Blog</h2>

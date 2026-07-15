@@ -6,6 +6,9 @@ import BookCover from '../components/BookCover';
 import EmailStrip from '../components/EmailStrip';
 import WriteTogetherHub from '../components/WriteTogetherHub';
 import BlogPreview from '../components/BlogPreview';
+import NewsPreview from '../components/NewsPreview';
+import Testimonials from '../components/Testimonials';
+import PressStrip from '../components/PressStrip';
 import AboutTeaser from '../components/AboutTeaser';
 import Divider from '../components/Divider';
 import { books, genreFilters, type Genre } from '../data/books';
@@ -54,15 +57,15 @@ export default function Home() {
             </div>
 
             {/* Right — fanned covers */}
-            <div className="relative h-[360px] md:h-[420px] flex items-center justify-center">
-              <div className="absolute left-2 md:left-0 top-10 fade-up" style={{ animationDelay: '0.4s', transform: 'rotate(-8deg)' }}>
-                <BookCover {...shadowCode} size="md" href="/books" />
+            <div className="flex items-end justify-center gap-4 py-6 md:gap-0">
+              <div className="hidden sm:block fade-up md:-mr-9 md:rotate-[-8deg]" style={{ animationDelay: '0.4s' }}>
+                <BookCover {...shadowCode} size="sm" href={`/books/${shadowCode.slug}`} />
               </div>
-              <div className="absolute right-2 md:right-0 top-12 fade-up" style={{ animationDelay: '0.55s', transform: 'rotate(8deg)' }}>
-                <BookCover {...journey} size="md" href="/books" />
+              <div className="relative z-10 fade-up" style={{ animationDelay: '0.25s' }}>
+                <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} priority />
               </div>
-              <div className="relative z-10 fade-up" style={{ animationDelay: '0.25s', transform: 'translateY(-8px)' }}>
-                <BookCover {...featured} size="lg" href="https://off-beat-love.com" external />
+              <div className="hidden sm:block fade-up md:-ml-9 md:rotate-[8deg]" style={{ animationDelay: '0.55s' }}>
+                <BookCover {...journey} size="sm" href={`/books/${journey.slug}`} />
               </div>
             </div>
           </div>
@@ -75,7 +78,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid items-center gap-12 md:grid-cols-[auto_1fr]">
             <div className="flex justify-center">
-              <BookCover {...featured} size="lg" href="https://off-beat-love.com" external />
+              <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} />
             </div>
             <div>
               <p className="eyebrow text-gold-lt mb-3">Featured Book</p>
@@ -84,11 +87,18 @@ export default function Home() {
                 A heartfelt romance about love, music, family expectations, and the courage to break free from a golden cage. Set against the pulse of Mumbai.
               </p>
               <p className="text-ivory/70 text-sm italic mb-7">Also available in Hindi as अनूठा प्यार.</p>
+              <div className="flex flex-wrap gap-3 mb-4">
+                {featured.buyLinks.map((link) => (
+                  <a key={link.label} href={link.href} className="btn-caps btn-gold-outline rounded-sm px-5 py-2.5 text-2xs">{link.label}</a>
+                ))}
+              </div>
               <div className="flex flex-wrap gap-4">
                 <a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
                   Visit the Book Site <ArrowRight size={15} />
                 </a>
-                <a href="#" className="btn-caps btn-gold-outline rounded-sm px-6 py-3">Buy on Amazon</a>
+                <Link to={`/books/${featured.slug}`} className="btn-caps btn-gold-outline rounded-sm px-6 py-3">
+                  Read More
+                </Link>
               </div>
             </div>
           </div>
@@ -96,7 +106,7 @@ export default function Home() {
       </section>
 
       {/* THE BOOKSHELF */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
         <div className="text-center">
           <p className="eyebrow text-gold mb-3">The Bookshelf</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Explore every world</h2>
@@ -113,26 +123,33 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((b) => {
-            const href = b.id === 'offbeat-love' || b.id === 'anootha-pyar' ? 'https://off-beat-love.com' : b.id === 'shadow-code' ? 'https://the-shadow-code.com' : '/books';
-            const external = href.startsWith('http');
-            return (
-              <div key={b.id} className="flex flex-col items-center gap-3">
-                <BookCover {...b} size="md" href={href} external={external} />
-                <div className="text-center">
-                  <p className="font-display text-sm text-ink">{b.title}</p>
-                  {b.isHindi && (
-                    <span className="inline-block mt-1 label-caps text-2xs text-rose border border-rose/40 rounded-full px-2 py-0.5">Hindi</span>
-                  )}
-                </div>
+          {filtered.map((b) => (
+            <div key={b.id} className="flex flex-col items-center gap-3">
+              <BookCover {...b} size="md" href={`/books/${b.slug}`} />
+              <div className="text-center">
+                <p className="font-display text-sm text-ink">{b.title}</p>
+                {b.isHindi && (
+                  <span className="inline-block mt-1 label-caps text-2xs text-rose border border-rose/40 rounded-full px-2 py-0.5">Hindi</span>
+                )}
               </div>
-            );
-          })}
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {b.buyLinks.map((link) => (
+                  <a key={link.label} href={link.href} className="label-caps text-2xs text-gold border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
+      <Testimonials />
+      <PressStrip />
+
       <div id="free-chapter" className="scroll-mt-20"><EmailStrip /></div>
       <WriteTogetherHub />
+      <NewsPreview />
       <BlogPreview />
       <AboutTeaser />
     </>

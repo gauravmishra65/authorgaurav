@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://authorgaurav.com/sitemap.xml
