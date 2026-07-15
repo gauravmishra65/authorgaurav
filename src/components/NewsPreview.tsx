@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { news } from '../data/news';
+import { fetchNewsItems } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 import Divider from './Divider';
 
 export default function NewsPreview() {
-  const latest = news.slice(0, 3);
+  const { data: news } = useSupabaseData(fetchNewsItems, []);
+  const latest = (news ?? []).slice(0, 3);
+  if (latest.length === 0) return null;
   return (
     <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
       <div className="text-center">

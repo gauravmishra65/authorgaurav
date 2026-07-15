@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Mail } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface NewsletterFormProps {
   /** Unique id so multiple forms on one page (footer + banner) don't collide. */
@@ -7,17 +8,13 @@ interface NewsletterFormProps {
   layout?: 'banner' | 'compact';
   buttonLabel?: string;
   className?: string;
+  /** Where this form appears, stored alongside the subscriber for reference. */
+  source?: string;
 }
-
-// Reads the subscriber-list endpoint from the environment — see .env.example.
-// Point VITE_NEWSLETTER_ENDPOINT at a MailerLite/ConvertKit (or any provider)
-// form-submit URL that accepts a JSON POST of { email }. Until it's set, the
-// form simulates success locally so the UI can still be reviewed end to end.
-const ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT;
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '' }: NewsletterFormProps) {
+export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '', source = 'website' }: NewsletterFormProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
 
@@ -25,23 +22,15 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
     e.preventDefault();
     if (!email) return;
 
-    if (!ENDPOINT) {
-      setStatus('success');
+    setStatus('loading');
+    // A duplicate email (unique constraint violation, code 23505) is treated
+    // as success — the visitor is already subscribed either way.
+    const { error } = await supabase.from('authorgaurav_newsletter_subscribers').insert({ email, source });
+    if (error && error.code !== '23505') {
+      setStatus('error');
       return;
     }
-
-    setStatus('loading');
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) throw new Error('Newsletter signup failed');
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
+    setStatus('success');
   };
 
   if (status === 'success') {

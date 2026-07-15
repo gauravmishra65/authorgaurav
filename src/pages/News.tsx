@@ -2,11 +2,14 @@ import { useState } from 'react';
 import Seo from '../components/Seo';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
-import { news, newsCategories, type NewsCategory } from '../data/news';
+import { newsCategories, type NewsCategory } from '../data/news';
+import { fetchNewsItems } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function News() {
   const [filter, setFilter] = useState<(typeof newsCategories)[number]>('All');
-  const filtered = filter === 'All' ? news : news.filter((n) => n.category === (filter as NewsCategory));
+  const { data: news, loading, error } = useSupabaseData(fetchNewsItems, []);
+  const filtered = !news ? [] : filter === 'All' ? news : news.filter((n) => n.category === (filter as NewsCategory));
 
   return (
     <>
@@ -35,6 +38,9 @@ export default function News() {
             </button>
           ))}
         </div>
+
+        {loading && <p className="text-center text-muted pb-16">Loading news…</p>}
+        {error && <p className="text-center text-rose pb-16">Couldn't load news: {error}</p>}
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
           {filtered.map((n) => (

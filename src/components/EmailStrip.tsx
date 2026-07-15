@@ -21,7 +21,7 @@ export default function EmailStrip({
         <h2 className="font-display text-2xl md:text-3xl mb-2">{heading}</h2>
         <p className={`text-sm mb-7 ${isDark ? 'text-ivory/70' : 'text-muted'}`}>{subheading}</p>
 
-        <NewsletterForm id="strip-email" buttonLabel="Get the Chapter" />
+        <NewsletterForm id="strip-email" buttonLabel="Get the Chapter" source="email-strip" />
       </div>
       <div className="hairline-solid w-full" />
     </section>

@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { posts } from '../data/posts';
+import { fetchBlogPosts } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 import Divider from './Divider';
 
 export default function BlogPreview() {
-  const latest = posts.slice(0, 3);
+  const { data: posts } = useSupabaseData(fetchBlogPosts, []);
+  const latest = (posts ?? []).slice(0, 3);
+  if (latest.length === 0) return null;
   return (
     <section className="mx-auto max-w-6xl px-6 pt-10 pb-10">
       <div className="text-center">

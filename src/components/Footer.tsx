@@ -38,7 +38,7 @@ export default function Footer() {
 
           <div>
             <p className="label-caps text-gold mb-4">Newsletter</p>
-            <NewsletterForm id="foot-email" layout="compact" />
+            <NewsletterForm id="foot-email" layout="compact" source="footer" />
           </div>
         </div>
 
