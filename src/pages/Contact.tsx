@@ -3,19 +3,44 @@ import { Mail, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
 import { socialLinks } from '../data/social';
+import { supabase, CONTACT_FORM_ENDPOINT, SUPABASE_ANON_KEY } from '../lib/supabase';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', circle: false });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const update = (k: keyof typeof form, v: string | boolean) => setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
-    // // Connect: POST to your contact-email service (e.g. Formspree, Resend, SendGrid).
-    // // If `form.circle` is true, also subscribe `form.email` to MailerLite/ConvertKit.
-    setSubmitted(true);
+
+    setSending(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SUPABASE_ANON_KEY },
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message, joinCircle: form.circle }),
+      });
+      if (!res.ok) throw new Error('Contact form submission failed');
+
+      if (form.circle) {
+        // Best-effort — a duplicate/failed subscribe shouldn't block "message sent".
+        await supabase.from('authorgaurav_newsletter_subscribers').insert({ email: form.email, source: 'contact-form' }).then(
+          () => {},
+          () => {},
+        );
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -76,8 +101,9 @@ export default function Contact() {
                   <input type="checkbox" checked={form.circle} onChange={(e) => update('circle', e.target.checked)} className="mt-1 h-4 w-4 accent-gold" />
                   <span className="text-sm text-muted">Add me to the reader circle — I'd like the free chapter and monthly letters.</span>
                 </label>
-                <button type="submit" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
-                  <Send size={15} /> Send Message
+                {submitError && <p className="text-2xs text-rose">Something went wrong — please try again.</p>}
+                <button type="submit" disabled={sending} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3 disabled:opacity-60">
+                  <Send size={15} /> {sending ? 'Sending…' : 'Send Message'}
                 </button>
               </form>
             )}

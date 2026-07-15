@@ -4,11 +4,14 @@ import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
-import { posts, blogCategories, type BlogCategory } from '../data/posts';
+import { blogCategories, type BlogCategory } from '../data/posts';
+import { fetchBlogPosts } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function Blog() {
   const [filter, setFilter] = useState<(typeof blogCategories)[number]>('All');
-  const filtered = filter === 'All' ? posts : posts.filter((p) => p.category === (filter as BlogCategory));
+  const { data: posts, loading, error } = useSupabaseData(fetchBlogPosts, []);
+  const filtered = !posts ? [] : filter === 'All' ? posts : posts.filter((p) => p.category === (filter as BlogCategory));
 
   return (
     <>
@@ -37,6 +40,9 @@ export default function Blog() {
             </button>
           ))}
         </div>
+
+        {loading && <p className="text-center text-muted pb-16">Loading posts…</p>}
+        {error && <p className="text-center text-rose pb-16">Couldn't load posts: {error}</p>}
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
           {filtered.map((p) => (

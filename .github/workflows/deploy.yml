@@ -26,9 +26,11 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          # Set in repo Settings > Secrets and variables > Actions. Optional —
-          # the newsletter form falls back to a local success stub if unset.
-          VITE_NEWSLETTER_ENDPOINT: ${{ secrets.VITE_NEWSLETTER_ENDPOINT }}
+          # Set both in repo Settings > Secrets and variables > Actions — the
+          # site fetches its content (books/blog/news/testimonials) from
+          # Supabase at runtime, so the build needs these to embed correctly.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

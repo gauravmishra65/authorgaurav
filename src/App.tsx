@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Books from './pages/Books';
@@ -8,6 +9,20 @@ import Blog from './pages/Blog';
 import News from './pages/News';
 import Contact from './pages/Contact';
 import WriteTogetherHubPage from './pages/WriteTogetherHubPage';
+
+// Admin is code-split out of the public bundle — regular visitors never
+// download the CRUD forms or the auth-gated layout.
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminBooks = lazy(() => import('./pages/admin/AdminBooks'));
+const AdminTestimonials = lazy(() => import('./pages/admin/AdminTestimonials'));
+const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
+const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
+const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
+const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
+
+function AdminFallback() {
+  return <div className="min-h-screen flex items-center justify-center bg-ink text-ivory">Loading…</div>;
+}
 
 export default function App() {
   return (
@@ -23,6 +38,16 @@ export default function App() {
           <Route path="/write-together-hub" element={<WriteTogetherHubPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
+        </Route>
+
+        <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
+          <Route index element={<Navigate to="/admin/books" replace />} />
+          <Route path="books" element={<Suspense fallback={<AdminFallback />}><AdminBooks /></Suspense>} />
+          <Route path="testimonials" element={<Suspense fallback={<AdminFallback />}><AdminTestimonials /></Suspense>} />
+          <Route path="blog" element={<Suspense fallback={<AdminFallback />}><AdminBlog /></Suspense>} />
+          <Route path="news" element={<Suspense fallback={<AdminFallback />}><AdminNews /></Suspense>} />
+          <Route path="subscribers" element={<Suspense fallback={<AdminFallback />}><AdminSubscribers /></Suspense>} />
+          <Route path="messages" element={<Suspense fallback={<AdminFallback />}><AdminMessages /></Suspense>} />
         </Route>
       </Routes>
     </BrowserRouter>

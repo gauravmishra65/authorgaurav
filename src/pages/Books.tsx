@@ -4,7 +4,9 @@ import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
-import { books, type Genre } from '../data/books';
+import { type Genre } from '../data/books';
+import { fetchBooks } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 const genreOrder: Genre[] = ['Fiction', 'Memoir', 'Devotional'];
 const genreEyebrow: Record<Genre, string> = {
@@ -14,6 +16,8 @@ const genreEyebrow: Record<Genre, string> = {
 };
 
 export default function Books() {
+  const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+
   return (
     <>
       <Seo
@@ -32,8 +36,12 @@ export default function Books() {
         </div>
       </section>
 
-      {genreOrder.map((genre) => {
+      {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
+      {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
+
+      {books && genreOrder.map((genre) => {
         const list = books.filter((b) => b.genre === genre);
+        if (list.length === 0) return null;
         return (
           <section key={genre} className="mx-auto max-w-6xl px-6 py-16">
             <div className="flex items-center gap-4 mb-10">

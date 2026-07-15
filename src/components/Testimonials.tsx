@@ -1,13 +1,12 @@
 import { Quote } from 'lucide-react';
-import { books } from '../data/books';
+import { fetchFeaturedTestimonials } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 import Divider from './Divider';
 
-const featuredTestimonials = books
-  .flatMap((b) => (b.testimonials ?? []).map((t) => ({ ...t, book: b.title })))
-  .slice(0, 3);
-
 export default function Testimonials() {
-  if (featuredTestimonials.length === 0) return null;
+  const { data: featuredTestimonials } = useSupabaseData(() => fetchFeaturedTestimonials(3), []);
+
+  if (!featuredTestimonials || featuredTestimonials.length === 0) return null;
 
   return (
     <section className="bg-cream">

@@ -4,11 +4,17 @@ import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
-import { books } from '../data/books';
+import { fetchBooks } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const book = books.find((b) => b.slug === slug);
+  const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+
+  if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
+  if (error) return <div className="py-32 text-center text-rose">Couldn't load this book: {error}</div>;
+
+  const book = books?.find((b) => b.slug === slug);
 
   if (!book) return <Navigate to="/books" replace />;
 

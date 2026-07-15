@@ -11,16 +11,22 @@ import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import AboutTeaser from '../components/AboutTeaser';
 import Divider from '../components/Divider';
-import { books, genreFilters, type Genre } from '../data/books';
+import { genreFilters, type Genre } from '../data/books';
+import { fetchBooks } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function Home() {
   const [filter, setFilter] = useState<(typeof genreFilters)[number]>('All');
+  const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+
+  if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
+  if (error || !books) return <div className="py-32 text-center text-rose">Couldn't load books: {error}</div>;
 
   const filtered = filter === 'All' ? books : books.filter((b) => b.genre === (filter as Genre));
 
-  const featured = books.find((b) => b.id === 'offbeat-love')!;
-  const shadowCode = books.find((b) => b.id === 'shadow-code')!;
-  const journey = books.find((b) => b.id === 'journey-of-grace')!;
+  const featured = books.find((b) => b.slug === 'offbeat-love') ?? books[0];
+  const shadowCode = books.find((b) => b.slug === 'shadow-code') ?? books[1] ?? books[0];
+  const journey = books.find((b) => b.slug === 'journey-of-grace') ?? books[2] ?? books[0];
 
   return (
     <>
