@@ -61,6 +61,10 @@ h1, h2, h3, h4 {
 .fade-up { opacity: 0; animation: rise 0.8s ease forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 
+.carousel-track { animation-name: carousel-scroll; animation-timing-function: linear; animation-iteration-count: infinite; }
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes carousel-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
 .prose-literary p { font-size: 1.0625rem; line-height: 1.75; color: var(--text); }
 .prose-literary p + p { margin-top: 1.1rem; }
 
