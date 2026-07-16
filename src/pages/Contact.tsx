@@ -112,8 +112,8 @@ export default function Contact() {
           <aside className="space-y-8">
             <div className="rounded-md border border-gold/20 bg-cream p-6">
               <p className="label-caps text-gold mb-3">Email</p>
-              <a href="mailto:hello@authorgaurav.com" className="inline-flex items-center gap-2 text-ink hover:text-gold transition-colors">
-                <Mail size={16} /> hello@authorgaurav.com
+              <a href="mailto:hello@writetogetherhub.com" className="inline-flex items-center gap-2 text-ink hover:text-gold transition-colors">
+                <Mail size={16} /> hello@writetogetherhub.com
               </a>
             </div>
             <div className="rounded-md border border-gold/20 bg-cream p-6">
