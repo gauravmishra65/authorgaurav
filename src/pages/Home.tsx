@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Mail } from 'lucide-react';
 import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
+import BookCarousel from '../components/BookCarousel';
 import EmailStrip from '../components/EmailStrip';
 import WriteTogetherHub from '../components/WriteTogetherHub';
 import BlogPreview from '../components/BlogPreview';
@@ -112,42 +113,23 @@ export default function Home() {
       </section>
 
       {/* THE BOOKSHELF */}
-      <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
-        <div className="text-center">
+      <section className="pt-20 pb-10">
+        <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="eyebrow text-gold mb-3">The Bookshelf</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Explore every world</h2>
           <Divider className="!my-8" />
+
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {genreFilters.map((g) => (
+              <button key={g} onClick={() => setFilter(g)}
+                className={`label-caps px-4 py-2 rounded-full border transition-all ${filter === g ? 'bg-ink text-gold-lt border-gold' : 'bg-cream text-text/70 border-gold/25 hover:border-gold/60 hover:text-ink'}`}>
+                {g}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {genreFilters.map((g) => (
-            <button key={g} onClick={() => setFilter(g)}
-              className={`label-caps px-4 py-2 rounded-full border transition-all ${filter === g ? 'bg-ink text-gold-lt border-gold' : 'bg-cream text-text/70 border-gold/25 hover:border-gold/60 hover:text-ink'}`}>
-              {g}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((b) => (
-            <div key={b.id} className="flex flex-col items-center gap-3">
-              <BookCover {...b} size="md" href={`/books/${b.slug}`} />
-              <div className="text-center">
-                <p className="font-display text-sm text-ink">{b.title}</p>
-                {b.isHindi && (
-                  <span className="inline-block mt-1 label-caps text-2xs text-rose border border-rose/40 rounded-full px-2 py-0.5">Hindi</span>
-                )}
-              </div>
-              <div className="flex flex-wrap justify-center gap-1.5">
-                {b.buyLinks.map((link) => (
-                  <a key={link.label} href={link.href} className="label-caps text-2xs text-gold border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <BookCarousel books={filtered} />
       </section>
 
       <Testimonials />
