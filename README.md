@@ -44,7 +44,9 @@ This converts PNG/JPG covers in that folder to `.webp` (via `scripts/convert-cov
 
 ## Contact form
 
-The Contact page posts to a Supabase Edge Function (`contact-form`, deployed in the same `writetogetherhub` project) which inserts the message into `authorgaurav_contact_messages` and emails it to **hello@writetogetherhub.com** via Resend (reply-to is set to the visitor's address). The function needs a `RESEND_API_KEY` secret set in that Supabase project (Edge Functions → Secrets) to actually send email — without it, messages still save to the database and are visible at `/admin`, but no email goes out.
+The Contact page posts to a Supabase Edge Function (`contact-form`, source at `supabase/functions/contact-form/index.ts`, deployed in the same `writetogetherhub` project) which inserts the message into `authorgaurav_contact_messages` and emails it to **hello@writetogetherhub.com** via Resend (reply-to is set to the visitor's address). The function needs an `AUTHORGAURAV_RESEND_API_KEY` secret set on that Supabase project (Edge Functions → contact-form → Secrets) to actually send email — without it, messages still save to the database and are visible at `/admin`, but no email goes out.
+
+**Important:** this key is deliberately namespaced `AUTHORGAURAV_RESEND_API_KEY`, not the more obvious `RESEND_API_KEY` — the shared project already runs WriteTogetherHub's own `notify-new-joiner` function, which reads `RESEND_API_KEY` for its own (different) Resend key. Supabase Edge Function secrets are project-wide, not per-function, so using the generic name broke both functions the first time someone updated "the" Resend key. Don't rename this back without also renaming the value WriteTogetherHub's function expects.
 
 ## Deploying (GitHub Pages)
 
@@ -71,6 +73,6 @@ The Contact page posts to a Supabase Edge Function (`contact-form`, deployed in 
 These need real accounts/credentials and can't be done from the codebase alone:
 
 - **Connect the custom domain** `authorgaurav.com` — see the Deploying section above; the DNS records and one Pages-settings click still need to be done by hand.
-- **Set the `RESEND_API_KEY` secret** in the Supabase project's Edge Functions settings so the contact form actually sends email (see Contact form section above).
+- **Set the `AUTHORGAURAV_RESEND_API_KEY` secret** in the Supabase project's Edge Functions settings so the contact form actually sends email (see Contact form section above).
 - **Search & analytics** — add Google Search Console + Google Analytics, and submit `https://authorgaurav.com/sitemap.xml` to Search Console.
 - **Replace placeholders** — the Amazon/Flipkart/Kindle buy links (`#` placeholders, editable per-book at `/admin`), the reader testimonials seeded into `authorgaurav_testimonials`, the press quotes in `src/data/press.ts`, and the YouTube link in `src/data/social.ts` are all placeholders and should be swapped for the real ones.
