@@ -54,6 +54,9 @@ export default function BookDetail() {
               <div className="flex items-center gap-3 flex-wrap mb-3">
                 <p className="eyebrow text-gold-lt">{book.genre}</p>
                 <span className="label-caps text-2xs text-ivory/70 border border-ivory/25 rounded-full px-2.5 py-0.5">{book.language}</span>
+                {book.status === 'upcoming' && (
+                  <span className="label-caps text-2xs text-gold-lt border border-gold/40 rounded-full px-2.5 py-0.5">Coming Soon</span>
+                )}
               </div>
               <h1 className="font-display text-4xl md:text-5xl mb-4">{book.title}</h1>
               <p className="text-ivory/80 leading-relaxed text-lg italic mb-6">{book.tagline}</p>

@@ -23,7 +23,11 @@ export default function Home() {
   if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
   if (error || !books) return <div className="py-32 text-center text-rose">Couldn't load books: {error}</div>;
 
-  const filtered = filter === 'All' ? books : books.filter((b) => b.genre === (filter as Genre));
+  const filtered = filter === 'Upcoming'
+    ? books.filter((b) => b.status === 'upcoming')
+    : filter === 'All'
+      ? books.filter((b) => b.status !== 'upcoming')
+      : books.filter((b) => b.genre === (filter as Genre) && b.status !== 'upcoming');
 
   const featured = books.find((b) => b.slug === 'offbeat-love') ?? books[0];
   const shadowCode = books.find((b) => b.slug === 'shadow-code') ?? books[1] ?? books[0];

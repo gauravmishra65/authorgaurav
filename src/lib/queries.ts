@@ -17,6 +17,7 @@ interface BookRow {
   synopsis: string;
   genre: Book['genre'];
   language: Book['language'];
+  status: Book['status'];
   gradient: string;
   text_on_dark: boolean;
   image_src: string | null;
@@ -46,6 +47,7 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     synopsis: row.synopsis,
     genre: row.genre,
     language: row.language,
+    status: row.status,
     isHindi: row.language === 'Hindi',
     gradient: row.gradient,
     textOnDark: row.text_on_dark,

@@ -1,5 +1,6 @@
 export type Genre = 'Fiction' | 'Memoir' | 'Devotional';
 export type Language = 'English' | 'Hindi';
+export type BookStatus = 'published' | 'upcoming';
 
 export interface Testimonial {
   quote: string;
@@ -17,6 +18,7 @@ export interface Book {
   synopsis: string;
   genre: Genre;
   language: Language;
+  status: BookStatus;
   isHindi?: boolean;
   gradient: string;
   textOnDark?: boolean;
@@ -30,4 +32,4 @@ export interface Book {
 
 // Book content lives in Supabase (authorgaurav_books/authorgaurav_testimonials) —
 // see src/lib/queries.ts. Manage it via /admin.
-export const genreFilters = ['All', 'Fiction', 'Devotional', 'Memoir'] as const;
+export const genreFilters = ['All', 'Upcoming', 'Fiction', 'Devotional', 'Memoir'] as const;

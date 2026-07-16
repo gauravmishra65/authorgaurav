@@ -10,6 +10,7 @@ export interface AdminBookRow {
   synopsis: string;
   genre: 'Fiction' | 'Memoir' | 'Devotional';
   language: 'English' | 'Hindi';
+  status: 'published' | 'upcoming';
   gradient: string;
   text_on_dark: boolean;
   image_src: string | null;
