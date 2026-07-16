@@ -4,7 +4,7 @@ import { fetchAdminBooks, saveBook, deleteBook, type AdminBookRow } from '../../
 
 const emptyBook: Partial<AdminBookRow> = {
   slug: '', title: '', title_html: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
-  genre: 'Fiction', language: 'English', gradient: 'from-ink via-rose to-amber-400', text_on_dark: true,
+  genre: 'Fiction', language: 'English', status: 'published', gradient: 'from-ink via-rose to-amber-400', text_on_dark: true,
   image_src: '', image_width: undefined, image_height: undefined, book_website: '',
   buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
@@ -67,7 +67,10 @@ export default function AdminBooks() {
           {books.map((b) => (
             <div key={b.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0">
               <div>
-                <p className="font-display text-ink">{b.title}</p>
+                <p className="font-display text-ink">
+                  {b.title}
+                  {b.status === 'upcoming' && <span className="ml-2 label-caps text-2xs text-gold border border-gold/40 rounded-full px-2 py-0.5 align-middle">Upcoming</span>}
+                </p>
                 <p className="text-2xs text-muted">{b.slug} · {b.genre} · {b.language}</p>
               </div>
               <div className="flex gap-2">
@@ -98,6 +101,12 @@ export default function AdminBooks() {
               <Field label="Language">
                 <select value={editing.language} onChange={(e) => setEditing({ ...editing, language: e.target.value as AdminBookRow['language'] })} className="input">
                   <option>English</option><option>Hindi</option>
+                </select>
+              </Field>
+              <Field label="Status">
+                <select value={editing.status} onChange={(e) => setEditing({ ...editing, status: e.target.value as AdminBookRow['status'] })} className="input">
+                  <option value="published">Published</option>
+                  <option value="upcoming">Upcoming</option>
                 </select>
               </Field>
             </div>

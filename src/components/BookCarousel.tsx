@@ -36,6 +36,9 @@ export default function BookCarousel({ books }: BookCarouselProps) {
               {b.isHindi && (
                 <span className="inline-block mt-1 label-caps text-2xs text-rose border border-rose/40 rounded-full px-2 py-0.5">Hindi</span>
               )}
+              {b.status === 'upcoming' && (
+                <span className="inline-block mt-1 ml-1 label-caps text-2xs text-gold border border-gold/40 rounded-full px-2 py-0.5">Coming Soon</span>
+              )}
             </div>
             <div className="flex flex-wrap justify-center gap-1.5">
               {b.buyLinks.map((link) => (
