@@ -23,11 +23,15 @@ export default function Home() {
   if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
   if (error || !books) return <div className="py-32 text-center text-rose">Couldn't load books: {error}</div>;
 
+  // "Upcoming" is an additional lens, not an exclusive one — "All" and the
+  // genre tabs always include upcoming books too (the "Coming Soon" badge
+  // on each card already distinguishes status), so nothing appears to
+  // vanish when switching between tabs.
   const filtered = filter === 'Upcoming'
     ? books.filter((b) => b.status === 'upcoming')
     : filter === 'All'
-      ? books.filter((b) => b.status !== 'upcoming')
-      : books.filter((b) => b.genre === (filter as Genre) && b.status !== 'upcoming');
+      ? books
+      : books.filter((b) => b.genre === (filter as Genre));
 
   const featured = books.find((b) => b.slug === 'offbeat-love') ?? books[0];
   const shadowCode = books.find((b) => b.slug === 'shadow-code') ?? books[1] ?? books[0];
