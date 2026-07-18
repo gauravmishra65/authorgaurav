@@ -45,6 +45,8 @@ export default function Home() {
         description="Stories across worlds — romance, mystery, devotion, and the road in between. Explore the books of Gaurav Mishra and join WriteTogetherHub, a home for writers."
       />
 
+      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
+
       {/* HERO */}
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="hairline-solid w-full opacity-30" />
@@ -87,8 +89,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
 
       {/* FEATURED BAND */}
       <section className="bg-ink-soft text-ivory relative overflow-hidden">
