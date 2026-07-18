@@ -1,11 +1,15 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Quote } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Quote } from 'lucide-react';
 import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
+import ReleaseDetails from '../components/ReleaseDetails';
+import ReleaseCountdown from '../components/ReleaseCountdown';
+import SocialShareButtons from '../components/SocialShareButtons';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { isReleased } from '../lib/releaseStatus';
 
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -18,6 +22,9 @@ export default function BookDetail() {
 
   if (!book) return <Navigate to="/books" replace />;
 
+  const released = book.releaseDate ? isReleased(book.releaseDate) : false;
+  const canonicalUrl = `https://authorgaurav.com/books/${book.slug}`;
+
   return (
     <>
       <Seo
@@ -27,14 +34,28 @@ export default function BookDetail() {
         image={book.imageSrc}
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'Book',
-          name: book.title,
-          author: { '@type': 'Person', name: 'Gaurav Mishra' },
-          description: book.synopsis,
-          genre: book.genre,
-          inLanguage: book.language === 'Hindi' ? 'hi' : 'en',
-          image: book.imageSrc ? `https://authorgaurav.com${book.imageSrc}` : undefined,
-          url: `https://authorgaurav.com/books/${book.slug}`,
+          '@graph': [
+            {
+              '@type': 'Book',
+              name: book.title,
+              author: { '@type': 'Person', name: 'Gaurav Mishra' },
+              description: book.synopsis,
+              genre: book.genre,
+              inLanguage: book.language === 'Hindi' ? 'hi' : 'en',
+              image: book.imageSrc ? `https://authorgaurav.com${book.imageSrc}` : undefined,
+              url: canonicalUrl,
+              datePublished: book.releaseDate,
+              bookFormat: book.paperbackUrl ? 'https://schema.org/Paperback' : book.kindleUrl ? 'https://schema.org/EBook' : undefined,
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://authorgaurav.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Books', item: 'https://authorgaurav.com/books' },
+                { '@type': 'ListItem', position: 3, name: book.title, item: canonicalUrl },
+              ],
+            },
+          ],
         }}
       />
 
@@ -55,7 +76,9 @@ export default function BookDetail() {
                 <p className="eyebrow text-gold-lt">{book.genre}</p>
                 <span className="label-caps text-2xs text-ivory/70 border border-ivory/25 rounded-full px-2.5 py-0.5">{book.language}</span>
                 {book.status === 'upcoming' && (
-                  <span className="label-caps text-2xs text-gold-lt border border-gold/40 rounded-full px-2.5 py-0.5">Coming Soon</span>
+                  <span className="label-caps text-2xs text-gold-lt border border-gold/40 rounded-full px-2.5 py-0.5">
+                    {released ? 'Now Available' : 'Coming Soon'}
+                  </span>
                 )}
               </div>
               <h1 className="font-display text-4xl md:text-5xl mb-4">{book.title}</h1>
@@ -80,7 +103,29 @@ export default function BookDetail() {
         <div className="prose-literary">
           <p>{book.synopsis}</p>
         </div>
+        <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
+          <SocialShareButtons path={`/books/${book.slug}`} title={book.title} />
+          <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold hover:text-ink transition-colors">
+            Back to All Books <ArrowRight size={13} />
+          </Link>
+        </div>
       </section>
+
+      {book.releaseDate && (
+        <section className="bg-ink text-ivory">
+          <div className="hairline-solid w-full opacity-30" />
+          <div className="mx-auto max-w-4xl px-6 py-16">
+            <p className="eyebrow text-gold mb-6 text-center">Release Details</p>
+            <ReleaseDetails book={book} className="mb-12" />
+            {!released && (
+              <>
+                <p className="eyebrow text-gold mb-6 text-center">The Code Will Be Revealed In</p>
+                <ReleaseCountdown releaseDate={book.releaseDate} />
+              </>
+            )}
+          </div>
+        </section>
+      )}
 
       {book.testimonials && book.testimonials.length > 0 && (
         <section className="bg-cream">

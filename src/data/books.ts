@@ -28,6 +28,12 @@ export interface Book {
   bookWebsite?: string;
   buyLinks: { label: string; href: string }[];
   testimonials?: Testimonial[];
+  /** ISO date (YYYY-MM-DD) the book releases or released. Drives the countdown/"Now Available" state. */
+  releaseDate?: string;
+  kindleUrl?: string;
+  paperbackUrl?: string;
+  /** Gives the book a "New Release" ribbon and extra prominence in listings. */
+  featured?: boolean;
 }
 
 // Book content lives in Supabase (authorgaurav_books/authorgaurav_testimonials) —

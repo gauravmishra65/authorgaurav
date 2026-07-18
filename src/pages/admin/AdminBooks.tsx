@@ -8,6 +8,7 @@ const emptyBook: Partial<AdminBookRow> = {
   image_src: '', image_width: undefined, image_height: undefined, book_website: '',
   buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
+  release_date: null, kindle_url: null, paperback_url: null, featured: false,
 };
 
 export default function AdminBooks() {
@@ -120,6 +121,15 @@ export default function AdminBooks() {
               <Field label="Image height (px)"><input type="number" value={editing.image_height ?? ''} onChange={(e) => setEditing({ ...editing, image_height: e.target.value ? Number(e.target.value) : undefined })} className="input" /></Field>
               <Field label="Gradient (Tailwind classes)"><input value={editing.gradient ?? ''} onChange={(e) => setEditing({ ...editing, gradient: e.target.value })} className="input" /></Field>
               <Field label="Sort order"><input type="number" value={editing.sort_order ?? 0} onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })} className="input" /></Field>
+              <Field label="Release date (optional)"><input type="date" value={editing.release_date ?? ''} onChange={(e) => setEditing({ ...editing, release_date: e.target.value || null })} className="input" /></Field>
+              <Field label="Featured (New Release ribbon)">
+                <select value={editing.featured ? 'true' : 'false'} onChange={(e) => setEditing({ ...editing, featured: e.target.value === 'true' })} className="input">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </Field>
+              <Field label="Kindle URL (optional)"><input value={editing.kindle_url ?? ''} onChange={(e) => setEditing({ ...editing, kindle_url: e.target.value || null })} className="input" /></Field>
+              <Field label="Paperback URL (optional)"><input value={editing.paperback_url ?? ''} onChange={(e) => setEditing({ ...editing, paperback_url: e.target.value || null })} className="input" /></Field>
             </div>
 
             <p className="label-caps text-muted">Buy Links</p>

@@ -19,6 +19,10 @@ export interface AdminBookRow {
   book_website: string | null;
   buy_links: { label: string; href: string }[];
   sort_order: number;
+  release_date: string | null;
+  kindle_url: string | null;
+  paperback_url: string | null;
+  featured: boolean;
 }
 
 export async function fetchAdminBooks(): Promise<AdminBookRow[]> {
@@ -127,6 +131,7 @@ export async function deleteNewsItem(id: string): Promise<void> {
 export interface AdminSubscriberRow {
   id: string;
   email: string;
+  name: string | null;
   source: string | null;
   created_at: string;
 }

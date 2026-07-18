@@ -25,6 +25,10 @@ interface BookRow {
   image_height: number | null;
   book_website: string | null;
   buy_links: { label: string; href: string }[];
+  release_date: string | null;
+  kindle_url: string | null;
+  paperback_url: string | null;
+  featured: boolean;
 }
 
 interface TestimonialRow {
@@ -57,6 +61,10 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     bookWebsite: row.book_website ?? undefined,
     buyLinks: row.buy_links,
     testimonials,
+    releaseDate: row.release_date ?? undefined,
+    kindleUrl: row.kindle_url ?? undefined,
+    paperbackUrl: row.paperback_url ?? undefined,
+    featured: row.featured,
   };
 }
 
