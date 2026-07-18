@@ -17,9 +17,12 @@ const genreEyebrow: Record<Genre, string> = {
 
 function BookArticle({ book }: { book: Book }) {
   return (
-    <article className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+    <article className={`grid gap-8 md:grid-cols-[200px_1fr] md:gap-12 ${book.featured ? 'rounded-md border border-gold/25 bg-cream/60 p-6 -mx-6 relative' : ''}`}>
+      {book.featured && (
+        <span className="absolute -top-3 left-6 label-caps text-2xs bg-gold text-ink rounded-full px-3 py-1 shadow-luxury">New Release</span>
+      )}
       <div className="flex justify-center md:justify-start">
-        <BookCover {...book} size="md" href={`/books/${book.slug}`} />
+        <BookCover {...book} size={book.featured ? 'lg' : 'md'} href={`/books/${book.slug}`} />
       </div>
       <div>
         <div className="flex items-center gap-3 flex-wrap mb-2">

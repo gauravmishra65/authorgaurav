@@ -11,6 +11,7 @@ import NewsPreview from '../components/NewsPreview';
 import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import AboutTeaser from '../components/AboutTeaser';
+import BookLaunchHero from '../components/BookLaunchHero';
 import Divider from '../components/Divider';
 import { genreFilters, type Genre } from '../data/books';
 import { fetchBooks } from '../lib/queries';
@@ -34,7 +35,7 @@ export default function Home() {
       : books.filter((b) => b.genre === (filter as Genre));
 
   const featured = books.find((b) => b.slug === 'offbeat-love') ?? books[0];
-  const shadowCode = books.find((b) => b.slug === 'shadow-code') ?? books[1] ?? books[0];
+  const shadowCode = books.find((b) => b.slug === 'the-shadow-code') ?? books[1] ?? books[0];
   const journey = books.find((b) => b.slug === 'journey-of-grace') ?? books[2] ?? books[0];
 
   return (
@@ -86,6 +87,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
 
       {/* FEATURED BAND */}
       <section className="bg-ink-soft text-ivory relative overflow-hidden">

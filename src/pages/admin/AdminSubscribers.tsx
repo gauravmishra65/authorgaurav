@@ -10,7 +10,7 @@ export default function AdminSubscribers() {
   }, []);
 
   const exportCsv = () => {
-    const csv = ['email,source,created_at', ...rows.map((r) => `${r.email},${r.source ?? ''},${r.created_at}`)].join('\n');
+    const csv = ['name,email,source,created_at', ...rows.map((r) => `${r.name ?? ''},${r.email},${r.source ?? ''},${r.created_at}`)].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -35,7 +35,7 @@ export default function AdminSubscribers() {
         <div className="rounded-md border border-gold/20 bg-ivory overflow-hidden">
           {rows.map((r) => (
             <div key={r.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0">
-              <p className="text-ink">{r.email}</p>
+              <p className="text-ink">{r.name ? `${r.name} · ${r.email}` : r.email}</p>
               <p className="text-2xs text-muted">{r.source ?? '—'} · {new Date(r.created_at).toLocaleDateString()}</p>
             </div>
           ))}
