@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { supabase } from '../lib/supabase';
+import { LAUNCH_SIGNUP_ENDPOINT, SUPABASE_ANON_KEY } from '../lib/supabase';
 
 interface LaunchSignupFormProps {
   source: string;
@@ -19,14 +19,17 @@ export default function LaunchSignupForm({ source, buttonLabel = 'Get Release Up
     if (!email) return;
 
     setStatus('loading');
-    // A duplicate email (unique constraint violation, code 23505) is treated
-    // as success — the visitor is already subscribed either way.
-    const { error } = await supabase.from('authorgaurav_newsletter_subscribers').insert({ name: name || null, email, source });
-    if (error && error.code !== '23505') {
+    try {
+      const res = await fetch(LAUNCH_SIGNUP_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SUPABASE_ANON_KEY },
+        body: JSON.stringify({ name, email, source }),
+      });
+      if (!res.ok) throw new Error('Launch signup failed');
+      setStatus('success');
+    } catch {
       setStatus('error');
-      return;
     }
-    setStatus('success');
   };
 
   if (status === 'success') {
