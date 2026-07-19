@@ -15,11 +15,19 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
   const released = book.releaseDate ? isReleased(book.releaseDate) : false;
 
   return (
-    <section className="bg-ink text-ivory relative overflow-hidden">
+    <section className="bg-ink bg-grain text-ivory relative overflow-hidden">
       <div className="hairline-solid w-full opacity-30" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-rose/10 via-transparent to-transparent" />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-20">
+      {/* Top row: countdown, then hero content, together in one unified block */}
+      <div className="relative mx-auto max-w-6xl px-6 py-16">
+        {!released && book.releaseDate && (
+          <div className="mb-12 pb-10 border-b border-gold/15 text-center">
+            <p className="eyebrow text-gold mb-6">The Code Will Be Revealed In</p>
+            <ReleaseCountdown releaseDate={book.releaseDate} />
+          </div>
+        )}
+
         <div className="grid items-center gap-12 md:grid-cols-[1fr_auto]">
           <div>
             <p className="eyebrow text-gold-lt mb-3">{released ? 'Now Available' : 'New Release'}</p>
@@ -49,35 +57,26 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
 
       <div className="hairline-solid w-full opacity-20" />
 
-      <div className="relative mx-auto max-w-3xl px-6 py-16 text-center">
+      <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
         <p className="eyebrow text-gold mb-3">Enter the Mystery</p>
         <h3 className="font-display text-2xl md:text-3xl mb-5">A world built to be uncovered, one clue at a time.</h3>
         <p className="text-ivory/80 leading-relaxed max-w-2xl mx-auto">{book.synopsis}</p>
       </div>
 
+      {/* Reader Circle sits in the middle of the flow, not at the end */}
       <div className="hairline-solid w-full opacity-20" />
 
-      <div className="relative mx-auto max-w-4xl px-6 py-16">
-        <ReleaseDetails book={book} />
-      </div>
-
-      {!released && book.releaseDate && (
-        <>
-          <div className="hairline-solid w-full opacity-20" />
-          <div className="relative mx-auto max-w-4xl px-6 py-16 text-center">
-            <p className="eyebrow text-gold mb-6">The Code Will Be Revealed In</p>
-            <ReleaseCountdown releaseDate={book.releaseDate} />
-          </div>
-        </>
-      )}
-
-      <div className="hairline-solid w-full opacity-20" />
-
-      <div className="relative mx-auto max-w-3xl px-6 py-16 text-center">
+      <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
         <p className="eyebrow text-gold mb-3">Reader Circle</p>
         <h3 className="font-display text-2xl md:text-3xl mb-2">Get Release Updates</h3>
         <p className="text-ivory/70 text-sm mb-7">Be the first to know the moment The Shadow Code is available.</p>
         <LaunchSignupForm source="shadow-code-launch" />
+      </div>
+
+      <div className="hairline-solid w-full opacity-20" />
+
+      <div className="relative mx-auto max-w-4xl px-6 py-10">
+        <ReleaseDetails book={book} />
       </div>
     </section>
   );

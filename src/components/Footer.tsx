@@ -4,7 +4,7 @@ import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-ink text-ivory">
+    <footer className="relative bg-ink bg-grain text-ivory">
       <div className="hairline-solid w-full opacity-30" />
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-5">

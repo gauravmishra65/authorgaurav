@@ -12,6 +12,7 @@ import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import AboutTeaser from '../components/AboutTeaser';
 import BookLaunchHero from '../components/BookLaunchHero';
+import WorldLinesMotif from '../components/WorldLinesMotif';
 import Divider from '../components/Divider';
 import { genreFilters, type Genre } from '../data/books';
 import { fetchBooks } from '../lib/queries';
@@ -45,8 +46,11 @@ export default function Home() {
         description="Stories across worlds — romance, mystery, devotion, and the road in between. Explore the books of Gaurav Mishra and join WriteTogetherHub, a home for writers."
       />
 
+      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
+
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ink text-ivory">
+      <section className="relative overflow-hidden bg-ink bg-grain text-ivory">
+        <WorldLinesMotif className="text-gold-lt/10" />
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
           <div className="grid items-center gap-12 md:grid-cols-[1.15fr_1fr]">
@@ -91,10 +95,8 @@ export default function Home() {
         </div>
       </section>
 
-      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
-
       {/* FEATURED BAND */}
-      <section className="bg-ink-soft text-ivory relative overflow-hidden">
+      <section className="bg-ink-soft bg-grain text-ivory relative overflow-hidden">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid items-center gap-12 md:grid-cols-[auto_1fr]">

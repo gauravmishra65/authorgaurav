@@ -25,7 +25,7 @@ export default function TestimonialModal({ book, className = '' }: TestimonialMo
 
       {open && (
         <div className="fixed inset-0 bg-ink/60 flex items-center justify-center p-6 z-50 overflow-auto" onClick={() => setOpen(false)}>
-          <div className="bg-cream rounded-md max-w-lg w-full p-6" onClick={(e) => e.stopPropagation()}>
+          <div className="content-card max-w-lg w-full p-6" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
               <h2 className="font-display text-xl text-ink">Share Your Feedback</h2>
               <button onClick={() => setOpen(false)} aria-label="Close" className="p-1 text-muted hover:text-ink">

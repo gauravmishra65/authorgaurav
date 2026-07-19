@@ -20,7 +20,7 @@ export default function Blog() {
         description="Essays on writing craft, the stories behind the books, spiritual reflections on devotional hymns, and book updates from author Gaurav Mishra."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Journal</p>

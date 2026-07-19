@@ -60,7 +60,7 @@ export default function BookDetail() {
         }}
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 pt-10 pb-2">
           <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold-lt/80 hover:text-gold-lt transition-colors">
@@ -114,7 +114,7 @@ export default function BookDetail() {
       </section>
 
       {book.releaseDate && (
-        <section className="bg-ink text-ivory">
+        <section className="bg-ink bg-grain text-ivory">
           <div className="hairline-solid w-full opacity-30" />
           <div className="mx-auto max-w-4xl px-6 py-16">
             <p className="eyebrow text-gold mb-6 text-center">Release Details</p>
@@ -136,7 +136,7 @@ export default function BookDetail() {
             <Divider className="!my-6" />
             <div className="grid gap-6 md:grid-cols-2">
               {book.testimonials.map((t, i) => (
-                <figure key={i} className="rounded-md border border-gold/20 bg-ivory p-7 shadow-luxury">
+                <figure key={i} className="content-card p-7">
                   <Quote className="text-gold/50 mb-3" size={20} aria-hidden="true" />
                   <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
                   <figcaption className="text-2xs label-caps text-muted">{t.name}{t.source ? ` · ${t.source}` : ''}</figcaption>

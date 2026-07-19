@@ -24,7 +24,7 @@ export default function StartHere() {
         path="/start-here"
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-4xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">New Here?</p>
@@ -45,7 +45,7 @@ export default function StartHere() {
               const book = books.find((b) => b.slug === slug);
               if (!book) return null;
               return (
-                <div key={slug} className="flex flex-col items-center text-center rounded-md border border-gold/20 bg-cream p-8 shadow-luxury">
+                <div key={slug} className="content-card flex flex-col items-center text-center p-8">
                   <p className="label-caps text-gold mb-5">{eyebrow}</p>
                   <BookCover {...book} size="md" href={`/books/${book.slug}`} />
                   <h2 className="font-display text-xl text-ink mt-6 mb-2">{book.title}</h2>

@@ -18,7 +18,7 @@ export default function WriteTogetherHubPage() {
         description="WriteTogetherHub gives writers and newcomers the guidance, community, and encouragement to grow their craft and get published. Founded by author Gaurav Mishra."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
           <span className="inline-block rounded-full border border-gold/40 px-4 py-1.5 label-caps text-gold-lt mb-5">A Home for Writers</span>

@@ -4,14 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0E1A2B',
-        'ink-soft': '#1C2E45',
-        gold: '#C79A3E',
-        'gold-lt': '#E6C87A',
-        ivory: '#F7F1E6',
-        cream: '#FBF7EF',
+        ink: '#16243A',
+        'ink-soft': '#22344D',
+        charcoal: '#171A1F',
+        gold: '#B88A44',
+        'gold-lt': '#D3AB6E',
+        ivory: '#F7F3EA',
+        cream: '#EFE8DA',
+        burgundy: '#7B263A',
         rose: '#B4506B',
-        text: '#23282F',
+        text: '#20242B',
         muted: '#6B6256',
       },
       fontFamily: {
@@ -20,9 +22,9 @@ export default {
       },
       fontSize: { '2xs': '0.65rem', xs: '0.75rem' },
       boxShadow: {
-        book: '0 18px 40px -18px rgba(14,26,43,0.5)',
-        'book-hover': '0 30px 50px -16px rgba(14,26,43,0.55)',
-        luxury: '0 8px 32px -8px rgba(14,26,43,0.22)',
+        book: '0 18px 40px -18px rgba(22,36,58,0.5)',
+        'book-hover': '0 30px 50px -16px rgba(22,36,58,0.55)',
+        luxury: '0 8px 32px -8px rgba(22,36,58,0.22)',
       },
       letterSpacing: { widest: '0.28em', wider: '0.14em' },
       keyframes: {

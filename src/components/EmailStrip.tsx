@@ -14,7 +14,7 @@ export default function EmailStrip({
   const isDark = variant === 'dark';
 
   return (
-    <section className={`relative overflow-hidden ${isDark ? 'bg-ink-soft text-ivory' : 'bg-gradient-to-r from-gold-lt/30 via-gold/15 to-gold-lt/30'}`}>
+    <section className={`relative overflow-hidden ${isDark ? 'bg-ink-soft bg-grain text-ivory' : 'bg-gradient-to-r from-gold-lt/30 via-gold/15 to-gold-lt/30'}`}>
       <div className="hairline-solid w-full" />
       <div className="mx-auto max-w-5xl px-6 py-14 text-center">
         <p className="eyebrow text-gold mb-3">Reader Letter</p>
@@ -23,7 +23,6 @@ export default function EmailStrip({
 
         <NewsletterForm id="strip-email" buttonLabel="Get the Chapter" source="email-strip" />
       </div>
-      <div className="hairline-solid w-full" />
     </section>
   );
 }
