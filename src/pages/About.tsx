@@ -14,7 +14,7 @@ export default function About() {
         description="Gaurav Mishra writes across romance, thriller, memoir, and devotion — united by the belief that a good story can carry a reader anywhere. Founder of WriteTogetherHub."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20">
           <div className="grid items-center gap-12 md:grid-cols-[280px_1fr]">

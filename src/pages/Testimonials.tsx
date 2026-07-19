@@ -8,7 +8,7 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 
 function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
   return (
-    <figure className="rounded-md border border-gold/20 bg-ivory p-7 shadow-luxury">
+    <figure className="content-card p-7">
       <Quote className="text-gold/50 mb-3" size={22} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted mb-4">
@@ -38,7 +38,7 @@ export default function Testimonials() {
         path="/testimonials"
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">Reader Circle</p>

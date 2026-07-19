@@ -18,7 +18,7 @@ export default function News() {
         description="Book releases, appearances, and announcements from author Gaurav Mishra — plus updates from WriteTogetherHub."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">Latest</p>

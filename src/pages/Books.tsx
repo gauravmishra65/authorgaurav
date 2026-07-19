@@ -62,7 +62,7 @@ export default function Books() {
         description="Browse every book by Gaurav Mishra — Offbeat Love, Shadow Code, A Journey of Grace, and devotional works in Hindi. Buy on Amazon, Flipkart, and Kindle."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-10 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
@@ -108,7 +108,7 @@ export default function Books() {
       })}
 
       {/* MICROSITES */}
-      <section className="bg-ink-soft text-ivory">
+      <section className="bg-ink-soft bg-grain text-ivory">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="text-center mb-10">
             <p className="eyebrow text-gold-lt mb-3">Explore the Dedicated Worlds</p>

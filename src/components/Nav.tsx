@@ -38,17 +38,17 @@ export default function Nav() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-ivory/85 backdrop-blur-md shadow-[0_1px_0_0_rgba(199,154,62,0.25)]' : 'bg-ivory/60 backdrop-blur-sm'}`}>
-      <div className="hairline-solid w-full opacity-60" />
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
+      <div className="hairline-solid w-full opacity-40" />
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-        <Link to="/" className="font-display text-xl tracking-tight text-ink" aria-label="Gaurav Mishra — home">
-          Gaurav<span className="text-gold">Mishra</span>
+        <Link to="/" className="font-display text-xl tracking-tight text-ivory" aria-label="Gaurav Mishra — home">
+          Gaurav<span className="text-gold-lt">Mishra</span>
         </Link>
 
         <ul className="hidden lg:flex items-center gap-3.5 xl:gap-6">
           {desktopLinks.map((l) => (
             <li key={l.to}>
-              <Link to={l.to} className={`label-caps transition-colors hover:text-gold ${location.pathname === l.to ? 'text-gold' : 'text-text/80'}`}>
+              <Link to={l.to} className={`label-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
                 {l.label}
               </Link>
             </li>
@@ -56,20 +56,20 @@ export default function Nav() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
-          <SocialLinks size={15} className="hidden xl:flex" iconClassName="text-text/50 hover:text-gold transition-colors" />
+          <SocialLinks size={15} className="hidden xl:flex" iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
           <a href="#free-chapter" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs whitespace-nowrap">Free Chapter</a>
         </div>
 
-        <button className="lg:hidden text-ink p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>
+        <button className="lg:hidden text-ivory p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
       <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ease-out ${open ? 'max-h-96' : 'max-h-0'}`}>
-        <ul className="flex flex-col gap-1 px-6 pb-5 pt-1 bg-ivory/95 backdrop-blur-md">
+        <ul className="flex flex-col gap-1 px-6 pb-5 pt-1 bg-charcoal/98 backdrop-blur-md">
           {links.map((l) => (
             <li key={l.to}>
-              <Link to={l.to} className={`label-caps block py-2.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold' : 'text-text/80'}`}>
+              <Link to={l.to} className={`label-caps block py-2.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
                 {l.label}
               </Link>
             </li>
@@ -78,7 +78,7 @@ export default function Nav() {
             <a href="#free-chapter" className="btn-caps btn-gold inline-block rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
           </li>
           <li className="pt-4">
-            <SocialLinks size={17} iconClassName="text-text/60 hover:text-gold transition-colors" />
+            <SocialLinks size={17} iconClassName="text-ivory/60 hover:text-gold-lt transition-colors" />
           </li>
         </ul>
       </div>

@@ -3,21 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --ink: #0e1a2b; --gold: #c79a3e; --gold-lt: #e6c87a;
-  --ivory: #f7f1e6; --cream: #fbf7ef; --rose: #b4506b;
-  --text: #23282f; --muted: #6b6256;
+  --ink: #16243a; --ink-soft: #22344d; --charcoal: #171a1f;
+  --gold: #b88a44; --gold-lt: #d3ab6e; --burgundy: #7b263a;
+  --ivory: #f7f3ea; --cream: #efe8da; --rose: #b4506b;
+  --text: #20242b; --muted: #6b6256;
 }
 
 * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 html { scroll-behavior: smooth; }
 
+/* Warm paper-grain texture — fine dot pattern at very low opacity, kept
+   subtle so it reads as quality paper stock, not a busy pattern. */
 body {
   font-family: 'Spectral', Georgia, serif;
   background-color: var(--ivory);
+  background-image: radial-gradient(rgba(42,35,25,0.035) 0.7px, transparent 0.7px);
+  background-size: 5px 5px;
   color: var(--text);
 }
 
-::selection { background: rgba(199,154,62,0.28); color: var(--ink); }
+::selection { background: rgba(184,138,68,0.28); color: var(--ink); }
 
 .eyebrow, .label-caps, .btn-caps {
   font-family: 'Spectral', Georgia, serif;
@@ -35,26 +40,26 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-.hairline { height: 1px; background: linear-gradient(to right, transparent, rgba(199,154,62,0.5), transparent); }
-.hairline-solid { height: 1px; background: rgba(199,154,62,0.35); }
+.hairline { height: 1px; background: linear-gradient(to right, transparent, rgba(184,138,68,0.5), transparent); }
+.hairline-solid { height: 1px; background: rgba(184,138,68,0.35); }
 
-.ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; color: rgba(199,154,62,0.7); font-size: 0.95rem; }
-.ornament::before, .ornament::after { content: ''; height: 1px; flex: 1; max-width: 120px; background: linear-gradient(to right, transparent, rgba(199,154,62,0.45), transparent); }
+.ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; color: rgba(184,138,68,0.7); font-size: 0.95rem; }
+.ornament::before, .ornament::after { content: ''; height: 1px; flex: 1; max-width: 120px; background: linear-gradient(to right, transparent, rgba(184,138,68,0.45), transparent); }
 
-.btn-gold { background: linear-gradient(180deg, #d4ad52 0%, #c79a3e 100%); color: #0e1a2b; border: 1px solid rgba(199,154,62,0.6); transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; }
-.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(199,154,62,0.7); filter: brightness(1.04); }
+.btn-gold { background: linear-gradient(180deg, #d3ab6e 0%, #b88a44 100%); color: #16243a; border: 1px solid rgba(184,138,68,0.6); transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; }
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(184,138,68,0.7); filter: brightness(1.04); }
 
-.btn-gold-outline { background: transparent; color: var(--gold); border: 1px solid rgba(199,154,62,0.55); transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
-.btn-gold-outline:hover { background: rgba(199,154,62,0.1); transform: translateY(-1px); }
+.btn-gold-outline { background: transparent; color: var(--gold); border: 1px solid rgba(184,138,68,0.55); transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.btn-gold-outline:hover { background: rgba(184,138,68,0.1); transform: translateY(-1px); }
 
 .book-tilt { transition: transform 0.45s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.45s cubic-bezier(0.2,0.7,0.2,1); }
-.book-tilt:hover { transform: translateY(-10px) rotate(-0.6deg); box-shadow: 0 30px 50px -16px rgba(14,26,43,0.55); }
+.book-tilt:hover { transform: translateY(-10px) rotate(-0.6deg); box-shadow: 0 30px 50px -16px rgba(22,36,58,0.55); }
 
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--ivory); }
-::-webkit-scrollbar-thumb { background: rgba(199,154,62,0.4); border-radius: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(184,138,68,0.4); border-radius: 6px; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
 
@@ -65,15 +70,46 @@ h1, h2, h3, h4 {
 .carousel-track:hover { animation-play-state: paused; }
 @keyframes carousel-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Same seamless-loop technique as .carousel-track, but moving left-to-right
+   (rightward) instead — used for the testimonials strip. */
+.carousel-track-ltr { animation-name: carousel-scroll-ltr; animation-timing-function: linear; animation-iteration-count: infinite; }
+.carousel-track-ltr:hover { animation-play-state: paused; }
+@keyframes carousel-scroll-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
 .prose-literary p { font-size: 1.0625rem; line-height: 1.75; color: var(--text); }
 .prose-literary p + p { margin-top: 1.1rem; }
 
 .input {
   width: 100%;
   border-radius: 0.125rem;
-  border: 1px solid rgba(199,154,62,0.3);
+  border: 1px solid rgba(184,138,68,0.3);
   background: var(--cream);
   padding: 0.5rem 0.75rem;
   color: var(--ink);
 }
 .input:focus { border-color: var(--gold); outline: none; }
+
+/* Premium content-card surface — plain white against the warm paper
+   background, so cards read as crisp, clean panels rather than another
+   layer of texture. */
+.content-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(184, 138, 68, 0.16);
+  border-radius: 1rem;
+  box-shadow: 0 8px 28px rgba(20, 24, 32, 0.07);
+}
+
+/* Subtle film-grain texture for dark (bg-ink) sections — pure CSS, no
+   image asset. The pseudo-element sits at z-index:-1 so it paints above
+   the section's own background-color but below its in-flow content. */
+.bg-grain { position: relative; }
+.bg-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-repeat: repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}

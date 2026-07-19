@@ -50,7 +50,7 @@ export default function Contact() {
         description="Get in touch with author Gaurav Mishra. Send a message, request a free chapter, or join the reader circle for monthly letters and new-release alerts."
       />
 
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">Say Hello</p>

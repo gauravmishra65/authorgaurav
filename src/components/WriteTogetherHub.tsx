@@ -9,8 +9,7 @@ const benefits = [
 
 export default function WriteTogetherHub() {
   return (
-    <section id="write-together-hub" className="relative bg-ink text-ivory overflow-hidden">
-      <div className="hairline-solid w-full opacity-30" />
+    <section id="write-together-hub" className="relative bg-ink bg-grain text-ivory overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <div className="text-center">
           <span className="inline-block rounded-full border border-gold/40 px-4 py-1.5 label-caps text-gold-lt">A Home for Writers</span>
