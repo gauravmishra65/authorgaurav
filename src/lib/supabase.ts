@@ -17,4 +17,5 @@ export const supabase = createClient(
 );
 
 export const CONTACT_FORM_ENDPOINT = `${supabaseUrl ?? ''}/functions/v1/contact-form`;
+export const LAUNCH_SIGNUP_ENDPOINT = `${supabaseUrl ?? ''}/functions/v1/launch-signup`;
 export const SUPABASE_ANON_KEY = supabaseAnonKey ?? '';
