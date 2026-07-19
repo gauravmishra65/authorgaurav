@@ -25,7 +25,7 @@ if (existsSync(envPath)) {
 
 const SITE_URL = 'https://authorgaurav.com';
 
-const staticRoutes = ['/', '/books', '/about', '/blog', '/news', '/testimonials', '/write-together-hub', '/contact'];
+const staticRoutes = ['/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact'];
 
 let bookRoutes = [];
 const { VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY } = process.env;

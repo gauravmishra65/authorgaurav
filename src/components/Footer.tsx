@@ -19,6 +19,7 @@ export default function Footer() {
           <div>
             <p className="label-caps text-gold mb-4">Explore</p>
             <ul className="space-y-2.5 text-sm">
+              <li><Link to="/start-here" className="text-ivory/75 hover:text-gold transition-colors">Start Here (New Readers)</Link></li>
               <li><Link to="/books" className="text-ivory/75 hover:text-gold transition-colors">Books</Link></li>
               <li><Link to="/about" className="text-ivory/75 hover:text-gold transition-colors">About</Link></li>
               <li><Link to="/blog" className="text-ivory/75 hover:text-gold transition-colors">Blog</Link></li>

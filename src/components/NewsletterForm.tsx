@@ -10,12 +10,18 @@ interface NewsletterFormProps {
   className?: string;
   /** Where this form appears, stored alongside the subscriber for reference. */
   source?: string;
+  /** Adds a genre-preference select — used on the Start Here page so new readers can flag what they're into. */
+  showGenrePreference?: boolean;
 }
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '', source = 'website' }: NewsletterFormProps) {
+const genrePreferenceOptions = ['Romance', 'Mystery & Thriller', 'Devotional & Spiritual', 'Memoir', 'Surprise me — send everything'];
+
+export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '', source = 'website', showGenrePreference = false }: NewsletterFormProps) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [genrePreference, setGenrePreference] = useState('');
   const [status, setStatus] = useState<Status>('idle');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -25,7 +31,12 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
     setStatus('loading');
     // A duplicate email (unique constraint violation, code 23505) is treated
     // as success — the visitor is already subscribed either way.
-    const { error } = await supabase.from('authorgaurav_newsletter_subscribers').insert({ email, source });
+    const { error } = await supabase.from('authorgaurav_newsletter_subscribers').insert({
+      name: name || null,
+      email,
+      source,
+      genre_preference: genrePreference || null,
+    });
     if (error && error.code !== '23505') {
       setStatus('error');
       return;
@@ -44,9 +55,35 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
     );
   }
 
+  const genreSelect = showGenrePreference && (
+    <div>
+      <label htmlFor={`${id}-genre`} className="sr-only">What do you love reading?</label>
+      <select
+        id={`${id}-genre`}
+        value={genrePreference}
+        onChange={(e) => setGenrePreference(e.target.value)}
+        className={layout === 'compact'
+          ? 'bg-transparent text-ivory text-sm w-full focus:outline-none border-b border-gold/40 pb-2'
+          : 'w-full rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink focus:border-gold focus:outline-none sm:w-auto'}
+      >
+        <option value="">What do you love reading? (optional)</option>
+        {genrePreferenceOptions.map((g) => <option key={g} value={g}>{g}</option>)}
+      </select>
+    </div>
+  );
+
   if (layout === 'compact') {
     return (
       <form onSubmit={handleSubmit} className={`flex flex-col gap-2.5 ${className}`}>
+        <label htmlFor={`${id}-name`} className="sr-only">Name</label>
+        <input
+          id={`${id}-name`}
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your name"
+          className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full border-b border-gold/40 pb-2 focus:outline-none"
+        />
         <label htmlFor={id} className="sr-only">Email address</label>
         <div className="flex items-center gap-2 border-b border-gold/40 pb-2">
           <Mail size={16} className="text-gold/70" />
@@ -60,6 +97,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
             className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-none"
           />
         </div>
+        {genreSelect}
         {status === 'error' && <p className="text-2xs text-rose">Something went wrong — please try again.</p>}
         <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold-outline self-start px-4 py-2 text-2xs rounded-sm disabled:opacity-60">
           {status === 'loading' ? 'Sending…' : buttonLabel}
@@ -70,7 +108,16 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
 
   return (
     <div className={className}>
-      <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+      <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <label htmlFor={`${id}-name`} className="sr-only">Name</label>
+        <input
+          id={`${id}-name`}
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your name"
+          className="flex-1 rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none"
+        />
         <label htmlFor={id} className="sr-only">Email address</label>
         <input
           id={id}
@@ -81,6 +128,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           placeholder="you@example.com"
           className="flex-1 rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none"
         />
+        {genreSelect}
         <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold rounded-sm px-6 py-3 whitespace-nowrap disabled:opacity-60">
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>

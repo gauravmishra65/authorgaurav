@@ -70,6 +70,9 @@ export default function Home() {
                   <Mail size={16} /> Get a Free Chapter
                 </a>
               </div>
+              <Link to="/start-here" className="inline-block mt-5 label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors fade-up" style={{ animationDelay: '0.55s' }}>
+                New here? Start Here — find your first book →
+              </Link>
             </div>
 
             {/* Right — fanned covers */}

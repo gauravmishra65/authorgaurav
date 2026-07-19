@@ -8,9 +8,16 @@ const links = [
   { label: 'Books', to: '/books' },
   { label: 'About', to: '/about' },
   { label: 'Blog', to: '/blog' },
+  { label: 'News', to: '/news' },
+  { label: 'Testimonials', to: '/testimonials' },
   { label: 'WriteTogetherHub', to: '/write-together-hub' },
   { label: 'Contact', to: '/contact' },
 ];
+
+// The logo already links home, so the desktop bar drops "Home" to save
+// width for the newer News/Testimonials links — the mobile menu keeps it
+// since it's a plain vertical list with no space pressure.
+const desktopLinks = links.filter((l) => l.to !== '/');
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -38,8 +45,8 @@ export default function Nav() {
           Gaurav<span className="text-gold">Mishra</span>
         </Link>
 
-        <ul className="hidden md:flex items-center gap-7">
-          {links.map((l) => (
+        <ul className="hidden lg:flex items-center gap-3.5 xl:gap-6">
+          {desktopLinks.map((l) => (
             <li key={l.to}>
               <Link to={l.to} className={`label-caps transition-colors hover:text-gold ${location.pathname === l.to ? 'text-gold' : 'text-text/80'}`}>
                 {l.label}
@@ -48,17 +55,17 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-5">
-          <SocialLinks size={15} className="hidden lg:flex" iconClassName="text-text/50 hover:text-gold transition-colors" />
-          <a href="#free-chapter" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs">Free Chapter</a>
+        <div className="hidden lg:flex items-center gap-4">
+          <SocialLinks size={15} className="hidden xl:flex" iconClassName="text-text/50 hover:text-gold transition-colors" />
+          <a href="#free-chapter" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs whitespace-nowrap">Free Chapter</a>
         </div>
 
-        <button className="md:hidden text-ink p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>
+        <button className="lg:hidden text-ink p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      <div className={`md:hidden overflow-hidden transition-[max-height] duration-300 ease-out ${open ? 'max-h-96' : 'max-h-0'}`}>
+      <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ease-out ${open ? 'max-h-96' : 'max-h-0'}`}>
         <ul className="flex flex-col gap-1 px-6 pb-5 pt-1 bg-ivory/95 backdrop-blur-md">
           {links.map((l) => (
             <li key={l.to}>
