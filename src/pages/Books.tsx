@@ -139,6 +139,9 @@ export default function Books() {
         <Link to="/contact" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
           Get in Touch <ArrowRight size={15} />
         </Link>
+        <p className="mt-6">
+          <Link to="/testimonials" className="label-caps text-gold hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>
+        </p>
       </section>
     </>
   );

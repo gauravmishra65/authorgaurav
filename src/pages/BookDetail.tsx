@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ExternalLink, Quote } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, MessageCircle, Quote } from 'lucide-react';
 import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
 import EmailStrip from '../components/EmailStrip';
@@ -138,9 +138,20 @@ export default function BookDetail() {
                   <Quote className="text-gold/50 mb-3" size={20} aria-hidden="true" />
                   <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
                   <figcaption className="text-2xs label-caps text-muted">{t.name}{t.source ? ` · ${t.source}` : ''}</figcaption>
+                  {t.authorReply && (
+                    <div className="border-l-2 border-gold/40 pl-4 mt-4">
+                      <p className="label-caps text-2xs text-gold mb-1.5 inline-flex items-center gap-1.5">
+                        <MessageCircle size={12} aria-hidden="true" /> Gaurav Replied
+                      </p>
+                      <p className="text-sm text-text/80 leading-relaxed">{t.authorReply}</p>
+                    </div>
+                  )}
                 </figure>
               ))}
             </div>
+            <p className="text-center mt-10">
+              <Link to="/testimonials" className="label-caps text-gold hover:text-ink transition-colors">Share Your Own Feedback</Link>
+            </p>
           </div>
         </section>
       )}

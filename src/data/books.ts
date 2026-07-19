@@ -6,6 +6,7 @@ export interface Testimonial {
   quote: string;
   name: string;
   source?: string;
+  authorReply?: string;
 }
 
 export interface Book {
