@@ -6,6 +6,7 @@ import AdminLogin from './AdminLogin';
 const links = [
   { label: 'Books', to: '/admin/books' },
   { label: 'Testimonials', to: '/admin/testimonials' },
+  { label: 'Testimonial Submissions', to: '/admin/testimonial-submissions' },
   { label: 'Blog', to: '/admin/blog' },
   { label: 'News & Events', to: '/admin/news' },
   { label: 'Newsletter Subscribers', to: '/admin/subscribers' },

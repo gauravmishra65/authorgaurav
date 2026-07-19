@@ -8,6 +8,7 @@ import About from './pages/About';
 import Blog from './pages/Blog';
 import News from './pages/News';
 import Contact from './pages/Contact';
+import Testimonials from './pages/Testimonials';
 import WriteTogetherHubPage from './pages/WriteTogetherHubPage';
 
 // Admin is code-split out of the public bundle — regular visitors never
@@ -15,6 +16,7 @@ import WriteTogetherHubPage from './pages/WriteTogetherHubPage';
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminBooks = lazy(() => import('./pages/admin/AdminBooks'));
 const AdminTestimonials = lazy(() => import('./pages/admin/AdminTestimonials'));
+const AdminTestimonialSubmissions = lazy(() => import('./pages/admin/AdminTestimonialSubmissions'));
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
@@ -36,6 +38,7 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/news" element={<News />} />
           <Route path="/write-together-hub" element={<WriteTogetherHubPage />} />
+          <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Route>
@@ -44,6 +47,7 @@ export default function App() {
           <Route index element={<Navigate to="/admin/books" replace />} />
           <Route path="books" element={<Suspense fallback={<AdminFallback />}><AdminBooks /></Suspense>} />
           <Route path="testimonials" element={<Suspense fallback={<AdminFallback />}><AdminTestimonials /></Suspense>} />
+          <Route path="testimonial-submissions" element={<Suspense fallback={<AdminFallback />}><AdminTestimonialSubmissions /></Suspense>} />
           <Route path="blog" element={<Suspense fallback={<AdminFallback />}><AdminBlog /></Suspense>} />
           <Route path="news" element={<Suspense fallback={<AdminFallback />}><AdminNews /></Suspense>} />
           <Route path="subscribers" element={<Suspense fallback={<AdminFallback />}><AdminSubscribers /></Suspense>} />

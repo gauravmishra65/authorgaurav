@@ -51,6 +51,7 @@ export interface AdminTestimonialRow {
   source: string | null;
   featured: boolean;
   sort_order: number;
+  author_reply: string | null;
 }
 
 export async function fetchAdminTestimonials(): Promise<AdminTestimonialRow[]> {
@@ -68,6 +69,56 @@ export async function saveTestimonial(row: Partial<AdminTestimonialRow>): Promis
 
 export async function deleteTestimonial(id: string): Promise<void> {
   const { error } = await supabase.from('authorgaurav_testimonials').delete().eq('id', id);
+  if (error) throw error;
+}
+
+export interface AdminTestimonialSubmissionRow {
+  id: string;
+  book_id: string | null;
+  name: string;
+  email: string;
+  quote: string;
+  status: 'pending' | 'approved' | 'rejected';
+  author_reply: string | null;
+  created_at: string;
+}
+
+export async function fetchTestimonialSubmissions(): Promise<AdminTestimonialSubmissionRow[]> {
+  const { data, error } = await supabase
+    .from('authorgaurav_testimonial_submissions')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data as AdminTestimonialSubmissionRow[];
+}
+
+/** Promotes a pending submission into the public "What Readers Say" table, carrying the author's reply along. */
+export async function approveTestimonialSubmission(submission: AdminTestimonialSubmissionRow, replyText: string): Promise<void> {
+  const reply = replyText.trim() || null;
+
+  const { error: insertError } = await supabase.from('authorgaurav_testimonials').insert({
+    book_id: submission.book_id,
+    quote: submission.quote,
+    name: submission.name,
+    source: 'Verified Reader',
+    featured: false,
+    sort_order: 0,
+    author_reply: reply,
+  });
+  if (insertError) throw insertError;
+
+  const { error: updateError } = await supabase
+    .from('authorgaurav_testimonial_submissions')
+    .update({ status: 'approved', author_reply: reply })
+    .eq('id', submission.id);
+  if (updateError) throw updateError;
+}
+
+export async function rejectTestimonialSubmission(id: string, replyText: string): Promise<void> {
+  const { error } = await supabase
+    .from('authorgaurav_testimonial_submissions')
+    .update({ status: 'rejected', author_reply: replyText.trim() || null })
+    .eq('id', id);
   if (error) throw error;
 }
 

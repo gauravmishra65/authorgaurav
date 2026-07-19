@@ -5,7 +5,7 @@ import {
   fetchAdminBooks, type AdminBookRow,
 } from '../../lib/adminQueries';
 
-const empty: Partial<AdminTestimonialRow> = { book_id: null, quote: '', name: '', source: '', featured: false, sort_order: 0 };
+const empty: Partial<AdminTestimonialRow> = { book_id: null, quote: '', name: '', source: '', featured: false, sort_order: 0, author_reply: null };
 
 export default function AdminTestimonials() {
   const [rows, setRows] = useState<AdminTestimonialRow[]>([]);
@@ -105,6 +105,10 @@ export default function AdminTestimonials() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={editing.featured ?? false} onChange={(e) => setEditing({ ...editing, featured: e.target.checked })} className="h-4 w-4 accent-gold" />
               <span className="text-sm text-muted">Feature on home page ("What Readers Say")</span>
+            </label>
+            <label className="block">
+              <span className="label-caps text-muted block mb-1.5 text-2xs">Author Reply (optional, shown publicly)</span>
+              <textarea rows={2} value={editing.author_reply ?? ''} onChange={(e) => setEditing({ ...editing, author_reply: e.target.value || null })} className="input" />
             </label>
 
             {error && <p className="text-2xs text-rose">{error}</p>}

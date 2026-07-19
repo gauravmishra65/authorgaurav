@@ -38,6 +38,7 @@ interface TestimonialRow {
   name: string;
   source: string | null;
   featured: boolean;
+  author_reply: string | null;
 }
 
 function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
@@ -71,7 +72,7 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
 export async function fetchBooks(): Promise<Book[]> {
   const [{ data: bookRows, error: booksError }, { data: testimonialRows, error: testimonialsError }] = await Promise.all([
     supabase.from('authorgaurav_books').select('*').order('sort_order'),
-    supabase.from('authorgaurav_testimonials').select('id, book_id, quote, name, source, featured').order('sort_order'),
+    supabase.from('authorgaurav_testimonials').select('id, book_id, quote, name, source, featured, author_reply').order('sort_order'),
   ]);
 
   if (booksError) throw booksError;
@@ -81,7 +82,7 @@ export async function fetchBooks(): Promise<Book[]> {
   for (const t of (testimonialRows ?? []) as TestimonialRow[]) {
     if (!t.book_id) continue;
     const list = testimonialsByBook.get(t.book_id) ?? [];
-    list.push({ quote: t.quote, name: t.name, source: t.source ?? undefined });
+    list.push({ quote: t.quote, name: t.name, source: t.source ?? undefined, authorReply: t.author_reply ?? undefined });
     testimonialsByBook.set(t.book_id, list);
   }
 
@@ -92,22 +93,58 @@ export interface FeaturedTestimonial extends Testimonial {
   book: string;
 }
 
+function mapTestimonialWithBook(row: {
+  quote: string; name: string; source: string | null; author_reply: string | null;
+  authorgaurav_books: { title: string }[] | { title: string } | null;
+}): FeaturedTestimonial {
+  const bookTitle = Array.isArray(row.authorgaurav_books)
+    ? row.authorgaurav_books[0]?.title
+    : row.authorgaurav_books?.title;
+  return {
+    quote: row.quote,
+    name: row.name,
+    source: row.source ?? undefined,
+    authorReply: row.author_reply ?? undefined,
+    book: bookTitle ?? '',
+  };
+}
+
 export async function fetchFeaturedTestimonials(limit = 3): Promise<FeaturedTestimonial[]> {
   const { data, error } = await supabase
     .from('authorgaurav_testimonials')
-    .select('quote, name, source, authorgaurav_books(title)')
+    .select('quote, name, source, author_reply, authorgaurav_books(title)')
     .eq('featured', true)
     .order('sort_order')
     .limit(limit);
 
   if (error) throw error;
+  return (data ?? []).map(mapTestimonialWithBook);
+}
 
-  return (data ?? []).map((row) => {
-    const bookTitle = Array.isArray(row.authorgaurav_books)
-      ? row.authorgaurav_books[0]?.title
-      : (row.authorgaurav_books as { title: string } | null)?.title;
-    return { quote: row.quote, name: row.name, source: row.source ?? undefined, book: bookTitle ?? '' };
-  });
+/** Every author-curated testimonial (the whole reader wall), newest-first for the /testimonials page. */
+export async function fetchAllTestimonials(): Promise<FeaturedTestimonial[]> {
+  const { data, error } = await supabase
+    .from('authorgaurav_testimonials')
+    .select('quote, name, source, author_reply, authorgaurav_books(title)')
+    .order('sort_order');
+
+  if (error) throw error;
+  return (data ?? []).map(mapTestimonialWithBook);
+}
+
+export interface TestimonialSubmission {
+  bookId: string;
+  name: string;
+  email: string;
+  quote: string;
+}
+
+/** Public reader feedback lands in a moderation queue — see fetchTestimonialSubmissions in adminQueries.ts. */
+export async function submitTestimonialFeedback({ bookId, name, email, quote }: TestimonialSubmission): Promise<void> {
+  const { error } = await supabase
+    .from('authorgaurav_testimonial_submissions')
+    .insert({ book_id: bookId, name, email, quote });
+  if (error) throw error;
 }
 
 interface BlogPostRow {
