@@ -9,6 +9,7 @@ import Blog from './pages/Blog';
 import News from './pages/News';
 import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
+import StartHere from './pages/StartHere';
 import WriteTogetherHubPage from './pages/WriteTogetherHubPage';
 
 // Admin is code-split out of the public bundle — regular visitors never
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/news" element={<News />} />
           <Route path="/write-together-hub" element={<WriteTogetherHubPage />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/start-here" element={<StartHere />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Route>

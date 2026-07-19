@@ -184,6 +184,7 @@ export interface AdminSubscriberRow {
   email: string;
   name: string | null;
   source: string | null;
+  genre_preference: string | null;
   created_at: string;
 }
 

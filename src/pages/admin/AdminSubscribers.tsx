@@ -10,7 +10,7 @@ export default function AdminSubscribers() {
   }, []);
 
   const exportCsv = () => {
-    const csv = ['name,email,source,created_at', ...rows.map((r) => `${r.name ?? ''},${r.email},${r.source ?? ''},${r.created_at}`)].join('\n');
+    const csv = ['name,email,source,genre_preference,created_at', ...rows.map((r) => `${r.name ?? ''},${r.email},${r.source ?? ''},${r.genre_preference ?? ''},${r.created_at}`)].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -36,7 +36,7 @@ export default function AdminSubscribers() {
           {rows.map((r) => (
             <div key={r.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0">
               <p className="text-ink">{r.name ? `${r.name} · ${r.email}` : r.email}</p>
-              <p className="text-2xs text-muted">{r.source ?? '—'} · {new Date(r.created_at).toLocaleDateString()}</p>
+              <p className="text-2xs text-muted">{r.source ?? '—'}{r.genre_preference ? ` · ${r.genre_preference}` : ''} · {new Date(r.created_at).toLocaleDateString()}</p>
             </div>
           ))}
           {rows.length === 0 && <p className="px-5 py-6 text-muted text-sm">No subscribers yet.</p>}
