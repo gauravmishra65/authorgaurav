@@ -7,6 +7,7 @@ import Divider from '../components/Divider';
 import ReleaseDetails from '../components/ReleaseDetails';
 import ReleaseCountdown from '../components/ReleaseCountdown';
 import SocialShareButtons from '../components/SocialShareButtons';
+import TestimonialModal from '../components/TestimonialModal';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
@@ -68,8 +69,9 @@ export default function BookDetail() {
         </div>
         <div className="mx-auto max-w-5xl px-6 py-14">
           <div className="grid items-center gap-12 md:grid-cols-[240px_1fr]">
-            <div className="flex justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start gap-6">
               <BookCover {...book} size="lg" />
+              <TestimonialModal book={book} className="w-full max-w-[240px]" />
             </div>
             <div>
               <div className="flex items-center gap-3 flex-wrap mb-3">

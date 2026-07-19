@@ -2,15 +2,15 @@ import { useState, type FormEvent } from 'react';
 import type { Book } from '../data/books';
 import { submitTestimonialFeedback } from '../lib/queries';
 
-interface TestimonialFormProps {
-  books: Book[];
-  className?: string;
-}
+type TestimonialFormProps = { className?: string } & (
+  | { books: Book[]; book?: undefined }
+  | { book: Book; books?: undefined }
+);
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export default function TestimonialForm({ books, className = '' }: TestimonialFormProps) {
-  const [bookId, setBookId] = useState('');
+export default function TestimonialForm({ className = '', ...props }: TestimonialFormProps) {
+  const [bookId, setBookId] = useState(props.book?.id ?? '');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [quote, setQuote] = useState('');
@@ -40,19 +40,26 @@ export default function TestimonialForm({ books, className = '' }: TestimonialFo
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-5 ${className}`}>
-      <div>
-        <label htmlFor="testimonial-book" className="label-caps text-muted block mb-2">Which book?</label>
-        <select
-          id="testimonial-book"
-          required
-          value={bookId}
-          onChange={(e) => setBookId(e.target.value)}
-          className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
-        >
-          <option value="">Select a book…</option>
-          {books.map((b) => <option key={b.id} value={b.id}>{b.title}</option>)}
-        </select>
-      </div>
+      {props.books ? (
+        <div>
+          <label htmlFor="testimonial-book" className="label-caps text-muted block mb-2">Which book?</label>
+          <select
+            id="testimonial-book"
+            required
+            value={bookId}
+            onChange={(e) => setBookId(e.target.value)}
+            className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
+          >
+            <option value="">Select a book…</option>
+            {props.books.map((b) => <option key={b.id} value={b.id}>{b.title}</option>)}
+          </select>
+        </div>
+      ) : (
+        <div>
+          <span className="label-caps text-muted block mb-2">Book</span>
+          <p className="font-display text-lg text-ink">{props.book.title}</p>
+        </div>
+      )}
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="testimonial-name" className="label-caps text-muted block mb-2">Name</label>
