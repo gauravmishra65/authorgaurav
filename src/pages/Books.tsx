@@ -66,7 +66,7 @@ export default function Books() {
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-14 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
-          <h1 className="font-display text-3xl md:text-4xl mb-4">The Books</h1>
+          <h1 className="font-display text-4xl md:text-5xl mb-4">The Books</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
             From romance to thriller to memoir to devotion — works that share one belief: a good story can carry a reader anywhere.
           </p>
