@@ -64,7 +64,7 @@ export default function Books() {
 
       <section className="bg-ink text-ivory">
         <div className="hairline-solid w-full opacity-30" />
-        <div className="mx-auto max-w-5xl px-6 py-14 text-center">
+        <div className="mx-auto max-w-5xl px-6 py-10 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">The Books</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
