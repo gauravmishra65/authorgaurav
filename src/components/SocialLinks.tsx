@@ -32,7 +32,7 @@ export default function SocialLinks({
       {socialLinks.map((s) => {
         const Icon = icons[s.label];
         return (
-          <a key={s.label} href={s.href} aria-label={s.label} className={iconClassName}>
+          <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={iconClassName}>
             {Icon ? <Icon size={size} /> : s.label}
           </a>
         );

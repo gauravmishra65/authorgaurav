@@ -128,7 +128,7 @@ export default function Contact() {
               <p className="label-caps text-gold mb-4">Social</p>
               <div className="flex gap-4">
                 {socialLinks.map((s) => (
-                  <a key={s.label} href={s.href} aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
                 ))}
               </div>
             </div>
