@@ -3,7 +3,7 @@ import { Pencil, Trash2, Plus } from 'lucide-react';
 import { fetchAdminBlogPosts, saveBlogPost, deleteBlogPost, type AdminBlogPostRow } from '../../lib/adminQueries';
 
 const empty: Partial<AdminBlogPostRow> = {
-  slug: '', title: '', excerpt: '', category: 'Writing Craft', gradient: 'from-ink via-rose to-amber-400',
+  slug: '', title: '', excerpt: '', content: '', category: 'Writing Craft', gradient: 'from-ink via-rose to-amber-400',
   read_time: '5 min', published_at: new Date().toISOString().slice(0, 10),
 };
 
@@ -88,6 +88,10 @@ export default function AdminBlog() {
             <label className="block">
               <span className="label-caps text-muted block mb-1.5 text-2xs">Excerpt</span>
               <textarea rows={3} value={editing.excerpt ?? ''} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} className="input" />
+            </label>
+            <label className="block">
+              <span className="label-caps text-muted block mb-1.5 text-2xs">Full Post Content</span>
+              <textarea rows={10} value={editing.content ?? ''} onChange={(e) => setEditing({ ...editing, content: e.target.value })} className="input" placeholder="Separate paragraphs with a blank line. Leave empty to show only the excerpt on the post page." />
             </label>
             <div className="grid grid-cols-2 gap-4">
               <label className="block">

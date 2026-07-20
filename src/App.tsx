@@ -6,6 +6,7 @@ import Books from './pages/Books';
 import BookDetail from './pages/BookDetail';
 import About from './pages/About';
 import Blog from './pages/Blog';
+import BlogPostDetail from './pages/BlogPostDetail';
 import News from './pages/News';
 import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/books/:slug" element={<BookDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPostDetail />} />
           <Route path="/news" element={<News />} />
           <Route path="/write-together-hub" element={<WriteTogetherHubPage />} />
           <Route path="/testimonials" element={<Testimonials />} />
