@@ -20,6 +20,7 @@ const AdminBooks = lazy(() => import('./pages/admin/AdminBooks'));
 const AdminTestimonials = lazy(() => import('./pages/admin/AdminTestimonials'));
 const AdminTestimonialSubmissions = lazy(() => import('./pages/admin/AdminTestimonialSubmissions'));
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
+const AdminBlogContent = lazy(() => import('./pages/admin/AdminBlogContent'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="testimonials" element={<Suspense fallback={<AdminFallback />}><AdminTestimonials /></Suspense>} />
           <Route path="testimonial-submissions" element={<Suspense fallback={<AdminFallback />}><AdminTestimonialSubmissions /></Suspense>} />
           <Route path="blog" element={<Suspense fallback={<AdminFallback />}><AdminBlog /></Suspense>} />
+          <Route path="blog/:id/content" element={<Suspense fallback={<AdminFallback />}><AdminBlogContent /></Suspense>} />
           <Route path="news" element={<Suspense fallback={<AdminFallback />}><AdminNews /></Suspense>} />
           <Route path="subscribers" element={<Suspense fallback={<AdminFallback />}><AdminSubscribers /></Suspense>} />
           <Route path="messages" element={<Suspense fallback={<AdminFallback />}><AdminMessages /></Suspense>} />

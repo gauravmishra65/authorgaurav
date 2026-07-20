@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Pencil, Trash2, Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Pencil, Trash2, Plus, FileText } from 'lucide-react';
 import { fetchAdminBlogPosts, saveBlogPost, deleteBlogPost, type AdminBlogPostRow } from '../../lib/adminQueries';
 
 const empty: Partial<AdminBlogPostRow> = {
@@ -61,8 +62,11 @@ export default function AdminBlog() {
                 <p className="text-2xs text-muted">{p.category} · {new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditing(p)} className="p-2 text-muted hover:text-gold"><Pencil size={16} /></button>
-                <button onClick={() => handleDelete(p.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
+                <Link to={`/admin/blog/${p.id}/content`} className="p-2 text-muted hover:text-gold" aria-label="Write full post content" title="Write full post content">
+                  <FileText size={16} />
+                </Link>
+                <button onClick={() => setEditing(p)} className="p-2 text-muted hover:text-gold" aria-label="Edit details"><Pencil size={16} /></button>
+                <button onClick={() => handleDelete(p.id)} className="p-2 text-muted hover:text-rose" aria-label="Delete post"><Trash2 size={16} /></button>
               </div>
             </div>
           ))}
@@ -89,10 +93,11 @@ export default function AdminBlog() {
               <span className="label-caps text-muted block mb-1.5 text-2xs">Excerpt</span>
               <textarea rows={3} value={editing.excerpt ?? ''} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} className="input" />
             </label>
-            <label className="block">
-              <span className="label-caps text-muted block mb-1.5 text-2xs">Full Post Content</span>
-              <textarea rows={10} value={editing.content ?? ''} onChange={(e) => setEditing({ ...editing, content: e.target.value })} className="input" placeholder="Separate paragraphs with a blank line. Leave empty to show only the excerpt on the post page." />
-            </label>
+            {editing.id && (
+              <p className="text-2xs text-muted">
+                The full "Read More" article body is written on its own page — save this post first, then use the <FileText size={11} className="inline -mt-0.5" aria-hidden="true" /> icon in the list to write or edit it.
+              </p>
+            )}
             <div className="grid grid-cols-2 gap-4">
               <label className="block">
                 <span className="label-caps text-muted block mb-1.5 text-2xs">Category</span>
