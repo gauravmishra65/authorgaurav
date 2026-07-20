@@ -149,8 +149,10 @@ export async function submitTestimonialFeedback({ bookId, name, email, quote }: 
 
 interface BlogPostRow {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
+  content: string | null;
   category: Post['category'];
   gradient: string;
   read_time: string;
@@ -162,8 +164,10 @@ export async function fetchBlogPosts(): Promise<Post[]> {
   if (error) throw error;
   return ((data ?? []) as BlogPostRow[]).map((row) => ({
     id: row.id,
+    slug: row.slug,
     title: row.title,
     excerpt: row.excerpt,
+    content: row.content ?? undefined,
     category: row.category,
     date: formatDate(row.published_at),
     readTime: row.read_time,

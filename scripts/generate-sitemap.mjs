@@ -28,22 +28,30 @@ const SITE_URL = 'https://authorgaurav.com';
 const staticRoutes = ['/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact'];
 
 let bookRoutes = [];
+let blogRoutes = [];
 const { VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY } = process.env;
 if (VITE_SUPABASE_URL && VITE_SUPABASE_ANON_KEY) {
-  const res = await fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_books?select=slug`, {
-    headers: { apikey: VITE_SUPABASE_ANON_KEY },
-  });
-  if (res.ok) {
-    const books = await res.json();
+  const [booksRes, postsRes] = await Promise.all([
+    fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_books?select=slug`, { headers: { apikey: VITE_SUPABASE_ANON_KEY } }),
+    fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_blog_posts?select=slug`, { headers: { apikey: VITE_SUPABASE_ANON_KEY } }),
+  ]);
+  if (booksRes.ok) {
+    const books = await booksRes.json();
     bookRoutes = books.map((b) => `/books/${b.slug}`);
   } else {
-    console.warn(`Warning: could not fetch book slugs from Supabase (${res.status}); sitemap will omit /books/:slug routes.`);
+    console.warn(`Warning: could not fetch book slugs from Supabase (${booksRes.status}); sitemap will omit /books/:slug routes.`);
+  }
+  if (postsRes.ok) {
+    const posts = await postsRes.json();
+    blogRoutes = posts.map((p) => `/blog/${p.slug}`);
+  } else {
+    console.warn(`Warning: could not fetch blog post slugs from Supabase (${postsRes.status}); sitemap will omit /blog/:slug routes.`);
   }
 } else {
-  console.warn('Warning: VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY not set; sitemap will omit /books/:slug routes.');
+  console.warn('Warning: VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY not set; sitemap will omit /books/:slug and /blog/:slug routes.');
 }
 
-const routes = [...staticRoutes, ...bookRoutes];
+const routes = [...staticRoutes, ...bookRoutes, ...blogRoutes];
 
 const urlset = routes
   .map((route) => `  <url>\n    <loc>${SITE_URL}${route}</loc>\n  </url>`)

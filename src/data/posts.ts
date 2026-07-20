@@ -6,8 +6,10 @@ export type BlogCategory =
 
 export interface Post {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
+  content?: string;
   category: BlogCategory;
   date: string;
   readTime: string;

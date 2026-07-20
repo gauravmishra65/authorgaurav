@@ -127,6 +127,7 @@ export interface AdminBlogPostRow {
   slug: string;
   title: string;
   excerpt: string;
+  content: string | null;
   category: 'Writing Craft' | 'Behind the Books' | 'Spiritual Reflections' | 'Book Updates';
   gradient: string;
   read_time: string;
