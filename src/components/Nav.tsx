@@ -41,8 +41,8 @@ export default function Nav() {
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
       <div className="hairline-solid w-full opacity-40" />
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-        <Link to="/" className="font-display text-xl tracking-tight text-ivory" aria-label="Gaurav Mishra — home">
-          Gaurav<span className="text-gold-lt">Mishra</span>
+        <Link to="/" className="flex items-center rounded-md bg-ivory px-2.5 py-1.5" aria-label="Gaurav Mishra — home">
+          <img src="/images/brand/logo-full.png" alt="Gaurav Mishra — authorgaurav.com" className="h-9 w-auto object-contain" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-3.5 xl:gap-6">
