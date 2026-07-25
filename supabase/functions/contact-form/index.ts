@@ -13,16 +13,38 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Lightweight, infra-free rate limit: block a second submission from the
+// same email within this window. Not a substitute for real WAF/Redis-backed
+// throttling — just enough to stop accidental double-submits and naive
+// scripted floods using the table that already exists.
+const RATE_LIMIT_WINDOW_SECONDS = 60;
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { name, email, message, joinCircle } = await req.json();
+    const { name, email, organisation, enquiryType, subject, message, consent, joinCircle, company } = await req.json();
 
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), {
+    // Honeypot: a real user never sees or fills this field. If it's
+    // populated, pretend success without inserting anything or sending mail.
+    if (company) {
+      return new Response(JSON.stringify({ ok: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!name || !email || !subject || !message) {
+      return new Response(JSON.stringify({ error: "missing_fields" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    if (!EMAIL_RE.test(email)) {
+      return new Response(JSON.stringify({ error: "invalid_email" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -30,11 +52,29 @@ Deno.serve(async (req: Request) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    const since = new Date(Date.now() - RATE_LIMIT_WINDOW_SECONDS * 1000).toISOString();
+    const { count: recentCount, error: rateError } = await supabase
+      .from("authorgaurav_contact_messages")
+      .select("id", { count: "exact", head: true })
+      .eq("email", email)
+      .gte("created_at", since);
+    if (rateError) throw rateError;
+    if ((recentCount ?? 0) > 0) {
+      return new Response(JSON.stringify({ error: "rate_limited" }), {
+        status: 429,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { error: dbError } = await supabase.from("authorgaurav_contact_messages").insert({
       name,
       email,
       message,
       join_circle: !!joinCircle,
+      organisation: organisation || null,
+      enquiry_type: enquiryType || null,
+      subject,
+      consent: !!consent,
     });
 
     if (dbError) throw dbError;
@@ -51,8 +91,8 @@ Deno.serve(async (req: Request) => {
           from: "authorgaurav.com <contact@writetogetherhub.com>",
           to: ["hello@writetogetherhub.com"],
           reply_to: email,
-          subject: `New contact form message from ${name}`,
-          text: `From: ${name} <${email}>\nJoin reader circle: ${joinCircle ? "Yes" : "No"}\n\n${message}`,
+          subject: `[${enquiryType ?? "Contact"}] ${subject}`,
+          text: `From: ${name} <${email}>\nOrganisation: ${organisation || "—"}\nEnquiry type: ${enquiryType ?? "—"}\nJoin reader circle: ${joinCircle ? "Yes" : "No"}\n\n${message}`,
         }),
       });
 
@@ -66,7 +106,7 @@ Deno.serve(async (req: Request) => {
     });
   } catch (err) {
     console.error(err);
-    return new Response(JSON.stringify({ error: "Something went wrong" }), {
+    return new Response(JSON.stringify({ error: "server_error" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

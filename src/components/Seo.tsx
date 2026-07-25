@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import StructuredData from './StructuredData';
 
 interface SeoProps {
   title: string;
@@ -9,6 +10,10 @@ interface SeoProps {
   image?: string;
   /** JSON-LD structured data object (e.g. a Book schema) to embed on this page. */
   jsonLd?: Record<string, unknown>;
+  /** BCP-47 language of this page's main content — set to "hi" on Hindi book
+   * pages. Updates <html lang>, which also drives the Devanagari font rules
+   * in index.css. Defaults to "en". */
+  lang?: 'en' | 'hi';
 }
 
 const SITE_URL = 'https://authorgaurav.com';
@@ -44,9 +49,10 @@ function setCanonical(href: string) {
   el.setAttribute('href', href);
 }
 
-export default function Seo({ title, description, path, image, jsonLd }: SeoProps) {
+export default function Seo({ title, description, path, image, jsonLd, lang = 'en' }: SeoProps) {
   useEffect(() => {
     document.title = title;
+    document.documentElement.lang = lang;
 
     const url = SITE_URL + (path ?? window.location.pathname);
     const imageUrl = SITE_URL + (image ?? DEFAULT_IMAGE);
@@ -65,22 +71,14 @@ export default function Seo({ title, description, path, image, jsonLd }: SeoProp
     setMetaByName('twitter:description', description);
     setMetaByName('twitter:image', imageUrl);
 
-    let script: HTMLScriptElement | null = null;
-    if (jsonLd) {
-      script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify(jsonLd);
-      document.head.appendChild(script);
-    }
-
     return () => {
       const def = document.querySelector('title[data-default]');
       const defMeta = document.querySelector('meta[name="description"][data-default]');
       if (def) document.title = def.textContent || 'Gaurav Mishra — Author';
       if (defMeta) setMetaByName('description', defMeta.getAttribute('content') || '');
-      if (script) script.remove();
+      document.documentElement.lang = 'en';
     };
-  }, [title, description, path, image, jsonLd]);
+  }, [title, description, path, image, lang]);
 
-  return null;
+  return jsonLd ? <StructuredData data={jsonLd} /> : null;
 }

@@ -1,6 +1,6 @@
 export type Genre = 'Fiction' | 'Memoir' | 'Devotional';
 export type Language = 'English' | 'Hindi';
-export type BookStatus = 'published' | 'upcoming';
+export type BookStatus = 'published' | 'upcoming' | 'preorder';
 
 export interface Testimonial {
   quote: string;
@@ -9,15 +9,25 @@ export interface Testimonial {
   authorReply?: string;
 }
 
+export interface BookFormat {
+  name: string;
+  url?: string;
+}
+
 export interface Book {
   id: string;
   slug: string;
   title: string;
   titleHtml?: string;
+  subtitle?: string;
   author: string;
   tagline: string;
   synopsis: string;
   genre: Genre;
+  /** Finer-grained tags (Thriller/Romance/Memoir/Devotional) — lets listings
+   * distinguish books that share a single `genre` value (e.g. Shadow Code
+   * and Offbeat Love are both `Fiction`, but Thriller vs Romance). */
+  categories?: string[];
   language: Language;
   status: BookStatus;
   isHindi?: boolean;
@@ -35,6 +45,22 @@ export interface Book {
   paperbackUrl?: string;
   /** Gives the book a "New Release" ribbon and extra prominence in listings. */
   featured?: boolean;
+  // TODO_CONTENT: all fields below are part of the Phase 4 data model but
+  // currently empty for every book — none of this is invented, and the UI
+  // that reads them only renders when a real value exists.
+  originalLanguage?: string;
+  translatedTitles?: Record<string, string>;
+  authorNote?: string;
+  isbn10?: string;
+  isbn13?: string;
+  pageCount?: number;
+  formats?: BookFormat[];
+  sampleUrl?: string;
+  trailerUrl?: string;
+  themes?: string[];
+  readingAudience?: string;
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 // Book content lives in Supabase (authorgaurav_books/authorgaurav_testimonials) —

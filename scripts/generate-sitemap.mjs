@@ -25,7 +25,11 @@ if (existsSync(envPath)) {
 
 const SITE_URL = 'https://authorgaurav.com';
 
-const staticRoutes = ['/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact'];
+const staticRoutes = [
+  '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
+  '/media', '/readers', '/events', '/book-clubs', '/writing-resources',
+  '/privacy-policy', '/terms', '/accessibility',
+];
 
 let bookRoutes = [];
 let blogRoutes = [];
@@ -53,8 +57,10 @@ if (VITE_SUPABASE_URL && VITE_SUPABASE_ANON_KEY) {
 
 const routes = [...staticRoutes, ...bookRoutes, ...blogRoutes];
 
+// Defends against a malformed slug (e.g. raw non-ASCII title text used by
+// mistake instead of a real slug) producing invalid, unencoded XML.
 const urlset = routes
-  .map((route) => `  <url>\n    <loc>${SITE_URL}${route}</loc>\n  </url>`)
+  .map((route) => `  <url>\n    <loc>${encodeURI(SITE_URL + route)}</loc>\n  </url>`)
   .join('\n');
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlset}\n</urlset>\n`;

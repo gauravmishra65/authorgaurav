@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import type { Book } from '../data/books';
 
@@ -29,7 +30,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
       */}
       <div className="carousel-track flex w-max py-2" style={{ animationDuration: `${duration}s` }}>
         {track.map((b, i) => (
-          <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-8">
+          <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-8 w-40">
             <BookCover {...b} size="md" href={`/books/${b.slug}`} />
             <div className="text-center">
               <p className="font-display text-sm text-ink">{b.title}</p>
@@ -40,6 +41,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
                 <span className="inline-block mt-1 ml-1 label-caps text-2xs text-gold border border-gold/40 rounded-full px-2 py-0.5">Coming Soon</span>
               )}
             </div>
+            <p className="text-2xs text-muted leading-relaxed text-center line-clamp-2">{b.tagline}</p>
             <div className="flex flex-wrap justify-center gap-1.5">
               {b.buyLinks.map((link) => (
                 <a key={link.label} href={link.href} className="label-caps text-2xs text-gold border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
@@ -47,6 +49,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
                 </a>
               ))}
             </div>
+            <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold transition-colors underline underline-offset-2">View Book</Link>
           </div>
         ))}
       </div>

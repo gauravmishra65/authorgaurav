@@ -3,13 +3,39 @@ import { Pencil, Trash2, Plus } from 'lucide-react';
 import { fetchAdminBooks, saveBook, deleteBook, type AdminBookRow } from '../../lib/adminQueries';
 
 const emptyBook: Partial<AdminBookRow> = {
-  slug: '', title: '', title_html: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
-  genre: 'Fiction', language: 'English', status: 'published', gradient: 'from-ink via-rose to-amber-400', text_on_dark: true,
+  slug: '', title: '', title_html: null, subtitle: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
+  genre: 'Fiction', categories: null, language: 'English', status: 'published', gradient: 'from-ink via-rose to-amber-400', text_on_dark: true,
   image_src: '', image_width: undefined, image_height: undefined, book_website: '',
   buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
   release_date: null, kindle_url: null, paperback_url: null, featured: false,
+  original_language: null, translated_titles: null, author_note: null, isbn10: null, isbn13: null,
+  page_count: null, formats: null, sample_url: null, trailer_url: null, themes: null,
+  reading_audience: null, seo_title: null, seo_description: null,
 };
+
+/** Comma-separated tag list <-> text[] column, for the admin's plain-input style. */
+function tagsToText(tags: string[] | null | undefined): string {
+  return (tags ?? []).join(', ');
+}
+function textToTags(text: string): string[] | null {
+  const tags = text.split(',').map((t) => t.trim()).filter(Boolean);
+  return tags.length > 0 ? tags : null;
+}
+
+/** JSON-textarea <-> jsonb column, for the two structured fields (formats,
+ * translated titles) that don't fit a single plain input. */
+function jsonToText(value: unknown): string {
+  return value ? JSON.stringify(value, null, 2) : '';
+}
+function textToJson<T>(text: string): T | null {
+  if (!text.trim()) return null;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
+}
 
 export default function AdminBooks() {
   const [books, setBooks] = useState<AdminBookRow[]>([]);
@@ -108,6 +134,7 @@ export default function AdminBooks() {
                 <select value={editing.status} onChange={(e) => setEditing({ ...editing, status: e.target.value as AdminBookRow['status'] })} className="input">
                   <option value="published">Published</option>
                   <option value="upcoming">Upcoming</option>
+                  <option value="preorder">Preorder</option>
                 </select>
               </Field>
             </div>
@@ -130,6 +157,35 @@ export default function AdminBooks() {
               </Field>
               <Field label="Kindle URL (optional)"><input value={editing.kindle_url ?? ''} onChange={(e) => setEditing({ ...editing, kindle_url: e.target.value || null })} className="input" /></Field>
               <Field label="Paperback URL (optional)"><input value={editing.paperback_url ?? ''} onChange={(e) => setEditing({ ...editing, paperback_url: e.target.value || null })} className="input" /></Field>
+            </div>
+
+            <p className="label-caps text-muted pt-2 border-t border-gold/15">Additional Details (optional)</p>
+            <div className="grid grid-cols-2 gap-4">
+              <Field label="Subtitle"><input value={editing.subtitle ?? ''} onChange={(e) => setEditing({ ...editing, subtitle: e.target.value || null })} className="input" /></Field>
+              <Field label="Categories (comma-separated, e.g. Thriller)">
+                <input value={tagsToText(editing.categories)} onChange={(e) => setEditing({ ...editing, categories: textToTags(e.target.value) })} className="input" />
+              </Field>
+              <Field label="Original language (if translated)"><input value={editing.original_language ?? ''} onChange={(e) => setEditing({ ...editing, original_language: e.target.value || null })} className="input" /></Field>
+              <Field label="Reading audience"><input value={editing.reading_audience ?? ''} onChange={(e) => setEditing({ ...editing, reading_audience: e.target.value || null })} className="input" /></Field>
+              <Field label="ISBN-10"><input value={editing.isbn10 ?? ''} onChange={(e) => setEditing({ ...editing, isbn10: e.target.value || null })} className="input" /></Field>
+              <Field label="ISBN-13"><input value={editing.isbn13 ?? ''} onChange={(e) => setEditing({ ...editing, isbn13: e.target.value || null })} className="input" /></Field>
+              <Field label="Page count"><input type="number" value={editing.page_count ?? ''} onChange={(e) => setEditing({ ...editing, page_count: e.target.value ? Number(e.target.value) : null })} className="input" /></Field>
+              <Field label="Themes (comma-separated)">
+                <input value={tagsToText(editing.themes)} onChange={(e) => setEditing({ ...editing, themes: textToTags(e.target.value) })} className="input" />
+              </Field>
+              <Field label="Sample URL"><input value={editing.sample_url ?? ''} onChange={(e) => setEditing({ ...editing, sample_url: e.target.value || null })} className="input" /></Field>
+              <Field label="Trailer URL"><input value={editing.trailer_url ?? ''} onChange={(e) => setEditing({ ...editing, trailer_url: e.target.value || null })} className="input" /></Field>
+              <Field label="SEO title"><input value={editing.seo_title ?? ''} onChange={(e) => setEditing({ ...editing, seo_title: e.target.value || null })} className="input" /></Field>
+              <Field label="SEO description"><input value={editing.seo_description ?? ''} onChange={(e) => setEditing({ ...editing, seo_description: e.target.value || null })} className="input" /></Field>
+            </div>
+            <Field label="Author's note"><textarea rows={3} value={editing.author_note ?? ''} onChange={(e) => setEditing({ ...editing, author_note: e.target.value || null })} className="input" /></Field>
+            <div className="grid grid-cols-2 gap-4">
+              <Field label="Translated titles (JSON, e.g. {&quot;hi&quot;: &quot;...&quot;})">
+                <textarea rows={3} value={jsonToText(editing.translated_titles)} onChange={(e) => setEditing({ ...editing, translated_titles: textToJson(e.target.value) })} className="input font-mono text-xs" />
+              </Field>
+              <Field label="Formats (JSON array, e.g. [{&quot;name&quot;:&quot;Hardcover&quot;}])">
+                <textarea rows={3} value={jsonToText(editing.formats)} onChange={(e) => setEditing({ ...editing, formats: textToJson(e.target.value) })} className="input font-mono text-xs" />
+              </Field>
             </div>
 
             <p className="label-caps text-muted">Buy Links</p>

@@ -5,12 +5,14 @@ export interface AdminBookRow {
   slug: string;
   title: string;
   title_html: string | null;
+  subtitle: string | null;
   author: string;
   tagline: string;
   synopsis: string;
   genre: 'Fiction' | 'Memoir' | 'Devotional';
+  categories: string[] | null;
   language: 'English' | 'Hindi';
-  status: 'published' | 'upcoming';
+  status: 'published' | 'upcoming' | 'preorder';
   gradient: string;
   text_on_dark: boolean;
   image_src: string | null;
@@ -23,6 +25,19 @@ export interface AdminBookRow {
   kindle_url: string | null;
   paperback_url: string | null;
   featured: boolean;
+  original_language: string | null;
+  translated_titles: Record<string, string> | null;
+  author_note: string | null;
+  isbn10: string | null;
+  isbn13: string | null;
+  page_count: number | null;
+  formats: { name: string; url?: string }[] | null;
+  sample_url: string | null;
+  trailer_url: string | null;
+  themes: string[] | null;
+  reading_audience: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
 }
 
 export async function fetchAdminBooks(): Promise<AdminBookRow[]> {
@@ -177,6 +192,39 @@ export async function saveNewsItem(row: Partial<AdminNewsItemRow>): Promise<void
 
 export async function deleteNewsItem(id: string): Promise<void> {
   const { error } = await supabase.from('authorgaurav_news_items').delete().eq('id', id);
+  if (error) throw error;
+}
+
+export interface AdminEventRow {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  event_date: string;
+  event_time: string | null;
+  timezone: string | null;
+  location: string | null;
+  mode: 'Online' | 'In-Person' | 'Hybrid';
+  event_type: 'Launch' | 'School' | 'Literary' | 'Interview' | 'Book Club' | 'Online' | 'Other';
+  registration_url: string | null;
+  featured: boolean;
+}
+
+export async function fetchAdminEvents(): Promise<AdminEventRow[]> {
+  const { data, error } = await supabase.from('authorgaurav_events').select('*').order('event_date', { ascending: false });
+  if (error) throw error;
+  return data as AdminEventRow[];
+}
+
+export async function saveEvent(row: Partial<AdminEventRow>): Promise<void> {
+  const { error } = row.id
+    ? await supabase.from('authorgaurav_events').update(row).eq('id', row.id)
+    : await supabase.from('authorgaurav_events').insert(row);
+  if (error) throw error;
+}
+
+export async function deleteEvent(id: string): Promise<void> {
+  const { error } = await supabase.from('authorgaurav_events').delete().eq('id', id);
   if (error) throw error;
 }
 

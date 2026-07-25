@@ -2,16 +2,31 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Books from './pages/Books';
-import BookDetail from './pages/BookDetail';
-import About from './pages/About';
-import Blog from './pages/Blog';
-import BlogPostDetail from './pages/BlogPostDetail';
-import News from './pages/News';
-import Contact from './pages/Contact';
-import Testimonials from './pages/Testimonials';
-import StartHere from './pages/StartHere';
-import WriteTogetherHubPage from './pages/WriteTogetherHubPage';
+
+// Every other public route is code-split per-page. Home stays eagerly
+// bundled since it's the single most common landing page — everything else
+// only downloads when a visitor actually navigates there, which is what
+// keeps the initial JS payload small for e.g. someone landing straight on a
+// legal page from a search result.
+const Books = lazy(() => import('./pages/Books'));
+const BookDetail = lazy(() => import('./pages/BookDetail'));
+const About = lazy(() => import('./pages/About'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPostDetail = lazy(() => import('./pages/BlogPostDetail'));
+const News = lazy(() => import('./pages/News'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Testimonials = lazy(() => import('./pages/Testimonials'));
+const StartHere = lazy(() => import('./pages/StartHere'));
+const WriteTogetherHubPage = lazy(() => import('./pages/WriteTogetherHubPage'));
+const Media = lazy(() => import('./pages/Media'));
+const Readers = lazy(() => import('./pages/Readers'));
+const Events = lazy(() => import('./pages/Events'));
+const BookClubs = lazy(() => import('./pages/BookClubs'));
+const WritingResources = lazy(() => import('./pages/WritingResources'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Accessibility = lazy(() => import('./pages/Accessibility'));
 
 // Admin is code-split out of the public bundle — regular visitors never
 // download the CRUD forms or the auth-gated layout.
@@ -22,6 +37,7 @@ const AdminTestimonialSubmissions = lazy(() => import('./pages/admin/AdminTestim
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
 const AdminBlogContent = lazy(() => import('./pages/admin/AdminBlogContent'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
+const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
 
@@ -45,7 +61,15 @@ export default function App() {
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/start-here" element={<StartHere />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
+          <Route path="/media" element={<Media />} />
+          <Route path="/readers" element={<Readers />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/book-clubs" element={<BookClubs />} />
+          <Route path="/writing-resources" element={<WritingResources />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/accessibility" element={<Accessibility />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
@@ -56,6 +80,7 @@ export default function App() {
           <Route path="blog" element={<Suspense fallback={<AdminFallback />}><AdminBlog /></Suspense>} />
           <Route path="blog/:id/content" element={<Suspense fallback={<AdminFallback />}><AdminBlogContent /></Suspense>} />
           <Route path="news" element={<Suspense fallback={<AdminFallback />}><AdminNews /></Suspense>} />
+          <Route path="events" element={<Suspense fallback={<AdminFallback />}><AdminEvents /></Suspense>} />
           <Route path="subscribers" element={<Suspense fallback={<AdminFallback />}><AdminSubscribers /></Suspense>} />
           <Route path="messages" element={<Suspense fallback={<AdminFallback />}><AdminMessages /></Suspense>} />
         </Route>

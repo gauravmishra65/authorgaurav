@@ -1,59 +1,49 @@
-import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
+import BookSearch from '../components/BookSearch';
+import BookFilters from '../components/BookFilters';
+import BookGrid from '../components/BookGrid';
 import EmailStrip from '../components/EmailStrip';
-import Divider from '../components/Divider';
-import type { Book, Genre } from '../data/books';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
-const genreOrder: Genre[] = ['Fiction', 'Memoir', 'Devotional'];
-const genreEyebrow: Record<Genre, string> = {
-  Fiction: 'Novels & Thrillers',
-  Memoir: 'Memoir',
-  Devotional: 'Devotional Works',
-};
+const categoryOptions = ['All', 'Thriller', 'Romance', 'Spiritual', 'Memoir'] as const;
+const languageOptions = ['All', 'English', 'Hindi'] as const;
+const statusOptions = ['All', 'Published', 'Upcoming'] as const;
 
-function BookArticle({ book }: { book: Book }) {
-  return (
-    <article className={`grid gap-8 md:grid-cols-[200px_1fr] md:gap-12 ${book.featured ? 'rounded-md border border-gold/25 bg-cream/60 p-6 -mx-6 relative' : ''}`}>
-      {book.featured && (
-        <span className="absolute -top-3 left-6 label-caps text-2xs bg-gold text-ink rounded-full px-3 py-1 shadow-luxury">New Release</span>
-      )}
-      <div className="flex justify-center md:justify-start">
-        <BookCover {...book} size={book.featured ? 'lg' : 'md'} href={`/books/${book.slug}`} />
-      </div>
-      <div>
-        <div className="flex items-center gap-3 flex-wrap mb-2">
-          <Link to={`/books/${book.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold transition-colors">{book.title}</Link>
-          {book.isHindi && (
-            <span className="label-caps text-2xs text-rose border border-rose/40 rounded-full px-2.5 py-0.5">Hindi</span>
-          )}
-          {book.status === 'upcoming' && (
-            <span className="label-caps text-2xs text-gold border border-gold/40 rounded-full px-2.5 py-0.5">Coming Soon</span>
-          )}
-        </div>
-        <p className="font-body italic text-muted mb-4">{book.tagline}</p>
-        <p className="text-text/85 leading-relaxed max-w-prose mb-6">{book.synopsis}</p>
-        <div className="flex flex-wrap gap-3 mb-4">
-          {book.buyLinks.map((link) => (
-            <a key={link.label} href={link.href} className="btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs">{link.label}</a>
-          ))}
-        </div>
-        {book.bookWebsite && (
-          <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-gold hover:text-ink transition-colors">
-            Book Website <ExternalLink size={13} />
-          </a>
-        )}
-      </div>
-    </article>
-  );
-}
+// "Spiritual" (the spec's label) maps onto the Devotional category tag
+// already used in the data.
+const categoryToTag: Record<(typeof categoryOptions)[number], string | null> = {
+  All: null, Thriller: 'Thriller', Romance: 'Romance', Spiritual: 'Devotional', Memoir: 'Memoir',
+};
 
 export default function Books() {
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
-  const upcoming = books?.filter((b) => b.status === 'upcoming') ?? [];
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const initialCategory = categoryOptions.includes(categoryParam as never) ? (categoryParam as (typeof categoryOptions)[number]) : 'All';
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<(typeof categoryOptions)[number]>(initialCategory);
+  const [language, setLanguage] = useState<(typeof languageOptions)[number]>('All');
+  const [status, setStatus] = useState<(typeof statusOptions)[number]>(searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All');
+
+  const featured = books?.find((b) => b.featured);
+
+  const filtered = useMemo(() => {
+    if (!books) return [];
+    const tag = categoryToTag[category];
+    return books.filter((b) => {
+      if (query && !b.title.toLowerCase().includes(query.toLowerCase())) return false;
+      if (tag && !(b.categories?.includes(tag) ?? b.genre === tag)) return false;
+      if (language !== 'All' && b.language !== language) return false;
+      if (status === 'Published' && b.status !== 'published') return false;
+      if (status === 'Upcoming' && b.status === 'published') return false;
+      return true;
+    });
+  }, [books, query, category, language, status]);
 
   return (
     <>
@@ -76,36 +66,40 @@ export default function Books() {
       {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
       {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
 
-      {upcoming.length > 0 && (
-        <section className="mx-auto max-w-6xl px-6 py-16">
-          <div className="flex items-center gap-4 mb-10">
-            <p className="eyebrow text-gold">Coming Soon</p>
-            <div className="hairline flex-1" />
+      {featured && (
+        <section className="bg-cream">
+          <div className="mx-auto max-w-5xl px-6 py-14">
+            <p className="eyebrow text-gold mb-6 text-center">Featured Release</p>
+            <div className="grid items-center gap-8 md:grid-cols-[180px_1fr]">
+              <div className="flex justify-center">
+                <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} />
+              </div>
+              <div>
+                <Link to={`/books/${featured.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold transition-colors">{featured.title}</Link>
+                <p className="font-body italic text-muted mt-1 mb-4">{featured.tagline}</p>
+                <Link to={`/books/${featured.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs">
+                  Explore the Book <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
           </div>
-          <div className="space-y-14">
-            {upcoming.map((b) => <BookArticle key={b.id} book={b} />)}
-          </div>
-          <Divider className="!my-10" />
         </section>
       )}
 
-      {books && genreOrder.map((genre) => {
-        const list = books.filter((b) => b.genre === genre && b.status !== 'upcoming');
-        if (list.length === 0) return null;
-        return (
-          <section key={genre} className="mx-auto max-w-6xl px-6 py-16">
-            <div className="flex items-center gap-4 mb-10">
-              <p className="eyebrow text-gold">{genreEyebrow[genre]}</p>
-              <div className="hairline flex-1" />
+      {books && (
+        <section className="mx-auto max-w-6xl px-6 py-16">
+          <div className="flex flex-col items-center gap-6 mb-12">
+            <BookSearch value={query} onChange={setQuery} />
+            <BookFilters label="Filter by genre" options={categoryOptions} value={category} onChange={setCategory} />
+            <div className="flex flex-wrap justify-center gap-4">
+              <BookFilters label="Filter by language" options={languageOptions} value={language} onChange={setLanguage} />
+              <BookFilters label="Filter by status" options={statusOptions} value={status} onChange={setStatus} />
             </div>
+          </div>
 
-            <div className="space-y-14">
-              {list.map((b) => <BookArticle key={b.id} book={b} />)}
-            </div>
-            <Divider className="!my-10" />
-          </section>
-        );
-      })}
+          <BookGrid books={filtered} />
+        </section>
+      )}
 
       {/* MICROSITES */}
       <section className="bg-ink-soft bg-grain text-ivory">

@@ -2,6 +2,7 @@ import { supabase } from './supabase';
 import type { Book, Testimonial } from '../data/books';
 import type { Post } from '../data/posts';
 import type { NewsItem } from '../data/news';
+import type { AuthorEvent } from '../data/events';
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -12,10 +13,12 @@ interface BookRow {
   slug: string;
   title: string;
   title_html: string | null;
+  subtitle: string | null;
   author: string;
   tagline: string;
   synopsis: string;
   genre: Book['genre'];
+  categories: string[] | null;
   language: Book['language'];
   status: Book['status'];
   gradient: string;
@@ -29,6 +32,19 @@ interface BookRow {
   kindle_url: string | null;
   paperback_url: string | null;
   featured: boolean;
+  original_language: string | null;
+  translated_titles: Record<string, string> | null;
+  author_note: string | null;
+  isbn10: string | null;
+  isbn13: string | null;
+  page_count: number | null;
+  formats: Book['formats'] | null;
+  sample_url: string | null;
+  trailer_url: string | null;
+  themes: string[] | null;
+  reading_audience: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
 }
 
 interface TestimonialRow {
@@ -47,10 +63,12 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     slug: row.slug,
     title: row.title,
     titleHtml: row.title_html ?? undefined,
+    subtitle: row.subtitle ?? undefined,
     author: row.author,
     tagline: row.tagline,
     synopsis: row.synopsis,
     genre: row.genre,
+    categories: row.categories ?? undefined,
     language: row.language,
     status: row.status,
     isHindi: row.language === 'Hindi',
@@ -66,6 +84,19 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     kindleUrl: row.kindle_url ?? undefined,
     paperbackUrl: row.paperback_url ?? undefined,
     featured: row.featured,
+    originalLanguage: row.original_language ?? undefined,
+    translatedTitles: row.translated_titles ?? undefined,
+    authorNote: row.author_note ?? undefined,
+    isbn10: row.isbn10 ?? undefined,
+    isbn13: row.isbn13 ?? undefined,
+    pageCount: row.page_count ?? undefined,
+    formats: row.formats ?? undefined,
+    sampleUrl: row.sample_url ?? undefined,
+    trailerUrl: row.trailer_url ?? undefined,
+    themes: row.themes ?? undefined,
+    readingAudience: row.reading_audience ?? undefined,
+    seoTitle: row.seo_title ?? undefined,
+    seoDescription: row.seo_description ?? undefined,
   };
 }
 
@@ -196,5 +227,39 @@ export async function fetchNewsItems(): Promise<NewsItem[]> {
     category: row.category,
     date: formatDate(row.published_at),
     gradient: row.gradient,
+  }));
+}
+
+interface EventRow {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  event_date: string;
+  event_time: string | null;
+  timezone: string | null;
+  location: string | null;
+  mode: AuthorEvent['mode'];
+  event_type: AuthorEvent['eventType'];
+  registration_url: string | null;
+  featured: boolean;
+}
+
+export async function fetchEvents(): Promise<AuthorEvent[]> {
+  const { data, error } = await supabase.from('authorgaurav_events').select('*').order('event_date', { ascending: true });
+  if (error) throw error;
+  return ((data ?? []) as EventRow[]).map((row) => ({
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    description: row.description,
+    eventDate: row.event_date,
+    eventTime: row.event_time ?? undefined,
+    timezone: row.timezone ?? undefined,
+    location: row.location ?? undefined,
+    mode: row.mode,
+    eventType: row.event_type,
+    registrationUrl: row.registration_url ?? undefined,
+    featured: row.featured,
   }));
 }
