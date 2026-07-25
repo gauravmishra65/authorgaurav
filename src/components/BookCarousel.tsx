@@ -28,7 +28,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
         mr-8 instead, so every item (duplicates included) contributes an
         identical width and translateX(-50%) lands exactly on the seam.
       */}
-      <div className="carousel-track flex w-max py-2" style={{ animationDuration: `${duration}s` }}>
+      <div className="carousel-track flex w-max py-6" style={{ animationDuration: `${duration}s` }}>
         {track.map((b, i) => (
           <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-8 w-40">
             <BookCover {...b} size="md" href={`/books/${b.slug}`} />

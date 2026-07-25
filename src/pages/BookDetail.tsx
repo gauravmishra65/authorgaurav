@@ -145,7 +145,7 @@ export default function BookDetail() {
             <div className="grid gap-5 sm:grid-cols-2">
               {lalitaFeatures.map((point) => (
                 <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{point}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
                 </div>
               ))}
             </div>
@@ -161,7 +161,7 @@ export default function BookDetail() {
             <div className="grid gap-5 sm:grid-cols-2">
               {vishnuFeatures.map((point) => (
                 <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{point}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
                 </div>
               ))}
             </div>
@@ -219,7 +219,7 @@ export default function BookDetail() {
           {book.authorNote && (
             <div className="mt-10 pt-8 border-t border-gold/15">
               <p className="eyebrow text-gold mb-3">{book.genre === 'Devotional' ? "Compiler's Note" : "Author's Note"}</p>
-              <p className="text-text/85 leading-relaxed italic">{book.authorNote}</p>
+              <p className="text-text/85 leading-relaxed text-lg italic">{book.authorNote}</p>
             </div>
           )}
 
@@ -237,7 +237,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               इस पुस्तक में श्री ललिता सहस्रनाम के नामों को सरल और सहज हिंदी में समझाने का प्रयास किया गया है, ताकि कठिन संस्कृत श्लोक भी आमजन के लिए सुलभ बन सकें।
             </p>
           </div>
@@ -248,7 +248,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>भावार्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               अर्थ के साथ-साथ हर नाम के भावार्थ को भी सामने रखा गया है, जिससे पाठक केवल शब्दों को नहीं, बल्कि उनके पीछे की भावना और भाव को भी समझ सकें।
             </p>
           </div>
@@ -259,7 +259,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक जीवन में प्रयोग</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               यह पुस्तक केवल पाठ के लिए नहीं, बल्कि दैनिक जीवन में शांति, संतुलन और सकारात्मकता लाने के एक सरल साधन के रूप में भी उपयोगी है।
             </p>
           </div>
@@ -270,7 +270,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               यह पुस्तक उन पाठकों के लिए उपयुक्त है जो संस्कृत श्लोकों को सरल हिंदी में समझना चाहते हैं, नियमित पाठ करना चाहते हैं, या अपने आध्यात्मिक अभ्यास को दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
           </div>
@@ -281,7 +281,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               गौरव मिश्रा ने इस सहस्रनाम को संकलित कर इसे सरल भाषा में प्रस्तुत करने का प्रयास किया है, ताकि अधिक से अधिक पाठक इसका लाभ उठा सकें।
             </p>
           </div>
@@ -293,7 +293,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               इस पुस्तक में श्री विष्णु सहस्रनाम के हर श्लोक का सरल अर्थ दिया गया है, ताकि पाठक बिना संस्कृत के गहन ज्ञान के भी भावार्थ को समझ सकें।
             </p>
           </div>
@@ -304,7 +304,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               यह पुस्तक विशेष रूप से युवाओं और आधुनिक पाठकों के लिए उपयोगी है जो भक्ति को केवल पाठ तक सीमित न रखकर, उसे अपने दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
           </div>
@@ -315,7 +315,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक पाठ और चिंतन</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               नियमित पाठ और चिंतन के माध्यम से यह पुस्तक भक्ति को दैनिक जीवन का स्वाभाविक हिस्सा बनाने में सहायक है।
             </p>
           </div>
@@ -326,7 +326,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
               गौरव मिश्रा ने श्री विष्णु सहस्रनाम को सरल भाषा में संकलित किया है, विशेष रूप से युवा और आधुनिक पाठकों को ध्यान में रखते हुए, ताकि यह ज्ञान अधिक सुलभ बन सके।
             </p>
           </div>
@@ -339,7 +339,7 @@ export default function BookDetail() {
           <p className="eyebrow text-gold mb-6 text-center">Why Thriller Readers May Enjoy It</p>
           <ul className="max-w-2xl mx-auto space-y-4">
             {shadowCodeWhyReaders.map((point) => (
-              <li key={point} className="flex gap-3 text-text/85 leading-relaxed">
+              <li key={point} className="flex gap-3 text-text/85 leading-relaxed text-lg">
                 <span className="text-gold mt-1">—</span>
                 <span>{point}</span>
               </li>
@@ -365,7 +365,7 @@ export default function BookDetail() {
             <div className="grid gap-5 sm:grid-cols-2">
               {offbeatLoveWhyReaders.map((point) => (
                 <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{point}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
                 </div>
               ))}
             </div>
@@ -377,7 +377,7 @@ export default function BookDetail() {
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Setting &amp; Journey</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed mb-6">
+            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg mb-6">
               The story moves between two very different worlds — shaped by different families, different expectations, and different ideas of what love is allowed to look like — and finds, in Mumbai, the one place they meet.
             </p>
             {book.bookWebsite && (
@@ -436,7 +436,7 @@ export default function BookDetail() {
               {lalitaFaq.map(({ q, a }) => (
                 <div key={q} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
                   <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{a}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{a}</p>
                 </div>
               ))}
             </div>
@@ -453,7 +453,7 @@ export default function BookDetail() {
               {vishnuFaq.map(({ q, a }) => (
                 <div key={q} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
                   <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{a}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{a}</p>
                 </div>
               ))}
             </div>
@@ -470,7 +470,7 @@ export default function BookDetail() {
               {offbeatLoveBookClubQuestions.map((q, i) => (
                 <div key={q} className="card-soft-lift flex gap-4 rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
                   <span className="label-caps shrink-0" style={{ color: 'var(--book-accent)' }}>{String(i + 1).padStart(2, '0')}</span>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed">{q}</p>
+                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{q}</p>
                 </div>
               ))}
             </div>

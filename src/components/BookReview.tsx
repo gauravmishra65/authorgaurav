@@ -12,7 +12,7 @@ export default function BookReview({ review }: BookReviewProps) {
   return (
     <figure className="content-card p-7">
       <Quote className="text-gold/50 mb-3" size={20} aria-hidden="true" />
-      <blockquote className="text-text/85 leading-relaxed italic mb-4">"{review.quote}"</blockquote>
+      <blockquote className="text-text/85 leading-relaxed italic mb-4 text-lg">"{review.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted">
         {review.name}{review.source ? ` · ${review.source}` : ''}
       </figcaption>
