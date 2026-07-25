@@ -8,7 +8,6 @@ import BlogPreview from '../components/BlogPreview';
 import NewsPreview from '../components/NewsPreview';
 import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
-import AboutTeaser from '../components/AboutTeaser';
 import BookLaunchHero from '../components/BookLaunchHero';
 import WorldLinesMotif from '../components/WorldLinesMotif';
 import Divider from '../components/Divider';
@@ -154,7 +153,6 @@ export default function Home() {
         <BookCarousel books={filtered} />
       </section>
 
-      <AboutTeaser />
       <Testimonials />
       <PressStrip />
       <NewsPreview />
