@@ -1,5 +1,6 @@
 import { Users, BookOpen, Rocket } from 'lucide-react';
 import Divider from './Divider';
+import { trackEvent } from '../lib/analytics';
 
 const benefits = [
   { icon: BookOpen, title: 'Learn the craft', body: 'Guided lessons on structure, character, voice, and revision — the things I wish I had known on day one.' },
@@ -17,7 +18,7 @@ export default function WriteTogetherHub() {
           <p className="max-w-2xl mx-auto text-ivory/80 leading-relaxed">
             I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out — guidance, community, and a place to grow their craft together.
           </p>
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold mt-7 inline-block rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-section' })} className="btn-caps btn-gold mt-7 inline-block rounded-sm px-6 py-3">
             Visit WriteTogetherHub
           </a>
         </div>

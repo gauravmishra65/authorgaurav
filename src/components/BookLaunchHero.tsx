@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import ReleaseCountdown from './ReleaseCountdown';
 import ReleaseDetails from './ReleaseDetails';
-import LaunchSignupForm from './LaunchSignupForm';
+import NewsletterForm from './NewsletterForm';
 import type { Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 
@@ -70,7 +70,7 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
         <p className="eyebrow text-gold mb-3">Reader Circle</p>
         <h3 className="font-display text-2xl md:text-3xl mb-2">Get Release Updates</h3>
         <p className="text-ivory/70 text-sm mb-7">Be the first to know the moment The Shadow Code is available.</p>
-        <LaunchSignupForm source="shadow-code-launch" />
+        <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel="Get Release Updates" />
       </div>
 
       <div className="hairline-solid w-full opacity-20" />

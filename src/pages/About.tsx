@@ -1,11 +1,21 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Mail } from 'lucide-react';
+import { BookOpen, Mail, FileText } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
+import BookCard from '../components/BookCard';
+import { fetchBooks } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
+
+// One representative title per genre this genuinely spans — matches the
+// four books already named in the biography prose below, not a new claim.
+const selectedSlugs = ['the-shadow-code', 'offbeat-love', 'journey-of-grace', 'vishnu-sahasranama'];
 
 export default function About() {
   const [imgError, setImgError] = useState(false);
+  const { data: books } = useSupabaseData(fetchBooks, []);
+  const selectedBooks = books?.filter((b) => selectedSlugs.includes(b.slug)) ?? [];
+  const genres = books ? [...new Set(books.flatMap((b) => b.categories ?? [b.genre]))] : [];
 
   return (
     <>
@@ -24,8 +34,10 @@ export default function About() {
                   <img
                     src="/images/author/GM-Photo.jpg"
                     alt="Gaurav Mishra — author portrait"
-                    width={1824}
-                    height={2736}
+                    width={1200}
+                    height={1800}
+                    // @ts-expect-error React 18 only applies the lowercase DOM attribute; camelCase fetchPriority isn't wired to it until React 19
+                    fetchpriority="high"
                     className="w-full h-full object-cover object-top"
                     onError={() => setImgError(true)}
                   />
@@ -86,8 +98,34 @@ export default function About() {
           <a href="#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
             <Mail size={16} /> Get a Free Chapter
           </a>
+          <Link to="/media#media-kit" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+            <FileText size={16} /> Media Kit
+          </Link>
         </div>
       </section>
+
+      {genres.length > 0 && (
+        <section className="bg-cream py-12">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <p className="eyebrow text-gold mb-5">Genres &amp; Interests</p>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {genres.map((g) => (
+                <span key={g} className="label-caps text-2xs border border-gold/30 text-gold rounded-full px-3.5 py-1.5">{g}</span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {selectedBooks.length > 0 && (
+        <section className="mx-auto max-w-6xl px-6 py-20">
+          <p className="eyebrow text-gold mb-3 text-center">Selected Books</p>
+          <h2 className="font-display text-3xl text-ink text-center mb-10">One World Per Book</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {selectedBooks.map((b) => <BookCard key={b.id} book={b} />)}
+          </div>
+        </section>
+      )}
     </>
   );
 }

@@ -4,29 +4,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#16243A',
-        'ink-soft': '#22344D',
-        charcoal: '#171A1F',
-        gold: '#B88A44',
-        'gold-lt': '#D3AB6E',
-        ivory: '#F7F3EA',
-        cream: '#EFE8DA',
-        burgundy: '#7B263A',
+        // Literal hex, matching src/index.css's :root values exactly — NOT
+        // var(--x) references. Tailwind's opacity-modifier utilities
+        // (text-ivory/70, bg-charcoal/95, etc., used throughout the site)
+        // need a real color to decompose into an alpha channel; a CSS
+        // variable reference silently drops every /opacity variant.
+        navy: '#101827',
+        'soft-grey': '#E8E5DF',
+        ink: '#101827',
+        'ink-soft': '#1B2536',
+        charcoal: '#17191D',
+        gold: '#B18A4A',
+        'gold-lt': '#CCAB74',
+        ivory: '#F7F3EB',
+        cream: '#FBF8F2',
+        burgundy: '#701F2A',
         rose: '#B4506B',
-        text: '#20242B',
-        muted: '#6B6256',
+        text: '#17191D',
+        muted: '#66625C',
       },
       fontFamily: {
         display: ['"Fraunces"', 'Georgia', 'serif'],
-        body: ['"Spectral"', 'Georgia', 'serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        'devanagari-serif': ['"Noto Serif Devanagari"', 'Georgia', 'serif'],
+        'devanagari-sans': ['"Noto Sans Devanagari"', 'system-ui', 'sans-serif'],
       },
       fontSize: { '2xs': '0.65rem', xs: '0.75rem' },
       boxShadow: {
-        book: '0 18px 40px -18px rgba(22,36,58,0.5)',
-        'book-hover': '0 30px 50px -16px rgba(22,36,58,0.55)',
-        luxury: '0 8px 32px -8px rgba(22,36,58,0.22)',
+        book: '0 18px 40px -18px rgba(16,24,39,0.5)',
+        'book-hover': '0 30px 50px -16px rgba(16,24,39,0.55)',
+        luxury: '0 8px 32px -8px rgba(16,24,39,0.22)',
       },
       letterSpacing: { widest: '0.28em', wider: '0.14em' },
+      zIndex: { header: '50', dropdown: '60', dialog: '70' },
       keyframes: {
         rise: { from: { opacity: '0', transform: 'translateY(22px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
         'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },

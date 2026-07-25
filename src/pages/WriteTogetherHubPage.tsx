@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Users, Rocket, Mail } from 'lucide-react';
 import Seo from '../components/Seo';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
+import { trackEvent } from '../lib/analytics';
 
 const benefits = [
   { icon: BookOpen, title: 'Learn the craft', body: 'Guided lessons on structure, character, voice, and revision — the things I wish I had known on day one.' },
@@ -26,7 +27,7 @@ export default function WriteTogetherHubPage() {
           <p className="text-ivory/80 max-w-2xl mx-auto leading-relaxed mb-8">
             I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out — guidance, community, and a place to grow their craft together.
           </p>
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={15} />
           </a>
         </div>
@@ -66,7 +67,7 @@ export default function WriteTogetherHubPage() {
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Ready to grow your craft?</h2>
         <div className="flex flex-wrap justify-center gap-4">
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={15} />
           </a>
           <Link to="/contact" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">

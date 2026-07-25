@@ -23,6 +23,7 @@ export default tseslint.config(
       'react/react-in-jsx-scope': 'off',
       'react/no-unescaped-entities': 'off',
       'react/prop-types': 'off',
+      'react/no-unknown-property': ['error', { ignore: ['fetchpriority'] }],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },

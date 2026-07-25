@@ -8,7 +8,8 @@ const links = [
   { label: 'Testimonials', to: '/admin/testimonials' },
   { label: 'Testimonial Submissions', to: '/admin/testimonial-submissions' },
   { label: 'Blog', to: '/admin/blog' },
-  { label: 'News & Events', to: '/admin/news' },
+  { label: 'News', to: '/admin/news' },
+  { label: 'Events', to: '/admin/events' },
   { label: 'Newsletter Subscribers', to: '/admin/subscribers' },
   { label: 'Contact Messages', to: '/admin/messages' },
 ];

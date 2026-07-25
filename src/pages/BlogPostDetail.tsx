@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import SocialShareButtons from '../components/SocialShareButtons';
+import EmailStrip from '../components/EmailStrip';
 import { fetchBlogPosts } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
@@ -75,6 +76,8 @@ export default function BlogPostDetail() {
           </Link>
         </div>
       </section>
+
+      <EmailStrip id="article-email" source="article" />
     </>
   );
 }
