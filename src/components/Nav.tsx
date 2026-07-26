@@ -83,7 +83,7 @@ export default function Nav() {
           <img src="/images/brand/logo-full.png" alt="Gaurav Mishra — authorgaurav.com" width={61} height={36} className="h-9 w-auto object-contain" />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-3 xl:gap-6">
+        <ul className="hidden lg:flex items-center gap-2 xl:gap-5 ml-6">
           {desktopLinks.map((l) => (
             <li key={l.to}>
               <Link

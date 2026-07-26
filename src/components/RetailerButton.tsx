@@ -24,7 +24,7 @@ export default function RetailerButton({ label, href, variant = 'solid', classNa
   };
 
   return (
-    <a href={href} className={classes} onClick={handleClick}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className={classes} onClick={handleClick}>
       {label}
     </a>
   );
