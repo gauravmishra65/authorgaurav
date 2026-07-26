@@ -195,11 +195,11 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
             className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-none"
           />
         </div>
-        {emailError && <p id={`${id}-email-error`} role="alert" className="text-2xs text-rose">{emailError}</p>}
+        {emailError && <p id={`${id}-email-error`} role="alert" className="text-sm text-rose">{emailError}</p>}
         {genreSelect}
         {honeypotField}
         {consentCheckbox}
-        {status === 'error' && <p role="alert" className="text-2xs text-rose">{errorMessage}</p>}
+        {status === 'error' && <p role="alert" className="text-sm text-rose">{errorMessage}</p>}
         <button type="submit" disabled={status === 'loading' || !consent} className={`btn-caps btn-gold-outline px-4 py-2 rounded-sm disabled:opacity-60 ${layout === 'compact' ? 'w-full text-center' : 'self-start'}`}>
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>
@@ -237,9 +237,9 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>
       </form>
-      {emailError && <p id={`${id}-email-error`} role="alert" className="text-2xs text-rose mt-2 text-center">{emailError}</p>}
+      {emailError && <p id={`${id}-email-error`} role="alert" className="text-sm text-rose mt-2 text-center">{emailError}</p>}
       <div className="mt-3 max-w-md mx-auto">{consentCheckbox}</div>
-      {status === 'error' && <p role="alert" className="text-2xs text-rose mt-3 text-center">{errorMessage}</p>}
+      {status === 'error' && <p role="alert" className="text-sm text-rose mt-3 text-center">{errorMessage}</p>}
     </div>
   );
 }

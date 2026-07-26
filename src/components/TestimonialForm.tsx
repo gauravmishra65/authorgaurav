@@ -97,7 +97,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
           className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none resize-none"
         />
       </div>
-      {status === 'error' && <p className="text-2xs text-rose">Something went wrong — please try again.</p>}
+      {status === 'error' && <p role="alert" className="text-sm text-rose">Something went wrong — please try again.</p>}
       <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold rounded-sm px-6 py-3 disabled:opacity-60">
         {status === 'loading' ? 'Submitting…' : 'Submit Feedback'}
       </button>

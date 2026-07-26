@@ -163,14 +163,14 @@ export default function Contact() {
                     <input id="name" type="text" value={form.name} onChange={(e) => update('name', e.target.value)}
                       aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
-                    {errors.name && <p id="name-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.name}</p>}
+                    {errors.name && <p id="name-error" role="alert" className="text-sm text-rose mt-1.5">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="form-label-caps text-muted block mb-2">Email</label>
                     <input id="email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)}
                       aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
-                    {errors.email && <p id="email-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.email}</p>}
+                    {errors.email && <p id="email-error" role="alert" className="text-sm text-rose mt-1.5">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -194,7 +194,7 @@ export default function Contact() {
                   <input id="subject" type="text" value={form.subject} onChange={(e) => update('subject', e.target.value)}
                     aria-invalid={!!errors.subject} aria-describedby={errors.subject ? 'subject-error' : undefined}
                     className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
-                  {errors.subject && <p id="subject-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.subject}</p>}
+                  {errors.subject && <p id="subject-error" role="alert" className="text-sm text-rose mt-1.5">{errors.subject}</p>}
                 </div>
 
                 <div>
@@ -202,7 +202,7 @@ export default function Contact() {
                   <textarea id="message" rows={5} value={form.message} onChange={(e) => update('message', e.target.value)}
                     aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined}
                     className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none resize-none" />
-                  {errors.message && <p id="message-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.message}</p>}
+                  {errors.message && <p id="message-error" role="alert" className="text-sm text-rose mt-1.5">{errors.message}</p>}
                 </div>
 
                 {/* Honeypot — hidden from sighted users and screen readers, but still in the DOM/tab flow for naive bots that ignore display:none. */}
@@ -223,10 +223,10 @@ export default function Contact() {
                       className="mt-1 h-4 w-4 accent-gold" />
                     <span className="text-sm text-muted">I consent to being contacted about this enquiry.</span>
                   </label>
-                  {errors.consent && <p id="consent-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.consent}</p>}
+                  {errors.consent && <p id="consent-error" role="alert" className="text-sm text-rose mt-1.5">{errors.consent}</p>}
                 </div>
 
-                {submitError && <p role="alert" className="text-2xs text-rose">{submitError}</p>}
+                {submitError && <p role="alert" className="text-sm text-rose">{submitError}</p>}
 
                 <button type="submit" disabled={sending} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3 disabled:opacity-60">
                   <Send size={15} /> {sending ? 'Sending…' : 'Send Message'}

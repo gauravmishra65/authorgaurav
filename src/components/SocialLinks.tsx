@@ -29,7 +29,7 @@ export default function SocialLinks({
 }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      {socialLinks.map((s) => {
+      {socialLinks.filter((s) => s.href && s.href !== '#').map((s) => {
         const Icon = icons[s.label];
         return (
           <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={iconClassName}>

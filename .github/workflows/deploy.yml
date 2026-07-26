@@ -24,6 +24,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run test
+      - run: npx playwright install --with-deps chromium
       - run: npm run build
         env:
           # Set both in repo Settings > Secrets and variables > Actions — the
