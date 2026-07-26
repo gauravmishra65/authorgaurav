@@ -31,7 +31,12 @@ export default function BookCarousel({ books }: BookCarouselProps) {
       */}
       <div className="carousel-track flex w-max py-6" style={{ animationDuration: `${duration}s` }}>
         {track.map((b, i) => (
-          <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36">
+          <div
+            key={`${b.id}-${i}`}
+            aria-hidden={i >= books.length}
+            {...(i >= books.length ? { inert: '' } : {})}
+            className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36"
+          >
             <BookCover {...b} size="xs" href={`/books/${b.slug}`} />
             <div className="text-center">
               <p className="font-display text-sm text-ink">{b.title}</p>
@@ -45,7 +50,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
             <p className="text-2xs text-muted leading-relaxed text-center line-clamp-2">{b.tagline}</p>
             <div className="flex flex-wrap justify-center gap-1.5">
               {getBuyOptions(b).map((opt) => (
-                <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" />
+                <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={b.title} />
               ))}
             </div>
             <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>

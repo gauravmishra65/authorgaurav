@@ -14,10 +14,12 @@
   --charcoal: #17191d;
   --gold: #b18a4a;
   --gold-lt: #ccab74;
+  /* AA-safe darker gold for text on light backgrounds — mirrors tailwind.config.js's 'gold-text' utility color. */
+  --gold-text: #76572a;
   --burgundy: #701f2a;
   --ivory: #f7f3eb;
   --cream: #fbf8f2;
-  --rose: #b4506b;
+  --rose: #a8455f;
   --text: var(--charcoal);
   --muted: #66625c;
 
@@ -122,7 +124,13 @@ h1, h2, h3, h4 {
 .btn-gold { background: linear-gradient(180deg, var(--gold-lt) 0%, var(--gold) 100%); color: var(--navy); border: 1px solid rgba(177,138,74,0.6); transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; }
 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(177,138,74,0.7); filter: brightness(1.04); }
 
-.btn-gold-outline { background: transparent; color: var(--gold); border: 1px solid rgba(177,138,74,0.55); transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+/* color: var(--gold) measures ~3:1 against the site's cream/ivory
+   backgrounds — this class is used almost everywhere on those light
+   backgrounds, so it uses the AA-safe --gold-text (~6:1) instead. The rare
+   dark-background usages (BookLaunchHero, AdminLayout, TestimonialModal)
+   override with an inline style={{color:'var(--gold-lt)'}}, since inline
+   styles win regardless of this rule's position in the cascade. */
+.btn-gold-outline { background: transparent; color: var(--gold-text); border: 1px solid rgba(177,138,74,0.55); transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
 .btn-gold-outline:hover { background: rgba(177,138,74,0.1); transform: translateY(-1px); }
 
 .book-tilt { transition: transform 0.45s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.45s cubic-bezier(0.2,0.7,0.2,1); }

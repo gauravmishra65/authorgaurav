@@ -5,13 +5,17 @@ interface RetailerButtonProps {
   href: string;
   variant?: 'solid' | 'outline';
   className?: string;
+  /** Book title, when known — used only to build a fuller screen-reader
+   * label ("Buy Shadow Code: Kindle") than the short visible pill text
+   * ("Kindle") alone would announce out of context. */
+  bookTitle?: string;
 }
 
 /** One retailer/buy link (from a book's `buyLinks`), formalized as a
  * component — replaces the inline `<a className="btn-...">` repeated across
  * BookDetail, Books, BookCarousel, and Home. Also the single place that
  * fires retailer_click/amazon_click for every buy button site-wide. */
-export default function RetailerButton({ label, href, variant = 'solid', className = '' }: RetailerButtonProps) {
+export default function RetailerButton({ label, href, variant = 'solid', className = '', bookTitle }: RetailerButtonProps) {
   const classes = variant === 'solid'
     ? `btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs ${className}`
     : `label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors ${className}`;
@@ -24,7 +28,14 @@ export default function RetailerButton({ label, href, variant = 'solid', classNa
   };
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={classes} onClick={handleClick}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={bookTitle ? `Buy ${bookTitle}: ${label}` : undefined}
+      className={classes}
+      onClick={handleClick}
+    >
       {label}
     </a>
   );

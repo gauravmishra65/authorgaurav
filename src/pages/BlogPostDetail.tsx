@@ -5,6 +5,7 @@ import SocialShareButtons from '../components/SocialShareButtons';
 import EmailStrip from '../components/EmailStrip';
 import { fetchBlogPosts } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { canonicalUrl as buildUrl } from '../lib/url';
 
 export default function BlogPostDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -17,7 +18,7 @@ export default function BlogPostDetail() {
 
   if (!post) return <Navigate to="/blog" replace />;
 
-  const canonicalUrl = `https://authorgaurav.com/blog/${post.slug}`;
+  const canonicalUrl = buildUrl(`/blog/${post.slug}`);
   const paragraphs = (post.content ?? post.excerpt).split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
 
   return (
@@ -41,8 +42,8 @@ export default function BlogPostDetail() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://authorgaurav.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://authorgaurav.com/blog' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: buildUrl('/') },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: buildUrl('/blog') },
                 { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
               ],
             },

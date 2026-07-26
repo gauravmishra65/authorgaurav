@@ -1,12 +1,11 @@
 import type { Book } from '../data/books';
-
-const SITE_URL = 'https://authorgaurav.com';
+import { SITE_URL, canonicalUrl as buildUrl } from '../lib/url';
 
 /** Builds the Book + BreadcrumbList JSON-LD for a book page — extracted out
  * of BookDetail so the schema logic is testable/reusable on its own. Passed
  * to `Seo`'s `jsonLd` prop, which renders it via `StructuredData`. */
 export function buildBookStructuredData(book: Book): Record<string, unknown> {
-  const canonicalUrl = `${SITE_URL}/books/${book.slug}`;
+  const canonicalUrl = buildUrl(`/books/${book.slug}`);
 
   return {
     '@context': 'https://schema.org',
@@ -36,8 +35,8 @@ export function buildBookStructuredData(book: Book): Record<string, unknown> {
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Books', item: `${SITE_URL}/books` },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: buildUrl('/') },
+          { '@type': 'ListItem', position: 2, name: 'Books', item: buildUrl('/books') },
           { '@type': 'ListItem', position: 3, name: book.title, item: canonicalUrl },
         ],
       },

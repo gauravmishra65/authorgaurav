@@ -43,7 +43,7 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
                 Learn More <ArrowRight size={15} />
               </Link>
               {book.bookWebsite && (
-                <a href={book.bookWebsite} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+                <a href={book.bookWebsite} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
                   Visit the Official Site <ExternalLink size={15} />
                 </a>
               )}

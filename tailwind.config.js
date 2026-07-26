@@ -25,7 +25,11 @@ export default {
         ivory: '#F7F3EB',
         cream: '#FBF8F2',
         burgundy: '#701F2A',
-        rose: '#B4506B',
+        // #B4506B measured ~4.4:1 on ivory/cream — just short of WCAG AA's
+        // 4.5:1 for normal text, and this token is used for every form
+        // validation error and "couldn't load" message sitewide. Darkened
+        // slightly to ~5.1-5.4:1 on the same backgrounds.
+        rose: '#A8455F',
         text: '#17191D',
         muted: '#66625C',
       },

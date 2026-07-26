@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Mail, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
-import { socialLinks } from '../data/social';
+import { getVerifiedSocialLinks } from '../data/social';
 import { supabase, CONTACT_FORM_ENDPOINT, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackEvent } from '../lib/analytics';
 
@@ -176,7 +176,7 @@ export default function Contact() {
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="organisation" className="form-label-caps text-muted block mb-2">Organisation <span className="normal-case text-2xs opacity-70">(optional)</span></label>
+                    <label htmlFor="organisation" className="form-label-caps text-muted block mb-2">Organisation <span className="normal-case text-2xs">(optional)</span></label>
                     <input id="organisation" type="text" value={form.organisation} onChange={(e) => update('organisation', e.target.value)}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
                   </div>
@@ -253,7 +253,7 @@ export default function Contact() {
             <div className="rounded-md border border-gold/20 bg-cream p-6">
               <p className="label-caps text-gold-text mb-4">Social</p>
               <div className="flex flex-wrap gap-4">
-                {socialLinks.map((s) => (
+                {getVerifiedSocialLinks().map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold-text transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
                 ))}
               </div>

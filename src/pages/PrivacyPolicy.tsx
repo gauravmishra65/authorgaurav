@@ -61,7 +61,7 @@ export default function PrivacyPolicy() {
       <h2 className="font-display text-xl text-ink">Your choices</h2>
       <p>
         You can unsubscribe from the newsletter at any time using the link in any email you receive, or by emailing{' '}
-        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
+        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text underline hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
         You can also email that address to request a copy of, or deletion of, any personal information held about
         you.
       </p>
@@ -75,7 +75,7 @@ export default function PrivacyPolicy() {
       <h2 className="font-display text-xl text-ink">Contact</h2>
       <p>
         Questions about this policy can be sent to{' '}
-        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
+        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text underline hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
       </p>
     </LegalPageLayout>
   );

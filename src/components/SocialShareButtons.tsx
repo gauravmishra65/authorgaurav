@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Facebook, Linkedin, MessageCircle, Link2, Check } from 'lucide-react';
+import { canonicalUrl } from '../lib/url';
 
 interface SocialShareButtonsProps {
   /** Root-relative path, e.g. "/books/the-shadow-code". Resolved against the current origin. */
@@ -18,7 +19,11 @@ function XIcon({ size = 16 }: { size?: number }) {
 
 export default function SocialShareButtons({ path, title, className = '' }: SocialShareButtonsProps) {
   const [copied, setCopied] = useState(false);
-  const url = `${window.location.origin}${path}`;
+  // Always the real production domain — not window.location.origin, which
+  // during static pre-rendering (a headless browser hitting `vite preview`
+  // on localhost) would otherwise get baked into the shipped static HTML as
+  // a broken "Share on Facebook" link pointing at localhost:4174.
+  const url = canonicalUrl(path);
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 

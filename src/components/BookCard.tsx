@@ -32,7 +32,7 @@ export default function BookCard({ book }: BookCardProps) {
       {buyOptions.length > 0 && (
         <div className="flex flex-wrap justify-center gap-1.5">
           {buyOptions.map((opt) => (
-            <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" />
+            <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={book.title} />
           ))}
         </div>
       )}

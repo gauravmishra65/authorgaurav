@@ -27,7 +27,11 @@ export const bookThemes: Record<string, BookTheme> = {
     surface: '#E9CBC5',
     text: '#2B2422',
     mutedText: '#45332F',
-    accent: '#B76757',
+    // #B76757 (the original terracotta) reads at ~2.7:1 against this
+    // theme's own light surface/background — well under the 4.5:1 normal-text
+    // threshold. #701F2A keeps the same warm rose-brown family (it's the
+    // site's existing --burgundy token) but at ~7-10:1 against both.
+    accent: '#701F2A',
     secondaryAccent: '#C2A06A',
   },
   'lalita-sahasranama': {

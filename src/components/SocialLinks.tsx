@@ -1,5 +1,5 @@
 import { Instagram, Facebook, Youtube } from 'lucide-react';
-import { socialLinks } from '../data/social';
+import { getVerifiedSocialLinks } from '../data/social';
 
 function XIcon({ size = 18 }: { size?: number }) {
   return (
@@ -29,7 +29,7 @@ export default function SocialLinks({
 }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      {socialLinks.filter((s) => s.href && s.href !== '#').map((s) => {
+      {getVerifiedSocialLinks().map((s) => {
         const Icon = icons[s.label];
         return (
           <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={iconClassName}>

@@ -1,6 +1,5 @@
 import type { AuthorEvent } from '../data/events';
-
-const SITE_URL = 'https://authorgaurav.com';
+import { SITE_URL, canonicalUrl } from '../lib/url';
 
 /** Builds Event JSON-LD for a list of events — pass only genuine, real
  * upcoming events (never past ones or placeholders). Returns undefined when
@@ -26,7 +25,7 @@ export function buildEventStructuredData(events: AuthorEvent[]): Record<string, 
         ? { '@type': 'VirtualLocation', url: event.registrationUrl ?? SITE_URL }
         : { '@type': 'Place', name: event.location ?? 'To be announced' },
       organizer: { '@type': 'Person', name: 'Gaurav Mishra', url: SITE_URL },
-      url: `${SITE_URL}/events`,
+      url: canonicalUrl('/events'),
     })),
   };
 }

@@ -39,7 +39,7 @@ export default function WritingResources() {
         <div className="grid gap-6 md:grid-cols-2 max-w-3xl mx-auto">
           {guidance.map((g) => (
             <div key={g.title} className="rounded-md border border-gold/20 bg-cream p-7">
-              <h3 className="font-display text-lg text-ink mb-2">{g.title}</h3>
+              <h2 className="font-display text-lg text-ink mb-2">{g.title}</h2>
               <p className="text-sm text-muted leading-relaxed mb-5">{g.body}</p>
               <SecondaryButton href={g.file} size="sm">
                 <Download size={14} /> Download Checklist

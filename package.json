@@ -14,7 +14,9 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "validate:links": "node scripts/validate-links.mjs",
+    "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.6",
@@ -24,6 +26,7 @@
     "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^9.9.0",
     "@playwright/test": "^1.62.0",
     "@testing-library/jest-dom": "^7.0.0",

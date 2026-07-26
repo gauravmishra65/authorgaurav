@@ -35,7 +35,7 @@ export default function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <button onClick={() => supabase.auth.signOut()} className="m-4 btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs">
+        <button onClick={() => supabase.auth.signOut()} className="m-4 btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs" style={{ color: 'var(--gold-lt)' }}>
           Sign Out
         </button>
       </aside>

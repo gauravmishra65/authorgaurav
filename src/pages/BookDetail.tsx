@@ -166,7 +166,7 @@ export default function BookDetail() {
       {/* Shadow Code only: atmosphere section ahead of the generic synopsis */}
       {isShadowCode && (
         <Section tone="dark">
-          <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Inside the Hidden Financial World</p>
+          <p className="eyebrow text-gold-lt mb-4 text-center">Inside the Hidden Financial World</p>
           <p className="font-display text-2xl md:text-3xl text-center max-w-2xl mx-auto leading-snug">
             A breach in the system. A trail through global finance. A truth powerful people cannot afford to reveal.
           </p>
@@ -191,7 +191,7 @@ export default function BookDetail() {
       {/* 8. Full story introduction */}
       <section lang={isHindiRelabel ? 'hi' : undefined} className="bg-[color-mix(in_srgb,var(--book-surface)_15%,white)] px-6 py-16">
         <div className="mx-auto max-w-prose">
-          <p className="eyebrow mb-3" style={{ color: 'var(--book-accent)' }}>{isLalita ? 'पुस्तक के बारे में' : isVishnu ? 'पुस्तक का उद्देश्य' : 'Synopsis'}</p>
+          <p className="eyebrow text-gold-text mb-3">{isLalita ? 'पुस्तक के बारे में' : isVishnu ? 'पुस्तक का उद्देश्य' : 'Synopsis'}</p>
           <div className="prose-literary">
             <p>{book.synopsis}</p>
           </div>

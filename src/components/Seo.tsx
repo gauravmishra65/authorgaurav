@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import StructuredData from './StructuredData';
+import { SITE_URL, canonicalPath } from '../lib/url';
 
 interface SeoProps {
   title: string;
@@ -16,7 +17,6 @@ interface SeoProps {
   lang?: 'en' | 'hi';
 }
 
-const SITE_URL = 'https://authorgaurav.com';
 const DEFAULT_IMAGE = '/images/author/GM-Photo.jpg';
 
 function setMetaByName(name: string, content: string) {
@@ -54,7 +54,7 @@ export default function Seo({ title, description, path, image, jsonLd, lang = 'e
     document.title = title;
     document.documentElement.lang = lang;
 
-    const url = SITE_URL + (path ?? window.location.pathname);
+    const url = SITE_URL + canonicalPath(path ?? window.location.pathname);
     const imageUrl = SITE_URL + (image ?? DEFAULT_IMAGE);
 
     setMetaByName('description', description);

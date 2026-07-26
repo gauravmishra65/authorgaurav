@@ -14,6 +14,7 @@ test-results
 playwright-report
 blob-report
 playwright/.cache
+reports
 
 .vscode/*
 !.vscode/extensions.json

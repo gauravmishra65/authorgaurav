@@ -23,7 +23,7 @@ export default function BookPurchasePanel({ book, variant = 'solid', className =
       {buyOptions.length > 0 && (
         <div className="flex flex-wrap gap-3">
           {buyOptions.map((opt) => (
-            <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant={variant} className={buttonClassName} />
+            <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant={variant} className={buttonClassName} bookTitle={book.title} />
           ))}
         </div>
       )}
