@@ -25,13 +25,13 @@ export default function BookCarousel({ books }: BookCarouselProps) {
         No `gap` on the track: a flex gap only appears *between* items, so
         scrollWidth/2 would be half a gap short of one true period, causing
         a visible jump where the loop restarts. Each item carries its own
-        mr-8 instead, so every item (duplicates included) contributes an
+        mr-10 instead, so every item (duplicates included) contributes an
         identical width and translateX(-50%) lands exactly on the seam.
       */}
       <div className="carousel-track flex w-max py-6" style={{ animationDuration: `${duration}s` }}>
         {track.map((b, i) => (
-          <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-8 w-40">
-            <BookCover {...b} size="md" href={`/books/${b.slug}`} />
+          <div key={`${b.id}-${i}`} aria-hidden={i >= books.length} className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36">
+            <BookCover {...b} size="xs" href={`/books/${b.slug}`} />
             <div className="text-center">
               <p className="font-display text-sm text-ink">{b.title}</p>
               {b.isHindi && (
@@ -48,6 +48,11 @@ export default function BookCarousel({ books }: BookCarouselProps) {
                   {link.label}
                 </a>
               ))}
+              {b.paperbackUrl && (
+                <a href={b.paperbackUrl} className="label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
+                  Paperback
+                </a>
+              )}
             </div>
             <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
           </div>

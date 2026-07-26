@@ -14,12 +14,13 @@ interface BookCoverProps {
   imageHeight?: number;
   href?: string;
   external?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   /** Set for the one above-the-fold cover (e.g. the hero) so it isn't lazy-loaded. */
   priority?: boolean;
 }
 
 const pixelSizes = {
+  xs: { w: 140, h: 210 },
   sm: { w: 150, h: 225 },
   md: { w: 200, h: 300 },
   lg: { w: 240, h: 360 },
@@ -32,6 +33,10 @@ export default function BookCover({
   const [imgError, setImgError] = useState(false);
 
   const sizes = {
+    // Deliberately smaller than `md` at every breakpoint — sized for the
+    // homepage carousel, where its wrapper (BookCarousel) is narrow enough
+    // that `md`'s 200px desktop width overflowed and overlapped neighbors.
+    xs: 'w-[100px] h-[150px] sm:w-[120px] sm:h-[180px] lg:w-[140px] lg:h-[210px]',
     sm: 'w-[150px] h-[225px]',
     // Shrinks to fit narrow multi-column grids (e.g. the 2-up mobile bookshelf)
     // before growing to its full size once the grid gives it more room.

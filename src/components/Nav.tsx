@@ -83,7 +83,7 @@ export default function Nav() {
           <img src="/images/brand/logo-full.png" alt="Gaurav Mishra — authorgaurav.com" width={61} height={36} className="h-9 w-auto object-contain" />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-3.5 xl:gap-6">
+        <ul className="hidden lg:flex items-center gap-3 xl:gap-6">
           {desktopLinks.map((l) => (
             <li key={l.to}>
               <Link
@@ -123,9 +123,9 @@ export default function Nav() {
           </li>
         </ul>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3">
           <SocialLinks size={15} className="hidden xl:flex" iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs whitespace-nowrap">Explore Latest Book</Link>
+          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-sm px-4 py-2 whitespace-nowrap">Explore Latest Book</Link>
         </div>
 
         <button ref={toggleRef} className="lg:hidden text-ivory p-2 -mr-2" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
