@@ -65,4 +65,37 @@ export interface Book {
 
 // Book content lives in Supabase (authorgaurav_books/authorgaurav_testimonials) —
 // see src/lib/queries.ts. Manage it via /admin.
-export const genreFilters = ['All', 'Upcoming', 'Fiction', 'Devotional', 'Memoir'] as const;
+
+// Single source of truth for the category tabs used to filter book listings
+// (the homepage carousel and the /books page) — every listing that lets a
+// reader filter by category should offer the same options. "Spiritual" is
+// the human-facing label for the "Devotional" tag already used in the data.
+export const bookCategoryOptions = ['Thriller', 'Romance', 'Spiritual', 'Memoir'] as const;
+export const bookCategoryToTag: Record<(typeof bookCategoryOptions)[number], string> = {
+  Thriller: 'Thriller', Romance: 'Romance', Spiritual: 'Devotional', Memoir: 'Memoir',
+};
+
+export interface BuyOption {
+  label: string;
+  href: string;
+}
+
+// Retailer links in `buyLinks` are frequently left as `#` placeholders
+// before a real one is confirmed, while `kindleUrl`/`paperbackUrl` are the
+// fields actually kept up to date for those two formats — so a book can
+// have a real Kindle link even while `buyLinks`' own "Kindle" entry is
+// still a placeholder. This is the one place that reconciles all three
+// fields into a single, real, honest list of buy options — used by
+// BookCarousel, BookCard, and BookPurchasePanel so every page shows the
+// exact same options for a given book.
+export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paperbackUrl'>): BuyOption[] {
+  const options: BuyOption[] = [];
+  for (const link of book.buyLinks) {
+    if (link.label === 'Kindle') continue;
+    if (link.href && link.href !== '#') options.push(link);
+  }
+  const kindleHref = book.kindleUrl || book.buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;
+  if (kindleHref) options.push({ label: 'Kindle', href: kindleHref });
+  if (book.paperbackUrl) options.push({ label: 'Paperback', href: book.paperbackUrl });
+  return options;
+}

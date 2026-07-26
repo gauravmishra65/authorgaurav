@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
-import type { Book } from '../data/books';
+import RetailerButton from './RetailerButton';
+import { getBuyOptions, type Book } from '../data/books';
 
 interface BookCarouselProps {
   books: Book[];
@@ -43,16 +44,9 @@ export default function BookCarousel({ books }: BookCarouselProps) {
             </div>
             <p className="text-2xs text-muted leading-relaxed text-center line-clamp-2">{b.tagline}</p>
             <div className="flex flex-wrap justify-center gap-1.5">
-              {b.buyLinks.map((link) => (
-                <a key={link.label} href={link.href} className="label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
-                  {link.label}
-                </a>
+              {getBuyOptions(b).map((opt) => (
+                <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" />
               ))}
-              {b.paperbackUrl && (
-                <a href={b.paperbackUrl} className="label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
-                  Paperback
-                </a>
-              )}
             </div>
             <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
           </div>

@@ -2,22 +2,20 @@ import { useMemo, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
-import BookCover from '../components/BookCover';
 import BookSearch from '../components/BookSearch';
 import BookFilters from '../components/BookFilters';
 import BookGrid from '../components/BookGrid';
 import EmailStrip from '../components/EmailStrip';
+import { bookCategoryOptions, bookCategoryToTag } from '../data/books';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
-const categoryOptions = ['All', 'Thriller', 'Romance', 'Spiritual', 'Memoir'] as const;
+const categoryOptions = ['All', ...bookCategoryOptions] as const;
 const languageOptions = ['All', 'English', 'Hindi'] as const;
 const statusOptions = ['All', 'Published', 'Upcoming'] as const;
 
-// "Spiritual" (the spec's label) maps onto the Devotional category tag
-// already used in the data.
 const categoryToTag: Record<(typeof categoryOptions)[number], string | null> = {
-  All: null, Thriller: 'Thriller', Romance: 'Romance', Spiritual: 'Devotional', Memoir: 'Memoir',
+  All: null, ...bookCategoryToTag,
 };
 
 export default function Books() {
@@ -29,8 +27,6 @@ export default function Books() {
   const [category, setCategory] = useState<(typeof categoryOptions)[number]>(initialCategory);
   const [language, setLanguage] = useState<(typeof languageOptions)[number]>('All');
   const [status, setStatus] = useState<(typeof statusOptions)[number]>(searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All');
-
-  const featured = books?.find((b) => b.featured);
 
   const filtered = useMemo(() => {
     if (!books) return [];
@@ -65,26 +61,6 @@ export default function Books() {
 
       {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
       {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
-
-      {featured && (
-        <section className="bg-cream">
-          <div className="mx-auto max-w-5xl px-6 py-14">
-            <p className="eyebrow text-gold-text mb-6 text-center">Featured Release</p>
-            <div className="grid items-center gap-8 md:grid-cols-[180px_1fr]">
-              <div className="flex justify-center">
-                <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} />
-              </div>
-              <div>
-                <Link to={`/books/${featured.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold-text transition-colors">{featured.title}</Link>
-                <p className="font-body italic text-muted mt-1 mb-4">{featured.tagline}</p>
-                <Link to={`/books/${featured.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs">
-                  Explore the Book <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {books && (
         <section className="mx-auto max-w-6xl px-6 py-16">

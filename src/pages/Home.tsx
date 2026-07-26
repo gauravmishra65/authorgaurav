@@ -15,10 +15,15 @@ import Section from '../components/Section';
 import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
-import { genreFilters, type Genre } from '../data/books';
+import { bookCategoryOptions, bookCategoryToTag } from '../data/books';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
+
+// "Upcoming" is an additional lens (handled separately below), not a
+// category — the rest of the row mirrors the /books page's category tabs
+// (src/data/books.ts) so the same options appear in both places.
+const bookshelfFilters = ['All', 'Upcoming', ...bookCategoryOptions] as const;
 
 // Phase 4 added a `categories` tag per book, so Thrillers and Love Stories
 // now link to genuinely distinct filtered views (both used to collapse onto
@@ -30,7 +35,7 @@ const genreCards: { category: string; label: string; description: string }[] = [
 ];
 
 export default function Home() {
-  const [filter, setFilter] = useState<(typeof genreFilters)[number]>('All');
+  const [filter, setFilter] = useState<(typeof bookshelfFilters)[number]>('All');
   const [portraitError, setPortraitError] = useState(false);
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
 
@@ -45,7 +50,7 @@ export default function Home() {
     ? books.filter((b) => b.status === 'upcoming')
     : filter === 'All'
       ? books
-      : books.filter((b) => b.genre === (filter as Genre));
+      : books.filter((b) => b.categories?.includes(bookCategoryToTag[filter as keyof typeof bookCategoryToTag]));
 
   const shadowCode = books.find((b) => b.slug === 'the-shadow-code') ?? books[0];
 
@@ -141,7 +146,7 @@ export default function Home() {
           <Divider className="!my-8" />
 
           <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {genreFilters.map((g) => (
+            {bookshelfFilters.map((g) => (
               <button key={g} onClick={() => setFilter(g)}
                 className={`label-caps px-4 py-2 rounded-full border transition-all ${filter === g ? 'bg-ink text-gold-lt border-gold' : 'bg-cream text-text/70 border-gold/25 hover:border-gold/60 hover:text-ink'}`}>
                 {g}
