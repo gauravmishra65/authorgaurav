@@ -59,8 +59,17 @@ const routes = [...staticRoutes, ...bookRoutes, ...blogRoutes];
 
 // Defends against a malformed slug (e.g. raw non-ASCII title text used by
 // mistake instead of a real slug) producing invalid, unencoded XML.
+//
+// Trailing slash matches GitHub Pages' directory-index convention exactly
+// (scripts/prerender.mjs writes dist/<route>/index.html for every route) —
+// the non-slash form still works, but only via a 301 redirect first. A
+// sitemap URL should resolve with a direct 200, so every entry here gets
+// the trailing slash.
 const urlset = routes
-  .map((route) => `  <url>\n    <loc>${encodeURI(SITE_URL + route)}</loc>\n  </url>`)
+  .map((route) => {
+    const path = route === '/' ? '/' : `${route}/`;
+    return `  <url>\n    <loc>${encodeURI(SITE_URL + path)}</loc>\n  </url>`;
+  })
   .join('\n');
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlset}\n</urlset>\n`;

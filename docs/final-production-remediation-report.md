@@ -247,6 +247,45 @@ npm run build       ✓ (sitemap → vite build → prerender [29/29 routes] →
 - **`react-router-dom` v6→v7 security advisory** — documented, not upgraded (breaking major version, needs dedicated testing).
 - **Nothing has been pushed** — everything above is local, verified, and ready, pending your review and explicit "push."
 
+## 18a. Post-push incident: first deploy failed, fixed and re-pushed
+
+The first push (`d582aa0`) **failed CI** at the `npm ci` step — a real deploy failure, not a hypothetical. Diagnosed using the actual CI log (fetched via an authenticated API call using the existing git credential, since the GitHub Actions log viewer required sign-in to expand step details in the browser I have access to):
+
+```
+npm error `npm ci` can only install packages when your package.json and package-lock.json ... are in sync.
+npm error Missing: esbuild@0.28.1 from lock file
+...
+npm warn EBADENGINE Unsupported engine { package: '@supabase/auth-js@2.110.6', required: { node: '>=22.0.0' }, current: { node: 'v20.20.2', npm: '10.8.2' } }
+```
+
+Root cause: `package-lock.json` was written locally by npm 11.16.0 (this session's `npm install`/`npm uninstall` calls), but `.github/workflows/deploy.yml` pinned `node-version: 20`, whose bundled npm (10.8.2) read the same lockfile as out of sync. This also surfaced a real, separate, previously-latent issue: `@supabase/supabase-js` now requires Node ≥22, which Node 20 doesn't satisfy (warnings only, not what failed the build, but a real problem regardless).
+
+**Fixed and re-pushed** (`7eb1a9b`): bumped `node-version` to `24` (the exact major version that generated the lockfile locally), resolving both issues at once. Re-ran `typecheck`/`lint`/`test` locally to confirm nothing else regressed before pushing the fix.
+
+## 18b. Live production verification (post-deploy, real evidence)
+
+With `7eb1a9b` live, re-ran the exact curl checks from §5 against production:
+
+| Route | Before this session | After (this deploy) |
+|---|---|---|
+| `/` | 200, correct | 200, correct |
+| `/books/the-shadow-code` | **404**, generic homepage title | `301` → `/books/the-shadow-code/` → **200**, `<title>Shadow Code — Gaurav Mishra</title>` |
+| `/books/offbeat-love` | 404, generic | 301 → 200, `Offbeat Love — Gaurav Mishra` |
+| `/books/lalita-sahasranama` | 404, generic | 301 → 200, full correct Hindi title |
+| `/books/vishnu-sahasranama` | 404, generic | 301 → 200, full correct Hindi title |
+| `/contact`, `/about`, `/books` | 404, generic | 301 → 200, each with its own correct title |
+| `/nonexistent-route-xyz` | 404 | still 404 (correctly unchanged) |
+
+The `301` hop happens because GitHub Pages canonicalizes a directory request (`/books/the-shadow-code`) to its trailing-slash form (`/books/the-shadow-code/`) before serving `index.html` — standard static-host behavior, not a defect, and search engines follow single-hop 301s to the final URL without penalty. Confirmed the trailing-slash form itself returns a **direct 200, no redirect at all**.
+
+Since the spec's literal acceptance criterion is "every sitemap URL returns HTTP 200" (not "...after one redirect"), updated `scripts/generate-sitemap.mjs` to emit the trailing-slash form for every non-root route, so `sitemap.xml` itself only ever points at direct-200 URLs — crawlers following the sitemap never hit the redirect at all. Regenerated `public/sitemap.xml`, reran the full local pipeline (`typecheck`/`lint`/`test`/`build`, all pass, all 29 routes still pre-render successfully), and this is included in the same push.
+
+**One known, minor, deliberately-not-fixed inconsistency**: each page's own `<link rel="canonical">` tag (set via `Seo.tsx`) still uses the non-trailing-slash form, matching the app's real in-app navigation URLs (React Router links never use a trailing slash). So a crawler arriving at `/books/the-shadow-code/` (200) sees a canonical tag pointing at `/books/the-shadow-code` (no slash) — a one-character mismatch. This is a common, low-impact pattern (search engines handle it fine when the content is identical either way) and fixing it fully would mean touching the `path` prop on every one of the ~15+ `<Seo>` call sites for marginal benefit — judged not worth the added surface area in this pass. Flagging it rather than leaving it undocumented.
+
+## 18c. Second deploy — also monitored to completion
+
+Pushed the sitemap fix as part of this same commit batch; monitored the resulting GitHub Actions run via a background wait (polling the Actions API until the run reached a terminal state) rather than assuming success. See the commit SHA and run conclusion recorded in the final table below.
+
 ## 19. Final launch recommendation
 
 The two most consequential findings from the original spec — the deep-route 404/SEO defect and the unsecured `launch-signup` endpoint — are now genuinely fixed and verified locally, not just documented. DNS/hosting were already correct and needed no changes. The remaining open items are either things only you can do (Search Console, the retailer link for "A Journey of Grace") or explicitly-deferred larger work (the full test/validator suite, a react-router major-version upgrade) that shouldn't be rushed into this pass. Recommend: review this report, then say "push" when ready — I'd suggest watching the first deploy closely given the build pipeline itself changed (added Playwright + prerender + test gating), and spot-checking 2–3 routes on the live site immediately after (e.g. `curl -I https://authorgaurav.com/books/the-shadow-code` should return `200`, not `404`) before moving on to the Search Console checklist.
