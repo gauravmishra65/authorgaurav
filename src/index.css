@@ -49,7 +49,7 @@ body {
 
 ::selection { background: rgba(177,138,74,0.28); color: var(--ink); }
 
-.eyebrow, .label-caps, .btn-caps {
+.eyebrow, .label-caps {
   font-family: 'Inter', system-ui, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.28em;
@@ -57,6 +57,43 @@ body {
   font-size: 0.7rem;
 }
 .label-caps { font-size: 0.65rem; letter-spacing: 0.22em; }
+
+/* Buttons: kept visually distinct from .eyebrow/.label-caps (decorative
+   captions can stay small) — buttons are interactive controls and need to
+   meet the 1rem/600-weight minimum. Letter-spacing is scaled down from the
+   caption tracking so the caps style doesn't look overspaced at this size. */
+.btn-caps {
+  font-family: 'Inter', system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+/* Primary site navigation — distinct from .label-caps: nav is core
+   wayfinding, not a decorative caption, so it needs to clear 15px on
+   desktop / 16px on mobile rather than the ~10px caption size. */
+.nav-caps {
+  font-family: 'Inter', system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+@media (max-width: 1023px) {
+  .nav-caps { font-size: 1rem; letter-spacing: 0.1em; }
+}
+
+/* Form labels — distinct from .label-caps for the same reason: a label is
+   informative form content, not a decorative caption. */
+.form-label-caps {
+  font-family: 'Inter', system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
 
 h1, h2, h3, h4 {
   font-family: 'Fraunces', Georgia, serif;

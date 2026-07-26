@@ -26,7 +26,7 @@ export default function NotFound() {
 
       <section className="bg-ink bg-grain text-ivory min-h-[70vh] flex items-center">
         <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-          <Compass className="mx-auto mb-6 text-gold" size={40} aria-hidden="true" />
+          <Compass className="mx-auto mb-6 text-gold-text" size={40} aria-hidden="true" />
           <p className="eyebrow text-gold-lt mb-4">404</p>
           <h1 className="font-display text-3xl md:text-4xl mb-4">This page doesn't exist</h1>
           <p className="text-ivory/75 leading-relaxed mb-10 max-w-md mx-auto">

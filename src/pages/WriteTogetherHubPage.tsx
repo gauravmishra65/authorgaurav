@@ -1,15 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Users, Rocket, Mail } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import Seo from '../components/Seo';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
 import { trackEvent } from '../lib/analytics';
-
-const benefits = [
-  { icon: BookOpen, title: 'Learn the craft', body: 'Guided lessons on structure, character, voice, and revision — the things I wish I had known on day one.' },
-  { icon: Users, title: 'Find your people', body: 'A community of writers and newcomers learning together, sharing pages, and keeping each other moving.' },
-  { icon: Rocket, title: 'Get published', body: 'Practical paths from finished manuscript to reader — publishing, self-publishing, and everything between.' },
-];
+import { writeTogetherHubBenefits as benefits } from '../data/writeTogetherHub';
 
 export default function WriteTogetherHubPage() {
   return (
@@ -35,14 +30,14 @@ export default function WriteTogetherHubPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="text-center">
-          <p className="eyebrow text-gold mb-3">Why It Exists</p>
+          <p className="eyebrow text-gold-text mb-3">Why It Exists</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Three things a writer needs</h2>
           <Divider className="!my-8" />
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {benefits.map((b) => (
             <div key={b.title} className="rounded-md border border-gold/20 bg-cream p-7 text-center shadow-luxury transition-all hover:-translate-y-1">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 text-gold">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 text-gold-text">
                 <b.icon size={22} />
               </div>
               <h3 className="font-display text-xl text-ink mb-2">{b.title}</h3>
@@ -54,7 +49,7 @@ export default function WriteTogetherHubPage() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-prose px-6 py-16">
-          <p className="eyebrow text-gold mb-3 text-center">A Note from the Founder</p>
+          <p className="eyebrow text-gold-text mb-3 text-center">A Note from the Founder</p>
           <Divider className="!my-6" />
           <p className="text-text/85 leading-relaxed text-center">
             I remember what it felt like to start out — the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap, for the writer I was and the writers I hope to meet.

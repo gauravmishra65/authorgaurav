@@ -42,7 +42,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
     <form onSubmit={handleSubmit} className={`space-y-5 ${className}`}>
       {props.books ? (
         <div>
-          <label htmlFor="testimonial-book" className="label-caps text-muted block mb-2">Which book?</label>
+          <label htmlFor="testimonial-book" className="form-label-caps text-muted block mb-2">Which book?</label>
           <select
             id="testimonial-book"
             required
@@ -56,13 +56,13 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
         </div>
       ) : (
         <div>
-          <span className="label-caps text-muted block mb-2">Book</span>
+          <span className="form-label-caps text-muted block mb-2">Book</span>
           <p className="font-display text-lg text-ink">{props.book.title}</p>
         </div>
       )}
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="testimonial-name" className="label-caps text-muted block mb-2">Name</label>
+          <label htmlFor="testimonial-name" className="form-label-caps text-muted block mb-2">Name</label>
           <input
             id="testimonial-name"
             type="text"
@@ -73,7 +73,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
           />
         </div>
         <div>
-          <label htmlFor="testimonial-email" className="label-caps text-muted block mb-2">Email</label>
+          <label htmlFor="testimonial-email" className="form-label-caps text-muted block mb-2">Email</label>
           <input
             id="testimonial-email"
             type="email"
@@ -86,7 +86,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
         </div>
       </div>
       <div>
-        <label htmlFor="testimonial-quote" className="label-caps text-muted block mb-2">Your Feedback</label>
+        <label htmlFor="testimonial-quote" className="form-label-caps text-muted block mb-2">Your Feedback</label>
         <textarea
           id="testimonial-quote"
           required

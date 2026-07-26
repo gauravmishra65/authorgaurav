@@ -61,7 +61,7 @@ export default function AdminEvents() {
                 <p className="text-2xs text-muted">{ev.event_type} · {ev.mode} · {new Date(`${ev.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditing(ev)} className="p-2 text-muted hover:text-gold"><Pencil size={16} /></button>
+                <button onClick={() => setEditing(ev)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(ev.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
             </div>

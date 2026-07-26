@@ -15,6 +15,12 @@ export default {
         'ink-soft': '#1B2536',
         charcoal: '#17191D',
         gold: '#B18A4A',
+        'gold-decoration': '#B18A4A',
+        // Darker gold specifically for small/normal-size text on light
+        // (cream/ivory) backgrounds — plain `gold` measures ~3:1 there,
+        // short of WCAG AA's 4.5:1 for text. `gold` itself is unchanged
+        // and still correct for borders, icons, and large display text.
+        'gold-text': '#76572A',
         'gold-lt': '#CCAB74',
         ivory: '#F7F3EB',
         cream: '#FBF8F2',
@@ -29,7 +35,10 @@ export default {
         'devanagari-serif': ['"Noto Serif Devanagari"', 'Georgia', 'serif'],
         'devanagari-sans': ['"Noto Sans Devanagari"', 'system-ui', 'sans-serif'],
       },
-      fontSize: { '2xs': '0.65rem', xs: '0.75rem' },
+      fontSize: {
+        '2xs': ['0.65rem', { lineHeight: '1rem' }],
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+      },
       boxShadow: {
         book: '0 18px 40px -18px rgba(16,24,39,0.5)',
         'book-hover': '0 30px 50px -16px rgba(16,24,39,0.55)',

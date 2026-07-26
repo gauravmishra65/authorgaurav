@@ -62,10 +62,10 @@ export default function AdminBlog() {
                 <p className="text-2xs text-muted">{p.category} · {new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               </div>
               <div className="flex gap-2">
-                <Link to={`/admin/blog/${p.id}/content`} className="p-2 text-muted hover:text-gold" aria-label="Write full post content" title="Write full post content">
+                <Link to={`/admin/blog/${p.id}/content`} className="p-2 text-muted hover:text-gold-text" aria-label="Write full post content" title="Write full post content">
                   <FileText size={16} />
                 </Link>
-                <button onClick={() => setEditing(p)} className="p-2 text-muted hover:text-gold" aria-label="Edit details"><Pencil size={16} /></button>
+                <button onClick={() => setEditing(p)} className="p-2 text-muted hover:text-gold-text" aria-label="Edit details"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(p.id)} className="p-2 text-muted hover:text-rose" aria-label="Delete post"><Trash2 size={16} /></button>
               </div>
             </div>

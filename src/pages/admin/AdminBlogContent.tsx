@@ -44,7 +44,7 @@ export default function AdminBlogContent() {
     return (
       <div>
         <p className="text-rose mb-4">Couldn't find that post.</p>
-        <Link to="/admin/blog" className="label-caps text-gold hover:text-ink transition-colors inline-flex items-center gap-1.5">
+        <Link to="/admin/blog" className="label-caps text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1.5">
           <ArrowLeft size={13} /> Back to Blog Posts
         </Link>
       </div>
@@ -53,13 +53,13 @@ export default function AdminBlogContent() {
 
   return (
     <div>
-      <Link to="/admin/blog" className="label-caps text-2xs text-muted hover:text-gold transition-colors inline-flex items-center gap-1.5 mb-4">
+      <Link to="/admin/blog" className="label-caps text-2xs text-muted hover:text-gold-text transition-colors inline-flex items-center gap-1.5 mb-4">
         <ArrowLeft size={13} /> Back to Blog Posts
       </Link>
 
       <div className="flex items-center justify-between mb-2">
         <h1 className="font-display text-2xl text-ink">{post.title}</h1>
-        <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="label-caps text-2xs text-muted hover:text-gold transition-colors inline-flex items-center gap-1.5">
+        <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="label-caps text-2xs text-muted hover:text-gold-text transition-colors inline-flex items-center gap-1.5">
           View Live Page <ExternalLink size={12} />
         </a>
       </div>
@@ -78,7 +78,7 @@ export default function AdminBlogContent() {
       <p className="text-2xs text-muted mt-2">This links to the same post via its slug — visitors reach it by clicking "Read more" on the Blog page.</p>
 
       {error && <p className="text-2xs text-rose mt-3">{error}</p>}
-      {saved && !error && <p className="text-2xs text-gold mt-3">Saved.</p>}
+      {saved && !error && <p className="text-2xs text-gold-text mt-3">Saved.</p>}
 
       <div className="flex gap-3 pt-4">
         <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs disabled:opacity-60">

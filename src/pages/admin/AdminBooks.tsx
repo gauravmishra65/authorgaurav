@@ -96,12 +96,12 @@ export default function AdminBooks() {
               <div>
                 <p className="font-display text-ink">
                   {b.title}
-                  {b.status === 'upcoming' && <span className="ml-2 label-caps text-2xs text-gold border border-gold/40 rounded-full px-2 py-0.5 align-middle">Upcoming</span>}
+                  {b.status === 'upcoming' && <span className="ml-2 label-caps text-2xs text-gold-text border border-gold/40 rounded-full px-2 py-0.5 align-middle">Upcoming</span>}
                 </p>
                 <p className="text-2xs text-muted">{b.slug} · {b.genre} · {b.language}</p>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditing(b)} className="p-2 text-muted hover:text-gold"><Pencil size={16} /></button>
+                <button onClick={() => setEditing(b)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(b.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
             </div>

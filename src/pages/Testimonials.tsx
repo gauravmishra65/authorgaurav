@@ -9,14 +9,14 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
   return (
     <figure className="content-card p-7">
-      <Quote className="text-gold/50 mb-3" size={22} aria-hidden="true" />
+      <Quote className="text-gold-text/50 mb-3" size={22} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted mb-4">
-        {t.name}{t.source ? ` · ${t.source}` : ''}{t.book ? <> — <span className="text-gold">{t.book}</span></> : null}
+        {t.name}{t.source ? ` · ${t.source}` : ''}{t.book ? <> — <span className="text-gold-text">{t.book}</span></> : null}
       </figcaption>
       {t.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-4">
-          <p className="label-caps text-2xs text-gold mb-1.5 inline-flex items-center gap-1.5">
+          <p className="label-caps text-2xs text-gold-text mb-1.5 inline-flex items-center gap-1.5">
             <MessageCircle size={12} aria-hidden="true" /> Gaurav Replied
           </p>
           <p className="text-sm text-text/80 leading-relaxed">{t.authorReply}</p>
@@ -65,7 +65,7 @@ export default function Testimonials() {
       <section className="bg-cream">
         <div className="mx-auto max-w-2xl px-6 py-20">
           <div className="text-center mb-10">
-            <p className="eyebrow text-gold mb-3">Your Turn</p>
+            <p className="eyebrow text-gold-text mb-3">Your Turn</p>
             <h2 className="font-display text-3xl md:text-4xl text-ink">Share Your Feedback</h2>
             <Divider className="!my-8" />
             <p className="text-muted leading-relaxed">

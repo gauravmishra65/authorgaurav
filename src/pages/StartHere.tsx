@@ -46,7 +46,7 @@ export default function StartHere() {
               if (!book) return null;
               return (
                 <div key={slug} className="content-card flex flex-col items-center text-center p-8">
-                  <p className="label-caps text-gold mb-5">{eyebrow}</p>
+                  <p className="label-caps text-gold-text mb-5">{eyebrow}</p>
                   <BookCover {...book} size="md" href={`/books/${book.slug}`} />
                   <h2 className="font-display text-xl text-ink mt-6 mb-2">{book.title}</h2>
                   <p className="text-sm text-muted leading-relaxed mb-6">{reason}</p>
@@ -63,12 +63,12 @@ export default function StartHere() {
       <section className="bg-cream">
         <div className="mx-auto max-w-3xl px-6 pb-20 text-center">
           <Divider className="!mb-10" />
-          <p className="eyebrow text-gold mb-3">Not Sure Yet?</p>
+          <p className="eyebrow text-gold-text mb-3">Not Sure Yet?</p>
           <h2 className="font-display text-2xl md:text-3xl text-ink mb-3">Get a free first chapter, no commitment</h2>
           <p className="text-muted mb-8 max-w-lg mx-auto">
             Tell us what you love reading and we'll send a free chapter to match — plus a note whenever a new book arrives.
           </p>
-          <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold mb-6">
+          <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold-text mb-6">
             <Mail size={14} aria-hidden="true" /> One email a month. No noise. Unsubscribe anytime.
           </div>
           <NewsletterForm id="start-here-signup" buttonLabel="Send Me a Chapter" source="start-here" showGenrePreference />

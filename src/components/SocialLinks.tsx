@@ -25,7 +25,7 @@ interface SocialLinksProps {
 export default function SocialLinks({
   size = 18,
   className = '',
-  iconClassName = 'text-ivory/70 hover:text-gold transition-colors',
+  iconClassName = 'text-ivory/70 hover:text-gold-text transition-colors',
 }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>

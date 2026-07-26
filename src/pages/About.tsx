@@ -107,10 +107,10 @@ export default function About() {
       {genres.length > 0 && (
         <section className="bg-cream py-12">
           <div className="mx-auto max-w-3xl px-6 text-center">
-            <p className="eyebrow text-gold mb-5">Genres &amp; Interests</p>
+            <p className="eyebrow text-gold-text mb-5">Genres &amp; Interests</p>
             <div className="flex flex-wrap justify-center gap-2.5">
               {genres.map((g) => (
-                <span key={g} className="label-caps text-2xs border border-gold/30 text-gold rounded-full px-3.5 py-1.5">{g}</span>
+                <span key={g} className="label-caps text-2xs border border-gold/30 text-gold-text rounded-full px-3.5 py-1.5">{g}</span>
               ))}
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function About() {
 
       {selectedBooks.length > 0 && (
         <section className="mx-auto max-w-6xl px-6 py-20">
-          <p className="eyebrow text-gold mb-3 text-center">Selected Books</p>
+          <p className="eyebrow text-gold-text mb-3 text-center">Selected Books</p>
           <h2 className="font-display text-3xl text-ink text-center mb-10">One World Per Book</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {selectedBooks.map((b) => <BookCard key={b.id} book={b} />)}

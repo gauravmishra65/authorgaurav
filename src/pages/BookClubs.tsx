@@ -5,13 +5,7 @@ import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import { trackEvent } from '../lib/analytics';
-
-const offbeatLoveQuestions = [
-  'The novel moves between two very different worlds — what did "home" mean for each of the two people at the center of the story?',
-  'Family expectations shape so much of the story. Where did you find yourself agreeing with them, and where did you push back?',
-  'Music runs through the relationship like a shared language. What role does a shared passion play in how two people understand each other?',
-  'The story is, in part, about the courage to choose your own life. What would that choice have cost you, in their place?',
-];
+import { offbeatLoveBookClubQuestions as offbeatLoveQuestions } from '../data/bookClubQuestions';
 
 const appearanceOptions = [
   {
@@ -59,7 +53,7 @@ export default function BookClubs() {
           <div className="space-y-4 mb-8">
             {offbeatLoveQuestions.map((q, i) => (
               <div key={q} className="flex gap-4 rounded-md border border-gold/20 bg-ivory p-5">
-                <span className="label-caps text-gold shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span className="label-caps text-gold-text shrink-0">{String(i + 1).padStart(2, '0')}</span>
                 <p className="text-text/85 leading-relaxed text-sm">{q}</p>
               </div>
             ))}
@@ -80,7 +74,7 @@ export default function BookClubs() {
         <div className="grid gap-6 md:grid-cols-3">
           {appearanceOptions.map((opt) => (
             <div key={opt.title} className="rounded-md border border-gold/20 bg-cream p-7 text-center">
-              <opt.icon className="mx-auto mb-3 text-gold" size={26} aria-hidden="true" />
+              <opt.icon className="mx-auto mb-3 text-gold-text" size={26} aria-hidden="true" />
               <h3 className="font-display text-lg text-ink mb-2">{opt.title}</h3>
               <p className="text-sm text-muted leading-relaxed mb-5">{opt.body}</p>
               <PrimaryButton to={`/contact?type=${opt.type}`} size="sm">Send a Request</PrimaryButton>

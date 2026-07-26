@@ -50,7 +50,7 @@ export default function News() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <p className="text-2xs text-muted mb-2">{n.date}</p>
-                <h2 className="font-display text-xl text-ink mb-2 group-hover:text-gold transition-colors">{n.title}</h2>
+                <h2 className="font-display text-xl text-ink mb-2 group-hover:text-gold-text transition-colors">{n.title}</h2>
                 <p className="text-sm text-muted leading-relaxed line-clamp-3 flex-1">{n.excerpt}</p>
               </div>
             </article>

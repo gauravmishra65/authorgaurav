@@ -24,12 +24,12 @@ export default function BookCard({ book }: BookCardProps) {
         <FormatBadge>{book.categories?.[0] ?? book.genre}</FormatBadge>
         {book.status !== 'published' && <FormatBadge>{book.status === 'preorder' ? 'Preorder' : 'Coming Soon'}</FormatBadge>}
       </div>
-      <Link to={`/books/${book.slug}`} className="font-display text-lg text-ink hover:text-gold transition-colors">
+      <Link to={`/books/${book.slug}`} className="font-display text-lg text-ink hover:text-gold-text transition-colors">
         {book.title}
       </Link>
       <p className="text-sm text-muted leading-relaxed line-clamp-2">{book.tagline}</p>
       <div className="flex items-center gap-3 mt-1">
-        <Link to={`/books/${book.slug}`} className="label-caps text-2xs text-gold hover:text-ink transition-colors underline underline-offset-2">
+        <Link to={`/books/${book.slug}`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2">
           View Book
         </Link>
         {confirmedRetailer && <RetailerButton label={confirmedRetailer.label} href={confirmedRetailer.href} variant="outline" />}

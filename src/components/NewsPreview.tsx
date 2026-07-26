@@ -10,7 +10,7 @@ export default function NewsPreview() {
   return (
     <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
       <div className="text-center">
-        <p className="eyebrow text-gold mb-3">News &amp; Events</p>
+        <p className="eyebrow text-gold-text mb-3">News &amp; Events</p>
         <h2 className="font-display text-3xl md:text-4xl text-ink">What's happening</h2>
         <Divider className="!my-8" />
       </div>
@@ -22,7 +22,7 @@ export default function NewsPreview() {
             </div>
             <div className="p-5 flex flex-col flex-1">
               <p className="text-2xs text-muted mb-2">{n.date}</p>
-              <h3 className="font-display text-lg text-ink mb-2 group-hover:text-gold transition-colors">{n.title}</h3>
+              <h3 className="font-display text-lg text-ink mb-2 group-hover:text-gold-text transition-colors">{n.title}</h3>
               <p className="text-sm text-muted leading-relaxed line-clamp-3">{n.excerpt}</p>
             </div>
           </Link>

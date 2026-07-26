@@ -26,7 +26,7 @@ export default function EmailStrip({
     <section className={`relative overflow-hidden ${isDark ? 'bg-ink-soft bg-grain text-ivory' : 'bg-gradient-to-r from-gold-lt/30 via-gold/15 to-gold-lt/30'}`}>
       <div className="hairline-solid w-full" />
       <div className="mx-auto max-w-5xl px-6 py-14 text-center">
-        <p className="eyebrow text-gold mb-3">Reader Letter</p>
+        <p className="eyebrow text-gold-text mb-3">Reader Letter</p>
         <h2 className="font-display text-2xl md:text-3xl mb-2">{heading}</h2>
         <p className={`text-sm mb-7 ${isDark ? 'text-ivory/70' : 'text-muted'}`}>{subheading}</p>
 

@@ -108,7 +108,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           <a
             href={magnet.fileUrl}
             download
-            className="mt-4 inline-flex items-center gap-1.5 label-caps text-2xs text-gold hover:text-ink transition-colors"
+            className="mt-4 inline-flex items-center gap-1.5 label-caps text-2xs text-gold-text hover:text-ink transition-colors"
           >
             <Download size={14} /> Download your {magnet.label}
           </a>
@@ -153,7 +153,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
   );
 
   const consentCheckbox = (
-    <label className={`flex items-start gap-2 cursor-pointer text-left ${layout === 'compact' ? 'text-2xs text-ivory/70' : 'text-2xs text-muted'}`}>
+    <label className={`flex items-start gap-2 cursor-pointer text-left text-sm ${layout === 'compact' ? 'text-ivory/70' : 'text-muted'}`}>
       <input
         type="checkbox"
         required
@@ -182,7 +182,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
         />
         <label htmlFor={id} className="sr-only">Email address</label>
         <div className="flex items-center gap-2 border-b border-gold/40 pb-2">
-          <Mail size={16} className="text-gold/70" />
+          <Mail size={16} className="text-gold-text/70" />
           <input
             id={id}
             type="email"
@@ -200,7 +200,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
         {honeypotField}
         {consentCheckbox}
         {status === 'error' && <p role="alert" className="text-2xs text-rose">{errorMessage}</p>}
-        <button type="submit" disabled={status === 'loading' || !consent} className="btn-caps btn-gold-outline self-start px-4 py-2 text-2xs rounded-sm disabled:opacity-60">
+        <button type="submit" disabled={status === 'loading' || !consent} className={`btn-caps btn-gold-outline px-4 py-2 rounded-sm disabled:opacity-60 ${layout === 'compact' ? 'w-full text-center' : 'self-start'}`}>
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>
       </form>

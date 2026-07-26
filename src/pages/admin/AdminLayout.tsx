@@ -24,13 +24,13 @@ export default function AdminLayout() {
     <div className="min-h-screen flex bg-cream">
       <aside className="w-56 flex-shrink-0 bg-ink text-ivory flex flex-col">
         <div className="px-5 py-6 border-b border-gold/20">
-          <p className="font-display text-lg">Gaurav<span className="text-gold">Mishra</span></p>
+          <p className="font-display text-lg">Gaurav<span className="text-gold-text">Mishra</span></p>
           <p className="text-2xs text-ivory/50 mt-1">{session.user.email}</p>
         </div>
         <nav className="flex-1 py-4">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to}
-              className={({ isActive }) => `block px-5 py-2.5 label-caps text-2xs ${isActive ? 'text-gold bg-ink-soft' : 'text-ivory/70 hover:text-gold'}`}>
+              className={({ isActive }) => `block px-5 py-2.5 label-caps text-2xs ${isActive ? 'text-gold-text bg-ink-soft' : 'text-ivory/70 hover:text-gold-text'}`}>
               {l.label}
             </NavLink>
           ))}

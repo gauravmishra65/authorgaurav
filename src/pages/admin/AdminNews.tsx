@@ -61,7 +61,7 @@ export default function AdminNews() {
                 <p className="text-2xs text-muted">{n.category} · {new Date(n.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditing(n)} className="p-2 text-muted hover:text-gold"><Pencil size={16} /></button>
+                <button onClick={() => setEditing(n)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(n.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
             </div>

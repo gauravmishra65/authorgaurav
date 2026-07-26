@@ -38,18 +38,18 @@ export default function BookCarousel({ books }: BookCarouselProps) {
                 <span className="inline-block mt-1 label-caps text-2xs text-rose border border-rose/40 rounded-full px-2 py-0.5">Hindi</span>
               )}
               {b.status === 'upcoming' && (
-                <span className="inline-block mt-1 ml-1 label-caps text-2xs text-gold border border-gold/40 rounded-full px-2 py-0.5">Coming Soon</span>
+                <span className="inline-block mt-1 ml-1 label-caps text-2xs text-gold-text border border-gold/40 rounded-full px-2 py-0.5">Coming Soon</span>
               )}
             </div>
             <p className="text-2xs text-muted leading-relaxed text-center line-clamp-2">{b.tagline}</p>
             <div className="flex flex-wrap justify-center gap-1.5">
               {b.buyLinks.map((link) => (
-                <a key={link.label} href={link.href} className="label-caps text-2xs text-gold border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
+                <a key={link.label} href={link.href} className="label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors">
                   {link.label}
                 </a>
               ))}
             </div>
-            <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold transition-colors underline underline-offset-2">View Book</Link>
+            <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
           </div>
         ))}
       </div>

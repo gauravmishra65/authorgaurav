@@ -79,7 +79,7 @@ export default function Nav() {
     <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
       <div className="hairline-solid w-full opacity-40" />
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-        <Link to="/" className="flex items-center rounded-md bg-ivory px-2.5 py-1.5" aria-label="Gaurav Mishra — home">
+        <Link to="/" className="flex items-center shrink-0 rounded-md bg-ivory px-2.5 py-1.5" aria-label="Gaurav Mishra — home">
           <img src="/images/brand/logo-full.png" alt="Gaurav Mishra — authorgaurav.com" width={61} height={36} className="h-9 w-auto object-contain" />
         </Link>
 
@@ -89,7 +89,7 @@ export default function Nav() {
               <Link
                 to={l.to}
                 aria-current={location.pathname === l.to ? 'page' : undefined}
-                className={`label-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}
+                className={`nav-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}
               >
                 {l.label}
               </Link>
@@ -101,7 +101,7 @@ export default function Nav() {
               aria-haspopup="true"
               aria-expanded={booksMenuOpen}
               aria-current={location.pathname.startsWith('/books') ? 'page' : undefined}
-              className={`label-caps inline-flex items-center gap-1 transition-colors hover:text-gold-lt ${location.pathname.startsWith('/books') ? 'text-gold-lt' : 'text-ivory/75'}`}
+              className={`nav-caps inline-flex items-center gap-1 transition-colors hover:text-gold-lt ${location.pathname.startsWith('/books') ? 'text-gold-lt' : 'text-ivory/75'}`}
             >
               Books <ChevronDown size={14} className={`transition-transform ${booksMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
@@ -113,7 +113,7 @@ export default function Nav() {
                     to={l.to}
                     role="menuitem"
                     onClick={() => setBooksMenuOpen(false)}
-                    className="label-caps block px-4 py-2 text-2xs text-ivory/75 hover:text-gold-lt hover:bg-ink-soft/60 transition-colors"
+                    className="nav-caps block px-4 py-2 text-ivory/75 hover:text-gold-lt hover:bg-ink-soft/60 transition-colors"
                   >
                     {l.label}
                   </Link>

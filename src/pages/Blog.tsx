@@ -52,9 +52,9 @@ export default function Blog() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <p className="text-2xs text-muted mb-2">{p.date} · {p.readTime} read</p>
-                <h2 className="font-display text-xl text-ink mb-2 group-hover:text-gold transition-colors">{p.title}</h2>
+                <h2 className="font-display text-xl text-ink mb-2 group-hover:text-gold-text transition-colors">{p.title}</h2>
                 <p className="text-sm text-muted leading-relaxed line-clamp-3 flex-1">{p.excerpt}</p>
-                <Link to={`/blog/${p.slug}`} className="mt-4 inline-flex items-center gap-1.5 label-caps text-gold hover:text-ink transition-colors text-2xs">
+                <Link to={`/blog/${p.slug}`} className="mt-4 inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors text-2xs">
                   Read more <ArrowRight size={13} />
                 </Link>
               </div>

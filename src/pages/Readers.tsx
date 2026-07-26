@@ -70,7 +70,7 @@ export default function Readers() {
                 const link = b.buyLinks.find((l) => l.href && l.href !== '#')!;
                 return (
                   <li key={b.id}>
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-gold transition-colors">
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-gold-text transition-colors">
                       Review <em>{b.title}</em> on {link.label}
                     </a>
                   </li>

@@ -24,6 +24,7 @@ import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
 import { trackEvent } from '../lib/analytics';
+import { offbeatLoveBookClubQuestions } from '../data/bookClubQuestions';
 
 const shadowCodeWhyReaders = [
   'Suspense built on a real anxiety — financial data, surveillance, and who’s really watching whom.',
@@ -37,13 +38,6 @@ const offbeatLoveWhyReaders = [
   'Music runs through the relationship as its own emotional thread.',
   'A Mumbai setting that feels lived-in and specific, not a generic romantic backdrop.',
   'A quieter, more mature kind of romance — about the courage to choose your own life, not just falling in love.',
-];
-
-const offbeatLoveBookClubQuestions = [
-  'The novel moves between two very different worlds — what did "home" mean for each of the two people at the center of the story?',
-  'Family expectations shape so much of the story. Where did you find yourself agreeing with them, and where did you push back?',
-  'Music runs through the relationship like a shared language. What role does a shared passion play in how two people understand each other?',
-  'The story is, in part, about the courage to choose your own life. What would that choice have cost you, in their place?',
 ];
 
 const lalitaFeatures = [
@@ -209,7 +203,7 @@ export default function BookDetail() {
           {book.themes && book.themes.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-2">
               {book.themes.map((t) => (
-                <span key={t} className="label-caps text-2xs border border-gold/30 text-gold rounded-full px-3 py-1">{t}</span>
+                <span key={t} className="label-caps text-2xs border border-gold/30 text-gold-text rounded-full px-3 py-1">{t}</span>
               ))}
             </div>
           )}
@@ -218,14 +212,14 @@ export default function BookDetail() {
           {/* TODO_CONTENT: authorNote is empty for every book today */}
           {book.authorNote && (
             <div className="mt-10 pt-8 border-t border-gold/15">
-              <p className="eyebrow text-gold mb-3">{book.genre === 'Devotional' ? "Compiler's Note" : "Author's Note"}</p>
+              <p className="eyebrow text-gold-text mb-3">{book.genre === 'Devotional' ? "Compiler's Note" : "Author's Note"}</p>
               <p className="text-text/85 leading-relaxed text-lg italic">{book.authorNote}</p>
             </div>
           )}
 
           <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
             <SocialShareButtons path={`/books/${book.slug}`} title={book.title} />
-            <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold hover:text-ink transition-colors">
+            <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
               Back to All Books <ArrowRight size={13} />
             </Link>
           </div>
@@ -336,11 +330,11 @@ export default function BookDetail() {
       {/* Shadow Code only: reader-fit + genre-context sections */}
       {isShadowCode && (
         <Section tone="cream">
-          <p className="eyebrow text-gold mb-6 text-center">Why Thriller Readers May Enjoy It</p>
+          <p className="eyebrow text-gold-text mb-6 text-center">Why Thriller Readers May Enjoy It</p>
           <ul className="max-w-2xl mx-auto space-y-4">
             {shadowCodeWhyReaders.map((point) => (
               <li key={point} className="flex gap-3 text-text/85 leading-relaxed text-lg">
-                <span className="text-gold mt-1">—</span>
+                <span className="text-gold-text mt-1">—</span>
                 <span>{point}</span>
               </li>
             ))}
@@ -350,7 +344,7 @@ export default function BookDetail() {
 
       {isShadowCode && (
         <Section tone="light">
-          <p className="eyebrow text-gold mb-4 text-center">Technology, Finance and Crime Context</p>
+          <p className="eyebrow text-gold-text mb-4 text-center">Technology, Finance and Crime Context</p>
           <div className="prose-literary max-w-2xl mx-auto text-center">
             <p>Shadow Code sits at the intersection of financial-crime fiction and the techno-thriller — whistleblowers, encrypted trails, and institutional power in collision. It's written for readers who enjoy suspense grounded in how modern financial and digital systems actually work, with no technical background required.</p>
           </div>
@@ -415,13 +409,13 @@ export default function BookDetail() {
       {book.testimonials && book.testimonials.length > 0 && (
         <section lang={isHindiRelabel ? 'hi' : undefined} className="bg-cream">
           <div className="mx-auto max-w-5xl px-6 py-16">
-            <p className="eyebrow text-gold mb-3 text-center">{isHindiRelabel ? 'पाठकों की प्रतिक्रियाएँ' : 'What Readers Say'}</p>
+            <p className="eyebrow text-gold-text mb-3 text-center">{isHindiRelabel ? 'पाठकों की प्रतिक्रियाएँ' : 'What Readers Say'}</p>
             <Divider className="!my-6" />
             <div className="grid gap-6 md:grid-cols-2">
               {book.testimonials.map((t, i) => <BookReview key={i} review={t} />)}
             </div>
             <p className="text-center mt-10">
-              <Link to="/testimonials" className="label-caps text-gold hover:text-ink transition-colors">Share Your Own Feedback</Link>
+              <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Share Your Own Feedback</Link>
             </p>
           </div>
         </section>
@@ -486,7 +480,7 @@ export default function BookDetail() {
       {/* 16. Related books */}
       {books && (
         <section className="mx-auto max-w-5xl px-6 pb-16">
-          <p className="eyebrow text-gold mb-3 text-center">More to Explore</p>
+          <p className="eyebrow text-gold-text mb-3 text-center">More to Explore</p>
           <Divider className="!my-6" />
           <RelatedBooks book={book} allBooks={books} />
         </section>

@@ -5,7 +5,7 @@ import {
 } from '../../lib/adminQueries';
 
 const statusStyles: Record<AdminTestimonialSubmissionRow['status'], string> = {
-  pending: 'text-gold border-gold/40',
+  pending: 'text-gold-text border-gold/40',
   approved: 'text-green-700 border-green-700/30',
   rejected: 'text-rose border-rose/40',
 };
@@ -77,7 +77,7 @@ export default function AdminTestimonialSubmissions() {
       {!loading && (
         <div className="space-y-8">
           <section>
-            <p className="label-caps text-gold mb-3">Pending ({pending.length})</p>
+            <p className="label-caps text-gold-text mb-3">Pending ({pending.length})</p>
             <div className="space-y-4">
               {pending.map((row) => (
                 <div key={row.id} className="rounded-md border border-gold/30 bg-ivory p-5">
@@ -113,7 +113,7 @@ export default function AdminTestimonialSubmissions() {
           </section>
 
           <section>
-            <p className="label-caps text-gold mb-3">Reviewed ({decided.length})</p>
+            <p className="label-caps text-gold-text mb-3">Reviewed ({decided.length})</p>
             <div className="rounded-md border border-gold/20 bg-ivory overflow-hidden">
               {decided.map((row) => (
                 <div key={row.id} className="px-5 py-3 border-b border-gold/10 last:border-0">

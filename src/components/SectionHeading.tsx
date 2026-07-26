@@ -23,12 +23,12 @@ export default function SectionHeading({ eyebrow, title, align = 'center', to, t
   const Heading = level;
   return (
     <div className={isCenter ? 'text-center' : 'text-left'}>
-      {eyebrow && <p className={`eyebrow mb-3 ${isDark ? 'text-gold-lt' : 'text-gold'}`}>{eyebrow}</p>}
+      {eyebrow && <p className={`eyebrow mb-3 ${isDark ? 'text-gold-lt' : 'text-gold-text'}`}>{eyebrow}</p>}
       <Heading className={`font-display text-3xl md:text-4xl ${isDark ? 'text-ivory' : 'text-ink'}`}>{title}</Heading>
       {to && (
         <Link
           to={to}
-          className={`mt-4 inline-flex items-center gap-1.5 label-caps transition-colors ${isDark ? 'text-gold-lt hover:text-gold' : 'text-gold hover:text-ink'}`}
+          className={`mt-4 inline-flex items-center gap-1.5 label-caps transition-colors ${isDark ? 'text-gold-lt hover:text-gold-text' : 'text-gold-text hover:text-ink'}`}
         >
           {toLabel} <ArrowRight size={14} />
         </Link>

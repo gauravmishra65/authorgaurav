@@ -144,7 +144,7 @@ export default function Contact() {
 
             {submitted ? (
               <div className="rounded-md border border-gold/40 bg-cream px-6 py-10 text-center">
-                <CheckCircle2 className="mx-auto mb-3 text-gold" size={36} />
+                <CheckCircle2 className="mx-auto mb-3 text-gold-text" size={36} />
                 <h3 className="font-display text-xl text-ink mb-2">Message sent</h3>
                 <p className="text-muted text-sm">
                   Thank you, {form.name.split(' ')[0] || 'friend'}. Your note is on its way — I'll reply soon
@@ -159,14 +159,14 @@ export default function Contact() {
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="label-caps text-muted block mb-2">Name</label>
+                    <label htmlFor="name" className="form-label-caps text-muted block mb-2">Name</label>
                     <input id="name" type="text" value={form.name} onChange={(e) => update('name', e.target.value)}
                       aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
                     {errors.name && <p id="name-error" role="alert" className="text-2xs text-rose mt-1.5">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="email" className="label-caps text-muted block mb-2">Email</label>
+                    <label htmlFor="email" className="form-label-caps text-muted block mb-2">Email</label>
                     <input id="email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)}
                       aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
@@ -176,12 +176,12 @@ export default function Contact() {
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="organisation" className="label-caps text-muted block mb-2">Organisation <span className="normal-case text-2xs opacity-70">(optional)</span></label>
+                    <label htmlFor="organisation" className="form-label-caps text-muted block mb-2">Organisation <span className="normal-case text-2xs opacity-70">(optional)</span></label>
                     <input id="organisation" type="text" value={form.organisation} onChange={(e) => update('organisation', e.target.value)}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
                   </div>
                   <div>
-                    <label htmlFor="enquiryType" className="label-caps text-muted block mb-2">Enquiry Type</label>
+                    <label htmlFor="enquiryType" className="form-label-caps text-muted block mb-2">Enquiry Type</label>
                     <select id="enquiryType" value={form.enquiryType} onChange={(e) => update('enquiryType', e.target.value as EnquiryValue)}
                       className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none">
                       {enquiryTypes.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
@@ -190,7 +190,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="label-caps text-muted block mb-2">Subject</label>
+                  <label htmlFor="subject" className="form-label-caps text-muted block mb-2">Subject</label>
                   <input id="subject" type="text" value={form.subject} onChange={(e) => update('subject', e.target.value)}
                     aria-invalid={!!errors.subject} aria-describedby={errors.subject ? 'subject-error' : undefined}
                     className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
@@ -198,7 +198,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="label-caps text-muted block mb-2">Message</label>
+                  <label htmlFor="message" className="form-label-caps text-muted block mb-2">Message</label>
                   <textarea id="message" rows={5} value={form.message} onChange={(e) => update('message', e.target.value)}
                     aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined}
                     className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none resize-none" />
@@ -237,24 +237,24 @@ export default function Contact() {
 
           <aside className="space-y-8">
             <div className="rounded-md border border-gold/20 bg-cream p-6">
-              <p className="label-caps text-gold mb-3">Email</p>
-              <a href="mailto:hello@writetogetherhub.com" className="inline-flex items-center gap-2 text-ink hover:text-gold transition-colors">
+              <p className="label-caps text-gold-text mb-3">Email</p>
+              <a href="mailto:hello@writetogetherhub.com" className="inline-flex items-center gap-2 text-ink hover:text-gold-text transition-colors">
                 <Mail size={16} /> hello@writetogetherhub.com
               </a>
             </div>
             <div className="rounded-md border border-gold/20 bg-cream p-6">
-              <p className="label-caps text-gold mb-4">Links</p>
+              <p className="label-caps text-gold-text mb-4">Links</p>
               <ul className="space-y-3 text-sm">
-                <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'contact' })} className="inline-flex items-center gap-1.5 text-ink hover:text-gold transition-colors">WriteTogetherHub <ExternalLink size={13} /></a></li>
-                <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold transition-colors">off-beat-love.com <ExternalLink size={13} /></a></li>
-                <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold transition-colors">the-shadow-code.com <ExternalLink size={13} /></a></li>
+                <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'contact' })} className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">WriteTogetherHub <ExternalLink size={13} /></a></li>
+                <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">off-beat-love.com <ExternalLink size={13} /></a></li>
+                <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">the-shadow-code.com <ExternalLink size={13} /></a></li>
               </ul>
             </div>
             <div className="rounded-md border border-gold/20 bg-cream p-6">
-              <p className="label-caps text-gold mb-4">Social</p>
+              <p className="label-caps text-gold-text mb-4">Social</p>
               <div className="flex flex-wrap gap-4">
                 {socialLinks.map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="label-caps text-2xs text-muted hover:text-gold-text transition-colors border border-gold/25 rounded-full px-3 py-2">{s.label}</a>
                 ))}
               </div>
             </div>

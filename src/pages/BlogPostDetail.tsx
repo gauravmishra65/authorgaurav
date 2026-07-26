@@ -71,7 +71,7 @@ export default function BlogPostDetail() {
 
         <div className="mt-12 flex items-center justify-between flex-wrap gap-4">
           <SocialShareButtons path={`/blog/${post.slug}`} title={post.title} />
-          <Link to="/blog" className="inline-flex items-center gap-1.5 label-caps text-gold hover:text-ink transition-colors">
+          <Link to="/blog" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
             Back to All Posts <ArrowRight size={13} />
           </Link>
         </div>

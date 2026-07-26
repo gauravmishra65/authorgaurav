@@ -14,7 +14,7 @@ interface RetailerButtonProps {
 export default function RetailerButton({ label, href, variant = 'solid', className = '' }: RetailerButtonProps) {
   const classes = variant === 'solid'
     ? `btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs ${className}`
-    : `label-caps text-2xs text-gold border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors ${className}`;
+    : `label-caps text-2xs text-gold-text border border-gold/30 rounded-full px-2.5 py-1 hover:bg-gold hover:text-ink transition-colors ${className}`;
 
   const handleClick = () => {
     // `#` is a not-yet-real placeholder link — nothing to track.

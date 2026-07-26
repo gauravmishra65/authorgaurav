@@ -35,7 +35,7 @@ export default function Accessibility() {
       <p>
         If you hit a barrier anywhere on this site, please tell us — specific feedback (which page, what assistive
         technology, what happened) helps us fix it faster. Email{' '}
-        <a href="mailto:hello@writetogetherhub.com" className="text-gold hover:text-ink transition-colors">hello@writetogetherhub.com</a>{' '}
+        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text hover:text-ink transition-colors">hello@writetogetherhub.com</a>{' '}
         and we'll get back to you.
       </p>
     </LegalPageLayout>

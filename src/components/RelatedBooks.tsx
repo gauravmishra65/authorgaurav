@@ -26,7 +26,7 @@ export default function RelatedBooks({ book, allBooks, limit = 3 }: RelatedBooks
       {related.map((b) => (
         <Link key={b.id} to={`/books/${b.slug}`} className="group flex flex-col items-center text-center gap-3">
           <BookCover {...b} size="md" />
-          <p className="font-display text-sm text-ink group-hover:text-gold transition-colors">{b.title}</p>
+          <p className="font-display text-sm text-ink group-hover:text-gold-text transition-colors">{b.title}</p>
         </Link>
       ))}
     </div>

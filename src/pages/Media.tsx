@@ -47,15 +47,15 @@ export default function Media() {
         <SectionHeading eyebrow="Biography" title="Short, Medium, and Long" />
         <div className="max-w-2xl mx-auto space-y-8">
           <div>
-            <p className="label-caps text-gold mb-2">Short (1–2 sentences)</p>
+            <p className="label-caps text-gold-text mb-2">Short (1–2 sentences)</p>
             <p className="text-text/85 leading-relaxed">{shortBio}</p>
           </div>
           <div>
-            <p className="label-caps text-gold mb-2">Medium (1 paragraph)</p>
+            <p className="label-caps text-gold-text mb-2">Medium (1 paragraph)</p>
             <p className="text-text/85 leading-relaxed">{mediumBio}</p>
           </div>
           <div>
-            <p className="label-caps text-gold mb-2">Long</p>
+            <p className="label-caps text-gold-text mb-2">Long</p>
             <p className="text-text/85 leading-relaxed whitespace-pre-line">{longBio}</p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function Media() {
           <div className="rounded-md border border-gold/20 bg-ivory p-6 text-center">
             <img src="/images/author/GM-Photo.jpg" alt="Gaurav Mishra — author portrait" width={128} height={128} loading="lazy" className="mx-auto mb-4 w-32 h-32 rounded-full object-cover object-top border border-gold/25" />
             <p className="font-display text-ink mb-3">Author Portrait</p>
-            <a href="/images/author/GM-Photo.jpg" download onClick={() => trackEvent('media_kit_download', { asset: 'author-photo' })} className="label-caps text-2xs text-gold hover:text-ink transition-colors inline-flex items-center gap-1.5">
+            <a href="/images/author/GM-Photo.jpg" download onClick={() => trackEvent('media_kit_download', { asset: 'author-photo' })} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1.5">
               <Download size={13} /> Download Photo
             </a>
           </div>
@@ -77,7 +77,7 @@ export default function Media() {
               {covers.map((b) => (
                 <li key={b.id} className="flex items-center justify-between gap-3">
                   <span className="text-muted">{b.title}</span>
-                  <a href={b.imageSrc} download onClick={() => trackEvent('media_kit_download', { asset: b.slug })} className="label-caps text-2xs text-gold hover:text-ink transition-colors inline-flex items-center gap-1 shrink-0">
+                  <a href={b.imageSrc} download onClick={() => trackEvent('media_kit_download', { asset: b.slug })} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1 shrink-0">
                     <Download size={12} /> Download
                   </a>
                 </li>
@@ -103,7 +103,7 @@ export default function Media() {
         <ul className="max-w-2xl mx-auto space-y-3">
           {interviewTopics.map((t) => (
             <li key={t} className="flex gap-3 text-text/85 leading-relaxed">
-              <span className="text-gold mt-1">—</span> <span>{t}</span>
+              <span className="text-gold-text mt-1">—</span> <span>{t}</span>
             </li>
           ))}
         </ul>

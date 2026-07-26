@@ -23,7 +23,7 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
       <div className="relative mx-auto max-w-6xl px-6 py-16">
         {!released && book.releaseDate && (
           <div className="mb-12 pb-10 border-b border-gold/15 text-center">
-            <p className="eyebrow text-gold mb-6">The Code Will Be Revealed In</p>
+            <p className="eyebrow text-gold-text mb-6">The Code Will Be Revealed In</p>
             <ReleaseCountdown releaseDate={book.releaseDate} />
           </div>
         )}
@@ -58,7 +58,7 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
       <div className="hairline-solid w-full opacity-20" />
 
       <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
-        <p className="eyebrow text-gold mb-3">Enter the Mystery</p>
+        <p className="eyebrow text-gold-text mb-3">Enter the Mystery</p>
         <h3 className="font-display text-2xl md:text-3xl mb-5">A world built to be uncovered, one clue at a time.</h3>
         <p className="text-ivory/80 leading-relaxed max-w-2xl mx-auto">{book.synopsis}</p>
       </div>
@@ -67,7 +67,7 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
       <div className="hairline-solid w-full opacity-20" />
 
       <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
-        <p className="eyebrow text-gold mb-3">Reader Circle</p>
+        <p className="eyebrow text-gold-text mb-3">Reader Circle</p>
         <h3 className="font-display text-2xl md:text-3xl mb-2">Get Release Updates</h3>
         <p className="text-ivory/70 text-sm mb-7">Be the first to know the moment The Shadow Code is available.</p>
         <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel="Get Release Updates" />

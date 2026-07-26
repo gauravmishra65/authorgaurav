@@ -41,7 +41,7 @@ export default function Events() {
 
         {!loading && !error && (
           <>
-            <p className="eyebrow text-gold mb-6 text-center">Upcoming</p>
+            <p className="eyebrow text-gold-text mb-6 text-center">Upcoming</p>
             {upcoming.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2 mb-16">
                 {upcoming.map((event) => <EventCard key={event.id} event={event} />)}
@@ -57,7 +57,7 @@ export default function Events() {
             {past.length > 0 && (
               <>
                 <Divider className="!my-10" />
-                <p className="eyebrow text-gold mb-6 text-center">Past Events</p>
+                <p className="eyebrow text-gold-text mb-6 text-center">Past Events</p>
                 <div className="grid gap-6 md:grid-cols-2">
                   {past.map((event) => <EventCard key={event.id} event={event} isPast />)}
                 </div>
@@ -68,8 +68,8 @@ export default function Events() {
       </section>
 
       <EmailStrip
-        heading="Join the Reader Circle"
-        subheading="Be the first to hear about book launches, events, and appearances."
+        heading="Never miss an appearance"
+        subheading="Get notified when a new event, launch, or book-club visit is announced."
       />
     </>
   );

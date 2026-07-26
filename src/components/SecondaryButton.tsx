@@ -14,7 +14,9 @@ type SecondaryButtonProps =
   | (BaseProps & { href: string; to?: never; external?: boolean })
   | (BaseProps & { to?: never; href?: never; type?: 'button' | 'submit'; disabled?: boolean });
 
-const sizeClasses = { sm: 'px-5 py-2.5 text-2xs', md: 'px-6 py-3 text-sm' };
+// Font-size is controlled by .btn-caps (kept at one consistent readable
+// size across sm/md) — this only varies padding between the two sizes.
+const sizeClasses = { sm: 'px-5 py-2.5', md: 'px-6 py-3' };
 
 /** The site's gold-outline secondary CTA, formalized to match PrimaryButton's API. */
 export default function SecondaryButton(props: SecondaryButtonProps) {

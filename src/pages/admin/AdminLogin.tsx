@@ -19,7 +19,7 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-ink px-6">
       <div className="w-full max-w-sm">
-        <p className="font-display text-2xl text-ivory text-center mb-8">Gaurav<span className="text-gold">Mishra</span> Admin</p>
+        <p className="font-display text-2xl text-ivory text-center mb-8">Gaurav<span className="text-gold-text">Mishra</span> Admin</p>
         <form onSubmit={handleSubmit} className="rounded-md border border-gold/20 bg-ink-soft p-8 space-y-5">
           <div>
             <label htmlFor="admin-email" className="label-caps text-ivory/70 block mb-2">Email</label>

@@ -69,13 +69,13 @@ export default function Books() {
       {featured && (
         <section className="bg-cream">
           <div className="mx-auto max-w-5xl px-6 py-14">
-            <p className="eyebrow text-gold mb-6 text-center">Featured Release</p>
+            <p className="eyebrow text-gold-text mb-6 text-center">Featured Release</p>
             <div className="grid items-center gap-8 md:grid-cols-[180px_1fr]">
               <div className="flex justify-center">
                 <BookCover {...featured} size="lg" href={`/books/${featured.slug}`} />
               </div>
               <div>
-                <Link to={`/books/${featured.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold transition-colors">{featured.title}</Link>
+                <Link to={`/books/${featured.slug}`} className="font-display text-2xl md:text-3xl text-ink hover:text-gold-text transition-colors">{featured.title}</Link>
                 <p className="font-body italic text-muted mt-1 mb-4">{featured.tagline}</p>
                 <Link to={`/books/${featured.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs">
                   Explore the Book <ArrowRight size={14} />
@@ -134,7 +134,7 @@ export default function Books() {
           Get in Touch <ArrowRight size={15} />
         </Link>
         <p className="mt-6">
-          <Link to="/testimonials" className="label-caps text-gold hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>
+          <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>
         </p>
       </section>
     </>

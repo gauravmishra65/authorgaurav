@@ -126,7 +126,7 @@ export default function Home() {
               onClick={() => trackEvent('homepage_cta_click', { label: `genre-card:${card.category}` })}
               className="group rounded-md border border-gold/20 bg-ivory p-8 text-center shadow-luxury transition-all hover:-translate-y-1 hover:border-gold/50"
             >
-              <p className="font-display text-xl text-ink mb-3 group-hover:text-gold transition-colors">{card.label}</p>
+              <p className="font-display text-xl text-ink mb-3 group-hover:text-gold-text transition-colors">{card.label}</p>
               <p className="text-sm text-muted leading-relaxed">{card.description}</p>
             </Link>
           ))}
@@ -136,7 +136,7 @@ export default function Home() {
       {/* THE BOOKSHELF */}
       <section className="pt-20">
         <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="eyebrow text-gold mb-3">The Bookshelf</p>
+          <p className="eyebrow text-gold-text mb-3">The Bookshelf</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Explore every world</h2>
           <Divider className="!my-8" />
 

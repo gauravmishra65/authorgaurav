@@ -32,7 +32,7 @@ export default function AdminMessages() {
                   <p className="text-2xs text-muted">{new Date(m.created_at).toLocaleString()}{m.join_circle ? ' · Wants reader circle' : ''}</p>
                 </div>
                 {m.status === 'new' && (
-                  <button onClick={() => markRead(m.id)} className="label-caps text-2xs text-gold hover:text-ink transition-colors">Mark read</button>
+                  <button onClick={() => markRead(m.id)} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors">Mark read</button>
                 )}
               </div>
               <p className="text-text/85 leading-relaxed whitespace-pre-wrap">{m.message}</p>

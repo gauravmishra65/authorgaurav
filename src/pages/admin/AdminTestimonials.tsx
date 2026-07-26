@@ -67,7 +67,7 @@ export default function AdminTestimonials() {
                 <p className="text-2xs text-muted">{t.name}{t.source ? ` · ${t.source}` : ''} — {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}</p>
               </div>
               <div className="flex gap-2 flex-shrink-0">
-                <button onClick={() => setEditing(t)} className="p-2 text-muted hover:text-gold"><Pencil size={16} /></button>
+                <button onClick={() => setEditing(t)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(t.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
             </div>

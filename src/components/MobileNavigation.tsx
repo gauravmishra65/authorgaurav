@@ -78,13 +78,13 @@ export default function MobileNavigation({ open, onClose, links, toggleButtonRef
     >
       <ul className="flex flex-col gap-1 px-6 pb-5 pt-1 bg-charcoal/98 backdrop-blur-md">
         <li className="flex justify-end pb-1">
-          <button onClick={closeAndReturnFocus} className="label-caps inline-flex items-center gap-1.5 text-ivory/70 hover:text-gold-lt transition-colors py-2.5 px-1 -mr-1" aria-label="Close menu">
+          <button onClick={closeAndReturnFocus} className="nav-caps inline-flex items-center gap-1.5 text-ivory/70 hover:text-gold-lt transition-colors py-2.5 px-1 -mr-1" aria-label="Close menu">
             <X size={18} /> Close
           </button>
         </li>
         {links.map((l) => (
           <li key={l.to}>
-            <Link to={l.to} className={`label-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
+            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
               {l.label}
             </Link>
           </li>

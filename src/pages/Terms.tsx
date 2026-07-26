@@ -54,7 +54,7 @@ export default function Terms() {
       <h2 className="font-display text-xl text-ink">Contact</h2>
       <p>
         Questions about these terms can be sent to{' '}
-        <a href="mailto:hello@writetogetherhub.com" className="text-gold hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
+        <a href="mailto:hello@writetogetherhub.com" className="text-gold-text hover:text-ink transition-colors">hello@writetogetherhub.com</a>.
       </p>
     </LegalPageLayout>
   );
