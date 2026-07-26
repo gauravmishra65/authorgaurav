@@ -11,8 +11,6 @@ import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
 const categoryOptions = ['All', ...bookCategoryOptions] as const;
-const languageOptions = ['All', 'English', 'Hindi'] as const;
-const statusOptions = ['All', 'Published', 'Upcoming'] as const;
 
 const categoryToTag: Record<(typeof categoryOptions)[number], string | null> = {
   All: null, ...bookCategoryToTag,
@@ -25,8 +23,9 @@ export default function Books() {
   const initialCategory = categoryOptions.includes(categoryParam as never) ? (categoryParam as (typeof categoryOptions)[number]) : 'All';
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<(typeof categoryOptions)[number]>(initialCategory);
-  const [language, setLanguage] = useState<(typeof languageOptions)[number]>('All');
-  const [status, setStatus] = useState<(typeof statusOptions)[number]>(searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All');
+  // Not a pill toggle (no second filter row) — just honors the Nav "Upcoming
+  // Books" dropdown link (`/books?status=Upcoming`) on initial load.
+  const status = searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All';
 
   const filtered = useMemo(() => {
     if (!books) return [];
@@ -34,12 +33,10 @@ export default function Books() {
     return books.filter((b) => {
       if (query && !b.title.toLowerCase().includes(query.toLowerCase())) return false;
       if (tag && !(b.categories?.includes(tag) ?? b.genre === tag)) return false;
-      if (language !== 'All' && b.language !== language) return false;
-      if (status === 'Published' && b.status !== 'published') return false;
       if (status === 'Upcoming' && b.status === 'published') return false;
       return true;
     });
-  }, [books, query, category, language, status]);
+  }, [books, query, category, status]);
 
   return (
     <>
@@ -67,10 +64,6 @@ export default function Books() {
           <div className="flex flex-col items-center gap-6 mb-12">
             <BookSearch value={query} onChange={setQuery} />
             <BookFilters label="Filter by genre" options={categoryOptions} value={category} onChange={setCategory} />
-            <div className="flex flex-wrap justify-center gap-4">
-              <BookFilters label="Filter by language" options={languageOptions} value={language} onChange={setLanguage} />
-              <BookFilters label="Filter by status" options={statusOptions} value={status} onChange={setStatus} />
-            </div>
           </div>
 
           <BookGrid books={filtered} />
