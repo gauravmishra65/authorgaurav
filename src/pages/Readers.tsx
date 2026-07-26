@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Download, MessageSquareQuote } from 'lucide-react';
 import Seo from '../components/Seo';
 import Section from '../components/Section';
@@ -32,11 +33,32 @@ export default function Readers() {
       />
 
       <Section tone="cream">
-        <SectionHeading eyebrow="Read Before You Buy" title="Sample Chapters" />
-        <EmptyState
-          heading="No sample chapters available yet"
-          message="Sample chapters will appear here as they're released for individual books. Join the Reader Circle to be notified."
-        />
+        <SectionHeading eyebrow="Read Before You Buy" title="Sample Chapters & Summaries" />
+        {books && books.length > 0 ? (
+          <div className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {books.map((b) => (
+              <div key={b.id} className="flex flex-col rounded-md border border-gold/20 bg-ivory p-6 text-center">
+                <p className="font-display text-lg text-ink mb-2">{b.title}</p>
+                <p className="flex-1 text-sm text-muted leading-relaxed line-clamp-5 mb-4">{b.synopsis}</p>
+                <div className="flex flex-col items-center gap-2">
+                  {b.sampleUrl && (
+                    <SecondaryButton href={b.sampleUrl} external size="sm" onClick={() => trackEvent('sample_download', { book: b.slug })}>
+                      <Download size={13} /> Read a Sample
+                    </SecondaryButton>
+                  )}
+                  <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2">
+                    View Book
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            heading="No sample chapters available yet"
+            message="Sample chapters will appear here as they're released for individual books. Join the Reader Circle to be notified."
+          />
+        )}
       </Section>
 
       <Section>

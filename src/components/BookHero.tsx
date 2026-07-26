@@ -77,7 +77,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
             <BookPurchasePanel book={book} className="mb-4" buttonClassName={purchaseButtonClassName} />
 
             <div className="flex flex-wrap items-center gap-4 mb-4">
-              <BookSample sampleUrl={book.sampleUrl} />
+              <BookSample sampleUrl={book.sampleUrl} book={book.slug} />
               {/* TODO_CONTENT: no book has a trailer_url yet */}
               {book.trailerUrl && (
                 <a href={book.trailerUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('trailer_play', { book: book.slug })} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent)] hover:text-[var(--book-secondary-accent)] transition-colors">

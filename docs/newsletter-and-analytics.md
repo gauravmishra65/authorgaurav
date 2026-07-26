@@ -127,7 +127,7 @@ before enabling it.
 | `book_view` | A book detail page mounts | `book` (slug) |
 | `retailer_click` | Any real (non-`#`) buy-link button is clicked | `retailer` (label) |
 | `amazon_click` | Same as above, additionally, when the link's hostname contains `amazon.` | `retailer` |
-| `sample_download` | "Read a Sample" clicked (currently never fires — no book has a real sample yet) | — |
+| `sample_download` | "Read a Sample" clicked on a book page or the Readers page (fires only once a book has a real `sampleUrl` set in /admin) | `book` (slug) |
 | `trailer_play` | "Watch Trailer" clicked (currently never fires — no book has a real trailer yet) | `book` (slug) |
 | `newsletter_signup` | A newsletter subscription is confirmed successful (not duplicate, not error) | `source`, `interest` |
 | `contact_submit` | The contact form is confirmed successfully sent (not honeypot, not error) | `enquiryType` |

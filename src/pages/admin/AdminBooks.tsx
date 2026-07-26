@@ -139,7 +139,7 @@ export default function AdminBooks() {
               </Field>
             </div>
 
-            <Field label="Synopsis"><textarea rows={4} value={editing.synopsis ?? ''} onChange={(e) => setEditing({ ...editing, synopsis: e.target.value })} className="input" /></Field>
+            <Field label="Synopsis (shown as the book summary on the Readers page)"><textarea rows={4} value={editing.synopsis ?? ''} onChange={(e) => setEditing({ ...editing, synopsis: e.target.value })} className="input" /></Field>
 
             <div className="grid grid-cols-2 gap-4">
               <Field label="Cover image path"><input value={editing.image_src ?? ''} onChange={(e) => setEditing({ ...editing, image_src: e.target.value })} className="input" placeholder="/images/book-covers/example.webp" /></Field>
@@ -173,7 +173,7 @@ export default function AdminBooks() {
               <Field label="Themes (comma-separated)">
                 <input value={tagsToText(editing.themes)} onChange={(e) => setEditing({ ...editing, themes: textToTags(e.target.value) })} className="input" />
               </Field>
-              <Field label="Sample URL"><input value={editing.sample_url ?? ''} onChange={(e) => setEditing({ ...editing, sample_url: e.target.value || null })} className="input" /></Field>
+              <Field label="Sample chapter URL (shown on the book page and Readers page)"><input value={editing.sample_url ?? ''} onChange={(e) => setEditing({ ...editing, sample_url: e.target.value || null })} className="input" placeholder="Link to a PDF, Google Doc, or hosted excerpt" /></Field>
               <Field label="Trailer URL"><input value={editing.trailer_url ?? ''} onChange={(e) => setEditing({ ...editing, trailer_url: e.target.value || null })} className="input" /></Field>
               <Field label="SEO title"><input value={editing.seo_title ?? ''} onChange={(e) => setEditing({ ...editing, seo_title: e.target.value || null })} className="input" /></Field>
               <Field label="SEO description"><input value={editing.seo_description ?? ''} onChange={(e) => setEditing({ ...editing, seo_description: e.target.value || null })} className="input" /></Field>
