@@ -53,6 +53,7 @@ export default function Home() {
       : books.filter((b) => b.categories?.includes(bookCategoryToTag[filter as keyof typeof bookCategoryToTag]));
 
   const shadowCode = books.find((b) => b.slug === 'the-shadow-code') ?? books[0];
+  const shadowCodeHindi = books.find((b) => b.slug === 'shadow-code-hindi');
 
   return (
     <>
@@ -118,7 +119,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED RELEASE */}
-      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} />}
+      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
 
       {/* EXPLORE BY GENRE */}
       <Section tone="cream">

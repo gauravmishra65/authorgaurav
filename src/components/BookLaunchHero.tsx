@@ -9,9 +9,13 @@ import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 
 interface BookLaunchHeroProps {
   book: Book;
+  /** A same-story edition in another language (e.g. the Hindi Shadow
+   * Code) — shown alongside the primary cover so readers can see both
+   * are available. Omit if there's no translation to show yet. */
+  translationEdition?: Book;
 }
 
-export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
+export default function BookLaunchHero({ book, translationEdition }: BookLaunchHeroProps) {
   const released = book.releaseDate ? isReleased(book.releaseDate) : false;
 
   return (
@@ -49,8 +53,14 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
               )}
             </div>
           </div>
-          <div className="flex justify-center fade-up">
+          <div className="flex justify-center items-end gap-6 fade-up">
             <BookCover {...book} size="lg" href={`/books/${book.slug}`} />
+            {translationEdition && (
+              <div className="flex flex-col items-center gap-2">
+                <BookCover {...translationEdition} size="md" href={`/books/${translationEdition.slug}`} />
+                <span className="label-caps text-2xs text-gold-lt/80">Hindi Edition</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -4,7 +4,9 @@ export interface Announcement {
   ctaHref: string;
 }
 
-// Set to an Announcement object to show the site-wide announcement bar.
-// Shadow Code (English and Hindi) are both live now, so the pre-release
-// countdown announcement is retired.
-export const activeAnnouncement: Announcement | null = null;
+// Set to null to hide the site-wide announcement bar.
+export const activeAnnouncement: Announcement | null = {
+  message: 'The Shadow Code available in Hindi & English - a new thriller from Gaurav Mishra.',
+  ctaLabel: 'Discover the Book',
+  ctaHref: '/books/the-shadow-code',
+};
