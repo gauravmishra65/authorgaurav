@@ -23,6 +23,19 @@ export default function Books() {
   const initialCategory = categoryOptions.includes(categoryParam as never) ? (categoryParam as (typeof categoryOptions)[number]) : 'All';
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<(typeof categoryOptions)[number]>(initialCategory);
+
+  // Clicking a different Nav "Books" dropdown link (e.g. /books?category=Romance
+  // after already being on /books?category=Thriller) changes the URL but
+  // doesn't remount this component, so the useState initializer above only
+  // ever runs once — without this, the filter stays stuck on whichever
+  // category was selected first. Re-sync during render (React's recommended
+  // way to adjust state from a changed prop) whenever the URL's own category
+  // actually changes, rather than a useEffect + setState.
+  const [prevCategoryParam, setPrevCategoryParam] = useState(categoryParam);
+  if (categoryParam !== prevCategoryParam) {
+    setPrevCategoryParam(categoryParam);
+    setCategory(initialCategory);
+  }
   // Not a pill toggle (no second filter row) — just honors the Nav "Upcoming
   // Books" dropdown link (`/books?status=Upcoming`) on initial load.
   const status = searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All';
