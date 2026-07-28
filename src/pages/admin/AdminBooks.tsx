@@ -14,6 +14,16 @@ const emptyBook: Partial<AdminBookRow> = {
   reading_audience: null, seo_title: null, seo_description: null,
 };
 
+// A book's slug becomes its /books/:slug URL — it must stay lowercase
+// ASCII with hyphens only. Typing the (often non-Latin) title straight into
+// this field has happened more than once, producing an unroutable slug
+// silently accepted by the form.
+const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+function slugError(slug: string | null | undefined): string | null {
+  if (!slug) return 'Slug is required.';
+  return SLUG_RE.test(slug) ? null : 'Slug must be lowercase letters, numbers, and hyphens only (e.g. "shadow-code-hindi") — not the title itself.';
+}
+
 /** Comma-separated tag list <-> text[] column, for the admin's plain-input style. */
 function tagsToText(tags: string[] | null | undefined): string {
   return (tags ?? []).join(', ');
@@ -52,6 +62,11 @@ export default function AdminBooks() {
 
   const handleSave = async () => {
     if (!editing) return;
+    const slugProblem = slugError(editing.slug);
+    if (slugProblem) {
+      setError(slugProblem);
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
@@ -116,7 +131,10 @@ export default function AdminBooks() {
             <h2 className="font-display text-xl text-ink">{editing.id ? 'Edit Book' : 'Add Book'}</h2>
 
             <div className="grid grid-cols-2 gap-4">
-              <Field label="Slug"><input value={editing.slug ?? ''} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} className="input" /></Field>
+              <Field label="Slug">
+                <input value={editing.slug ?? ''} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} className="input" placeholder="e.g. shadow-code-hindi" />
+                {editing.slug && slugError(editing.slug) && <p className="text-2xs text-rose mt-1">{slugError(editing.slug)}</p>}
+              </Field>
               <Field label="Title"><input value={editing.title ?? ''} onChange={(e) => setEditing({ ...editing, title: e.target.value })} className="input" /></Field>
               <Field label="Author"><input value={editing.author ?? ''} onChange={(e) => setEditing({ ...editing, author: e.target.value })} className="input" /></Field>
               <Field label="Tagline"><input value={editing.tagline ?? ''} onChange={(e) => setEditing({ ...editing, tagline: e.target.value })} className="input" /></Field>
