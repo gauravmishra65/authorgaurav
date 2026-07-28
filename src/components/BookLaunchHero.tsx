@@ -68,9 +68,11 @@ export default function BookLaunchHero({ book }: BookLaunchHeroProps) {
 
       <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
         <p className="eyebrow text-gold-text mb-3">Reader Circle</p>
-        <h3 className="font-display text-2xl md:text-3xl mb-2">Get Release Updates</h3>
-        <p className="text-ivory/70 text-sm mb-7">Be the first to know the moment The Shadow Code is available.</p>
-        <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel="Get Release Updates" />
+        <h3 className="font-display text-2xl md:text-3xl mb-2">{released ? 'Join the Reader Circle' : 'Get Release Updates'}</h3>
+        <p className="text-ivory/70 text-sm mb-7">
+          {released ? `${book.title} is out now — join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
+        </p>
+        <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel={released ? 'Join the Reader Circle' : 'Get Release Updates'} />
       </div>
 
       <div className="hairline-solid w-full opacity-20" />

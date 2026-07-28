@@ -24,7 +24,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
           <dd className="text-ivory">
             {book.paperbackUrl ? (
               <a href={book.paperbackUrl} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">Buy the Paperback</a>
-            ) : book.releaseDate ? (
+            ) : book.releaseDate && !released ? (
               `Available ${formatReleaseDate(book.releaseDate)}`
             ) : (
               'Coming Soon'
@@ -35,9 +35,9 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
           <dt className="label-caps text-2xs text-gold-lt/80 mb-1">Kindle</dt>
           <dd className="text-ivory">
             {book.kindleUrl ? (
-              <a href={book.kindleUrl} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">Pre-order on Kindle</a>
+              <a href={book.kindleUrl} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">{released ? 'Buy on Kindle' : 'Pre-order on Kindle'}</a>
             ) : (
-              'Pre-order Coming Soon'
+              'Coming Soon'
             )}
           </dd>
         </div>
