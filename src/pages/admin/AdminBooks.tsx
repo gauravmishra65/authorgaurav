@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import { fetchAdminBooks, saveBook, deleteBook, type AdminBookRow } from '../../lib/adminQueries';
+import { bookCategoryOptions, bookCategoryToTag } from '../../data/books';
 
 const emptyBook: Partial<AdminBookRow> = {
   slug: '', title: '', title_html: null, subtitle: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
@@ -180,8 +181,28 @@ export default function AdminBooks() {
             <p className="label-caps text-muted pt-2 border-t border-gold/15">Additional Details (optional)</p>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Subtitle"><input value={editing.subtitle ?? ''} onChange={(e) => setEditing({ ...editing, subtitle: e.target.value || null })} className="input" /></Field>
-              <Field label="Categories (comma-separated, e.g. Thriller)">
-                <input value={tagsToText(editing.categories)} onChange={(e) => setEditing({ ...editing, categories: textToTags(e.target.value) })} className="input" />
+              <Field label="Categories">
+                <div className="flex flex-wrap gap-3 pt-1">
+                  {bookCategoryOptions.map((label) => {
+                    const tag = bookCategoryToTag[label];
+                    const checked = editing.categories?.includes(tag) ?? false;
+                    return (
+                      <label key={label} className="inline-flex items-center gap-1.5 text-sm text-ink cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) => {
+                            const current = editing.categories ?? [];
+                            const next = e.target.checked ? [...current, tag] : current.filter((t) => t !== tag);
+                            setEditing({ ...editing, categories: next.length > 0 ? next : null });
+                          }}
+                          className="h-3.5 w-3.5 accent-gold"
+                        />
+                        {label}
+                      </label>
+                    );
+                  })}
+                </div>
               </Field>
               <Field label="Original language (if translated)"><input value={editing.original_language ?? ''} onChange={(e) => setEditing({ ...editing, original_language: e.target.value || null })} className="input" /></Field>
               <Field label="Reading audience"><input value={editing.reading_audience ?? ''} onChange={(e) => setEditing({ ...editing, reading_audience: e.target.value || null })} className="input" /></Field>
