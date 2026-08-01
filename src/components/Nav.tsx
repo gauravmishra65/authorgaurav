@@ -30,6 +30,7 @@ const booksMenuLinks = [
   { label: 'All Books', to: '/books' },
   { label: 'Thrillers', to: '/books?category=Thriller' },
   { label: 'Romance and Contemporary Fiction', to: '/books?category=Romance' },
+  { label: 'Fiction', to: '/books?category=Fiction' },
   { label: 'Spiritual and Devotional Books', to: '/books?category=Spiritual' },
   { label: 'Upcoming Books', to: '/books?status=Upcoming' },
 ];
