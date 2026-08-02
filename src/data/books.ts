@@ -43,6 +43,10 @@ export interface Book {
   releaseDate?: string;
   kindleUrl?: string;
   paperbackUrl?: string;
+  /** Real Goodreads book-page URL, if one exists — a review/shelving link,
+   * not a retailer, so it's rendered separately from getBuyOptions() rather
+   * than folded into the buy-links list. */
+  goodreadsUrl?: string;
   /** Gives the book a "New Release" ribbon and extra prominence in listings. */
   featured?: boolean;
   // TODO_CONTENT: all fields below are part of the Phase 4 data model but

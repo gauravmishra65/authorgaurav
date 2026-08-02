@@ -29,11 +29,14 @@ export default function BookCard({ book }: BookCardProps) {
         {book.title}
       </Link>
       <p className="text-sm text-muted leading-relaxed line-clamp-2">{book.tagline}</p>
-      {buyOptions.length > 0 && (
+      {(buyOptions.length > 0 || book.goodreadsUrl) && (
         <div className="flex flex-wrap justify-center gap-1.5">
           {buyOptions.map((opt) => (
             <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={book.title} />
           ))}
+          {book.goodreadsUrl && (
+            <RetailerButton label="Goodreads" href={book.goodreadsUrl} variant="outline" bookTitle={book.title} />
+          )}
         </div>
       )}
       <Link to={`/books/${book.slug}`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2 mt-1">

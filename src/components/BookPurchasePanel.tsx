@@ -20,11 +20,14 @@ export default function BookPurchasePanel({ book, variant = 'solid', className =
 
   return (
     <div className={className}>
-      {buyOptions.length > 0 && (
+      {(buyOptions.length > 0 || book.goodreadsUrl) && (
         <div className="flex flex-wrap gap-3">
           {buyOptions.map((opt) => (
             <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant={variant} className={buttonClassName} bookTitle={book.title} />
           ))}
+          {book.goodreadsUrl && (
+            <RetailerButton label="Goodreads" href={book.goodreadsUrl} variant={variant} className={buttonClassName} bookTitle={book.title} />
+          )}
         </div>
       )}
       {/* TODO_CONTENT: `formats` is empty for every book today — nothing renders until real formats are entered in /admin. */}
