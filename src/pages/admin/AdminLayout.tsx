@@ -10,6 +10,7 @@ const links = [
   { label: 'Blog', to: '/admin/blog' },
   { label: 'News', to: '/admin/news' },
   { label: 'Events', to: '/admin/events' },
+  { label: 'Reader Photos', to: '/admin/reader-photos' },
   { label: 'Newsletter Subscribers', to: '/admin/subscribers' },
   { label: 'Contact Messages', to: '/admin/messages' },
 ];

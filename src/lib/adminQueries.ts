@@ -229,6 +229,34 @@ export async function deleteEvent(id: string): Promise<void> {
   if (error) throw error;
 }
 
+export interface AdminReaderPhotoRow {
+  id: string;
+  image_src: string;
+  reader_name: string | null;
+  caption: string | null;
+  book_id: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export async function fetchAdminReaderPhotos(): Promise<AdminReaderPhotoRow[]> {
+  const { data, error } = await supabase.from('authorgaurav_reader_photos').select('*').order('sort_order');
+  if (error) throw error;
+  return data as AdminReaderPhotoRow[];
+}
+
+export async function saveReaderPhoto(row: Partial<AdminReaderPhotoRow>): Promise<void> {
+  const { error } = row.id
+    ? await supabase.from('authorgaurav_reader_photos').update(row).eq('id', row.id)
+    : await supabase.from('authorgaurav_reader_photos').insert(row);
+  if (error) throw error;
+}
+
+export async function deleteReaderPhoto(id: string): Promise<void> {
+  const { error } = await supabase.from('authorgaurav_reader_photos').delete().eq('id', id);
+  if (error) throw error;
+}
+
 export interface AdminSubscriberRow {
   id: string;
   email: string;

@@ -3,6 +3,7 @@ import type { Book, Testimonial } from '../data/books';
 import type { Post } from '../data/posts';
 import type { NewsItem } from '../data/news';
 import type { AuthorEvent } from '../data/events';
+import type { ReaderPhoto } from '../data/readerPhotos';
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -245,6 +246,37 @@ interface EventRow {
   event_type: AuthorEvent['eventType'];
   registration_url: string | null;
   featured: boolean;
+}
+
+interface ReaderPhotoRow {
+  id: string;
+  image_src: string;
+  reader_name: string | null;
+  caption: string | null;
+  sort_order: number;
+  authorgaurav_books: { title: string }[] | { title: string } | null;
+}
+
+/** Fan/reader-submitted photos with the book, for the Events page gallery — sorted by admin-set sort_order. */
+export async function fetchReaderPhotos(): Promise<ReaderPhoto[]> {
+  const { data, error } = await supabase
+    .from('authorgaurav_reader_photos')
+    .select('id, image_src, reader_name, caption, sort_order, authorgaurav_books(title)')
+    .order('sort_order');
+
+  if (error) throw error;
+  return ((data ?? []) as ReaderPhotoRow[]).map((row) => {
+    const bookTitle = Array.isArray(row.authorgaurav_books)
+      ? row.authorgaurav_books[0]?.title
+      : row.authorgaurav_books?.title;
+    return {
+      id: row.id,
+      imageSrc: row.image_src,
+      readerName: row.reader_name ?? undefined,
+      caption: row.caption ?? undefined,
+      bookTitle: bookTitle ?? undefined,
+    };
+  });
 }
 
 export async function fetchEvents(): Promise<AuthorEvent[]> {

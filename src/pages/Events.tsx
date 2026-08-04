@@ -4,11 +4,12 @@ import EmptyState from '../components/EmptyState';
 import EmailStrip from '../components/EmailStrip';
 import Divider from '../components/Divider';
 import { buildEventStructuredData } from '../components/EventStructuredData';
-import { fetchEvents } from '../lib/queries';
+import { fetchEvents, fetchReaderPhotos } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function Events() {
   const { data: events, loading, error } = useSupabaseData(fetchEvents, []);
+  const { data: readerPhotos } = useSupabaseData(fetchReaderPhotos, []);
 
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = events?.filter((e) => e.eventDate >= today) ?? [];
@@ -66,6 +67,28 @@ export default function Events() {
           </>
         )}
       </section>
+
+      {readerPhotos && readerPhotos.length > 0 && (
+        <section className="mx-auto max-w-5xl px-6 py-16 border-t border-gold/10">
+          <p className="eyebrow text-gold-text mb-2 text-center">Reader Photos</p>
+          <h2 className="font-display text-2xl md:text-3xl text-ink text-center mb-10">Readers with the Book</h2>
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {readerPhotos.map((photo) => (
+              <figure key={photo.id} className="rounded-md border border-gold/15 bg-ivory overflow-hidden hover:border-gold/40 transition-colors">
+                <img src={photo.imageSrc} alt={photo.caption || photo.readerName || 'Reader with the book'} className="w-full aspect-square object-cover" loading="lazy" />
+                {(photo.caption || photo.readerName || photo.bookTitle) && (
+                  <figcaption className="p-4">
+                    {photo.caption && <p className="text-sm text-ink leading-relaxed">{photo.caption}</p>}
+                    <p className="text-2xs text-muted mt-1">
+                      {photo.readerName}{photo.readerName && photo.bookTitle ? ' · ' : ''}{photo.bookTitle}
+                    </p>
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <EmailStrip
         heading="Never miss an appearance"
