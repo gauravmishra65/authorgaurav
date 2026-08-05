@@ -64,7 +64,7 @@ export default function AdminTestimonials() {
             <div key={t.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0 gap-4">
               <div className="min-w-0">
                 <p className="text-ink italic truncate">"{t.quote}"</p>
-                <p className="text-2xs text-muted">{t.name}{t.source ? ` · ${t.source}` : ''} — {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}</p>
+                <p className="text-2xs text-muted">{t.name}{t.source ? ` · ${t.source}` : ''} · {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}</p>
               </div>
               <div className="flex gap-2 flex-shrink-0">
                 <button onClick={() => setEditing(t)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>

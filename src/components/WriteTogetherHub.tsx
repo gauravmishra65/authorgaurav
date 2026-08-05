@@ -10,7 +10,7 @@ export default function WriteTogetherHub() {
           <span className="inline-block rounded-full border border-gold/40 px-4 py-1.5 label-caps text-gold-lt">A Home for Writers</span>
           <h2 className="font-display text-3xl md:text-5xl mt-5 mb-4">WriteTogetherHub</h2>
           <p className="max-w-2xl mx-auto text-ivory/80 leading-relaxed">
-            I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out — guidance, community, and a place to grow their craft together.
+            I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out: guidance, community, and a place to grow their craft together.
           </p>
           <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-section' })} className="btn-caps btn-gold mt-7 inline-block rounded-sm px-6 py-3">
             Visit WriteTogetherHub

@@ -18,8 +18,8 @@ export default function Readers() {
   return (
     <>
       <Seo
-        title="Readers — Gaurav Mishra"
-        description="A hub for readers of Gaurav Mishra's books — the Reader Circle newsletter, reading guides, and review links."
+        title="Readers | Gaurav Mishra"
+        description="A hub for readers of Gaurav Mishra's books: the Reader Circle newsletter, reading guides, and review links."
         path="/readers"
       />
 
@@ -66,7 +66,7 @@ export default function Readers() {
         <div className="max-w-2xl mx-auto grid gap-6 sm:grid-cols-2">
           <div className="rounded-md border border-gold/20 bg-cream p-6 text-center">
             <p className="font-display text-lg text-ink mb-2">Offbeat Love Discussion Guide</p>
-            <p className="text-sm text-muted leading-relaxed mb-5">A worked example of reading-group questions — more guides are added on request via Book Clubs.</p>
+            <p className="text-sm text-muted leading-relaxed mb-5">A worked example of reading-group questions. More guides are added on request via Book Clubs.</p>
             <SecondaryButton href="/resources/book-club-questions-offbeat-love.txt" size="sm" onClick={() => trackEvent('discussion_guide_download', { book: 'offbeat-love' })}>
               <Download size={13} /> Download
             </SecondaryButton>

@@ -27,24 +27,24 @@ import { trackEvent } from '../lib/analytics';
 import { offbeatLoveBookClubQuestions } from '../data/bookClubQuestions';
 
 const shadowCodeWhyReaders = [
-  'Suspense built on a real anxiety — financial data, surveillance, and who’s really watching whom.',
+  'Suspense built on a real anxiety: financial data, surveillance, and who’s really watching whom.',
   'A grounded techno-thriller pace, not over-the-top action.',
   'A Mumbai setting that grounds global finance in a specific, vivid place.',
-  'Ambiguity built into the premise — the line between watcher and watched blurs, keeping the moral center in question.',
+  'Ambiguity built into the premise. The line between watcher and watched blurs, keeping the moral center in question.',
 ];
 
 const offbeatLoveWhyReaders = [
-  'A love story grounded in real tension — family expectation versus personal choice, not manufactured drama.',
+  'A love story grounded in real tension: family expectation versus personal choice, not manufactured drama.',
   'Music runs through the relationship as its own emotional thread.',
   'A Mumbai setting that feels lived-in and specific, not a generic romantic backdrop.',
-  'A quieter, more mature kind of romance — about the courage to choose your own life, not just falling in love.',
+  'A quieter, more mature kind of romance, about the courage to choose your own life, not just falling in love.',
 ];
 
 const lalitaFeatures = [
   'सरल और सहज हिंदी भाषा में अर्थ',
   'हर नाम का भावार्थ, न कि केवल शब्दार्थ',
   'दैनिक जीवन से जुड़े व्यावहारिक सुझाव',
-  'श्रद्धा और समझ — दोनों के लिए उपयुक्त',
+  'श्रद्धा और समझ, दोनों के लिए उपयुक्त',
 ];
 
 const lalitaFaq = [
@@ -93,7 +93,7 @@ export default function BookDetail() {
   return (
     <BookThemeProvider theme={theme}>
       <Seo
-        title={book.seoTitle || `${book.title} — Gaurav Mishra`}
+        title={book.seoTitle || `${book.title} | Gaurav Mishra`}
         description={book.seoDescription || book.tagline || book.synopsis.slice(0, 155)}
         path={`/books/${book.slug}`}
         image={book.imageSrc}
@@ -346,7 +346,7 @@ export default function BookDetail() {
         <Section tone="light">
           <p className="eyebrow text-gold-text mb-4 text-center">Technology, Finance and Crime Context</p>
           <div className="prose-literary max-w-2xl mx-auto text-center">
-            <p>Shadow Code sits at the intersection of financial-crime fiction and the techno-thriller — whistleblowers, encrypted trails, and institutional power in collision. It's written for readers who enjoy suspense grounded in how modern financial and digital systems actually work, with no technical background required.</p>
+            <p>Shadow Code sits at the intersection of financial-crime fiction and the techno-thriller: whistleblowers, encrypted trails, and institutional power in collision. It's written for readers who enjoy suspense grounded in how modern financial and digital systems actually work, with no technical background required.</p>
           </div>
         </Section>
       )}
@@ -372,7 +372,7 @@ export default function BookDetail() {
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Setting &amp; Journey</p>
             <p className="text-[var(--book-text)]/85 leading-relaxed text-lg mb-6">
-              The story moves between two very different worlds — shaped by different families, different expectations, and different ideas of what love is allowed to look like — and finds, in Mumbai, the one place they meet.
+              The story moves between two very different worlds, shaped by different families, different expectations, and different ideas of what love is allowed to look like, and finds, in Mumbai, the one place they meet.
             </p>
             {book.bookWebsite && (
               <a

@@ -75,7 +75,7 @@ export default function AdminBlogContent() {
           placeholder="Write the full article here. Separate paragraphs with a blank line. Leave empty to show only the excerpt on the post page."
         />
       </label>
-      <p className="text-2xs text-muted mt-2">This links to the same post via its slug — visitors reach it by clicking "Read more" on the Blog page.</p>
+      <p className="text-2xs text-muted mt-2">This links to the same post via its slug. Visitors reach it by clicking "Read more" on the Blog page.</p>
 
       {error && <p className="text-2xs text-rose mt-3">{error}</p>}
       {saved && !error && <p className="text-2xs text-gold-text mt-3">Saved.</p>}

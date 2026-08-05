@@ -80,7 +80,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
         <p className="eyebrow text-gold-text mb-3">Reader Circle</p>
         <h3 className="font-display text-2xl md:text-3xl mb-2">{released ? 'Join the Reader Circle' : 'Get Release Updates'}</h3>
         <p className="text-ivory/70 text-sm mb-7">
-          {released ? `${book.title} is out now — join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
+          {released ? `${book.title} is out now. Join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
         </p>
         <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel={released ? 'Join the Reader Circle' : 'Get Release Updates'} />
       </div>

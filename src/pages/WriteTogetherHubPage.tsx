@@ -10,7 +10,7 @@ export default function WriteTogetherHubPage() {
   return (
     <>
       <Seo
-        title="WriteTogetherHub — A Home for Writers, Founded by Gaurav Mishra"
+        title="WriteTogetherHub: A Home for Writers, Founded by Gaurav Mishra"
         description="WriteTogetherHub gives writers and newcomers the guidance, community, and encouragement to grow their craft and get published. Founded by author Gaurav Mishra."
       />
 
@@ -20,7 +20,7 @@ export default function WriteTogetherHubPage() {
           <span className="inline-block rounded-full border border-gold/40 px-4 py-1.5 label-caps text-gold-lt mb-5">A Home for Writers</span>
           <h1 className="font-display text-4xl md:text-6xl mb-5">WriteTogetherHub</h1>
           <p className="text-ivory/80 max-w-2xl mx-auto leading-relaxed mb-8">
-            I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out — guidance, community, and a place to grow their craft together.
+            I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out: guidance, community, and a place to grow their craft together.
           </p>
           <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={15} />
@@ -52,7 +52,7 @@ export default function WriteTogetherHubPage() {
           <p className="eyebrow text-gold-text mb-3 text-center">A Note from the Founder</p>
           <Divider className="!my-6" />
           <p className="text-text/85 leading-relaxed text-center">
-            I remember what it felt like to start out — the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap, for the writer I was and the writers I hope to meet.
+            I remember what it felt like to start out: the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap, for the writer I was and the writers I hope to meet.
           </p>
         </div>
       </section>

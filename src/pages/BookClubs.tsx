@@ -11,7 +11,7 @@ const appearanceOptions = [
   {
     icon: Video,
     title: 'Virtual Appearance',
-    body: 'Request a video call with your book club — a short Q&A or discussion, scheduled around your meeting.',
+    body: 'Request a video call with your book club: a short Q&A or discussion, scheduled around your meeting.',
     type: 'book-club',
   },
   {
@@ -32,7 +32,7 @@ export default function BookClubs() {
   return (
     <>
       <Seo
-        title="Book Clubs — Gaurav Mishra"
+        title="Book Clubs | Gaurav Mishra"
         description="Discussion guides, appearance requests, and group-order enquiries for book clubs reading Gaurav Mishra's novels."
         path="/book-clubs"
       />
@@ -48,7 +48,7 @@ export default function BookClubs() {
         <SectionHeading eyebrow="Discussion Guides" title="Start With a Worked Example" />
         <div className="max-w-2xl mx-auto">
           <p className="text-muted text-center mb-8">
-            Here's the discussion guide already written for <em>Offbeat Love</em> — a model for the kind of questions available for other books on request.
+            Here's the discussion guide already written for <em>Offbeat Love</em>, a model for the kind of questions available for other books on request.
           </p>
           <div className="space-y-4 mb-8">
             {offbeatLoveQuestions.map((q, i) => (
@@ -69,7 +69,7 @@ export default function BookClubs() {
       <Section>
         <SectionHeading eyebrow="Requests" title="Bring the Author to Your Club" />
         <p className="text-muted max-w-2xl mx-auto text-center mb-10 -mt-4">
-          These are requests, not guarantees — every appearance depends on schedule and location, and isn't offered free by default.
+          These are requests, not guarantees. Every appearance depends on schedule and location, and isn't offered free by default.
         </p>
         <div className="grid gap-6 md:grid-cols-3">
           {appearanceOptions.map((opt) => (

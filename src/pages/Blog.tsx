@@ -16,7 +16,7 @@ export default function Blog() {
   return (
     <>
       <Seo
-        title="Blog — Gaurav Mishra | Writing Craft, Behind the Books & Spiritual Reflections"
+        title="Gaurav Mishra's Blog: Writing Craft, Behind the Books & Spiritual Reflections"
         description="Essays on writing craft, the stories behind the books, spiritual reflections on devotional hymns, and book updates from author Gaurav Mishra."
       />
 
@@ -26,7 +26,7 @@ export default function Blog() {
           <p className="eyebrow text-gold-lt mb-4">The Journal</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">From the Blog</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Notes on the writing life — craft, the stories behind the books, and reflections on the hymns that keep me grounded.
+            Notes on the writing life: craft, the stories behind the books, and reflections on the hymns that keep me grounded.
           </p>
         </div>
       </section>
@@ -65,7 +65,7 @@ export default function Blog() {
       </section>
 
       <EmailStrip
-        heading="Never miss a post — or a new release"
+        heading="Never miss a post or a new release"
         subheading="One letter a month: essays, behind-the-scenes, and early word on what's next."
       />
     </>

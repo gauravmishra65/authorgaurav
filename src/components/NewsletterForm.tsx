@@ -63,10 +63,10 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
       if (!res.ok) {
         setErrorMessage(
           body?.error === 'rate_limited'
-            ? "You already signed up moments ago — please wait a minute and try again."
+            ? "You already signed up moments ago. Please wait a minute and try again."
             : body?.error === 'invalid_email'
               ? 'Please enter a valid email address.'
-              : 'Something went wrong — please try again.',
+              : 'Something went wrong. Please try again.',
         );
         setStatus('error');
         return;
@@ -80,18 +80,18 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
       trackEvent('newsletter_signup', { source, interest: genrePreference || undefined });
       setStatus('success');
     } catch {
-      setErrorMessage('Something went wrong — please check your connection and try again.');
+      setErrorMessage('Something went wrong. Please check your connection and try again.');
       setStatus('error');
     }
   };
 
   if (status === 'duplicate') {
     return layout === 'compact' ? (
-      <p className={`text-sm text-gold-lt ${className}`}>You're already on the list — thank you!</p>
+      <p className={`text-sm text-gold-lt ${className}`}>You're already on the list. Thank you!</p>
     ) : (
       <div className={`mx-auto max-w-md rounded-md border border-gold/40 bg-cream/80 px-6 py-6 text-ink ${className}`}>
         <p className="font-display text-lg">You're already on the list</p>
-        <p className="text-sm text-muted mt-1">Thanks for your enthusiasm — no need to sign up twice.</p>
+        <p className="text-sm text-muted mt-1">Thanks for your enthusiasm. No need to sign up twice.</p>
       </div>
     );
   }
@@ -99,11 +99,11 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
   if (status === 'success') {
     const magnet = getReaderMagnet(genrePreference);
     return layout === 'compact' ? (
-      <p className={`text-sm text-gold-lt ${className}`}>Thank you — you're subscribed.</p>
+      <p className={`text-sm text-gold-lt ${className}`}>Thank you, you're subscribed.</p>
     ) : (
       <div className={`mx-auto max-w-md rounded-md border border-gold/40 bg-cream/80 px-6 py-6 text-ink ${className}`}>
         <p className="font-display text-lg">You're on the list.</p>
-        <p className="text-sm text-muted mt-1">Check your inbox for the free chapter — and welcome to the reader circle.</p>
+        <p className="text-sm text-muted mt-1">Check your inbox for the free chapter, and welcome to the reader circle.</p>
         {magnet?.fileUrl && (
           <a
             href={magnet.fileUrl}

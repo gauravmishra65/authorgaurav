@@ -20,8 +20,8 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About Gaurav Mishra — A Writer Who Refuses to Stay in One Lane"
-        description="Gaurav Mishra writes across romance, thriller, memoir, and devotion — united by the belief that a good story can carry a reader anywhere. Founder of WriteTogetherHub."
+        title="About Gaurav Mishra: A Writer Who Refuses to Stay in One Lane"
+        description="Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. He's also the founder of WriteTogetherHub."
       />
 
       <section className="bg-ink bg-grain text-ivory">
@@ -33,7 +33,7 @@ export default function About() {
                 {!imgError ? (
                   <img
                     src="/images/author/GM-Photo.jpg"
-                    alt="Gaurav Mishra — author portrait"
+                    alt="Gaurav Mishra, author portrait"
                     width={1200}
                     height={1800}
                     // @ts-expect-error React 18 only applies the lowercase DOM attribute; camelCase fetchPriority isn't wired to it until React 19
@@ -55,7 +55,7 @@ export default function About() {
               <p className="eyebrow text-gold-lt mb-4">About the Author</p>
               <h1 className="font-display text-4xl md:text-5xl mb-5">Gaurav Mishra</h1>
               <p className="text-ivory/80 leading-relaxed text-lg">
-                A writer who refuses to stay in one lane — romance, thriller, memoir, devotion — united by the belief that a good story can carry a reader anywhere.
+                A writer who refuses to stay in one lane: romance, thriller, memoir, devotion, all united by the belief that a good story can carry a reader anywhere.
               </p>
             </div>
           </div>
@@ -64,28 +64,28 @@ export default function About() {
 
       <section className="mx-auto max-w-prose px-6 py-20">
         <div className="prose-literary">
-          <p>I didn't set out to write across genres. I set out to follow curiosity — and curiosity, it turns out, doesn't stay in one lane.</p>
+          <p>I didn't set out to write across genres. I set out to follow curiosity, and curiosity, it turns out, doesn't stay in one lane.</p>
           <p>
             It led me to <em>Offbeat Love</em>, a romance about two people from different worlds who find one shared melody in the noise of Mumbai. It led me to <em>Shadow Code</em>, a thriller about the truths that hide inside algorithms and the people willing to chase them. It led me to <em>A Journey of Grace</em>, a travel memoir about faith, the road, and the quiet conversations that change us when we're paying attention.
           </p>
           <p>
-            And it led me back — again and again — to the devotional texts I grew up with. The Vishnu Sahasranama. The Lalita Sahasranama. Not as rituals to perform, but as living wisdom to understand, to unpack, and to carry into ordinary days.
+            And it led me back, again and again, to the devotional texts I grew up with. The Vishnu Sahasranama. The Lalita Sahasranama. Not as rituals to perform, but as living wisdom to understand, unpack, and carry into ordinary days.
           </p>
 
           <blockquote className="my-12 border-l-2 border-gold pl-6 py-2">
             <p className="font-display text-2xl md:text-3xl text-ink italic leading-snug">
-              "I write across worlds because that's how curiosity works — it doesn't stay in one lane."
+              "I write across worlds because that's how curiosity works. It doesn't stay in one lane."
             </p>
           </blockquote>
 
           <p>
-            People sometimes ask whether writing in so many genres is a risk. Maybe it is. But I'd rather risk a reader's surprise than write the same book twice. And I've learned that the readers who find me in one world often follow me into the next — not because the genre is the same, but because the voice is.
+            People sometimes ask whether writing in so many genres is a risk. Maybe it is. But I'd rather risk a reader's surprise than write the same book twice. And I've learned that readers who find me in one world often follow me into the next, not because the genre is the same, but because the voice is.
           </p>
           <p>
-            That voice — curious, sincere, a little stubborn about craft — is also why I built <strong>WriteTogetherHub</strong>. I remember what it felt like to start out: the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap — to give new writers the guidance, community, and encouragement I wished I'd had from day one.
+            That voice, curious, sincere, a little stubborn about craft, is also why I built <strong>WriteTogetherHub</strong>. I remember what it felt like to start out: the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap, giving new writers the guidance, community, and encouragement I wished I'd had from day one.
           </p>
           <p>
-            So whether you're here for a love story, a thriller, a memoir, or a hymn made plain — welcome. There's more than one world inside. I hope you'll wander.
+            So whether you're here for a love story, a thriller, a memoir, or a hymn made plain, welcome. There's more than one world inside. I hope you'll wander.
           </p>
         </div>
 

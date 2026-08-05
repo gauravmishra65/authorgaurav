@@ -33,7 +33,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
     return (
       <div className={`rounded-md border border-gold/40 bg-cream px-6 py-8 text-center ${className}`}>
         <p className="font-display text-lg text-ink">Thank you for sharing.</p>
-        <p className="text-sm text-muted mt-1">Your feedback is awaiting review — once approved, it'll appear on this page, and Gaurav may reply.</p>
+        <p className="text-sm text-muted mt-1">Your feedback is awaiting review. Once approved, it'll appear on this page, and Gaurav may reply.</p>
       </div>
     );
   }
@@ -82,7 +82,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
             onChange={(e) => setEmail(e.target.value)}
             className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
           />
-          <p className="text-2xs text-muted mt-1.5">Kept private — never shown publicly.</p>
+          <p className="text-2xs text-muted mt-1.5">Kept private. Never shown publicly.</p>
         </div>
       </div>
       <div>
@@ -97,7 +97,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
           className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none resize-none"
         />
       </div>
-      {status === 'error' && <p role="alert" className="text-sm text-rose">Something went wrong — please try again.</p>}
+      {status === 'error' && <p role="alert" className="text-sm text-rose">Something went wrong. Please try again.</p>}
       <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold rounded-sm px-6 py-3 disabled:opacity-60">
         {status === 'loading' ? 'Submitting…' : 'Submit Feedback'}
       </button>

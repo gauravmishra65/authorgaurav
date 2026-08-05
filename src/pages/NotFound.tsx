@@ -19,7 +19,7 @@ export default function NotFound() {
   return (
     <>
       <Seo
-        title="Page Not Found — Gaurav Mishra"
+        title="Page Not Found | Gaurav Mishra"
         description="This page doesn't exist. Find your way back to the books, or search for a title."
         path="/404"
       />

@@ -82,14 +82,14 @@ export default function BookCover({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${title} — book website`} className="inline-block">
+      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${title}: book website`} className="inline-block">
         {inner}
       </a>
     );
   }
 
   return (
-    <Link to={href} aria-label={`${title} — view details`} className="inline-block">
+    <Link to={href} aria-label={`${title}: view details`} className="inline-block">
       {inner}
     </Link>
   );

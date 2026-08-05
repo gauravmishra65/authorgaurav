@@ -14,7 +14,7 @@ interface EmailStripProps {
 
 export default function EmailStrip({
   variant = 'light',
-  heading = 'Get a free chapter — and new-release alerts',
+  heading = 'Get a free chapter and new-release alerts',
   subheading = 'One email a month. No noise. Unsubscribe anytime.',
   showGenrePreference = false,
   id = 'strip-email',

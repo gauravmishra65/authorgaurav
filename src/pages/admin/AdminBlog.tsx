@@ -95,7 +95,7 @@ export default function AdminBlog() {
             </label>
             {editing.id && (
               <p className="text-2xs text-muted">
-                The full "Read More" article body is written on its own page — save this post first, then use the <FileText size={11} className="inline -mt-0.5" aria-hidden="true" /> icon in the list to write or edit it.
+                The full "Read More" article body is written on its own page. Save this post first, then use the <FileText size={11} className="inline -mt-0.5" aria-hidden="true" /> icon in the list to write or edit it.
               </p>
             )}
             <div className="grid grid-cols-2 gap-4">

@@ -11,16 +11,16 @@ import { trackEvent } from '../lib/analytics';
 
 // Length variants of the same already-approved About-page biography — no
 // new facts, just different amounts of the same confirmed material.
-const shortBio = 'Gaurav Mishra writes across romance, thriller, memoir, and devotion — united by the belief that a good story can carry a reader anywhere. He is the founder of WriteTogetherHub.';
+const shortBio = 'Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. He is the founder of WriteTogetherHub.';
 
-const mediumBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion — united by the belief that a good story can carry a reader anywhere. His books include the contemporary romance Offbeat Love, the techno-financial thriller Shadow Code, the travel memoir A Journey of Grace, and accessible Hindi renderings of the Vishnu and Lalita Sahasranama. He is also the founder of WriteTogetherHub, a community and guided-learning platform for new and returning writers.`;
+const mediumBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. His books include the contemporary romance Offbeat Love, the techno-financial thriller Shadow Code, the travel memoir A Journey of Grace, and accessible Hindi renderings of the Vishnu and Lalita Sahasranama. He is also the founder of WriteTogetherHub, a community and guided-learning platform for new and returning writers.`;
 
-const longBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion — united by the belief that a good story can carry a reader anywhere. His curiosity has led him to Offbeat Love, a contemporary romance about two people from different worlds who find one shared melody in the noise of Mumbai; to Shadow Code, a techno-financial thriller about the truths that hide inside algorithms and the people willing to chase them; to A Journey of Grace, a travel memoir about faith, the road, and the quiet conversations that change us; and back, again and again, to the devotional texts he grew up with — the Vishnu Sahasranama and the Lalita Sahasranama — rendered in accessible Hindi as living wisdom rather than ritual alone.
+const longBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. His curiosity has led him to Offbeat Love, a contemporary romance about two people from different worlds who find one shared melody in the noise of Mumbai; to Shadow Code, a techno-financial thriller about the truths that hide inside algorithms and the people willing to chase them; to A Journey of Grace, a travel memoir about faith, the road, and the quiet conversations that change us; and back, again and again, to the devotional texts he grew up with, the Vishnu Sahasranama and the Lalita Sahasranama, rendered in accessible Hindi as living wisdom rather than ritual alone.
 
 He is also the founder of WriteTogetherHub, built to give new and returning writers the guidance, community, and encouragement he wished he'd had when he was starting out.`;
 
 const interviewTopics = [
-  'Writing across genres — romance, thriller, memoir, and devotional texts under one name',
+  'Writing across genres: romance, thriller, memoir, and devotional texts under one name',
   'Founding WriteTogetherHub and building a community for new writers',
   'Making Hindi devotional texts (the Vishnu and Lalita Sahasranama) accessible to modern, younger readers',
   'The research and craft behind a techno-financial thriller (Shadow Code)',
@@ -34,7 +34,7 @@ export default function Media() {
   return (
     <>
       <Seo
-        title="Media — Gaurav Mishra"
+        title="Media | Gaurav Mishra"
         description="Press resources, author biography, approved photography, book covers, and interview enquiries for Gaurav Mishra."
         path="/media"
       />
@@ -65,7 +65,7 @@ export default function Media() {
         <SectionHeading eyebrow="Assets" title="Photography & Book Covers" />
         <div className="max-w-3xl mx-auto grid gap-6 sm:grid-cols-2">
           <div className="rounded-md border border-gold/20 bg-ivory p-6 text-center">
-            <img src="/images/author/GM-Photo.jpg" alt="Gaurav Mishra — author portrait" width={128} height={128} loading="lazy" className="mx-auto mb-4 w-32 h-32 rounded-full object-cover object-top border border-gold/25" />
+            <img src="/images/author/GM-Photo.jpg" alt="Gaurav Mishra, author portrait" width={128} height={128} loading="lazy" className="mx-auto mb-4 w-32 h-32 rounded-full object-cover object-top border border-gold/25" />
             <p className="font-display text-ink mb-3">Author Portrait</p>
             <a href="/images/author/GM-Photo.jpg" download onClick={() => trackEvent('media_kit_download', { asset: 'author-photo' })} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1.5">
               <Download size={13} /> Download Photo

@@ -12,7 +12,7 @@ function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
       <Quote className="text-gold-text/50 mb-3" size={22} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted mb-4">
-        {t.name}{t.source ? ` · ${t.source}` : ''}{t.book ? <> — <span className="text-gold-text">{t.book}</span></> : null}
+        {t.name}{t.source ? ` · ${t.source}` : ''}{t.book ? <> · <span className="text-gold-text">{t.book}</span></> : null}
       </figcaption>
       {t.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-4">
@@ -33,8 +33,8 @@ export default function Testimonials() {
   return (
     <>
       <Seo
-        title="Reader Testimonials — Gaurav Mishra | Share Your Feedback"
-        description="Read what readers are saying about Gaurav Mishra's books, and share your own feedback — Gaurav reads and replies to every review."
+        title="Reader Testimonials & Feedback | Gaurav Mishra"
+        description="Read what readers are saying about Gaurav Mishra's books, and share your own feedback. Gaurav reads and replies to every review."
         path="/testimonials"
       />
 
@@ -44,7 +44,7 @@ export default function Testimonials() {
           <p className="eyebrow text-gold-lt mb-4">Reader Circle</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">What Readers Are Saying</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Feedback from readers across every book — and a place to share your own. Every submission is read personally, and many get a reply.
+            Feedback from readers across every book, and a place to share your own. Every submission is read personally, and many get a reply.
           </p>
         </div>
       </section>
@@ -53,7 +53,7 @@ export default function Testimonials() {
         {loading && <p className="py-8 text-center text-muted">Loading testimonials…</p>}
         {error && <p className="py-8 text-center text-rose">Couldn't load testimonials: {error}</p>}
         {testimonials && testimonials.length === 0 && (
-          <p className="py-8 text-center text-muted">No testimonials yet — be the first to share your feedback below.</p>
+          <p className="py-8 text-center text-muted">No testimonials yet. Be the first to share your feedback below.</p>
         )}
         {testimonials && testimonials.length > 0 && (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

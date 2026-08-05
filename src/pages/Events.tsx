@@ -19,7 +19,7 @@ export default function Events() {
   return (
     <>
       <Seo
-        title="Events — Gaurav Mishra"
+        title="Events | Gaurav Mishra"
         description="Upcoming book launches, literary events, school visits, and book-club appearances with author Gaurav Mishra."
         path="/events"
         jsonLd={jsonLd}
@@ -31,7 +31,7 @@ export default function Events() {
           <p className="eyebrow text-gold-lt mb-4">Appearances</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">Events</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Book launches, literary events, school visits, interviews, and book-club appearances — online and in person.
+            Book launches, literary events, school visits, interviews, and book-club appearances, online and in person.
           </p>
         </div>
       </section>

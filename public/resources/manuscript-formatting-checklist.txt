@@ -1,5 +1,5 @@
 MANUSCRIPT FORMATTING CHECKLIST
-A quick pre-submission pass — from WriteTogetherHub
+A quick pre-submission pass, from WriteTogetherHub
 
 [ ] Standard font (Times New Roman or similar), 12pt, double-spaced
 [ ] 1-inch margins on all sides
@@ -13,7 +13,7 @@ A quick pre-submission pass — from WriteTogetherHub
 [ ] File named clearly: Title_YourLastName.docx (or per submission guidelines)
 [ ] Word count included on the title page if requested by the publisher/agent
 
-This is general guidance, not a guarantee of acceptance — always check the
+This is general guidance, not a guarantee of acceptance. Always check the
 specific formatting guidelines of the publisher, agent, or platform you're
 submitting to first.
 

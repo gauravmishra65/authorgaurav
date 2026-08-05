@@ -14,7 +14,7 @@ interface LegalPageLayoutProps {
 export default function LegalPageLayout({ title, seoDescription, path, lastUpdated, children }: LegalPageLayoutProps) {
   return (
     <>
-      <Seo title={`${title} — Gaurav Mishra`} description={seoDescription} path={path} />
+      <Seo title={`${title} | Gaurav Mishra`} description={seoDescription} path={path} />
 
       <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />

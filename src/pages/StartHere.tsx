@@ -8,9 +8,9 @@ import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
 const paths = [
-  { slug: 'offbeat-love', eyebrow: 'If you love romance', reason: 'A heartfelt love story set to the pulse of Mumbai — start here for music, family, and the courage to choose each other.' },
+  { slug: 'offbeat-love', eyebrow: 'If you love romance', reason: 'A heartfelt love story set to the pulse of Mumbai. Start here for music, family, and the courage to choose each other.' },
   { slug: 'the-shadow-code', eyebrow: 'If you love mystery & thrillers', reason: 'A taut techno-thriller of secrets, surveillance, and a whistleblower who can’t stop what she started.' },
-  { slug: 'vishnu-sahasranama', eyebrow: 'If you want something spiritual', reason: 'A thousand names, one steady anchor — devotional reading for daily reflection.' },
+  { slug: 'vishnu-sahasranama', eyebrow: 'If you want something spiritual', reason: 'A thousand names, one steady anchor: devotional reading for daily reflection.' },
 ];
 
 export default function StartHere() {
@@ -19,8 +19,8 @@ export default function StartHere() {
   return (
     <>
       <Seo
-        title="Start Here — New Reader's Guide | Gaurav Mishra"
-        description="New to Gaurav Mishra's books? Find the right first read — romance, mystery, or something spiritual — and get a free first chapter."
+        title="Start Here: New Reader's Guide | Gaurav Mishra"
+        description="New to Gaurav Mishra's books? Find the right first read, whether romance, mystery, or something spiritual, and get a free first chapter."
         path="/start-here"
       />
 
@@ -66,7 +66,7 @@ export default function StartHere() {
           <p className="eyebrow text-gold-text mb-3">Not Sure Yet?</p>
           <h2 className="font-display text-2xl md:text-3xl text-ink mb-3">Get a free first chapter, no commitment</h2>
           <p className="text-muted mb-8 max-w-lg mx-auto">
-            Tell us what you love reading and we'll send a free chapter to match — plus a note whenever a new book arrives.
+            Tell us what you love reading and we'll send a free chapter to match, plus a note whenever a new book arrives.
           </p>
           <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold-text mb-6">
             <Mail size={14} aria-hidden="true" /> One email a month. No noise. Unsubscribe anytime.

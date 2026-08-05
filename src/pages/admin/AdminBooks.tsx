@@ -22,7 +22,7 @@ const emptyBook: Partial<AdminBookRow> = {
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 function slugError(slug: string | null | undefined): string | null {
   if (!slug) return 'Slug is required.';
-  return SLUG_RE.test(slug) ? null : 'Slug must be lowercase letters, numbers, and hyphens only (e.g. "shadow-code-hindi") — not the title itself.';
+  return SLUG_RE.test(slug) ? null : 'Slug must be lowercase letters, numbers, and hyphens only (e.g. "shadow-code-hindi"), not the title itself.';
 }
 
 /** Comma-separated tag list <-> text[] column, for the admin's plain-input style. */

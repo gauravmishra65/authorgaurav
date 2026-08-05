@@ -74,7 +74,7 @@ export default function Seo({ title, description, path, image, jsonLd, lang = 'e
     return () => {
       const def = document.querySelector('title[data-default]');
       const defMeta = document.querySelector('meta[name="description"][data-default]');
-      if (def) document.title = def.textContent || 'Gaurav Mishra — Author';
+      if (def) document.title = def.textContent || 'Gaurav Mishra, Author';
       if (defMeta) setMetaByName('description', defMeta.getAttribute('content') || '');
       document.documentElement.lang = 'en';
     };

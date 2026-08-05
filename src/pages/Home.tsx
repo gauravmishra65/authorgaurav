@@ -29,9 +29,9 @@ const bookshelfFilters = ['All', 'Upcoming', ...bookCategoryOptions] as const;
 // now link to genuinely distinct filtered views (both used to collapse onto
 // the same `genre=Fiction` bucket before that field existed).
 const genreCards: { category: string; label: string; description: string }[] = [
-  { category: 'Thriller', label: 'Thrillers and Contemporary Fiction', description: 'Techno-financial thrillers and character-driven fiction — Shadow Code, The Zero Account, and more.' },
-  { category: 'Romance', label: 'Love Stories', description: 'Contemporary romance about love, family, and the courage to choose your own life — Offbeat Love and अनूठा प्यार.' },
-  { category: 'Spiritual', label: 'Spiritual and Devotional Books', description: 'Accessible Hindi devotional texts — the Vishnu and Lalita Sahasranama, explained simply for daily life.' },
+  { category: 'Thriller', label: 'Thrillers and Contemporary Fiction', description: 'Techno-financial thrillers and character-driven fiction, including Shadow Code and The Zero Account.' },
+  { category: 'Romance', label: 'Love Stories', description: 'Contemporary romance about love, family, and the courage to choose your own life, including Offbeat Love and अनूठा प्यार.' },
+  { category: 'Spiritual', label: 'Spiritual and Devotional Books', description: 'Accessible Hindi devotional texts, including the Vishnu and Lalita Sahasranama, explained simply for daily life.' },
 ];
 
 export default function Home() {
@@ -83,7 +83,7 @@ export default function Home() {
                 <SecondaryButton to="/#free-chapter" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle (hero)' })}>Join the Reader Circle</SecondaryButton>
               </div>
               <Link to="/start-here" className="inline-block mt-5 label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors fade-up" style={{ animationDelay: '0.55s' }}>
-                New here? Start Here — find your first book →
+                New here? Start Here to find your first book →
               </Link>
             </div>
 
@@ -94,7 +94,7 @@ export default function Home() {
                   {!portraitError ? (
                     <img
                       src="/images/author/GM-Photo.jpg"
-                      alt="Gaurav Mishra — author portrait"
+                      alt="Gaurav Mishra, author portrait"
                       width={1200}
                       height={1800}
                       className="w-full h-full object-cover object-top"

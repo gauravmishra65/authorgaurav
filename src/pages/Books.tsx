@@ -54,8 +54,8 @@ export default function Books() {
   return (
     <>
       <Seo
-        title="Books — Gaurav Mishra | Romance, Thriller, Memoir & Devotional"
-        description="Browse every book by Gaurav Mishra — Offbeat Love, Shadow Code, A Journey of Grace, and devotional works in Hindi. Buy on Amazon, Flipkart, and Kindle."
+        title="Books by Gaurav Mishra: Romance, Thriller, Memoir & Devotional"
+        description="Browse every book by Gaurav Mishra, including Offbeat Love, Shadow Code, A Journey of Grace, and devotional works in Hindi. Buy on Amazon, Flipkart, and Kindle."
       />
 
       <section className="bg-ink bg-grain text-ivory">
@@ -64,7 +64,7 @@ export default function Books() {
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">The Books</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            From romance to thriller to memoir to devotion — works that share one belief: a good story can carry a reader anywhere.
+            From romance to thriller to memoir to devotion, these are works that share one belief: a good story can carry a reader anywhere.
           </p>
         </div>
       </section>
@@ -111,7 +111,7 @@ export default function Books() {
 
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Want a taste before you buy?</h2>
-        <p className="text-muted mb-7 max-w-lg mx-auto">Get a free chapter delivered to your inbox — and a note when the next book arrives.</p>
+        <p className="text-muted mb-7 max-w-lg mx-auto">Get a free chapter delivered to your inbox, and a note when the next book arrives.</p>
         <Link to="/contact" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
           Get in Touch <ArrowRight size={15} />
         </Link>

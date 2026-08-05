@@ -56,7 +56,7 @@ export default function TestimonialModal({ book, className = '' }: TestimonialMo
         <p className="label-caps text-gold-lt mb-1.5 inline-flex items-center gap-1.5">
           <MessageCircle size={13} aria-hidden="true" /> Loved This Book?
         </p>
-        <p className="text-sm text-ivory/70 mb-4">Share your feedback — Gaurav reads every note, and often replies.</p>
+        <p className="text-sm text-ivory/70 mb-4">Share your feedback. Gaurav reads every note, and often replies.</p>
         <button ref={triggerRef} onClick={() => setOpen(true)} className="btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs" style={{ color: 'var(--gold-lt)' }}>
           Add a Testimonial
         </button>

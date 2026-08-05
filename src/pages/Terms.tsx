@@ -24,7 +24,7 @@ export default function Terms() {
       <p>
         Purchase links on this site (Amazon, Flipkart, Kindle, and others) take you to third-party retailers. Any
         purchase you make is a transaction between you and that retailer, subject to their own terms, pricing, and
-        availability — this site does not process payments or handle order fulfillment.
+        availability. This site does not process payments or handle order fulfillment.
       </p>
 
       <h2 className="font-display text-xl text-ink">Reader submissions</h2>

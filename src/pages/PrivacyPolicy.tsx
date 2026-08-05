@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
         Site data (newsletter subscribers, contact messages, testimonials) is stored using Supabase, a third-party
         database and authentication provider. Contact-form emails are delivered through Resend, a third-party email
         API. If you subscribe to the newsletter, your email address and chosen interest may also be added to Brevo,
-        the email service provider used to actually send newsletter mailings — this only happens when Brevo is
+        the email service provider used to actually send newsletter mailings. This only happens when Brevo is
         configured on the site's backend, and never for contact-form messages or testimonials. These providers
         process data on the site's behalf and are bound by their own privacy and security practices.
       </p>

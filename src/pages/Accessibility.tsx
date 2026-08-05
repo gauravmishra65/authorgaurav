@@ -9,8 +9,8 @@ export default function Accessibility() {
       lastUpdated="24 July 2026"
     >
       <p>
-        Gaurav Mishra wants everyone — including readers using screen readers, keyboard navigation, or other
-        assistive technology — to be able to browse this site, read about the books, and get in touch. This page
+        Gaurav Mishra wants everyone, including readers using screen readers, keyboard navigation, or other
+        assistive technology, to be able to browse this site, read about the books, and get in touch. This page
         describes where things stand and how to reach us if something isn't working for you.
       </p>
 
@@ -21,7 +21,7 @@ export default function Accessibility() {
         <li>Descriptive alt text on book covers and author photography.</li>
         <li>A mobile navigation menu with proper dialog semantics, a keyboard focus trap, Escape-to-close, background scroll locking, and focus returned to the menu button on close.</li>
         <li>Correct Devanagari fonts and a declared Hindi language attribute on Hindi book pages, so matras and conjuncts render properly and screen readers use the right pronunciation rules.</li>
-        <li>Respect for your device's "reduce motion" setting — animations are shortened or removed accordingly.</li>
+        <li>Respect for your device's "reduce motion" setting, so animations are shortened or removed accordingly.</li>
       </ul>
 
       <h2 className="font-display text-xl text-ink">Where we're still improving</h2>
@@ -33,7 +33,7 @@ export default function Accessibility() {
 
       <h2 className="font-display text-xl text-ink">Let us know</h2>
       <p>
-        If you hit a barrier anywhere on this site, please tell us — specific feedback (which page, what assistive
+        If you hit a barrier anywhere on this site, please tell us. Specific feedback (which page, what assistive
         technology, what happened) helps us fix it faster. Email{' '}
         <a href="mailto:hello@writetogetherhub.com" className="text-gold-text underline hover:text-ink transition-colors">hello@writetogetherhub.com</a>{' '}
         and we'll get back to you.

@@ -96,7 +96,7 @@ export default function Contact() {
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
         throw new Error(body?.error === 'rate_limited'
-          ? 'You already sent a message moments ago — please wait a minute before sending another.'
+          ? 'You already sent a message moments ago. Please wait a minute before sending another.'
           : 'Something went wrong sending your message. Please try again.');
       }
 
@@ -111,7 +111,7 @@ export default function Contact() {
       trackEvent('contact_submit', { enquiryType: enquiryTypes.find((t) => t.value === form.enquiryType)?.label });
       setSubmitted(true);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Something went wrong — please try again.');
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setSending(false);
     }
@@ -120,7 +120,7 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact Gaurav Mishra — Say Hello, Share a Note, Join the Reader Circle"
+        title="Contact Gaurav Mishra: Say Hello, Share a Note, Join the Reader Circle"
         description="Get in touch with author Gaurav Mishra. Send a message, request a free chapter, or join the reader circle for monthly letters and new-release alerts."
         path="/contact"
       />
@@ -131,7 +131,7 @@ export default function Contact() {
           <p className="eyebrow text-gold-lt mb-4">Say Hello</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">Contact</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Whether you're a reader, a fellow writer, media, a book club, or a school — I'd love to hear from you.
+            Whether you're a reader, a fellow writer, media, a book club, or a school, I'd love to hear from you.
           </p>
         </div>
       </section>
@@ -147,7 +147,7 @@ export default function Contact() {
                 <CheckCircle2 className="mx-auto mb-3 text-gold-text" size={36} />
                 <h3 className="font-display text-xl text-ink mb-2">Message sent</h3>
                 <p className="text-muted text-sm">
-                  Thank you, {form.name.split(' ')[0] || 'friend'}. Your note is on its way — I'll reply soon
+                  Thank you, {form.name.split(' ')[0] || 'friend'}. Your note is on its way. I'll reply soon
                   {form.circle ? ", and you have been added to the reader circle." : "."}
                 </p>
                 <button onClick={() => { setSubmitted(false); setForm(emptyForm('reader')); setErrors({}); }}
@@ -213,7 +213,7 @@ export default function Contact() {
 
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" checked={form.circle} onChange={(e) => update('circle', e.target.checked)} className="mt-1 h-4 w-4 accent-gold" />
-                  <span className="text-sm text-muted">Add me to the reader circle — I'd like the free chapter and monthly letters.</span>
+                  <span className="text-sm text-muted">Add me to the reader circle. I'd like the free chapter and monthly letters.</span>
                 </label>
 
                 <div>

@@ -24,7 +24,7 @@ export default function BlogPostDetail() {
   return (
     <>
       <Seo
-        title={`${post.title} — Gaurav Mishra`}
+        title={`${post.title} | Gaurav Mishra`}
         description={post.excerpt}
         path={`/blog/${post.slug}`}
         jsonLd={{

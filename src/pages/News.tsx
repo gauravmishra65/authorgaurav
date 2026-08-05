@@ -14,8 +14,8 @@ export default function News() {
   return (
     <>
       <Seo
-        title="News & Events — Gaurav Mishra"
-        description="Book releases, appearances, and announcements from author Gaurav Mishra — plus updates from WriteTogetherHub."
+        title="News & Events | Gaurav Mishra"
+        description="Book releases, appearances, and announcements from author Gaurav Mishra, plus updates from WriteTogetherHub."
       />
 
       <section className="bg-ink bg-grain text-ivory">
@@ -24,7 +24,7 @@ export default function News() {
           <p className="eyebrow text-gold-lt mb-4">Latest</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">News &amp; Events</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Releases, appearances, and announcements — from new books to WriteTogetherHub updates.
+            Releases, appearances, and announcements, from new books to WriteTogetherHub updates.
           </p>
         </div>
       </section>

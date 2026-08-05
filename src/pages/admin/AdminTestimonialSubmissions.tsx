@@ -120,7 +120,7 @@ export default function AdminTestimonialSubmissions() {
                   <div className="flex items-center justify-between gap-4 flex-wrap">
                     <div className="min-w-0">
                       <p className="text-ink italic truncate">"{row.quote}"</p>
-                      <p className="text-2xs text-muted">{row.name} — {bookTitle(row.book_id)}</p>
+                      <p className="text-2xs text-muted">{row.name} · {bookTitle(row.book_id)}</p>
                     </div>
                     <span className={`label-caps text-2xs border rounded-full px-2.5 py-0.5 flex-shrink-0 ${statusStyles[row.status]}`}>{row.status}</span>
                   </div>

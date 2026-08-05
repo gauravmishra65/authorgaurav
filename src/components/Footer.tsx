@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-2">
             <p className="font-display text-2xl mb-3">Gaurav<span className="text-gold-text">Mishra</span></p>
             <p className="text-ivory/75 leading-relaxed max-w-sm">
-              Stories of love, faith, ambition and the hidden systems that shape our lives — contemporary fiction, techno-financial thrillers, love stories, and accessible spiritual books.
+              Stories of love, faith, ambition and the hidden systems that shape our lives: contemporary fiction, techno-financial thrillers, love stories, and accessible spiritual books.
             </p>
             <SocialLinks size={20} className="mt-5" />
           </div>
