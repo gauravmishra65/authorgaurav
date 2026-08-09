@@ -34,8 +34,8 @@ export default function About() {
                   <img
                     src="/images/author/GM-Photo.jpg"
                     alt="Gaurav Mishra, author portrait"
-                    width={1200}
-                    height={1800}
+                    width={960}
+                    height={1440}
                     // @ts-expect-error React 18 only applies the lowercase DOM attribute; camelCase fetchPriority isn't wired to it until React 19
                     fetchpriority="high"
                     className="w-full h-full object-cover object-top"

@@ -37,23 +37,24 @@ const genreCards: { category: string; label: string; description: string }[] = [
 export default function Home() {
   const [filter, setFilter] = useState<(typeof bookshelfFilters)[number]>('All');
   const [portraitError, setPortraitError] = useState(false);
+  // Deliberately not gating the whole page behind this fetch — the hero,
+  // testimonials, news, and blog previews below don't need book data, so
+  // they render (and fire their own queries) immediately instead of
+  // waiting on this one to resolve first.
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
-
-  if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
-  if (error || !books) return <div className="py-32 text-center text-rose">Couldn't load books: {error}</div>;
 
   // "Upcoming" is an additional lens, not an exclusive one — "All" and the
   // genre tabs always include upcoming books too (the "Coming Soon" badge
   // on each card already distinguishes status), so nothing appears to
   // vanish when switching between tabs.
-  const filtered = filter === 'Upcoming'
+  const filtered = !books ? [] : filter === 'Upcoming'
     ? books.filter((b) => b.status === 'upcoming')
     : filter === 'All'
       ? books
       : books.filter((b) => b.categories?.includes(bookCategoryToTag[filter as keyof typeof bookCategoryToTag]));
 
-  const shadowCode = books.find((b) => b.slug === 'the-shadow-code') ?? books[0];
-  const shadowCodeHindi = books.find((b) => b.slug === 'shadow-code-hindi');
+  const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
+  const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
 
   return (
     <>
@@ -95,8 +96,8 @@ export default function Home() {
                     <img
                       src="/images/author/GM-Photo.jpg"
                       alt="Gaurav Mishra, author portrait"
-                      width={1200}
-                      height={1800}
+                      width={960}
+                      height={1440}
                       className="w-full h-full object-cover object-top"
                       onError={() => setPortraitError(true)}
                       loading="eager"
@@ -119,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED RELEASE */}
-      {shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
+      {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
 
       {/* EXPLORE BY GENRE */}
       <Section tone="cream">
@@ -156,7 +157,9 @@ export default function Home() {
           </div>
         </div>
 
-        <BookCarousel books={filtered} />
+        {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
+        {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
+        {!loading && !error && <BookCarousel books={filtered} />}
       </section>
 
       <Testimonials />
