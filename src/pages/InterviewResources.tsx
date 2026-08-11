@@ -13,7 +13,7 @@ import { canonicalUrl } from '../lib/url';
 import { trackEvent } from '../lib/analytics';
 
 const BOOK_PATH = '/books/interview-guide';
-const BOOK_TITLE = 'The Complete Interview Success Guide (2026 Edition)';
+const BOOK_TITLE = 'The Complete Interview Success Guide - 2026 Edition';
 
 const categoryOptions = ['All Resources', ...new Set(interviewExternalResources.map((r) => r.category))] as const;
 

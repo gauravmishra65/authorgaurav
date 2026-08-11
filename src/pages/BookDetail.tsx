@@ -89,6 +89,7 @@ export default function BookDetail() {
   const isLalita = book.slug === 'lalita-sahasranama';
   const isVishnu = book.slug === 'vishnu-sahasranama';
   const isHindiRelabel = isLalita || isVishnu;
+  const isInterviewGuide = book.slug === 'interview-guide';
 
   return (
     <BookThemeProvider theme={theme}>
@@ -468,6 +469,26 @@ export default function BookDetail() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Interview Guide only: link to the dedicated, continuously-updated resources page */}
+      {isInterviewGuide && (
+        <section className="bg-[var(--book-surface)]">
+          <div className="mx-auto max-w-2xl px-6 py-16 text-center">
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Go Deeper</p>
+            <h2 className="font-display text-2xl mb-4" style={{ color: 'var(--book-text)' }}>Interview Resources &amp; Tools</h2>
+            <p className="text-[var(--book-text)]/80 leading-relaxed mb-6">
+              Official references and practical worksheets that support this book, kept current on a dedicated resources page.
+            </p>
+            <Link
+              to="/interview-resources"
+              className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3"
+              style={{ color: 'var(--book-accent)', borderColor: 'var(--book-accent)' }}
+            >
+              Explore Interview Resources <ArrowRight size={14} />
+            </Link>
           </div>
         </section>
       )}
