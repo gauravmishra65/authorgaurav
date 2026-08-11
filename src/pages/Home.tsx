@@ -15,15 +15,9 @@ import Section from '../components/Section';
 import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
-import { bookCategoryOptions, bookCategoryToTag } from '../data/books';
-import { fetchBooks } from '../lib/queries';
+import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
-
-// "Upcoming" is an additional lens (handled separately below), not a
-// category — the rest of the row mirrors the /books page's category tabs
-// (src/data/books.ts) so the same options appear in both places.
-const bookshelfFilters = ['All', 'Upcoming', ...bookCategoryOptions] as const;
 
 // Phase 4 added a `categories` tag per book, so Thrillers and Love Stories
 // now link to genuinely distinct filtered views (both used to collapse onto
@@ -35,23 +29,28 @@ const genreCards: { category: string; label: string; description: string }[] = [
 ];
 
 export default function Home() {
-  const [filter, setFilter] = useState<(typeof bookshelfFilters)[number]>('All');
+  const [filter, setFilter] = useState('All');
   const [portraitError, setPortraitError] = useState(false);
   // Deliberately not gating the whole page behind this fetch — the hero,
   // testimonials, news, and blog previews below don't need book data, so
   // they render (and fire their own queries) immediately instead of
   // waiting on this one to resolve first.
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+  const { data: categories } = useSupabaseData(fetchBookCategories, []);
 
-  // "Upcoming" is an additional lens, not an exclusive one — "All" and the
-  // genre tabs always include upcoming books too (the "Coming Soon" badge
-  // on each card already distinguishes status), so nothing appears to
-  // vanish when switching between tabs.
+  // "Upcoming" is an additional lens (handled separately), not a category —
+  // the rest of the row mirrors the /books page's category tabs (from the
+  // authorgaurav_book_categories table) so the same options appear in both
+  // places, and "All" and the genre tabs always include upcoming books too
+  // (the "Coming Soon" badge on each card already distinguishes status), so
+  // nothing appears to vanish when switching between tabs.
+  const bookshelfFilters = ['All', 'Upcoming', ...(categories?.map((c) => c.label) ?? [])];
+
   const filtered = !books ? [] : filter === 'Upcoming'
     ? books.filter((b) => b.status === 'upcoming')
     : filter === 'All'
       ? books
-      : books.filter((b) => b.categories?.includes(bookCategoryToTag[filter as keyof typeof bookCategoryToTag]));
+      : books.filter((b) => b.categories?.includes(categories?.find((c) => c.label === filter)?.tag ?? '__none__'));
 
   const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
   const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');

@@ -70,15 +70,6 @@ export interface Book {
 // Book content lives in Supabase (authorgaurav_books/authorgaurav_testimonials) —
 // see src/lib/queries.ts. Manage it via /admin.
 
-// Single source of truth for the category tabs used to filter book listings
-// (the homepage carousel and the /books page) — every listing that lets a
-// reader filter by category should offer the same options. "Spiritual" is
-// the human-facing label for the "Devotional" tag already used in the data.
-export const bookCategoryOptions = ['Thriller', 'Romance', 'Spiritual', 'Memoir', 'Fiction'] as const;
-export const bookCategoryToTag: Record<(typeof bookCategoryOptions)[number], string> = {
-  Thriller: 'Thriller', Romance: 'Romance', Spiritual: 'Devotional', Memoir: 'Memoir', Fiction: 'Fiction',
-};
-
 export interface BuyOption {
   label: string;
   href: string;

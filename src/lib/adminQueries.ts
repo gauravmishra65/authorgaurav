@@ -257,6 +257,32 @@ export async function deleteReaderPhoto(id: string): Promise<void> {
   if (error) throw error;
 }
 
+export interface AdminBookCategoryRow {
+  id: string;
+  label: string;
+  nav_label: string | null;
+  tag: string;
+  sort_order: number;
+}
+
+export async function fetchAdminBookCategories(): Promise<AdminBookCategoryRow[]> {
+  const { data, error } = await supabase.from('authorgaurav_book_categories').select('*').order('sort_order');
+  if (error) throw error;
+  return data as AdminBookCategoryRow[];
+}
+
+export async function saveBookCategory(row: Partial<AdminBookCategoryRow>): Promise<void> {
+  const { error } = row.id
+    ? await supabase.from('authorgaurav_book_categories').update(row).eq('id', row.id)
+    : await supabase.from('authorgaurav_book_categories').insert(row);
+  if (error) throw error;
+}
+
+export async function deleteBookCategory(id: string): Promise<void> {
+  const { error } = await supabase.from('authorgaurav_book_categories').delete().eq('id', id);
+  if (error) throw error;
+}
+
 export interface AdminSubscriberRow {
   id: string;
   email: string;

@@ -6,23 +6,16 @@ import BookSearch from '../components/BookSearch';
 import BookFilters from '../components/BookFilters';
 import BookGrid from '../components/BookGrid';
 import EmailStrip from '../components/EmailStrip';
-import { bookCategoryOptions, bookCategoryToTag } from '../data/books';
-import { fetchBooks } from '../lib/queries';
+import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
-
-const categoryOptions = ['All', ...bookCategoryOptions] as const;
-
-const categoryToTag: Record<(typeof categoryOptions)[number], string | null> = {
-  All: null, ...bookCategoryToTag,
-};
 
 export default function Books() {
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+  const { data: categories } = useSupabaseData(fetchBookCategories, []);
   const [searchParams] = useSearchParams();
   const categoryParam = searchParams.get('category');
-  const initialCategory = categoryOptions.includes(categoryParam as never) ? (categoryParam as (typeof categoryOptions)[number]) : 'All';
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState<(typeof categoryOptions)[number]>(initialCategory);
+  const [category, setCategory] = useState(categoryParam ?? 'All');
 
   // Clicking a different Nav "Books" dropdown link (e.g. /books?category=Romance
   // after already being on /books?category=Thriller) changes the URL but
@@ -34,22 +27,24 @@ export default function Books() {
   const [prevCategoryParam, setPrevCategoryParam] = useState(categoryParam);
   if (categoryParam !== prevCategoryParam) {
     setPrevCategoryParam(categoryParam);
-    setCategory(initialCategory);
+    setCategory(categoryParam ?? 'All');
   }
   // Not a pill toggle (no second filter row) — just honors the Nav "Upcoming
   // Books" dropdown link (`/books?status=Upcoming`) on initial load.
   const status = searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All';
 
+  const categoryOptions = ['All', ...(categories?.map((c) => c.label) ?? [])];
+
   const filtered = useMemo(() => {
     if (!books) return [];
-    const tag = categoryToTag[category];
+    const tag = category === 'All' ? null : categories?.find((c) => c.label === category)?.tag;
     return books.filter((b) => {
       if (query && !b.title.toLowerCase().includes(query.toLowerCase())) return false;
       if (tag && !(b.categories?.includes(tag) ?? b.genre === tag)) return false;
       if (status === 'Upcoming' && b.status === 'published') return false;
       return true;
     });
-  }, [books, query, category, status]);
+  }, [books, categories, query, category, status]);
 
   return (
     <>

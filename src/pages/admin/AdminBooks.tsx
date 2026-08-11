@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
-import { fetchAdminBooks, saveBook, deleteBook, type AdminBookRow } from '../../lib/adminQueries';
-import { bookCategoryOptions, bookCategoryToTag } from '../../data/books';
+import {
+  fetchAdminBooks, saveBook, deleteBook, type AdminBookRow,
+  fetchAdminBookCategories, type AdminBookCategoryRow,
+} from '../../lib/adminQueries';
 
 const emptyBook: Partial<AdminBookRow> = {
   slug: '', title: '', title_html: null, subtitle: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
@@ -50,13 +52,17 @@ function textToJson<T>(text: string): T | null {
 
 export default function AdminBooks() {
   const [books, setBooks] = useState<AdminBookRow[]>([]);
+  const [categories, setCategories] = useState<AdminBookCategoryRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Partial<AdminBookRow> | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const load = () => {
-    fetchAdminBooks().then(setBooks).catch((e) => setError(e.message)).finally(() => setLoading(false));
+    Promise.all([fetchAdminBooks(), fetchAdminBookCategories()])
+      .then(([b, c]) => { setBooks(b); setCategories(c); })
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
   };
 
   useEffect(load, []);
@@ -184,11 +190,11 @@ export default function AdminBooks() {
               <Field label="Subtitle"><input value={editing.subtitle ?? ''} onChange={(e) => setEditing({ ...editing, subtitle: e.target.value || null })} className="input" /></Field>
               <Field label="Categories">
                 <div className="flex flex-wrap gap-3 pt-1">
-                  {bookCategoryOptions.map((label) => {
-                    const tag = bookCategoryToTag[label];
+                  {categories.map((c) => {
+                    const tag = c.tag;
                     const checked = editing.categories?.includes(tag) ?? false;
                     return (
-                      <label key={label} className="inline-flex items-center gap-1.5 text-sm text-ink cursor-pointer">
+                      <label key={c.id} className="inline-flex items-center gap-1.5 text-sm text-ink cursor-pointer">
                         <input
                           type="checkbox"
                           checked={checked}
@@ -199,10 +205,11 @@ export default function AdminBooks() {
                           }}
                           className="h-3.5 w-3.5 accent-gold"
                         />
-                        {label}
+                        {c.label}
                       </label>
                     );
                   })}
+                  {categories.length === 0 && <span className="text-2xs text-muted">No categories yet. Add some under Book Categories.</span>}
                 </div>
               </Field>
               <Field label="Original language (if translated)"><input value={editing.original_language ?? ''} onChange={(e) => setEditing({ ...editing, original_language: e.target.value || null })} className="input" /></Field>

@@ -279,6 +279,36 @@ export async function fetchReaderPhotos(): Promise<ReaderPhoto[]> {
   });
 }
 
+export interface BookCategory {
+  id: string;
+  label: string;
+  navLabel: string;
+  tag: string;
+}
+
+interface BookCategoryRow {
+  id: string;
+  label: string;
+  nav_label: string | null;
+  tag: string;
+  sort_order: number;
+}
+
+/** Every book category, in display order. Drives the /books and homepage
+ * filter pills, the Nav "Books" dropdown, and the admin book editor's
+ * category checkboxes — add a row here (via /admin/book-categories) and it
+ * appears in all of them automatically. */
+export async function fetchBookCategories(): Promise<BookCategory[]> {
+  const { data, error } = await supabase.from('authorgaurav_book_categories').select('*').order('sort_order');
+  if (error) throw error;
+  return ((data ?? []) as BookCategoryRow[]).map((row) => ({
+    id: row.id,
+    label: row.label,
+    navLabel: row.nav_label || row.label,
+    tag: row.tag,
+  }));
+}
+
 export async function fetchEvents(): Promise<AuthorEvent[]> {
   const { data, error } = await supabase.from('authorgaurav_events').select('*').order('event_date', { ascending: true });
   if (error) throw error;

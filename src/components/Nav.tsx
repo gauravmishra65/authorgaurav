@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 import MobileNavigation from './MobileNavigation';
+import { fetchBookCategories } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
 
 // Journal deliberately links to the existing, populated /blog route rather
 // than a new /journal URL — same content, different label, no risk to
@@ -22,24 +24,20 @@ const links = [
 // Desktop drops "Books" since it renders as its own dropdown below.
 const desktopLinks = links.filter((l) => l.to !== '/books');
 
-// Phase 4 added a `categories` tag per book (Thriller/Romance/Memoir/
-// Devotional), so these can finally link to genuinely distinct filtered
-// views instead of both Thrillers and Romance pointing at the same
-// `genre=Fiction` bucket.
-const booksMenuLinks = [
-  { label: 'All Books', to: '/books' },
-  { label: 'Thrillers', to: '/books?category=Thriller' },
-  { label: 'Romance and Contemporary Fiction', to: '/books?category=Romance' },
-  { label: 'Fiction', to: '/books?category=Fiction' },
-  { label: 'Spiritual and Devotional Books', to: '/books?category=Spiritual' },
-  { label: 'Upcoming Books', to: '/books?status=Upcoming' },
-];
-
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [booksMenuOpen, setBooksMenuOpen] = useState(false);
   const location = useLocation();
+  // Categories come from authorgaurav_book_categories (managed at
+  // /admin/book-categories) so a new category shows up in this dropdown
+  // automatically — no code change needed.
+  const { data: categories } = useSupabaseData(fetchBookCategories, []);
+  const booksMenuLinks = [
+    { label: 'All Books', to: '/books' },
+    ...(categories ?? []).map((c) => ({ label: c.navLabel, to: `/books?category=${c.label}` })),
+    { label: 'Upcoming Books', to: '/books?status=Upcoming' },
+  ];
   const toggleRef = useRef<HTMLButtonElement>(null);
   const booksMenuRef = useRef<HTMLLIElement>(null);
 

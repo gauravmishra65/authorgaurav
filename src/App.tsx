@@ -39,6 +39,7 @@ const AdminBlogContent = lazy(() => import('./pages/admin/AdminBlogContent'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
 const AdminReaderPhotos = lazy(() => import('./pages/admin/AdminReaderPhotos'));
+const AdminBookCategories = lazy(() => import('./pages/admin/AdminBookCategories'));
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
 
@@ -76,6 +77,7 @@ export default function App() {
         <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
           <Route index element={<Navigate to="/admin/books" replace />} />
           <Route path="books" element={<Suspense fallback={<AdminFallback />}><AdminBooks /></Suspense>} />
+          <Route path="book-categories" element={<Suspense fallback={<AdminFallback />}><AdminBookCategories /></Suspense>} />
           <Route path="testimonials" element={<Suspense fallback={<AdminFallback />}><AdminTestimonials /></Suspense>} />
           <Route path="testimonial-submissions" element={<Suspense fallback={<AdminFallback />}><AdminTestimonialSubmissions /></Suspense>} />
           <Route path="blog" element={<Suspense fallback={<AdminFallback />}><AdminBlog /></Suspense>} />
