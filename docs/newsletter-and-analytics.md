@@ -135,6 +135,7 @@ before enabling it.
 | `discussion_guide_download` | Book-club questions file download on `/book-clubs` or `/readers` | `book` |
 | `event_registration_click` | "Register" clicked on an `/events` card | `event` (slug) |
 | `writetogetherhub_click` | Any real outbound link to writetogetherhub.com | `source` (which section/page) |
+| `interview_resource_click` | "Visit Official Resource" clicked on `/interview-resources` | `organization`, `title` |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any

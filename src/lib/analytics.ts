@@ -15,7 +15,8 @@ export type AnalyticsEvent =
   | 'media_kit_download'
   | 'discussion_guide_download'
   | 'event_registration_click'
-  | 'writetogetherhub_click';
+  | 'writetogetherhub_click'
+  | 'interview_resource_click';
 
 type AnalyticsProperties = Record<string, string | number | boolean | null | undefined>;
 
