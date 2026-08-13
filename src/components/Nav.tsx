@@ -10,12 +10,17 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 // than a new /journal URL — same content, different label, no risk to
 // anything already indexed. Events now has its own real page (Phase 9) with
 // structured date/time/location fields, so it no longer borrows /news.
+//
+// News itself had its own top-nav entry early on but silently lost it during
+// the Phase 2 header rebuild, leaving the page (real content, real route)
+// unreachable from anywhere on the site. Restored here, next to Events.
 const links = [
   { label: 'Home', to: '/' },
   { label: 'Books', to: '/books' },
   { label: 'About', to: '/about' },
   { label: 'Journal', to: '/blog' },
   { label: 'Media', to: '/media' },
+  { label: 'News', to: '/news' },
   { label: 'Events', to: '/events' },
   { label: 'Readers', to: '/readers' },
   { label: 'Contact', to: '/contact' },

@@ -43,6 +43,7 @@ export default function Footer() {
             <p className="label-caps text-gold-text mb-4">Media &amp; Journal</p>
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/blog" className="text-ivory/75 hover:text-gold-text transition-colors">Journal</Link></li>
+              <li><Link to="/news" className="text-ivory/75 hover:text-gold-text transition-colors">News</Link></li>
               <li><Link to="/events" className="text-ivory/75 hover:text-gold-text transition-colors">Events</Link></li>
               <li><Link to="/media" className="text-ivory/75 hover:text-gold-text transition-colors">Media</Link></li>
             </ul>
