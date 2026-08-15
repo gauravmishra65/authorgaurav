@@ -4,6 +4,7 @@ export interface ReaderPhoto {
   readerName?: string;
   caption?: string;
   bookTitle?: string;
+  kind: 'reader' | 'bookstore';
 }
 
 // Reader-submitted photos with the book live in Supabase

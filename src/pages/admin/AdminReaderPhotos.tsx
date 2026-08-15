@@ -5,7 +5,7 @@ import {
   fetchAdminBooks, type AdminBookRow,
 } from '../../lib/adminQueries';
 
-const empty: Partial<AdminReaderPhotoRow> = { image_src: '', reader_name: '', caption: '', book_id: null, sort_order: 0 };
+const empty: Partial<AdminReaderPhotoRow> = { image_src: '', reader_name: '', caption: '', book_id: null, sort_order: 0, kind: 'reader' };
 
 export default function AdminReaderPhotos() {
   const [rows, setRows] = useState<AdminReaderPhotoRow[]>([]);
@@ -57,7 +57,7 @@ export default function AdminReaderPhotos() {
       </div>
 
       <p className="text-sm text-muted mb-6">
-        Shown in the Reader Photos gallery on the Events page. Add the image file to the repo first (same convention as book covers), then enter its path here.
+        Reader photos show in the gallery on the Events page. Bookstore photos show on that book's own page (currently only wired up for Shadow Code). Add the image file to the repo first (same convention as book covers), then enter its path here.
       </p>
 
       {loading && <p className="text-muted">Loading…</p>}
@@ -69,7 +69,9 @@ export default function AdminReaderPhotos() {
               <div className="flex items-center gap-4 min-w-0">
                 <img src={p.image_src} alt="" className="w-12 h-12 rounded-sm object-cover flex-shrink-0 bg-cream" />
                 <div className="min-w-0">
-                  <p className="font-display text-ink truncate">{p.reader_name || 'Unnamed reader'}</p>
+                  <p className="font-display text-ink truncate">
+                    {p.kind === 'bookstore' ? 'Bookstore photo' : (p.reader_name || 'Unnamed reader')}
+                  </p>
                   <p className="text-2xs text-muted truncate">{p.caption || '—'} · {bookTitle(p.book_id)}</p>
                 </div>
               </div>
@@ -92,9 +94,16 @@ export default function AdminReaderPhotos() {
               <span className="label-caps text-muted block mb-1.5 text-2xs">Image path</span>
               <input value={editing.image_src ?? ''} onChange={(e) => setEditing({ ...editing, image_src: e.target.value })} className="input" placeholder="/images/reader-photos/example.jpg" />
             </label>
+            <label className="block">
+              <span className="label-caps text-muted block mb-1.5 text-2xs">Kind</span>
+              <select value={editing.kind ?? 'reader'} onChange={(e) => setEditing({ ...editing, kind: e.target.value as 'reader' | 'bookstore' })} className="input">
+                <option value="reader">Reader photo (fan with the book, shown on /events)</option>
+                <option value="bookstore">Bookstore photo (in-store stocking shot, shown on the book's page)</option>
+              </select>
+            </label>
             <div className="grid grid-cols-2 gap-4">
               <label className="block">
-                <span className="label-caps text-muted block mb-1.5 text-2xs">Reader Name (optional)</span>
+                <span className="label-caps text-muted block mb-1.5 text-2xs">Reader Name (optional, leave blank for bookstore photos)</span>
                 <input value={editing.reader_name ?? ''} onChange={(e) => setEditing({ ...editing, reader_name: e.target.value || null })} className="input" />
               </label>
               <label className="block">

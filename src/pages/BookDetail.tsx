@@ -20,7 +20,7 @@ import OffbeatLoveBackground from '../components/OffbeatLoveBackground';
 import LalitaBackground from '../components/LalitaBackground';
 import VishnuBackground from '../components/VishnuBackground';
 import { getBookTheme } from '../data/bookThemes';
-import { fetchBooks } from '../lib/queries';
+import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
 import { trackEvent } from '../lib/analytics';
@@ -71,6 +71,7 @@ const vishnuFaq = [
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+  const { data: allPhotos } = useSupabaseData(fetchReaderPhotos, []);
   const book = books?.find((b) => b.slug === slug);
 
   useEffect(() => {
@@ -90,6 +91,7 @@ export default function BookDetail() {
   const isVishnu = book.slug === 'vishnu-sahasranama';
   const isHindiRelabel = isLalita || isVishnu;
   const isInterviewGuide = book.slug === 'interview-guide';
+  const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
 
   return (
     <BookThemeProvider theme={theme}>
@@ -350,6 +352,33 @@ export default function BookDetail() {
             <p>Shadow Code sits at the intersection of financial-crime fiction and the techno-thriller: whistleblowers, encrypted trails, and institutional power in collision. It's written for readers who enjoy suspense grounded in how modern financial and digital systems actually work, with no technical background required.</p>
           </div>
         </Section>
+      )}
+
+      {/* Shadow Code only: on-shelf-in-India social proof, shown only once real bookstore photos exist */}
+      {isShadowCode && bookstorePhotos.length > 0 && (
+        <section className="bg-[var(--book-surface)]">
+          <div className="mx-auto max-w-5xl px-6 py-16">
+            <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Now in Stores</p>
+            <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
+            <p className="text-[var(--book-text)]/80 leading-relaxed max-w-2xl mx-auto text-center mb-10">
+              Shadow Code is now stocked in bookstores across Bangalore, Chennai, and Delhi, alongside the online retailers above.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+              {bookstorePhotos.map((photo) => (
+                <figure key={photo.id} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-bg)] overflow-hidden">
+                  <div className="h-48 flex items-center justify-center bg-[var(--book-bg)] p-2">
+                    <img src={photo.imageSrc} alt={photo.caption || 'Shadow Code on a bookstore shelf in India'} className="max-h-full max-w-full object-contain" loading="lazy" />
+                  </div>
+                  {photo.caption && (
+                    <figcaption className="px-3 py-2.5 text-2xs text-[var(--book-text)]/70 text-center border-t border-[var(--book-accent)]/10">
+                      {photo.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Offbeat Love only: reader-fit + setting sections */}

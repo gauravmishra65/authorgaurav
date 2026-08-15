@@ -9,7 +9,8 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 
 export default function Events() {
   const { data: events, loading, error } = useSupabaseData(fetchEvents, []);
-  const { data: readerPhotos } = useSupabaseData(fetchReaderPhotos, []);
+  const { data: allPhotos } = useSupabaseData(fetchReaderPhotos, []);
+  const readerPhotos = allPhotos?.filter((p) => p.kind === 'reader');
 
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = events?.filter((e) => e.eventDate >= today) ?? [];

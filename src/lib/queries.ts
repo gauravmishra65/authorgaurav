@@ -254,14 +254,15 @@ interface ReaderPhotoRow {
   reader_name: string | null;
   caption: string | null;
   sort_order: number;
+  kind: 'reader' | 'bookstore';
   authorgaurav_books: { title: string }[] | { title: string } | null;
 }
 
-/** Fan/reader-submitted photos with the book, for the Events page gallery — sorted by admin-set sort_order. */
+/** Fan/reader photos and real bookstore-stocking photos, sorted by admin-set sort_order. Filter by `kind` at the call site. */
 export async function fetchReaderPhotos(): Promise<ReaderPhoto[]> {
   const { data, error } = await supabase
     .from('authorgaurav_reader_photos')
-    .select('id, image_src, reader_name, caption, sort_order, authorgaurav_books(title)')
+    .select('id, image_src, reader_name, caption, sort_order, kind, authorgaurav_books(title)')
     .order('sort_order');
 
   if (error) throw error;
@@ -275,6 +276,7 @@ export async function fetchReaderPhotos(): Promise<ReaderPhoto[]> {
       readerName: row.reader_name ?? undefined,
       caption: row.caption ?? undefined,
       bookTitle: bookTitle ?? undefined,
+      kind: row.kind,
     };
   });
 }

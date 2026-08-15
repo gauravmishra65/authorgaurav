@@ -235,6 +235,7 @@ export interface AdminReaderPhotoRow {
   reader_name: string | null;
   caption: string | null;
   book_id: string | null;
+  kind: 'reader' | 'bookstore';
   sort_order: number;
   created_at: string;
 }
