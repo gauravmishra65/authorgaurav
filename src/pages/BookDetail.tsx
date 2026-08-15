@@ -360,7 +360,7 @@ export default function BookDetail() {
           <div className="mx-auto max-w-5xl px-6 py-16">
             <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Now in Stores</p>
             <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
-            <p className="text-[var(--book-text)]/80 leading-relaxed max-w-2xl mx-auto text-center mb-10">
+            <p className="leading-relaxed max-w-2xl mx-auto text-center mb-10" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
               Shadow Code is now stocked at bookstores across India, including Higginbotham's, Odyssey, and VR Mall in Chennai; Gangaram and Bookworm in Bangalore; Jain Book Agency in Delhi; and Barhisons, alongside the online retailers above.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -370,7 +370,10 @@ export default function BookDetail() {
                     <img src={photo.imageSrc} alt={photo.caption || 'Shadow Code on a bookstore shelf in India'} className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                   {photo.caption && (
-                    <figcaption className="px-3 py-2.5 text-2xs text-[var(--book-text)]/70 text-center border-t border-[var(--book-accent)]/10">
+                    <figcaption
+                      className="px-3 py-2.5 text-2xs text-center border-t border-[var(--book-accent)]/10"
+                      style={{ color: 'color-mix(in srgb, var(--book-text) 70%, transparent)' }}
+                    >
                       {photo.caption}
                     </figcaption>
                   )}
