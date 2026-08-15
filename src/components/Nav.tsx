@@ -83,12 +83,12 @@ export default function Nav() {
   return (
     <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
       <div className="hairline-solid w-full opacity-40" />
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
         <Link to="/" className="flex items-center shrink-0 rounded-md bg-ivory px-2.5 py-1.5" aria-label="Gaurav Mishra, home">
           <img src="/images/brand/logo-full.png" alt="Gaurav Mishra, authorgaurav.com" width={61} height={36} className="h-9 w-auto object-contain" />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-2 xl:gap-5 ml-6">
+        <ul className="hidden xl:flex items-center gap-3 ml-3">
           {desktopLinks.map((l) => (
             <li key={l.to}>
               <Link
@@ -128,12 +128,12 @@ export default function Nav() {
           </li>
         </ul>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <SocialLinks size={15} className="hidden xl:flex" iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-sm px-4 py-2 whitespace-nowrap">Explore Latest Book</Link>
+        <div className="hidden xl:flex items-center gap-2.5">
+          <SocialLinks size={15} iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
+          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-sm px-3.5 py-2 whitespace-nowrap">Explore Latest Book</Link>
         </div>
 
-        <button ref={toggleRef} className="lg:hidden text-ivory p-2 -mr-2" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+        <button ref={toggleRef} className="xl:hidden text-ivory p-2 -mr-2" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
