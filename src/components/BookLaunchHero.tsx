@@ -6,6 +6,9 @@ import ReleaseDetails from './ReleaseDetails';
 import NewsletterForm from './NewsletterForm';
 import type { Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
+import { fetchReaderPhotos } from '../lib/queries';
+import { useSupabaseData } from '../lib/useSupabaseData';
+import { buildBookstoreAvailabilityText } from '../lib/bookstoreAvailability';
 
 interface BookLaunchHeroProps {
   book: Book;
@@ -17,6 +20,9 @@ interface BookLaunchHeroProps {
 
 export default function BookLaunchHero({ book, translationEdition }: BookLaunchHeroProps) {
   const released = book.releaseDate ? isReleased(book.releaseDate) : false;
+  const { data: allPhotos } = useSupabaseData(fetchReaderPhotos, []);
+  const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
+  const bookstoreAvailabilityText = buildBookstoreAvailabilityText(book.title, bookstorePhotos);
 
   return (
     <section className="bg-ink bg-grain text-ivory relative overflow-hidden">
@@ -91,14 +97,12 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
         <ReleaseDetails book={book} />
       </div>
 
-      {book.slug === 'the-shadow-code' && (
+      {bookstoreAvailabilityText && (
         <>
           <div className="hairline-solid w-full opacity-20" />
           <div className="relative mx-auto max-w-2xl px-6 py-10 text-center">
             <p className="eyebrow text-gold-text mb-3">Now in Stores</p>
-            <p className="text-ivory/80 leading-relaxed">
-              Shadow Code is now stocked at bookstores across India, including Higginbotham's, Odyssey, and VR Mall in Chennai; Gangaram and Bookworm in Bangalore; Jain Book Agency in Delhi; and Barhisons, alongside the online retailers above.
-            </p>
+            <p className="text-ivory/80 leading-relaxed">{bookstoreAvailabilityText}</p>
           </div>
         </>
       )}

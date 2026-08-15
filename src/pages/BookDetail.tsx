@@ -21,6 +21,7 @@ import LalitaBackground from '../components/LalitaBackground';
 import VishnuBackground from '../components/VishnuBackground';
 import { getBookTheme } from '../data/bookThemes';
 import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
+import { buildBookstoreAvailabilityText } from '../lib/bookstoreAvailability';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
 import { trackEvent } from '../lib/analytics';
@@ -92,6 +93,7 @@ export default function BookDetail() {
   const isHindiRelabel = isLalita || isVishnu;
   const isInterviewGuide = book.slug === 'interview-guide';
   const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
+  const bookstoreAvailabilityText = buildBookstoreAvailabilityText(book.title, bookstorePhotos);
 
   return (
     <BookThemeProvider theme={theme}>
@@ -362,15 +364,17 @@ export default function BookDetail() {
         </Section>
       )}
 
-      {/* Shadow Code only: on-shelf-in-India social proof, shown only once real bookstore photos exist */}
-      {isShadowCode && bookstorePhotos.length > 0 && (
+      {/* Any book with real bookstore photos on file gets this section — not tied to a specific book */}
+      {bookstorePhotos.length > 0 && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Now in Stores</p>
             <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
-            <p className="leading-relaxed max-w-2xl mx-auto text-center mb-10" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
-              Shadow Code is now stocked at bookstores across India, including Higginbotham's, Odyssey, and VR Mall in Chennai; Gangaram and Bookworm in Bangalore; Jain Book Agency in Delhi; and Barhisons, alongside the online retailers above.
-            </p>
+            {bookstoreAvailabilityText && (
+              <p className="leading-relaxed max-w-2xl mx-auto text-center mb-10" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
+                {bookstoreAvailabilityText}
+              </p>
+            )}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
               {bookstorePhotos.map((photo) => (
                 <figure
@@ -379,7 +383,7 @@ export default function BookDetail() {
                   style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)' }}
                 >
                   <div className="h-48 flex items-center justify-center bg-[var(--book-bg)] p-2">
-                    <img src={photo.imageSrc} alt={photo.caption || 'Shadow Code on a bookstore shelf in India'} className="max-h-full max-w-full object-contain" loading="lazy" />
+                    <img src={photo.imageSrc} alt={photo.caption || `${book.title} on a bookstore shelf in India`} className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                   {photo.caption && (
                     <figcaption
