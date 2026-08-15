@@ -394,8 +394,8 @@ export default function BookDetail() {
                   </div>
                   {photo.caption && (
                     <figcaption
-                      className="px-3 py-2.5 text-2xs text-center border-t"
-                      style={{ color: 'color-mix(in srgb, var(--book-text) 70%, transparent)', borderColor: 'color-mix(in srgb, var(--book-accent) 10%, transparent)' }}
+                      className="px-3 py-2.5 text-sm font-medium text-center border-t"
+                      style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)', borderColor: 'color-mix(in srgb, var(--book-accent) 10%, transparent)' }}
                     >
                       {photo.caption}
                     </figcaption>

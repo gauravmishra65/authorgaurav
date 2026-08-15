@@ -102,7 +102,7 @@ export default function WhereToBuy() {
                         />
                       </div>
                       {photo.caption && (
-                        <figcaption className="px-3 py-2.5 text-2xs text-muted text-center border-t border-gold/10">
+                        <figcaption className="px-3 py-2.5 text-sm font-medium text-ink text-center border-t border-gold/10">
                           {storeNameOnly(photo.caption)}
                         </figcaption>
                       )}
