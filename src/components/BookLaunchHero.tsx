@@ -90,6 +90,18 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
       <div className="relative mx-auto max-w-4xl px-6 py-10">
         <ReleaseDetails book={book} />
       </div>
+
+      {book.slug === 'the-shadow-code' && (
+        <>
+          <div className="hairline-solid w-full opacity-20" />
+          <div className="relative mx-auto max-w-2xl px-6 py-10 text-center">
+            <p className="eyebrow text-gold-text mb-3">Now in Stores</p>
+            <p className="text-ivory/80 leading-relaxed">
+              Shadow Code is now stocked at bookstores across India, including Higginbotham's, Odyssey, and VR Mall in Chennai; Gangaram and Bookworm in Bangalore; Jain Book Agency in Delhi; and Barhisons, alongside the online retailers above.
+            </p>
+          </div>
+        </>
+      )}
     </section>
   );
 }
