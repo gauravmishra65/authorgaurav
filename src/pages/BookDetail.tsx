@@ -361,7 +361,7 @@ export default function BookDetail() {
             <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Now in Stores</p>
             <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
             <p className="text-[var(--book-text)]/80 leading-relaxed max-w-2xl mx-auto text-center mb-10">
-              Shadow Code is now stocked in bookstores across Bangalore, Chennai, and Delhi, alongside the online retailers above.
+              Shadow Code is now stocked at bookstores across India, including Higginbotham's, Odyssey, and VR Mall in Chennai; Gangaram and Bookworm in Bangalore; Jain Book Agency in Delhi; and Barhisons, alongside the online retailers above.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
               {bookstorePhotos.map((photo) => (
