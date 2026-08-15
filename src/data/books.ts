@@ -43,6 +43,7 @@ export interface Book {
   releaseDate?: string;
   kindleUrl?: string;
   paperbackUrl?: string;
+  shopifyUrl?: string;
   /** Real Goodreads book-page URL, if one exists — a review/shelving link,
    * not a retailer, so it's rendered separately from getBuyOptions() rather
    * than folded into the buy-links list. */
@@ -83,7 +84,7 @@ export interface BuyOption {
 // fields into a single, real, honest list of buy options — used by
 // BookCarousel, BookCard, and BookPurchasePanel so every page shows the
 // exact same options for a given book.
-export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paperbackUrl'>): BuyOption[] {
+export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paperbackUrl' | 'shopifyUrl'>): BuyOption[] {
   const options: BuyOption[] = [];
   for (const link of book.buyLinks) {
     if (link.label === 'Kindle') continue;
@@ -92,5 +93,6 @@ export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paper
   const kindleHref = book.kindleUrl || book.buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;
   if (kindleHref) options.push({ label: 'Kindle', href: kindleHref });
   if (book.paperbackUrl) options.push({ label: 'Paperback', href: book.paperbackUrl });
+  if (book.shopifyUrl) options.push({ label: 'Shopify', href: book.shopifyUrl });
   return options;
 }

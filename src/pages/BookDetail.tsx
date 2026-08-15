@@ -15,6 +15,7 @@ import Section from '../components/Section';
 import ReleaseDetails from '../components/ReleaseDetails';
 import ReleaseCountdown from '../components/ReleaseCountdown';
 import SocialShareButtons from '../components/SocialShareButtons';
+import WhereToBuyButton from '../components/WhereToBuyButton';
 import ShadowCodeBackground from '../components/ShadowCodeBackground';
 import OffbeatLoveBackground from '../components/OffbeatLoveBackground';
 import LalitaBackground from '../components/LalitaBackground';
@@ -237,6 +238,12 @@ export default function BookDetail() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Secondary purchase path: every book page links to the consolidated directory alongside its own retailer buttons above */}
+      <section className="bg-[var(--book-bg)] px-6 py-12 text-center">
+        <p className="font-display text-xl mb-5" style={{ color: 'var(--book-text)' }}>Ready to read?</p>
+        <WhereToBuyButton source={`book-detail:${book.slug}`} />
       </section>
 
       {/* Lalita Sahasranama only: सरल अर्थ / भावार्थ / दैनिक जीवन में प्रयोग / किन पाठकों के लिए उपयोगी */}

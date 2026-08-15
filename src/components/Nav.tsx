@@ -17,6 +17,7 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 const links = [
   { label: 'Home', to: '/' },
   { label: 'Books', to: '/books' },
+  { label: 'Where to Buy', to: '/where-to-buy' },
   { label: 'About', to: '/about' },
   { label: 'Journal', to: '/blog' },
   { label: 'Media', to: '/media' },

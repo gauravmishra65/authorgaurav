@@ -38,3 +38,34 @@ export function buildBookstoreAvailabilityText(bookTitle: string, photos: Reader
     : clauses[0];
   return `${bookTitle} is now stocked at bookstores across India, including ${joined}, alongside the online retailers above.`;
 }
+
+export interface BookstoreCityGroup {
+  city: string | null;
+  photos: ReaderPhoto[];
+}
+
+/**
+ * Groups real bookstore photos (any book) by the city named in their caption
+ * ("Store, City"), for the site-wide "Find in Bookstores" directory. Photos
+ * with no city in their caption land in a final `city: null` group rather
+ * than being dropped or assigned a guessed location.
+ */
+export function groupBookstorePhotosByCity(photos: ReaderPhoto[]): BookstoreCityGroup[] {
+  const byCity = new Map<string, ReaderPhoto[]>();
+  const noCity: ReaderPhoto[] = [];
+
+  for (const photo of photos) {
+    const [, city] = (photo.caption ?? '').split(',').map((s) => s.trim());
+    if (city) {
+      const list = byCity.get(city) ?? [];
+      list.push(photo);
+      byCity.set(city, list);
+    } else {
+      noCity.push(photo);
+    }
+  }
+
+  const groups: BookstoreCityGroup[] = [...byCity.entries()].map(([city, cityPhotos]) => ({ city, photos: cityPhotos }));
+  if (noCity.length > 0) groups.push({ city: null, photos: noCity });
+  return groups;
+}

@@ -15,6 +15,7 @@ import Section from '../components/Section';
 import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
+import WhereToBuyButton from '../components/WhereToBuyButton';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
@@ -159,6 +160,10 @@ export default function Home() {
         {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
         {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
         {!loading && !error && <BookCarousel books={filtered} />}
+
+        <div className="mx-auto max-w-6xl px-6 pb-20 pt-4 text-center">
+          <WhereToBuyButton source="home" subtext="Online & selected bookstores" />
+        </div>
       </section>
 
       <Testimonials />

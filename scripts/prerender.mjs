@@ -38,7 +38,7 @@ if (existsSync(envPath)) {
 
 const staticRoutes = [
   '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
-  '/media', '/readers', '/events', '/book-clubs', '/writing-resources', '/interview-resources',
+  '/media', '/readers', '/events', '/book-clubs', '/writing-resources', '/interview-resources', '/where-to-buy',
   '/privacy-policy', '/terms', '/accessibility',
 ];
 

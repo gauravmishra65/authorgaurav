@@ -156,6 +156,27 @@ h1, h2, h3, h4 {
 .btn-glow-red { transition: box-shadow 0.25s ease, transform 0.25s ease; }
 .btn-glow-red:hover { box-shadow: 0 0 24px -6px rgba(197,42,53,0.55); transform: translateY(-1px); }
 
+/* "Where to Buy" CTA: a deliberately distinct premium chip — always a dark
+   navy surface with a thin gold border and ivory text, regardless of
+   whether it sits on a light or dark section, so it reads as its own
+   consistent brand element rather than blending into either section's
+   normal button styling. */
+.btn-where-to-buy {
+  background: var(--navy);
+  color: var(--ivory);
+  border: 1px solid rgba(177,138,74,0.45);
+  box-shadow: 0 8px 20px -12px rgba(16,24,39,0.5);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-where-to-buy:hover {
+  background: var(--ink-soft);
+  border-color: rgba(177,138,74,0.75);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -12px rgba(16,24,39,0.6);
+}
+.btn-where-to-buy .btn-where-to-buy-arrow { transition: transform 0.25s ease; }
+.btn-where-to-buy:hover .btn-where-to-buy-arrow { transform: translateX(4px); }
+
 /* Generic, reusable across any page: a softer underline than the plain
    `underline` utility — grows in from the center on hover rather than
    just appearing, and a gentler hover lift than the site's other

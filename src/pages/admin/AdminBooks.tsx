@@ -11,7 +11,7 @@ const emptyBook: Partial<AdminBookRow> = {
   image_src: '', image_width: undefined, image_height: undefined, book_website: '',
   buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
-  release_date: null, kindle_url: null, paperback_url: null, goodreads_url: null, featured: false,
+  release_date: null, kindle_url: null, paperback_url: null, shopify_url: null, goodreads_url: null, featured: false,
   original_language: null, translated_titles: null, author_note: null, isbn10: null, isbn13: null,
   page_count: null, formats: null, sample_url: null, trailer_url: null, themes: null,
   reading_audience: null, seo_title: null, seo_description: null,
@@ -182,6 +182,7 @@ export default function AdminBooks() {
               </Field>
               <Field label="Kindle URL (optional)"><input value={editing.kindle_url ?? ''} onChange={(e) => setEditing({ ...editing, kindle_url: e.target.value || null })} className="input" /></Field>
               <Field label="Paperback URL (optional)"><input value={editing.paperback_url ?? ''} onChange={(e) => setEditing({ ...editing, paperback_url: e.target.value || null })} className="input" /></Field>
+              <Field label="Shopify URL (optional)"><input value={editing.shopify_url ?? ''} onChange={(e) => setEditing({ ...editing, shopify_url: e.target.value || null })} className="input" /></Field>
               <Field label="Goodreads URL (optional)"><input value={editing.goodreads_url ?? ''} onChange={(e) => setEditing({ ...editing, goodreads_url: e.target.value || null })} className="input" /></Field>
             </div>
 

@@ -32,6 +32,7 @@ interface BookRow {
   release_date: string | null;
   kindle_url: string | null;
   paperback_url: string | null;
+  shopify_url: string | null;
   goodreads_url: string | null;
   featured: boolean;
   original_language: string | null;
@@ -85,6 +86,7 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     releaseDate: row.release_date ?? undefined,
     kindleUrl: row.kindle_url ?? undefined,
     paperbackUrl: row.paperback_url ?? undefined,
+    shopifyUrl: row.shopify_url ?? undefined,
     goodreadsUrl: row.goodreads_url ?? undefined,
     featured: row.featured,
     originalLanguage: row.original_language ?? undefined,

@@ -21,6 +21,7 @@ export default function Footer() {
             <p className="label-caps text-gold-text mb-4">Explore</p>
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/books" className="text-ivory/75 hover:text-gold-text transition-colors">Books</Link></li>
+              <li><Link to="/where-to-buy" className="text-ivory/75 hover:text-gold-text transition-colors">Where to Buy</Link></li>
               <li><Link to="/about" className="text-ivory/75 hover:text-gold-text transition-colors">About</Link></li>
               <li><Link to="/start-here" className="text-ivory/75 hover:text-gold-text transition-colors">Start Here (New Readers)</Link></li>
               <li><Link to="/writing-resources" className="text-ivory/75 hover:text-gold-text transition-colors">Writing Resources</Link></li>

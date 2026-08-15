@@ -6,6 +6,7 @@ import BookSearch from '../components/BookSearch';
 import BookFilters from '../components/BookFilters';
 import BookGrid from '../components/BookGrid';
 import EmailStrip from '../components/EmailStrip';
+import WhereToBuyButton from '../components/WhereToBuyButton';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 
@@ -58,9 +59,10 @@ export default function Books() {
         <div className="mx-auto max-w-5xl px-6 py-10 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">The Books</h1>
-          <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed mb-8">
             From romance to thriller to memoir to devotion, these are works that share one belief: a good story can carry a reader anywhere.
           </p>
+          <WhereToBuyButton source="books" />
         </div>
       </section>
 

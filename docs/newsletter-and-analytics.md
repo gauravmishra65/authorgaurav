@@ -136,6 +136,7 @@ before enabling it.
 | `event_registration_click` | "Register" clicked on an `/events` card | `event` (slug) |
 | `writetogetherhub_click` | Any real outbound link to writetogetherhub.com | `source` (which section/page) |
 | `interview_resource_click` | "Visit Official Resource" clicked on `/interview-resources` | `organization`, `title` |
+| `where_to_buy_click` | The "Where to Buy" CTA is clicked, on any of its placements (Home, Books, a book detail page) | `source` (which page/section) |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any

@@ -24,6 +24,7 @@ const Events = lazy(() => import('./pages/Events'));
 const BookClubs = lazy(() => import('./pages/BookClubs'));
 const WritingResources = lazy(() => import('./pages/WritingResources'));
 const InterviewResources = lazy(() => import('./pages/InterviewResources'));
+const WhereToBuy = lazy(() => import('./pages/WhereToBuy'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Terms = lazy(() => import('./pages/Terms'));
@@ -70,6 +71,7 @@ export default function App() {
           <Route path="/book-clubs" element={<BookClubs />} />
           <Route path="/writing-resources" element={<WritingResources />} />
           <Route path="/interview-resources" element={<InterviewResources />} />
+          <Route path="/where-to-buy" element={<WhereToBuy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/accessibility" element={<Accessibility />} />
