@@ -141,8 +141,12 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {lalitaFeatures.map((point) => (
-                <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
+                <div
+                  key={point}
+                  className="card-soft-lift rounded-md border p-6"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{point}</p>
                 </div>
               ))}
             </div>
@@ -157,8 +161,12 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {vishnuFeatures.map((point) => (
-                <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
+                <div
+                  key={point}
+                  className="card-soft-lift rounded-md border p-6"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{point}</p>
                 </div>
               ))}
             </div>
@@ -184,7 +192,7 @@ export default function BookDetail() {
             <p className="font-display text-2xl md:text-3xl leading-snug mb-5" style={{ color: '#672F3A' }}>
               Two lives shaped by different worlds. One connection neither expected.
             </p>
-            <p className="text-[var(--book-text)]/80 leading-relaxed">
+            <p className="leading-relaxed" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
               Offbeat Love unfolds against the pulse of Mumbai, where two people from very different worlds are pulled toward each other despite the distance between their families, their expectations, and the lives they were each raised to live.
             </p>
           </div>
@@ -234,7 +242,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               इस पुस्तक में श्री ललिता सहस्रनाम के नामों को सरल और सहज हिंदी में समझाने का प्रयास किया गया है, ताकि कठिन संस्कृत श्लोक भी आमजन के लिए सुलभ बन सकें।
             </p>
           </div>
@@ -245,7 +253,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>भावार्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               अर्थ के साथ-साथ हर नाम के भावार्थ को भी सामने रखा गया है, जिससे पाठक केवल शब्दों को नहीं, बल्कि उनके पीछे की भावना और भाव को भी समझ सकें।
             </p>
           </div>
@@ -256,7 +264,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक जीवन में प्रयोग</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक केवल पाठ के लिए नहीं, बल्कि दैनिक जीवन में शांति, संतुलन और सकारात्मकता लाने के एक सरल साधन के रूप में भी उपयोगी है।
             </p>
           </div>
@@ -267,7 +275,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक उन पाठकों के लिए उपयुक्त है जो संस्कृत श्लोकों को सरल हिंदी में समझना चाहते हैं, नियमित पाठ करना चाहते हैं, या अपने आध्यात्मिक अभ्यास को दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
           </div>
@@ -278,7 +286,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               गौरव मिश्रा ने इस सहस्रनाम को संकलित कर इसे सरल भाषा में प्रस्तुत करने का प्रयास किया है, ताकि अधिक से अधिक पाठक इसका लाभ उठा सकें।
             </p>
           </div>
@@ -290,7 +298,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               इस पुस्तक में श्री विष्णु सहस्रनाम के हर श्लोक का सरल अर्थ दिया गया है, ताकि पाठक बिना संस्कृत के गहन ज्ञान के भी भावार्थ को समझ सकें।
             </p>
           </div>
@@ -301,7 +309,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक विशेष रूप से युवाओं और आधुनिक पाठकों के लिए उपयोगी है जो भक्ति को केवल पाठ तक सीमित न रखकर, उसे अपने दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
           </div>
@@ -312,7 +320,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक पाठ और चिंतन</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               नियमित पाठ और चिंतन के माध्यम से यह पुस्तक भक्ति को दैनिक जीवन का स्वाभाविक हिस्सा बनाने में सहायक है।
             </p>
           </div>
@@ -323,7 +331,7 @@ export default function BookDetail() {
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">
+            <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               गौरव मिश्रा ने श्री विष्णु सहस्रनाम को सरल भाषा में संकलित किया है, विशेष रूप से युवा और आधुनिक पाठकों को ध्यान में रखते हुए, ताकि यह ज्ञान अधिक सुलभ बन सके।
             </p>
           </div>
@@ -365,14 +373,18 @@ export default function BookDetail() {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
               {bookstorePhotos.map((photo) => (
-                <figure key={photo.id} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-bg)] overflow-hidden">
+                <figure
+                  key={photo.id}
+                  className="rounded-md border bg-[var(--book-bg)] overflow-hidden"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)' }}
+                >
                   <div className="h-48 flex items-center justify-center bg-[var(--book-bg)] p-2">
                     <img src={photo.imageSrc} alt={photo.caption || 'Shadow Code on a bookstore shelf in India'} className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                   {photo.caption && (
                     <figcaption
-                      className="px-3 py-2.5 text-2xs text-center border-t border-[var(--book-accent)]/10"
-                      style={{ color: 'color-mix(in srgb, var(--book-text) 70%, transparent)' }}
+                      className="px-3 py-2.5 text-2xs text-center border-t"
+                      style={{ color: 'color-mix(in srgb, var(--book-text) 70%, transparent)', borderColor: 'color-mix(in srgb, var(--book-accent) 10%, transparent)' }}
                     >
                       {photo.caption}
                     </figcaption>
@@ -391,8 +403,12 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>Why Romance Readers May Enjoy It</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {offbeatLoveWhyReaders.map((point) => (
-                <div key={point} className="card-soft-lift rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-6">
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{point}</p>
+                <div
+                  key={point}
+                  className="card-soft-lift rounded-md border p-6"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{point}</p>
                 </div>
               ))}
             </div>
@@ -404,7 +420,7 @@ export default function BookDetail() {
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Setting &amp; Journey</p>
-            <p className="text-[var(--book-text)]/85 leading-relaxed text-lg mb-6">
+            <p className="leading-relaxed text-lg mb-6" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               The story moves between two very different worlds, shaped by different families, different expectations, and different ideas of what love is allowed to look like, and finds, in Mumbai, the one place they meet.
             </p>
             {book.bookWebsite && (
@@ -461,9 +477,13 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
               {lalitaFaq.map(({ q, a }) => (
-                <div key={q} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
+                <div
+                  key={q}
+                  className="rounded-md border p-5"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
                   <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{a}</p>
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{a}</p>
                 </div>
               ))}
             </div>
@@ -478,9 +498,13 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
               {vishnuFaq.map(({ q, a }) => (
-                <div key={q} className="rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
+                <div
+                  key={q}
+                  className="rounded-md border p-5"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
                   <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{a}</p>
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{a}</p>
                 </div>
               ))}
             </div>
@@ -495,9 +519,13 @@ export default function BookDetail() {
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>Book-Club Questions</p>
             <div className="space-y-4">
               {offbeatLoveBookClubQuestions.map((q, i) => (
-                <div key={q} className="card-soft-lift flex gap-4 rounded-md border border-[var(--book-accent)]/20 bg-[var(--book-surface)]/40 p-5">
+                <div
+                  key={q}
+                  className="card-soft-lift flex gap-4 rounded-md border p-5"
+                  style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
+                >
                   <span className="label-caps shrink-0" style={{ color: 'var(--book-accent)' }}>{String(i + 1).padStart(2, '0')}</span>
-                  <p className="text-[var(--book-text)]/85 leading-relaxed text-lg">{q}</p>
+                  <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{q}</p>
                 </div>
               ))}
             </div>
@@ -511,7 +539,7 @@ export default function BookDetail() {
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Go Deeper</p>
             <h2 className="font-display text-2xl mb-4" style={{ color: 'var(--book-text)' }}>Interview Resources &amp; Tools</h2>
-            <p className="text-[var(--book-text)]/80 leading-relaxed mb-6">
+            <p className="leading-relaxed mb-6" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
               Official references and practical worksheets that support this book, kept current on a dedicated resources page.
             </p>
             <Link
