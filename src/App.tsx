@@ -41,6 +41,7 @@ const AdminBlogContent = lazy(() => import('./pages/admin/AdminBlogContent'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
 const AdminReaderPhotos = lazy(() => import('./pages/admin/AdminReaderPhotos'));
+const AdminWebpConverter = lazy(() => import('./pages/admin/AdminWebpConverter'));
 const AdminBookCategories = lazy(() => import('./pages/admin/AdminBookCategories'));
 const AdminSubscribers = lazy(() => import('./pages/admin/AdminSubscribers'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="news" element={<Suspense fallback={<AdminFallback />}><AdminNews /></Suspense>} />
           <Route path="events" element={<Suspense fallback={<AdminFallback />}><AdminEvents /></Suspense>} />
           <Route path="reader-photos" element={<Suspense fallback={<AdminFallback />}><AdminReaderPhotos /></Suspense>} />
+          <Route path="webp-converter" element={<Suspense fallback={<AdminFallback />}><AdminWebpConverter /></Suspense>} />
           <Route path="subscribers" element={<Suspense fallback={<AdminFallback />}><AdminSubscribers /></Suspense>} />
           <Route path="messages" element={<Suspense fallback={<AdminFallback />}><AdminMessages /></Suspense>} />
         </Route>

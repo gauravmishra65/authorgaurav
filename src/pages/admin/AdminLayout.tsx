@@ -12,6 +12,7 @@ const links = [
   { label: 'News', to: '/admin/news' },
   { label: 'Events', to: '/admin/events' },
   { label: 'Reader Photos', to: '/admin/reader-photos' },
+  { label: 'WebP Converter', to: '/admin/webp-converter' },
   { label: 'Newsletter Subscribers', to: '/admin/subscribers' },
   { label: 'Contact Messages', to: '/admin/messages' },
 ];
