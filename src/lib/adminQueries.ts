@@ -25,6 +25,8 @@ export interface AdminBookRow {
   kindle_url: string | null;
   paperback_url: string | null;
   shopify_url: string | null;
+  shopee_url: string | null;
+  lazada_url: string | null;
   goodreads_url: string | null;
   featured: boolean;
   original_language: string | null;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import RetailerButton from './RetailerButton';
@@ -8,6 +9,13 @@ interface BookCarouselProps {
 }
 
 export default function BookCarousel({ books }: BookCarouselProps) {
+  // `:hover`/`:focus-within` alone (in index.css) never fires on touch
+  // devices, so a phone tap on a cover or retailer button lands on a track
+  // that's still sliding underneath it. Pausing on pointerdown (which fires
+  // before the synthetic click on a tap) freezes the track in place before
+  // the tap resolves, on every pointer type, not just mouse hover.
+  const [paused, setPaused] = useState(false);
+
   if (books.length === 0) {
     return <p className="text-center text-muted py-8">No books in this category yet.</p>;
   }
@@ -18,7 +26,13 @@ export default function BookCarousel({ books }: BookCarouselProps) {
   const duration = books.length * 4.5;
 
   return (
-    <div className="relative overflow-hidden">
+    <div
+      className="relative overflow-hidden"
+      onPointerDown={() => setPaused(true)}
+      onPointerUp={() => setPaused(false)}
+      onPointerLeave={() => setPaused(false)}
+      onPointerCancel={() => setPaused(false)}
+    >
       <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-gradient-to-r from-ivory to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-gradient-to-l from-ivory to-transparent z-10" />
 
@@ -29,7 +43,10 @@ export default function BookCarousel({ books }: BookCarouselProps) {
         mr-10 instead, so every item (duplicates included) contributes an
         identical width and translateX(-50%) lands exactly on the seam.
       */}
-      <div className="carousel-track flex w-max py-6" style={{ animationDuration: `${duration}s` }}>
+      <div
+        className="carousel-track flex w-max py-6"
+        style={{ animationDuration: `${duration}s`, animationPlayState: paused ? 'paused' : undefined }}
+      >
         {track.map((b, i) => (
           <div
             key={`${b.id}-${i}`}
