@@ -33,7 +33,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
       <div className="relative mx-auto max-w-6xl px-6 py-16">
         {!released && book.releaseDate && (
           <div className="mb-12 pb-10 border-b border-gold/15 text-center">
-            <p className="eyebrow text-gold-text mb-6">The Code Will Be Revealed In</p>
+            <p className="eyebrow text-gold-text mb-6">Releasing In</p>
             <ReleaseCountdown releaseDate={book.releaseDate} />
           </div>
         )}
@@ -74,8 +74,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
       <div className="hairline-solid w-full opacity-20" />
 
       <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
-        <p className="eyebrow text-gold-text mb-3">Enter the Mystery</p>
-        <h3 className="font-display text-2xl md:text-3xl mb-5">A world built to be uncovered, one clue at a time.</h3>
+        <p className="eyebrow text-gold-text mb-3">Synopsis</p>
         <p className="text-ivory/80 leading-relaxed max-w-2xl mx-auto">{book.synopsis}</p>
       </div>
 
@@ -88,7 +87,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
         <p className="text-ivory/70 text-sm mb-7">
           {released ? `${book.title} is out now. Join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
         </p>
-        <NewsletterForm id="launch-signup" source="shadow-code-launch" buttonLabel={released ? 'Join the Reader Circle' : 'Get Release Updates'} />
+        <NewsletterForm id={`launch-signup-${book.slug}`} source={`${book.slug}-launch`} buttonLabel={released ? 'Join the Reader Circle' : 'Get Release Updates'} />
       </div>
 
       <div className="hairline-solid w-full opacity-20" />

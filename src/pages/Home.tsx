@@ -55,6 +55,7 @@ export default function Home() {
 
   const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
   const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
+  const friendYouKeep = books?.find((b) => b.slug === 'the-friend-you-keep');
 
   return (
     <>
@@ -119,8 +120,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED RELEASE */}
+      {/* FEATURED RELEASE(S) */}
       {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
+      {friendYouKeep && <BookLaunchHero book={friendYouKeep} />}
 
       {/* EXPLORE BY GENRE */}
       <Section tone="cream">
