@@ -37,6 +37,9 @@ interface BookRow {
   lazada_url: string | null;
   goodreads_url: string | null;
   featured: boolean;
+  milestone_sales_count: number | null;
+  milestone_month_label: string | null;
+  milestone_store_count: number | null;
   original_language: string | null;
   translated_titles: Record<string, string> | null;
   author_note: string | null;
@@ -93,6 +96,9 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     lazadaUrl: row.lazada_url ?? undefined,
     goodreadsUrl: row.goodreads_url ?? undefined,
     featured: row.featured,
+    milestoneSalesCount: row.milestone_sales_count ?? undefined,
+    milestoneMonthLabel: row.milestone_month_label ?? undefined,
+    milestoneStoreCount: row.milestone_store_count ?? undefined,
     originalLanguage: row.original_language ?? undefined,
     translatedTitles: row.translated_titles ?? undefined,
     authorNote: row.author_note ?? undefined,

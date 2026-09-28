@@ -12,6 +12,7 @@ const emptyBook: Partial<AdminBookRow> = {
   buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
   release_date: null, kindle_url: null, paperback_url: null, shopify_url: null, shopee_url: null, lazada_url: null, goodreads_url: null, featured: false,
+  milestone_sales_count: null, milestone_month_label: null, milestone_store_count: null,
   original_language: null, translated_titles: null, author_note: null, isbn10: null, isbn13: null,
   page_count: null, formats: null, sample_url: null, trailer_url: null, themes: null,
   reading_audience: null, seo_title: null, seo_description: null,
@@ -185,6 +186,9 @@ export default function AdminBooks() {
               <Field label="Shopify URL (optional)"><input value={editing.shopify_url ?? ''} onChange={(e) => setEditing({ ...editing, shopify_url: e.target.value || null })} className="input" /></Field>
               <Field label="Shopee URL (optional)"><input value={editing.shopee_url ?? ''} onChange={(e) => setEditing({ ...editing, shopee_url: e.target.value || null })} className="input" /></Field>
               <Field label="Lazada URL (optional)"><input value={editing.lazada_url ?? ''} onChange={(e) => setEditing({ ...editing, lazada_url: e.target.value || null })} className="input" /></Field>
+              <Field label="Milestone sales count (leave blank to hide the banner)"><input type="number" value={editing.milestone_sales_count ?? ''} onChange={(e) => setEditing({ ...editing, milestone_sales_count: e.target.value ? Number(e.target.value) : null })} className="input" placeholder="e.g. 850" /></Field>
+              <Field label="Milestone month label"><input value={editing.milestone_month_label ?? ''} onChange={(e) => setEditing({ ...editing, milestone_month_label: e.target.value || null })} className="input" placeholder="e.g. September 2026" /></Field>
+              <Field label="Milestone bookstore count (optional)"><input type="number" value={editing.milestone_store_count ?? ''} onChange={(e) => setEditing({ ...editing, milestone_store_count: e.target.value ? Number(e.target.value) : null })} className="input" placeholder="e.g. 40" /></Field>
               <Field label="Goodreads URL (optional)"><input value={editing.goodreads_url ?? ''} onChange={(e) => setEditing({ ...editing, goodreads_url: e.target.value || null })} className="input" /></Field>
             </div>
 

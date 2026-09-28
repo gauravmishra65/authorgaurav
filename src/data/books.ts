@@ -52,6 +52,12 @@ export interface Book {
   goodreadsUrl?: string;
   /** Gives the book a "New Release" ribbon and extra prominence in listings. */
   featured?: boolean;
+  /** Sales-milestone banner on the book page (e.g. "850+ copies sold in
+   * September 2026"). Shown only when milestoneSalesCount is set — admin
+   * clears it to null to turn the banner off between milestones. */
+  milestoneSalesCount?: number;
+  milestoneMonthLabel?: string;
+  milestoneStoreCount?: number;
   // TODO_CONTENT: all fields below are part of the Phase 4 data model but
   // currently empty for every book — none of this is invented, and the UI
   // that reads them only renders when a real value exists.

@@ -137,6 +137,27 @@ export default function BookDetail() {
         }
       />
 
+      {/* Sales-milestone banner: any book with milestoneSalesCount set gets this; admin clears the field to turn it off between milestones */}
+      {book.milestoneSalesCount && (
+        <section className="bg-[var(--book-surface)]">
+          <div className="mx-auto max-w-3xl px-6 py-14 text-center">
+            <p className="eyebrow mb-3" style={{ color: 'var(--book-accent)' }}>Milestone</p>
+            <p className="font-display text-4xl md:text-5xl mb-4" style={{ color: 'var(--book-accent)' }}>
+              {book.milestoneSalesCount}+ Copies Sold
+            </p>
+            <p className="leading-relaxed max-w-2xl mx-auto" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
+              {book.milestoneMonthLabel ? `In ${book.milestoneMonthLabel}, ` : ''}
+              {book.title} sold {book.milestoneSalesCount}+ copies{isShadowCode ? ' in English and Hindi' : ''}, across Amazon, Flipkart, Kindle
+              {isShadowCode ? ', Shopee, Lazada and Shopify' : ''}
+              {book.milestoneStoreCount
+                ? `, and in ${book.milestoneStoreCount}+ bookstores across India${isShadowCode ? ', including Delhi, Bangalore, Chennai, Uttar Pradesh and Rajasthan' : ''}`
+                : ''}
+              .
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* Lalita Sahasranama only: key-features section ahead of the generic synopsis */}
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-bg)]">

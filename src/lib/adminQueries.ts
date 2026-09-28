@@ -29,6 +29,9 @@ export interface AdminBookRow {
   lazada_url: string | null;
   goodreads_url: string | null;
   featured: boolean;
+  milestone_sales_count: number | null;
+  milestone_month_label: string | null;
+  milestone_store_count: number | null;
   original_language: string | null;
   translated_titles: Record<string, string> | null;
   author_note: string | null;
