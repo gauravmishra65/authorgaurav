@@ -193,20 +193,10 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
         <p className="text-ivory/80 leading-relaxed max-w-2xl mx-auto">{book.synopsis}</p>
       </div>
 
-      {/* Reader Circle sits in the middle of the flow, not at the end */}
-      <div className="hairline-solid w-full opacity-20" />
-
-      <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
-        <p className="eyebrow text-gold-text mb-3">Reader Circle</p>
-        <h3 className="font-display text-2xl md:text-3xl mb-2">{released ? 'Join the Reader Circle' : 'Get Release Updates'}</h3>
-        <p className="text-ivory/70 text-sm mb-7">
-          {released ? `${book.title} is out now. Join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
-        </p>
-        <Link to="/#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
-          {released ? 'Join the Reader Circle' : 'Get Release Updates'} <ArrowRight size={15} />
-        </Link>
-      </div>
-
+      {/* Per-book "Reader Circle" teaser was removed — it just duplicated
+          the single canonical signup at the bottom of the homepage
+          (id="free-chapter"), once per featured book. That one section
+          is the merged destination for all of these. */}
       <div className="hairline-solid w-full opacity-20" />
 
       <div className="relative mx-auto max-w-4xl px-6 py-10">

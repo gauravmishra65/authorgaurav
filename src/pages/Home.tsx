@@ -9,13 +9,10 @@ import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import BookLaunchHero from '../components/BookLaunchHero';
 import Divider from '../components/Divider';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
 import WhereToBuyButton from '../components/WhereToBuyButton';
 import MilestoneTicker from '../components/MilestoneTicker';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
-import { trackEvent } from '../lib/analytics';
 import { buildMilestoneParts } from '../lib/milestoneText';
 
 export default function Home() {
@@ -98,15 +95,6 @@ export default function Home() {
       <BlogPreview />
 
       <WriteTogetherHub />
-
-      {/* FINAL CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="font-display text-2xl md:text-3xl text-ink mb-7">Find your next read.</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          <PrimaryButton to="/books" onClick={() => trackEvent('homepage_cta_click', { label: 'Browse All Books (final)' })}>Browse All Books</PrimaryButton>
-          <SecondaryButton to="/#free-chapter" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle (final)' })}>Join the Reader Circle</SecondaryButton>
-        </div>
-      </section>
 
       <div id="free-chapter" className="scroll-mt-20">
         <EmailStrip
