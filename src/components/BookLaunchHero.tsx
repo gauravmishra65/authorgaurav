@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import ReleaseCountdown from './ReleaseCountdown';
 import ReleaseDetails from './ReleaseDetails';
-import NewsletterForm from './NewsletterForm';
 import type { Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 import { fetchReaderPhotos } from '../lib/queries';
@@ -87,7 +86,9 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
         <p className="text-ivory/70 text-sm mb-7">
           {released ? `${book.title} is out now. Join for future releases, sample chapters, and behind-the-scenes notes.` : `Be the first to know the moment ${book.title} is available.`}
         </p>
-        <NewsletterForm id={`launch-signup-${book.slug}`} source={`${book.slug}-launch`} buttonLabel={released ? 'Join the Reader Circle' : 'Get Release Updates'} />
+        <Link to="/#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
+          {released ? 'Join the Reader Circle' : 'Get Release Updates'} <ArrowRight size={15} />
+        </Link>
       </div>
 
       <div className="hairline-solid w-full opacity-20" />

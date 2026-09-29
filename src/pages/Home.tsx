@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import BookCarousel from '../components/BookCarousel';
 import EmailStrip from '../components/EmailStrip';
@@ -10,8 +9,6 @@ import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import BookLaunchHero from '../components/BookLaunchHero';
 import Divider from '../components/Divider';
-import Section from '../components/Section';
-import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import WhereToBuyButton from '../components/WhereToBuyButton';
@@ -20,15 +17,6 @@ import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
 import { buildMilestoneParts } from '../lib/milestoneText';
-
-// Phase 4 added a `categories` tag per book, so Thrillers and Love Stories
-// now link to genuinely distinct filtered views (both used to collapse onto
-// the same `genre=Fiction` bucket before that field existed).
-const genreCards: { category: string; label: string; description: string }[] = [
-  { category: 'Thriller', label: 'Thrillers and Contemporary Fiction', description: 'Techno-financial thrillers and character-driven fiction, including Shadow Code and The Zero Account.' },
-  { category: 'Romance', label: 'Love Stories', description: 'Contemporary romance about love, family, and the courage to choose your own life, including Offbeat Love and अनूठा प्यार.' },
-  { category: 'Spiritual', label: 'Spiritual and Devotional Books', description: 'Accessible Hindi devotional texts, including the Vishnu and Lalita Sahasranama, explained simply for daily life.' },
-];
 
 export default function Home() {
   const [filter, setFilter] = useState('All');
@@ -78,24 +66,6 @@ export default function Home() {
       {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
       {friendYouKeep && <BookLaunchHero book={friendYouKeep} />}
 
-      {/* EXPLORE BY GENRE */}
-      <Section tone="cream">
-        <SectionHeading eyebrow="Explore by Genre" title="Find your next world" />
-        <div className="grid gap-6 md:grid-cols-3 mt-4">
-          {genreCards.map((card) => (
-            <Link
-              key={card.category}
-              to={`/books?category=${card.category}`}
-              onClick={() => trackEvent('homepage_cta_click', { label: `genre-card:${card.category}` })}
-              className="group rounded-md border border-gold/20 bg-ivory p-8 text-center shadow-luxury transition-all hover:-translate-y-1 hover:border-gold/50"
-            >
-              <p className="font-display text-xl text-ink mb-3 group-hover:text-gold-text transition-colors">{card.label}</p>
-              <p className="text-sm text-muted leading-relaxed">{card.description}</p>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
       {/* THE BOOKSHELF */}
       <section className="pt-20">
         <div className="mx-auto max-w-6xl px-6 text-center">
@@ -127,13 +97,6 @@ export default function Home() {
       <NewsPreview />
       <BlogPreview />
 
-      <div id="free-chapter" className="scroll-mt-20">
-        <EmailStrip
-          heading="Join Gaurav's Reader Circle"
-          subheading="Receive new-release updates, sample chapters, behind-the-scenes writing notes and occasional subscriber-only resources."
-          showGenrePreference
-        />
-      </div>
       <WriteTogetherHub />
 
       {/* FINAL CTA */}
@@ -144,6 +107,14 @@ export default function Home() {
           <SecondaryButton to="/#free-chapter" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle (final)' })}>Join the Reader Circle</SecondaryButton>
         </div>
       </section>
+
+      <div id="free-chapter" className="scroll-mt-20">
+        <EmailStrip
+          heading="Join Gaurav's Reader Circle"
+          subheading="Receive new-release updates, sample chapters, behind-the-scenes writing notes and occasional subscriber-only resources."
+          showGenrePreference
+        />
+      </div>
     </>
   );
 }
