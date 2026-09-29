@@ -63,7 +63,7 @@ export default function About() {
               </p>
               <div className="flex flex-wrap gap-4 mb-4">
                 <Link to="/books" className="btn-caps btn-gold rounded-sm px-6 py-3" onClick={() => trackEvent('about_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
-                <a href="#free-chapter" className="btn-caps btn-gold-outline rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }} onClick={() => trackEvent('about_cta_click', { label: 'Join the Reader Circle' })}>Join the Reader Circle</a>
+                <Link to="/#free-chapter" className="btn-caps btn-gold-outline rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }} onClick={() => trackEvent('about_cta_click', { label: 'Join the Reader Circle' })}>Join the Reader Circle</Link>
               </div>
               <Link to="/start-here" className="inline-block label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors">
                 New here? Start Here to find your first book →
@@ -106,9 +106,9 @@ export default function About() {
           <Link to="/books" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
             <BookOpen size={16} /> Explore the Books
           </Link>
-          <a href="#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <Link to="/#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
             <Mail size={16} /> Get a Free Chapter
-          </a>
+          </Link>
           <Link to="/media#media-kit" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
             <FileText size={16} /> Media Kit
           </Link>
