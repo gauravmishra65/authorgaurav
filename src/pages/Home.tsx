@@ -16,9 +16,11 @@ import SectionHeading from '../components/SectionHeading';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import WhereToBuyButton from '../components/WhereToBuyButton';
+import MilestoneTicker from '../components/MilestoneTicker';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
+import { buildMilestoneText } from '../lib/milestoneText';
 
 // Phase 4 added a `categories` tag per book, so Thrillers and Love Stories
 // now link to genuinely distinct filtered views (both used to collapse onto
@@ -56,6 +58,7 @@ export default function Home() {
   const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
   const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
   const friendYouKeep = books?.find((b) => b.slug === 'the-friend-you-keep');
+  const milestoneText = shadowCode ? buildMilestoneText(shadowCode) : null;
 
   return (
     <>
@@ -63,6 +66,9 @@ export default function Home() {
         title="Gaurav Mishra | Author of Shadow Code, Offbeat Love and Spiritual Books"
         description="Explore books by Gaurav Mishra, including the techno-financial thriller Shadow Code, contemporary fiction and accessible spiritual books in Hindi and English."
       />
+
+      {/* MILESTONE TICKER — first thing on the page, on purpose */}
+      {milestoneText && shadowCode && <MilestoneTicker text={milestoneText} href={`/books/${shadowCode.slug}`} />}
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-ink bg-grain text-ivory">

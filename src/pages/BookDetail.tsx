@@ -23,6 +23,7 @@ import VishnuBackground from '../components/VishnuBackground';
 import { getBookTheme } from '../data/bookThemes';
 import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
 import { buildBookstoreAvailabilityText } from '../lib/bookstoreAvailability';
+import { buildMilestoneText } from '../lib/milestoneText';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
 import { trackEvent } from '../lib/analytics';
@@ -146,13 +147,7 @@ export default function BookDetail() {
               {book.milestoneSalesCount}+ Copies Sold
             </p>
             <p className="leading-relaxed max-w-2xl mx-auto" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
-              {book.milestoneMonthLabel ? `In ${book.milestoneMonthLabel}, ` : ''}
-              {book.title} sold {book.milestoneSalesCount}+ copies{isShadowCode ? ' in English and Hindi' : ''}, across Amazon, Flipkart, Kindle
-              {isShadowCode ? ', Shopee, Lazada and Shopify' : ''}
-              {book.milestoneStoreCount
-                ? `, and in ${book.milestoneStoreCount}+ bookstores across India${isShadowCode ? ', including Delhi, Bangalore, Chennai, Uttar Pradesh and Rajasthan' : ''}`
-                : ''}
-              .
+              {buildMilestoneText(book)}
             </p>
           </div>
         </section>
