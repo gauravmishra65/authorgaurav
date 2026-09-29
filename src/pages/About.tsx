@@ -6,6 +6,7 @@ import Divider from '../components/Divider';
 import BookCard from '../components/BookCard';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { trackEvent } from '../lib/analytics';
 
 // One representative title per genre this genuinely spans — matches the
 // four books already named in the biography prose below, not a new claim.
@@ -53,10 +54,20 @@ export default function About() {
             </div>
             <div>
               <p className="eyebrow text-gold-lt mb-4">About the Author</p>
-              <h1 className="font-display text-4xl md:text-5xl mb-5">Gaurav Mishra</h1>
-              <p className="text-ivory/80 leading-relaxed text-lg">
+              <h1 className="font-display text-4xl md:text-5xl mb-4">Gaurav Mishra</h1>
+              <p className="font-display text-xl md:text-2xl leading-snug mb-5" style={{ color: 'var(--gold-lt)' }}>
+                Stories of love, faith, ambition and the hidden systems that shape our lives.
+              </p>
+              <p className="text-ivory/80 leading-relaxed text-lg mb-8">
                 A writer who refuses to stay in one lane: romance, thriller, memoir, devotion, all united by the belief that a good story can carry a reader anywhere.
               </p>
+              <div className="flex flex-wrap gap-4 mb-4">
+                <Link to="/books" className="btn-caps btn-gold rounded-sm px-6 py-3" onClick={() => trackEvent('about_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
+                <a href="#free-chapter" className="btn-caps btn-gold-outline rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }} onClick={() => trackEvent('about_cta_click', { label: 'Join the Reader Circle' })}>Join the Reader Circle</a>
+              </div>
+              <Link to="/start-here" className="inline-block label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors">
+                New here? Start Here to find your first book →
+              </Link>
             </div>
           </div>
         </div>

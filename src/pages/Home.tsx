@@ -9,7 +9,6 @@ import NewsPreview from '../components/NewsPreview';
 import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import BookLaunchHero from '../components/BookLaunchHero';
-import WorldLinesMotif from '../components/WorldLinesMotif';
 import Divider from '../components/Divider';
 import Section from '../components/Section';
 import SectionHeading from '../components/SectionHeading';
@@ -33,7 +32,6 @@ const genreCards: { category: string; label: string; description: string }[] = [
 
 export default function Home() {
   const [filter, setFilter] = useState('All');
-  const [portraitError, setPortraitError] = useState(false);
   // Deliberately not gating the whole page behind this fetch — the hero,
   // testimonials, news, and blog previews below don't need book data, so
   // they render (and fire their own queries) immediately instead of
@@ -67,64 +65,14 @@ export default function Home() {
         description="Explore books by Gaurav Mishra, including the techno-financial thriller Shadow Code, contemporary fiction and accessible spiritual books in Hindi and English."
       />
 
+      {/* The author-portrait hero that used to live here moved to /about — this
+          page now opens directly with the milestone ticker and the featured
+          release(s). Kept as a screen-reader-only h1 so the page still has a
+          real top-level heading for SEO/accessibility. */}
+      <h1 className="sr-only">Gaurav Mishra: stories of love, faith, ambition and the hidden systems that shape our lives.</h1>
+
       {/* MILESTONE TICKER — first thing on the page, on purpose */}
       {milestoneParts && shadowCode && <MilestoneTicker parts={milestoneParts} href={`/books/${shadowCode.slug}`} />}
-
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-ink bg-grain text-ivory">
-        <WorldLinesMotif className="text-gold-lt/10" />
-        <div className="hairline-solid w-full opacity-30" />
-        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <div className="grid items-center gap-12 md:grid-cols-[1.15fr_1fr]">
-            <div>
-              <p className="eyebrow text-gold-lt mb-5 fade-up" style={{ animationDelay: '0.05s' }}>
-                Author • Storyteller • Independent Publisher
-              </p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 fade-up" style={{ animationDelay: '0.18s' }}>
-                Stories of love, faith, ambition and the hidden systems that shape our lives.
-              </h1>
-              <p className="text-ivory/80 leading-relaxed max-w-xl mb-8 fade-up" style={{ animationDelay: '0.32s' }}>
-                Gaurav Mishra writes contemporary fiction, financial thrillers and accessible spiritual books for readers seeking suspense, emotion, meaning and reflection.
-              </p>
-              <div className="flex flex-wrap gap-4 fade-up" style={{ animationDelay: '0.46s' }}>
-                <PrimaryButton to="/books" onClick={() => trackEvent('homepage_cta_click', { label: 'Explore the Books' })}>Explore the Books</PrimaryButton>
-                <SecondaryButton to="/#free-chapter" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle (hero)' })}>Join the Reader Circle</SecondaryButton>
-              </div>
-              <Link to="/start-here" className="inline-block mt-5 label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors fade-up" style={{ animationDelay: '0.55s' }}>
-                New here? Start Here to find your first book →
-              </Link>
-            </div>
-
-            {/* Right — single visual: the author, not a crowd of covers */}
-            <div className="flex justify-center py-6 fade-up" style={{ animationDelay: '0.25s' }}>
-              <div className="relative w-full max-w-[280px]">
-                <div className="aspect-[3/4] rounded-md border border-gold/25 shadow-book overflow-hidden bg-gradient-to-br from-ink-soft via-ink to-navy">
-                  {!portraitError ? (
-                    <img
-                      src="/images/author/GM-Photo.jpg"
-                      alt="Gaurav Mishra, author portrait"
-                      width={960}
-                      height={1440}
-                      className="w-full h-full object-cover object-top"
-                      onError={() => setPortraitError(true)}
-                      loading="eager"
-                      // @ts-expect-error React 18 only applies the lowercase DOM attribute; camelCase fetchPriority isn't wired to it until React 19
-                      fetchpriority="high"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-center px-6">
-                      <div>
-                        <div className="mx-auto mb-3 w-16 hairline-solid opacity-60" />
-                        <p className="label-caps text-gold-lt/80">Gaurav Mishra</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FEATURED RELEASE(S) */}
       {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
