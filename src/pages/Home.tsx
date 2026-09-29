@@ -20,7 +20,7 @@ import MilestoneTicker from '../components/MilestoneTicker';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
-import { buildMilestoneText } from '../lib/milestoneText';
+import { buildMilestoneParts } from '../lib/milestoneText';
 
 // Phase 4 added a `categories` tag per book, so Thrillers and Love Stories
 // now link to genuinely distinct filtered views (both used to collapse onto
@@ -58,7 +58,7 @@ export default function Home() {
   const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
   const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
   const friendYouKeep = books?.find((b) => b.slug === 'the-friend-you-keep');
-  const milestoneText = shadowCode ? buildMilestoneText(shadowCode) : null;
+  const milestoneParts = shadowCode ? buildMilestoneParts(shadowCode) : null;
 
   return (
     <>
@@ -68,7 +68,7 @@ export default function Home() {
       />
 
       {/* MILESTONE TICKER — first thing on the page, on purpose */}
-      {milestoneText && shadowCode && <MilestoneTicker text={milestoneText} href={`/books/${shadowCode.slug}`} />}
+      {milestoneParts && shadowCode && <MilestoneTicker parts={milestoneParts} href={`/books/${shadowCode.slug}`} />}
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-ink bg-grain text-ivory">

@@ -23,3 +23,27 @@ export function buildMilestoneText(book: MilestoneBook): string | null {
 
   return `${monthPrefix}${book.title} sold ${book.milestoneSalesCount}+ copies${editionsClause}, across Amazon, Flipkart, Kindle${retailersClause}${storesClause}.`;
 }
+
+export interface MilestoneParts {
+  before: string;
+  highlight: string;
+  after: string;
+}
+
+/** Same sentence as buildMilestoneText(), split around the "850+" figure so
+ * callers can render it bold/gold without needing their own copy of the
+ * sentence-building logic. */
+export function buildMilestoneParts(book: MilestoneBook): MilestoneParts | null {
+  const text = buildMilestoneText(book);
+  if (!text) return null;
+
+  const highlight = `${book.milestoneSalesCount}+`;
+  const index = text.indexOf(highlight);
+  if (index === -1) return { before: text, highlight: '', after: '' };
+
+  return {
+    before: text.slice(0, index),
+    highlight,
+    after: text.slice(index + highlight.length),
+  };
+}

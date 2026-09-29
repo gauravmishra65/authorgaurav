@@ -23,7 +23,7 @@ import VishnuBackground from '../components/VishnuBackground';
 import { getBookTheme } from '../data/bookThemes';
 import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
 import { buildBookstoreAvailabilityText } from '../lib/bookstoreAvailability';
-import { buildMilestoneText } from '../lib/milestoneText';
+import { buildMilestoneParts } from '../lib/milestoneText';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { isReleased } from '../lib/releaseStatus';
 import { trackEvent } from '../lib/analytics';
@@ -96,6 +96,7 @@ export default function BookDetail() {
   const isInterviewGuide = book.slug === 'interview-guide';
   const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
   const bookstoreAvailabilityText = buildBookstoreAvailabilityText(book.title, bookstorePhotos);
+  const milestoneParts = buildMilestoneParts(book);
 
   return (
     <BookThemeProvider theme={theme}>
@@ -139,7 +140,7 @@ export default function BookDetail() {
       />
 
       {/* Sales-milestone banner: any book with milestoneSalesCount set gets this; admin clears the field to turn it off between milestones */}
-      {book.milestoneSalesCount && (
+      {milestoneParts && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-3xl px-6 py-14 text-center">
             <p className="eyebrow mb-3" style={{ color: 'var(--book-accent)' }}>Milestone</p>
@@ -147,7 +148,9 @@ export default function BookDetail() {
               {book.milestoneSalesCount}+ Copies Sold
             </p>
             <p className="leading-relaxed max-w-2xl mx-auto" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
-              {buildMilestoneText(book)}
+              {milestoneParts.before}
+              <strong className="font-bold" style={{ color: 'var(--gold-lt)' }}>{milestoneParts.highlight}</strong>
+              {milestoneParts.after}
             </p>
           </div>
         </section>

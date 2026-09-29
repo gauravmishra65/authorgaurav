@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy } from 'lucide-react';
+import type { MilestoneParts } from '../lib/milestoneText';
 
 interface MilestoneTickerProps {
-  text: string;
+  parts: MilestoneParts;
   href: string;
 }
 
@@ -11,13 +12,17 @@ interface MilestoneTickerProps {
  * same seamless-loop technique as BookCarousel (.carousel-track), and the
  * same pointerdown-pause fix, since this is just as tappable/clickable on a
  * phone as that carousel's covers were. */
-export default function MilestoneTicker({ text, href }: MilestoneTickerProps) {
+export default function MilestoneTicker({ parts, href }: MilestoneTickerProps) {
   const [paused, setPaused] = useState(false);
 
   const item = (
     <Link to={href} className="inline-flex items-center gap-2 mr-16 flex-shrink-0 hover:text-gold-lt transition-colors">
       <Trophy size={15} className="text-gold-lt flex-shrink-0" aria-hidden="true" />
-      <span className="whitespace-nowrap">{text}</span>
+      <span className="whitespace-nowrap">
+        {parts.before}
+        <strong className="font-bold text-gold-lt">{parts.highlight}</strong>
+        {parts.after}
+      </span>
     </Link>
   );
 
