@@ -18,7 +18,7 @@ export default function NewsPreview() {
         {latest.map((n) => (
           <Link key={n.id} to="/news" className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
             <div className={`h-40 bg-gradient-to-br ${n.gradient} relative`}>
-              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/40 px-2 py-1 rounded-sm">{n.category}</span>
+              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-sm">{n.category}</span>
             </div>
             <div className="p-5 flex flex-col flex-1">
               <p className="text-2xs text-muted mb-2">{n.date}</p>

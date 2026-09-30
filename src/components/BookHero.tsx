@@ -50,7 +50,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
           </div>
           <div>
             <div className="flex items-center gap-3 flex-wrap mb-3">
-              <p className="eyebrow text-[var(--book-accent)]">{eyebrowOverride ?? book.genre}</p>
+              <p className="eyebrow text-[var(--book-accent-text)]">{eyebrowOverride ?? book.genre}</p>
               <LanguageBadge language={book.language} tone={book.textOnDark ? 'dark' : 'light'} />
               {book.status !== 'published' && (
                 <FormatBadge tone={book.textOnDark ? 'dark' : 'light'}>
@@ -60,7 +60,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
             </div>
             <h1 className="font-display text-4xl md:text-5xl mb-2">{book.title}</h1>
             {introLine && (
-              <p className="text-lg leading-relaxed mb-3" style={{ color: 'var(--book-accent)' }}>{introLine}</p>
+              <p className="text-lg leading-relaxed mb-3" style={{ color: 'var(--book-accent-text)' }}>{introLine}</p>
             )}
             {/* Devotional works are compiled from scripture, not authored —
                the byline says so rather than crediting Gaurav as "author"
@@ -80,19 +80,19 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
               <BookSample sampleUrl={book.sampleUrl} book={book.slug} />
               {/* TODO_CONTENT: no book has a trailer_url yet */}
               {book.trailerUrl && (
-                <a href={book.trailerUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('trailer_play', { book: book.slug })} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent)] hover:text-[var(--book-secondary-accent)] transition-colors">
+                <a href={book.trailerUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('trailer_play', { book: book.slug })} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
                   <PlayCircle size={16} /> Watch Trailer
                 </a>
               )}
               {readerCircleHref && (
-                <a href={readerCircleHref} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent)] hover:text-[var(--book-secondary-accent)] transition-colors">
+                <a href={readerCircleHref} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
                   <Mail size={15} /> Join the Reader Circle
                 </a>
               )}
             </div>
 
             {book.bookWebsite && (
-              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent)] hover:text-[var(--book-secondary-accent)] transition-colors">
+              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
                 Visit the Book Website <ExternalLink size={13} />
               </a>
             )}

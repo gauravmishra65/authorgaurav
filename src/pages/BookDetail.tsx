@@ -118,7 +118,7 @@ export default function BookDetail() {
               { label: 'Books', href: '/books' },
               { label: book.title },
             ]}
-            className="text-[var(--book-accent)]"
+            className="text-[var(--book-accent-text)]"
           />
         </div>
       </div>
@@ -143,8 +143,8 @@ export default function BookDetail() {
       {milestoneParts && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-3xl px-6 py-14 text-center">
-            <p className="eyebrow mb-3" style={{ color: 'var(--book-accent)' }}>Milestone</p>
-            <p className="font-display text-4xl md:text-5xl mb-4" style={{ color: 'var(--book-accent)' }}>
+            <p className="eyebrow mb-3" style={{ color: 'var(--book-accent-text)' }}>Milestone</p>
+            <p className="font-display text-4xl md:text-5xl mb-4" style={{ color: 'var(--book-accent-text)' }}>
               {book.milestoneSalesCount}+ Copies Sold
             </p>
             <p className="leading-relaxed max-w-2xl mx-auto" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -160,7 +160,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-4xl px-6 py-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>इस पुस्तक की विशेषताएँ</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {lalitaFeatures.map((point) => (
                 <div
@@ -180,7 +180,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-4xl px-6 py-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>इस पुस्तक की विशेषताएँ</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {vishnuFeatures.map((point) => (
                 <div
@@ -210,7 +210,7 @@ export default function BookDetail() {
       {isOffbeatLove && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>A Story Across Two Worlds</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>A Story Across Two Worlds</p>
             <p className="font-display text-2xl md:text-3xl leading-snug mb-5" style={{ color: '#672F3A' }}>
               Two lives shaped by different worlds. One connection neither expected.
             </p>
@@ -269,7 +269,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>सरल अर्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               इस पुस्तक में श्री ललिता सहस्रनाम के नामों को सरल और सहज हिंदी में समझाने का प्रयास किया गया है, ताकि कठिन संस्कृत श्लोक भी आमजन के लिए सुलभ बन सकें।
             </p>
@@ -280,7 +280,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>भावार्थ</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>भावार्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               अर्थ के साथ-साथ हर नाम के भावार्थ को भी सामने रखा गया है, जिससे पाठक केवल शब्दों को नहीं, बल्कि उनके पीछे की भावना और भाव को भी समझ सकें।
             </p>
@@ -291,7 +291,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक जीवन में प्रयोग</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>दैनिक जीवन में प्रयोग</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक केवल पाठ के लिए नहीं, बल्कि दैनिक जीवन में शांति, संतुलन और सकारात्मकता लाने के एक सरल साधन के रूप में भी उपयोगी है।
             </p>
@@ -302,7 +302,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>किन पाठकों के लिए उपयोगी</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक उन पाठकों के लिए उपयुक्त है जो संस्कृत श्लोकों को सरल हिंदी में समझना चाहते हैं, नियमित पाठ करना चाहते हैं, या अपने आध्यात्मिक अभ्यास को दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
@@ -313,7 +313,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>संकलनकर्ता की भूमिका</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               गौरव मिश्रा ने इस सहस्रनाम को संकलित कर इसे सरल भाषा में प्रस्तुत करने का प्रयास किया है, ताकि अधिक से अधिक पाठक इसका लाभ उठा सकें।
             </p>
@@ -325,7 +325,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>सरल अर्थ</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>सरल अर्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               इस पुस्तक में श्री विष्णु सहस्रनाम के हर श्लोक का सरल अर्थ दिया गया है, ताकि पाठक बिना संस्कृत के गहन ज्ञान के भी भावार्थ को समझ सकें।
             </p>
@@ -336,7 +336,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>किन पाठकों के लिए उपयोगी</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>किन पाठकों के लिए उपयोगी</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               यह पुस्तक विशेष रूप से युवाओं और आधुनिक पाठकों के लिए उपयोगी है जो भक्ति को केवल पाठ तक सीमित न रखकर, उसे अपने दैनिक जीवन से जोड़ना चाहते हैं।
             </p>
@@ -347,7 +347,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>दैनिक पाठ और चिंतन</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>दैनिक पाठ और चिंतन</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               नियमित पाठ और चिंतन के माध्यम से यह पुस्तक भक्ति को दैनिक जीवन का स्वाभाविक हिस्सा बनाने में सहायक है।
             </p>
@@ -358,7 +358,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>संकलनकर्ता की भूमिका</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>संकलनकर्ता की भूमिका</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               गौरव मिश्रा ने श्री विष्णु सहस्रनाम को सरल भाषा में संकलित किया है, विशेष रूप से युवा और आधुनिक पाठकों को ध्यान में रखते हुए, ताकि यह ज्ञान अधिक सुलभ बन सके।
             </p>
@@ -394,7 +394,7 @@ export default function BookDetail() {
       {bookstorePhotos.length > 0 && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-5xl px-6 py-16">
-            <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent)' }}>Now in Stores</p>
+            <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent-text)' }}>Now in Stores</p>
             <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
             {bookstoreAvailabilityText && (
               <p className="leading-relaxed max-w-2xl mx-auto text-center mb-10" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
@@ -430,7 +430,7 @@ export default function BookDetail() {
       {isOffbeatLove && (
         <section className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-4xl px-6 py-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>Why Romance Readers May Enjoy It</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>Why Romance Readers May Enjoy It</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {offbeatLoveWhyReaders.map((point) => (
                 <div
@@ -449,7 +449,7 @@ export default function BookDetail() {
       {isOffbeatLove && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Setting &amp; Journey</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>Setting &amp; Journey</p>
             <p className="leading-relaxed text-lg mb-6" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
               The story moves between two very different worlds, shaped by different families, different expectations, and different ideas of what love is allowed to look like, and finds, in Mumbai, the one place they meet.
             </p>
@@ -459,7 +459,7 @@ export default function BookDetail() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-underline-elegant inline-flex items-center gap-1.5 label-caps"
-                style={{ color: 'var(--book-accent)' }}
+                style={{ color: 'var(--book-accent-text)' }}
               >
                 Visit the Offbeat Love Website
               </a>
@@ -472,11 +472,11 @@ export default function BookDetail() {
         <section className="bg-[var(--book-bg)] bg-grain text-[var(--book-text)]">
           <div className="hairline-solid w-full opacity-30" />
           <div className="mx-auto max-w-4xl px-6 py-16">
-            <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent)' }}>Release Details</p>
+            <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent-text)' }}>Release Details</p>
             <ReleaseDetails book={book} className="mb-12" />
             {!released && (
               <>
-                <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent)' }}>The Code Will Be Revealed In</p>
+                <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent-text)' }}>The Code Will Be Revealed In</p>
                 <ReleaseCountdown releaseDate={book.releaseDate} />
               </>
             )}
@@ -504,7 +504,7 @@ export default function BookDetail() {
       {isLalita && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>सामान्य प्रश्न</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
               {lalitaFaq.map(({ q, a }) => (
                 <div
@@ -512,7 +512,7 @@ export default function BookDetail() {
                   className="rounded-md border p-5"
                   style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
                 >
-                  <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
+                  <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent-text)' }}>{q}</p>
                   <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{a}</p>
                 </div>
               ))}
@@ -525,7 +525,7 @@ export default function BookDetail() {
       {isVishnu && (
         <section lang="hi" className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 py-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>सामान्य प्रश्न</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
               {vishnuFaq.map(({ q, a }) => (
                 <div
@@ -533,7 +533,7 @@ export default function BookDetail() {
                   className="rounded-md border p-5"
                   style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
                 >
-                  <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent)' }}>{q}</p>
+                  <p className="font-display text-lg mb-2" style={{ color: 'var(--book-accent-text)' }}>{q}</p>
                   <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{a}</p>
                 </div>
               ))}
@@ -546,7 +546,7 @@ export default function BookDetail() {
       {isOffbeatLove && (
         <section className="bg-[var(--book-bg)]">
           <div className="mx-auto max-w-2xl px-6 pt-16">
-            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent)' }}>Book-Club Questions</p>
+            <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>Book-Club Questions</p>
             <div className="space-y-4">
               {offbeatLoveBookClubQuestions.map((q, i) => (
                 <div
@@ -554,7 +554,7 @@ export default function BookDetail() {
                   className="card-soft-lift flex gap-4 rounded-md border p-5"
                   style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)', backgroundColor: 'color-mix(in srgb, var(--book-surface) 40%, transparent)' }}
                 >
-                  <span className="label-caps shrink-0" style={{ color: 'var(--book-accent)' }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span className="label-caps shrink-0" style={{ color: 'var(--book-accent-text)' }}>{String(i + 1).padStart(2, '0')}</span>
                   <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>{q}</p>
                 </div>
               ))}
@@ -567,7 +567,7 @@ export default function BookDetail() {
       {isInterviewGuide && (
         <section className="bg-[var(--book-surface)]">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent)' }}>Go Deeper</p>
+            <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>Go Deeper</p>
             <h2 className="font-display text-2xl mb-4" style={{ color: 'var(--book-text)' }}>Interview Resources &amp; Tools</h2>
             <p className="leading-relaxed mb-6" style={{ color: 'color-mix(in srgb, var(--book-text) 80%, transparent)' }}>
               Official references and practical worksheets that support this book, kept current on a dedicated resources page.
@@ -575,7 +575,7 @@ export default function BookDetail() {
             <Link
               to="/interview-resources"
               className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3"
-              style={{ color: 'var(--book-accent)', borderColor: 'var(--book-accent)' }}
+              style={{ color: 'var(--book-accent-text)', borderColor: 'var(--book-accent)' }}
             >
               Explore Interview Resources <ArrowRight size={14} />
             </Link>

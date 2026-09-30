@@ -17,6 +17,7 @@ export default function BookThemeProvider({ theme, children }: BookThemeProvider
     '--book-text': theme.text,
     '--book-muted': theme.mutedText,
     '--book-accent': theme.accent,
+    '--book-accent-text': theme.accentText ?? theme.accent,
     '--book-secondary-accent': theme.secondaryAccent ?? theme.accent,
     ...(theme.headingFont && { '--book-heading-font': theme.headingFont }),
   } as CSSProperties;

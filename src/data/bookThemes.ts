@@ -8,6 +8,12 @@ export interface BookTheme {
   text: string;
   mutedText: string;
   accent: string;
+  /** A text-safe variant of `accent`, only needed when the raw accent color
+   * fails WCAG AA (4.5:1) as small text against `background` — omit to
+   * reuse `accent` unchanged. `accent` itself stays untouched for non-text
+   * uses (borders, glows, decorative fills) where contrast rules don't
+   * apply, so the stronger brand color is preserved there. */
+  accentText?: string;
   secondaryAccent?: string;
   /** CSS font-family value; omit to inherit the site's Fraunces heading font. */
   headingFont?: string;
@@ -20,6 +26,15 @@ export const bookThemes: Record<string, BookTheme> = {
     text: '#F5F7FA',
     mutedText: '#AAB2C0',
     accent: '#C52A35',
+    // #C52A35 reads at ~3.5:1 against this theme's own #080B12 background
+    // and ~3.1:1 against its #151B26 surface — both under the 4.5:1
+    // normal-text threshold (confirmed via axe-core e2e tests flagging
+    // small eyebrow/label text on both surfaces; large headings in the
+    // same color pass, since WCAG's large-text threshold is only 3:1).
+    // #D66A72 keeps the same red family (30% mixed toward white) at ~5.8:1
+    // vs background and ~5.1:1 vs surface — verified against both with the
+    // same relative-luminance formula axe uses.
+    accentText: '#D66A72',
     secondaryAccent: '#3578A8',
   },
   'offbeat-love': {
