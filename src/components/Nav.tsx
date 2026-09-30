@@ -19,27 +19,33 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 // meant to be one of the site's strongest new-reader entry points, but only
 // ever linked from the footer, never from primary or mobile nav. Added here,
 // right after Books, matching where it belongs in the reader journey.
-const links = [
-  { label: 'Home', to: '/' },
-  { label: 'Books', to: '/books' },
+//
+// Primary/secondary split (matches the master plan's recommended nav):
+// Books, Start Here, Journal, About, Readers, Media stay always-visible;
+// Where to Buy/News/Events/Contact move into a "More" dropdown, the same
+// pattern the Books dropdown already uses — not deleted from the header
+// entirely, since that's exactly the mistake that made News and Start Here
+// unreachable before. Mobile keeps every link, just grouped visually.
+const primaryLinks = [
   { label: 'Start Here', to: '/start-here' },
-  { label: 'Where to Buy', to: '/where-to-buy' },
-  { label: 'About', to: '/about' },
   { label: 'Journal', to: '/blog' },
-  { label: 'Media', to: '/media' },
-  { label: 'News', to: '/news' },
-  { label: 'Events', to: '/events' },
+  { label: 'About', to: '/about' },
   { label: 'Readers', to: '/readers' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Media', to: '/media' },
 ];
 
-// Desktop drops "Books" since it renders as its own dropdown below.
-const desktopLinks = links.filter((l) => l.to !== '/books');
+const secondaryLinks = [
+  { label: 'Where to Buy', to: '/where-to-buy' },
+  { label: 'News', to: '/news' },
+  { label: 'Events', to: '/events' },
+  { label: 'Contact', to: '/contact' },
+];
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [booksMenuOpen, setBooksMenuOpen] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
   const location = useLocation();
   // Categories come from authorgaurav_book_categories (managed at
   // /admin/book-categories) so a new category shows up in this dropdown
@@ -52,12 +58,14 @@ export default function Nav() {
   ];
   const toggleRef = useRef<HTMLButtonElement>(null);
   const booksMenuRef = useRef<HTMLLIElement>(null);
+  const moreMenuRef = useRef<HTMLLIElement>(null);
 
   const [lastPathname, setLastPathname] = useState(location.pathname);
   if (location.pathname !== lastPathname) {
     setLastPathname(location.pathname);
     setMobileOpen(false);
     setBooksMenuOpen(false);
+    setMoreMenuOpen(false);
   }
 
   useEffect(() => {
@@ -67,16 +75,22 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Books dropdown: close on outside click or Escape.
+  // Books/More dropdowns: close on outside click or Escape.
   useEffect(() => {
-    if (!booksMenuOpen) return;
+    if (!booksMenuOpen && !moreMenuOpen) return;
     function onPointerDown(e: MouseEvent) {
-      if (booksMenuRef.current && !booksMenuRef.current.contains(e.target as Node)) {
+      if (booksMenuOpen && booksMenuRef.current && !booksMenuRef.current.contains(e.target as Node)) {
         setBooksMenuOpen(false);
+      }
+      if (moreMenuOpen && moreMenuRef.current && !moreMenuRef.current.contains(e.target as Node)) {
+        setMoreMenuOpen(false);
       }
     }
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') setBooksMenuOpen(false);
+      if (e.key === 'Escape') {
+        setBooksMenuOpen(false);
+        setMoreMenuOpen(false);
+      }
     }
     document.addEventListener('mousedown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
@@ -84,7 +98,9 @@ export default function Nav() {
       document.removeEventListener('mousedown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [booksMenuOpen]);
+  }, [booksMenuOpen, moreMenuOpen]);
+
+  const isSecondaryActive = secondaryLinks.some((l) => location.pathname === l.to);
 
   return (
     <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
@@ -95,17 +111,6 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden xl:flex items-center gap-3 ml-3">
-          {desktopLinks.map((l) => (
-            <li key={l.to}>
-              <Link
-                to={l.to}
-                aria-current={location.pathname === l.to ? 'page' : undefined}
-                className={`nav-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
           <li className="relative" ref={booksMenuRef}>
             <button
               onClick={() => setBooksMenuOpen((v) => !v)}
@@ -132,6 +137,43 @@ export default function Nav() {
               </div>
             )}
           </li>
+          {primaryLinks.map((l) => (
+            <li key={l.to}>
+              <Link
+                to={l.to}
+                aria-current={location.pathname === l.to ? 'page' : undefined}
+                className={`nav-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
+          <li className="relative" ref={moreMenuRef}>
+            <button
+              onClick={() => setMoreMenuOpen((v) => !v)}
+              aria-haspopup="true"
+              aria-expanded={moreMenuOpen}
+              aria-current={isSecondaryActive ? 'page' : undefined}
+              className={`nav-caps inline-flex items-center gap-1 transition-colors hover:text-gold-lt ${isSecondaryActive ? 'text-gold-lt' : 'text-ivory/75'}`}
+            >
+              More <ChevronDown size={14} className={`transition-transform ${moreMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+            </button>
+            {moreMenuOpen && (
+              <div role="menu" className="absolute right-0 top-full z-dropdown mt-2 min-w-[200px] rounded-md border border-gold/20 bg-charcoal shadow-luxury py-2">
+                {secondaryLinks.map((l) => (
+                  <Link
+                    key={l.to}
+                    to={l.to}
+                    role="menuitem"
+                    onClick={() => setMoreMenuOpen(false)}
+                    className="nav-caps block px-4 py-2 text-ivory/75 hover:text-gold-lt hover:bg-ink-soft/60 transition-colors"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
         </ul>
 
         <div className="hidden xl:flex items-center gap-2.5">
@@ -144,7 +186,13 @@ export default function Nav() {
         </button>
       </nav>
 
-      <MobileNavigation open={mobileOpen} onClose={() => setMobileOpen(false)} links={links} toggleButtonRef={toggleRef} />
+      <MobileNavigation
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        primaryLinks={[{ label: 'Home', to: '/' }, { label: 'Books', to: '/books' }, ...primaryLinks]}
+        secondaryLinks={secondaryLinks}
+        toggleButtonRef={toggleRef}
+      />
     </header>
   );
 }

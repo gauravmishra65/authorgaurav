@@ -11,7 +11,10 @@ interface NavLink {
 interface MobileNavigationProps {
   open: boolean;
   onClose: () => void;
-  links: NavLink[];
+  /** Always-visible-on-desktop links (Home, Books, and the primary tier) — rendered first, no heading. */
+  primaryLinks: NavLink[];
+  /** Links tucked into the desktop "More" dropdown — rendered after primaryLinks under a small heading, since mobile has no dropdown to hide them in. */
+  secondaryLinks: NavLink[];
   toggleButtonRef: RefObject<HTMLButtonElement>;
 }
 
@@ -19,7 +22,7 @@ interface MobileNavigationProps {
  * trapped within the panel, Escape closes and returns focus to the toggle
  * button, background scroll is locked while open, and the panel is fully
  * out of the tab order (visibility:hidden, not just clipped) while closed. */
-export default function MobileNavigation({ open, onClose, links, toggleButtonRef }: MobileNavigationProps) {
+export default function MobileNavigation({ open, onClose, primaryLinks, secondaryLinks, toggleButtonRef }: MobileNavigationProps) {
   const location = useLocation();
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +85,17 @@ export default function MobileNavigation({ open, onClose, links, toggleButtonRef
             <X size={18} /> Close
           </button>
         </li>
-        {links.map((l) => (
+        {primaryLinks.map((l) => (
+          <li key={l.to}>
+            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
+              {l.label}
+            </Link>
+          </li>
+        ))}
+        <li className="pt-3">
+          <p className="label-caps text-2xs text-ivory/40">More</p>
+        </li>
+        {secondaryLinks.map((l) => (
           <li key={l.to}>
             <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
               {l.label}
