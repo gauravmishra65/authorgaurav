@@ -1,6 +1,8 @@
 import { pressQuotes } from '../data/press';
 
 export default function PressStrip() {
+  if (pressQuotes.length === 0) return null;
+
   return (
     <section className="bg-ink-soft bg-grain text-ivory/80">
       <div className="mx-auto max-w-6xl px-6 py-8">

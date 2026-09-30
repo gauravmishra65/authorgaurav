@@ -14,9 +14,15 @@ import { useSupabaseData } from '../lib/useSupabaseData';
 // News itself had its own top-nav entry early on but silently lost it during
 // the Phase 2 header rebuild, leaving the page (real content, real route)
 // unreachable from anywhere on the site. Restored here, next to Events.
+//
+// Start Here had the same problem from the day it launched — a real route
+// meant to be one of the site's strongest new-reader entry points, but only
+// ever linked from the footer, never from primary or mobile nav. Added here,
+// right after Books, matching where it belongs in the reader journey.
 const links = [
   { label: 'Home', to: '/' },
   { label: 'Books', to: '/books' },
+  { label: 'Start Here', to: '/start-here' },
   { label: 'Where to Buy', to: '/where-to-buy' },
   { label: 'About', to: '/about' },
   { label: 'Journal', to: '/blog' },
