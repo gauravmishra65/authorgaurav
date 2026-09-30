@@ -19,7 +19,7 @@ export default function JournalBookCTA({ relatedLink, books }: JournalBookCTAPro
     return (
       <div className="mt-12 rounded-md border border-gold/25 bg-cream p-6 sm:p-7 text-center">
         <p className="label-caps text-gold-text text-2xs mb-2">Continue Writing</p>
-        <h3 className="font-display text-xl text-ink mb-2">WriteTogetherHub</h3>
+        <h2 className="font-display text-xl text-ink mb-2">WriteTogetherHub</h2>
         <p className="text-sm text-muted mb-4 max-w-md mx-auto">
           A home for writers and newcomers: guidance, community, and a place to grow your craft together.
         </p>
@@ -44,7 +44,7 @@ export default function JournalBookCTA({ relatedLink, books }: JournalBookCTAPro
       <BookCover {...book} size="sm" />
       <div className="text-center sm:text-left flex-1">
         <p className="label-caps text-gold-text text-2xs mb-2">Continue the Story</p>
-        <h3 className="font-display text-xl text-ink mb-2">{book.title}</h3>
+        <h2 className="font-display text-xl text-ink mb-2">{book.title}</h2>
         <p className="text-sm text-muted mb-4">{book.tagline}</p>
         <Link
           to={`/books/${book.slug}`}
