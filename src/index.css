@@ -115,6 +115,11 @@ h1, h2, h3, h4 {
 [lang='hi'] h1, [lang='hi'] h2, [lang='hi'] h3, [lang='hi'] h4 {
   font-family: 'Noto Serif Devanagari', Georgia, serif;
 }
+/* Devanagari's matras/conjuncts read more comfortably with extra line-height
+ * than Latin text needs — scoped to .prose-literary (the main long-form
+ * reading content, e.g. a book's synopsis) rather than every element under
+ * lang="hi", so this can't cascade into buttons/badges/nav on Hindi pages. */
+[lang='hi'] .prose-literary p { line-height: 1.85; }
 
 .hairline { height: 1px; background: linear-gradient(to right, transparent, rgba(177,138,74,0.5), transparent); }
 .hairline-solid { height: 1px; background: rgba(177,138,74,0.35); }
