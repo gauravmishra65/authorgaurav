@@ -72,7 +72,7 @@ export default function WhereToBuy() {
       {!loading && !error && (
         <Section tone="light" containerSize="wide">
           <SectionHeading eyebrow="Buy Online" title="Every Book, Every Retailer" />
-          <BookGrid books={buyableBooks} />
+          <BookGrid books={buyableBooks} source="where-to-buy-grid" />
         </Section>
       )}
 

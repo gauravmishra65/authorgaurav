@@ -138,6 +138,10 @@ before enabling it.
 | `interview_resource_click` | "Visit Official Resource" clicked on `/interview-resources` | `organization`, `title` |
 | `where_to_buy_click` | The "Where to Buy" CTA is clicked, on any of its placements (Home, Books, a book detail page) | `source` (which page/section) |
 | `about_cta_click` | "Explore the Books" or "Join the Reader Circle" clicked in the About page hero | `label` |
+| `book_explore` | A book's cover/title/"View Book" is clicked from a browsing surface (not the detail page itself) — the homepage carousel, the /books grid, or /where-to-buy's grid | `book` (slug), `source` (`home-carousel`, `books-grid`, `where-to-buy-grid`, or `about-page`) |
+| `related_book_click` | A "More to Explore" related-book suggestion is clicked on a book detail page | `from` (the page's own slug), `to` (the clicked book's slug) |
+| `start_here_view` | The `/start-here` page mounts | — |
+| `start_here_book_click` | A book's cover or "Read More" is clicked from one of the three reader paths on `/start-here` | `book` (slug), `path` (the path's eyebrow label, e.g. "If you love romance") |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any

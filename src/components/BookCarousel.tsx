@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import RetailerButton from './RetailerButton';
 import { getBuyOptions, type Book } from '../data/books';
+import { trackEvent } from '../lib/analytics';
 
 interface BookCarouselProps {
   books: Book[];
@@ -54,7 +55,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
             {...(i >= books.length ? { inert: '' } : {})}
             className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36"
           >
-            <BookCover {...b} size="xs" href={`/books/${b.slug}`} />
+            <BookCover {...b} size="xs" href={`/books/${b.slug}`} onClick={() => trackEvent('book_explore', { book: b.slug, source: 'home-carousel' })} />
             <div className="text-center">
               <p className="font-display text-sm text-ink">{b.title}</p>
               {b.isHindi && (
@@ -70,7 +71,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
                 <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={b.title} />
               ))}
             </div>
-            <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
+            <Link to={`/books/${b.slug}`} onClick={() => trackEvent('book_explore', { book: b.slug, source: 'home-carousel' })} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
           </div>
         ))}
       </div>

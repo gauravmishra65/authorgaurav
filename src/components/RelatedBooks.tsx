@@ -1,6 +1,7 @@
 import type { Book } from '../data/books';
 import BookCover from './BookCover';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../lib/analytics';
 
 interface RelatedBooksProps {
   book: Book;
@@ -24,7 +25,12 @@ export default function RelatedBooks({ book, allBooks, limit = 3 }: RelatedBooks
   return (
     <div className="grid gap-6 sm:grid-cols-3">
       {related.map((b) => (
-        <Link key={b.id} to={`/books/${b.slug}`} className="group flex flex-col items-center text-center gap-3">
+        <Link
+          key={b.id}
+          to={`/books/${b.slug}`}
+          onClick={() => trackEvent('related_book_click', { from: book.slug, to: b.slug })}
+          className="group flex flex-col items-center text-center gap-3"
+        >
           <BookCover {...b} size="md" />
           <p className="font-display text-sm text-ink group-hover:text-gold-text transition-colors">{b.title}</p>
         </Link>

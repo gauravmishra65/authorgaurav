@@ -17,6 +17,8 @@ interface BookCoverProps {
   size?: 'xs' | 'sm' | 'md' | 'lg';
   /** Set for the one above-the-fold cover (e.g. the hero) so it isn't lazy-loaded. */
   priority?: boolean;
+  /** Fires when the cover is clicked as a navigation link (not shown for a non-href cover). Used for click analytics — never changes navigation itself. */
+  onClick?: () => void;
 }
 
 const pixelSizes = {
@@ -28,7 +30,7 @@ const pixelSizes = {
 
 export default function BookCover({
   title, titleHtml, author, tagline, gradient, textOnDark = true,
-  imageSrc, imageWidth, imageHeight, href, external = false, size = 'md', priority = false,
+  imageSrc, imageWidth, imageHeight, href, external = false, size = 'md', priority = false, onClick,
 }: BookCoverProps) {
   const [imgError, setImgError] = useState(false);
 
@@ -82,14 +84,14 @@ export default function BookCover({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${title}: book website`} className="inline-block">
+      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${title}: book website`} className="inline-block" onClick={onClick}>
         {inner}
       </a>
     );
   }
 
   return (
-    <Link to={href} aria-label={`${title}: view details`} className="inline-block">
+    <Link to={href} aria-label={`${title}: view details`} className="inline-block" onClick={onClick}>
       {inner}
     </Link>
   );

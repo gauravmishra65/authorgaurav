@@ -152,7 +152,7 @@ export default function About() {
           <p className="eyebrow text-gold-text mb-3 text-center">Selected Books</p>
           <h2 className="font-display text-3xl text-ink text-center mb-10">One World Per Book</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {selectedBooks.map((b) => <BookCard key={b.id} book={b} />)}
+            {selectedBooks.map((b) => <BookCard key={b.id} book={b} source="about-page" />)}
           </div>
         </section>
       )}

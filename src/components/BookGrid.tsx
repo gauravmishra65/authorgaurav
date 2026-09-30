@@ -4,9 +4,11 @@ import EmptyState from './EmptyState';
 
 interface BookGridProps {
   books: Book[];
+  /** Forwarded to every BookCard's book_explore click event — see BookCard's own doc comment. */
+  source: string;
 }
 
-export default function BookGrid({ books }: BookGridProps) {
+export default function BookGrid({ books, source }: BookGridProps) {
   if (books.length === 0) {
     return (
       <EmptyState
@@ -19,7 +21,7 @@ export default function BookGrid({ books }: BookGridProps) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {books.map((book) => (
-        <BookCard key={book.id} book={book} />
+        <BookCard key={book.id} book={book} source={source} />
       ))}
     </div>
   );

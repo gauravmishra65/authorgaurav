@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail } from 'lucide-react';
 import Seo from '../components/Seo';
@@ -6,6 +7,7 @@ import Divider from '../components/Divider';
 import NewsletterForm from '../components/NewsletterForm';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { trackEvent } from '../lib/analytics';
 
 const paths = [
   { slug: 'offbeat-love', eyebrow: 'If you love romance', reason: 'A heartfelt love story set to the pulse of Mumbai. Start here for music, family, and the courage to choose each other.' },
@@ -15,6 +17,8 @@ const paths = [
 
 export default function StartHere() {
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
+
+  useEffect(() => { trackEvent('start_here_view'); }, []);
 
   return (
     <>
@@ -47,10 +51,14 @@ export default function StartHere() {
               return (
                 <div key={slug} className="content-card flex flex-col items-center text-center p-8">
                   <p className="label-caps text-gold-text mb-5">{eyebrow}</p>
-                  <BookCover {...book} size="md" href={`/books/${book.slug}`} />
+                  <BookCover {...book} size="md" href={`/books/${book.slug}`} onClick={() => trackEvent('start_here_book_click', { book: book.slug, path: eyebrow })} />
                   <h2 className="font-display text-xl text-ink mt-6 mb-2">{book.title}</h2>
                   <p className="text-sm text-muted leading-relaxed mb-6">{reason}</p>
-                  <Link to={`/books/${book.slug}`} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs mt-auto">
+                  <Link
+                    to={`/books/${book.slug}`}
+                    onClick={() => trackEvent('start_here_book_click', { book: book.slug, path: eyebrow })}
+                    className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs mt-auto"
+                  >
                     Read More <ArrowRight size={13} />
                   </Link>
                 </div>
