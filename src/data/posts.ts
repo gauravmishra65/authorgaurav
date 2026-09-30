@@ -14,6 +14,10 @@ export interface Post {
   date: string;
   readTime: string;
   gradient: string;
+  /** What to promote at the end of the article — either a real book slug
+   * (e.g. "the-shadow-code") or the literal value "writetogetherhub".
+   * Undefined means no end-of-article CTA renders (never guessed/invented). */
+  relatedLink?: string;
 }
 
 export const blogCategories = [

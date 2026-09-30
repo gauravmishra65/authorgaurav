@@ -3,14 +3,16 @@ import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import SocialShareButtons from '../components/SocialShareButtons';
 import Breadcrumbs from '../components/Breadcrumbs';
+import JournalBookCTA from '../components/JournalBookCTA';
 import EmailStrip from '../components/EmailStrip';
-import { fetchBlogPosts } from '../lib/queries';
+import { fetchBlogPosts, fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { canonicalUrl as buildUrl } from '../lib/url';
 
 export default function BlogPostDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: posts, loading, error } = useSupabaseData(fetchBlogPosts, []);
+  const { data: books } = useSupabaseData(fetchBooks, []);
 
   if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
   if (error) return <div className="py-32 text-center text-rose">Couldn't load this post: {error}</div>;
@@ -75,6 +77,8 @@ export default function BlogPostDetail() {
         <div className="prose-literary">
           {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
         </div>
+
+        {post.relatedLink && books && <JournalBookCTA relatedLink={post.relatedLink} books={books} />}
 
         <div className="mt-12 flex items-center justify-between flex-wrap gap-4">
           <SocialShareButtons path={`/blog/${post.slug}`} title={post.title} />

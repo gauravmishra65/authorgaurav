@@ -22,7 +22,8 @@ export type AnalyticsEvent =
   | 'book_explore'
   | 'related_book_click'
   | 'start_here_view'
-  | 'start_here_book_click';
+  | 'start_here_book_click'
+  | 'journal_book_click';
 
 type AnalyticsProperties = Record<string, string | number | boolean | null | undefined>;
 

@@ -203,6 +203,7 @@ interface BlogPostRow {
   gradient: string;
   read_time: string;
   published_at: string;
+  related_link: string | null;
 }
 
 export async function fetchBlogPosts(): Promise<Post[]> {
@@ -218,6 +219,7 @@ export async function fetchBlogPosts(): Promise<Post[]> {
     date: formatDate(row.published_at),
     readTime: row.read_time,
     gradient: row.gradient,
+    relatedLink: row.related_link ?? undefined,
   }));
 }
 

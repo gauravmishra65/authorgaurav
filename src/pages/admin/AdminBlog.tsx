@@ -118,6 +118,18 @@ export default function AdminBlog() {
                 <input value={editing.gradient ?? ''} onChange={(e) => setEditing({ ...editing, gradient: e.target.value })} className="input" />
               </label>
             </div>
+            <label className="block">
+              <span className="label-caps text-muted block mb-1.5 text-2xs">End-of-article promotion (optional)</span>
+              <input
+                value={editing.related_link ?? ''}
+                onChange={(e) => setEditing({ ...editing, related_link: e.target.value || null })}
+                className="input"
+                placeholder="a real book slug (e.g. the-shadow-code), or writetogetherhub"
+              />
+              <span className="text-2xs text-muted block mt-1">
+                Leave blank for no CTA. A book slug must match a real book exactly or nothing renders.
+              </span>
+            </label>
 
             {error && <p className="text-2xs text-rose">{error}</p>}
 

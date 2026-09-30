@@ -154,6 +154,7 @@ export interface AdminBlogPostRow {
   gradient: string;
   read_time: string;
   published_at: string;
+  related_link: string | null;
 }
 
 export async function fetchAdminBlogPosts(): Promise<AdminBlogPostRow[]> {

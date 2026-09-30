@@ -142,6 +142,7 @@ before enabling it.
 | `related_book_click` | A "More to Explore" related-book suggestion is clicked on a book detail page | `from` (the page's own slug), `to` (the clicked book's slug) |
 | `start_here_view` | The `/start-here` page mounts | — |
 | `start_here_book_click` | A book's cover or "Read More" is clicked from one of the three reader paths on `/start-here` | `book` (slug), `path` (the path's eyebrow label, e.g. "If you love romance") |
+| `journal_book_click` | The end-of-article CTA on a blog post is clicked (only renders when that post's `related_link` is set in `/admin`) | `link` (a book slug, or `writetogetherhub`) |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any
