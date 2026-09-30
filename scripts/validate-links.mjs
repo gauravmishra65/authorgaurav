@@ -102,7 +102,11 @@ for (const { route, file } of pages) {
       const [pathOnly] = href.split(/[?#]/);
       const ext = extname(pathOnly);
       if (ext) {
-        if (!allFiles.has(pathOnly)) {
+        // Filenames on disk are never percent-encoded (a literal space stays
+        // a space) — hrefs are, so decode before checking existsSync/allFiles,
+        // or every asset with a space/special char in its name false-fails.
+        const decodedPath = decodeURIComponent(pathOnly);
+        if (!allFiles.has(decodedPath)) {
           addIssue('fail', route, 'missing-asset', `${href} has no matching file in dist/`);
         }
       } else {
