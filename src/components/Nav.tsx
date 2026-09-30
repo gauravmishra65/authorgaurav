@@ -36,6 +36,7 @@ const primaryLinks = [
 
 const secondaryLinks = [
   { label: 'Where to Buy', to: '/where-to-buy' },
+  { label: 'Reader Circle', to: '/reader-circle' },
   { label: 'News', to: '/news' },
   { label: 'Events', to: '/events' },
   { label: 'Contact', to: '/contact' },

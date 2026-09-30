@@ -143,6 +143,8 @@ before enabling it.
 | `start_here_view` | The `/start-here` page mounts | — |
 | `start_here_book_click` | A book's cover or "Read More" is clicked from one of the three reader paths on `/start-here` | `book` (slug), `path` (the path's eyebrow label, e.g. "If you love romance") |
 | `journal_book_click` | The end-of-article CTA on a blog post is clicked (only renders when that post's `related_link` is set in `/admin`) | `link` (a book slug, or `writetogetherhub`) |
+| `reader_circle_view` | The `/reader-circle` page mounts | — |
+| `reader_circle_welcome_click` | A CTA on `/reader-circle/welcome` is clicked (the book/resource/social suggestion after a real Reader Circle signup) | `type` (`book`, `resource`, or `social`), `label` |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any

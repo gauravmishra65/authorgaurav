@@ -15,6 +15,12 @@ interface NewsletterFormProps {
   source?: string;
   /** Adds a genre-preference select — used on the Start Here page and the homepage Reader Circle so readers can flag what they're into. */
   showGenrePreference?: boolean;
+  /** Called right after a real (non-duplicate, non-error) signup, with the
+   * genre preference the reader chose (or '' if none/not shown). Every
+   * existing embed (footer, book pages, etc.) leaves this unset and keeps
+   * its own inline "you're on the list" card — only /reader-circle uses it,
+   * to navigate to the dedicated /reader-circle/welcome confirmation page. */
+  onSuccess?: (genrePreference: string) => void;
 }
 
 type Status = 'idle' | 'loading' | 'success' | 'duplicate' | 'error';
@@ -23,7 +29,7 @@ const genrePreferenceOptions = ['Thrillers', 'Romance', 'Spiritual books', 'Writ
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '', source = 'website', showGenrePreference = false }: NewsletterFormProps) {
+export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'Subscribe', className = '', source = 'website', showGenrePreference = false, onSuccess }: NewsletterFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [genrePreference, setGenrePreference] = useState('');
@@ -79,6 +85,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
 
       trackEvent('newsletter_signup', { source, interest: genrePreference || undefined });
       setStatus('success');
+      onSuccess?.(genrePreference);
     } catch {
       setErrorMessage('Something went wrong. Please check your connection and try again.');
       setStatus('error');

@@ -24,6 +24,7 @@ export default function Footer() {
               <li><Link to="/where-to-buy" className="text-ivory/75 hover:text-gold-text transition-colors">Where to Buy</Link></li>
               <li><Link to="/about" className="text-ivory/75 hover:text-gold-text transition-colors">About</Link></li>
               <li><Link to="/start-here" className="text-ivory/75 hover:text-gold-text transition-colors">Start Here (New Readers)</Link></li>
+              <li><Link to="/reader-circle" className="text-ivory/75 hover:text-gold-text transition-colors">Reader Circle</Link></li>
               <li><Link to="/writing-resources" className="text-ivory/75 hover:text-gold-text transition-colors">Writing Resources</Link></li>
               <li><Link to="/interview-resources" className="text-ivory/75 hover:text-gold-text transition-colors">Interview Resources</Link></li>
               <li><Link to="/contact" className="text-ivory/75 hover:text-gold-text transition-colors">Contact</Link></li>

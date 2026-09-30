@@ -36,10 +36,14 @@ if (existsSync(envPath)) {
   }
 }
 
+// /reader-circle/welcome is deliberately excluded — it's a post-signup
+// confirmation page (like a "thank you" page), not meant for organic
+// discovery/indexing, so it isn't prerendered as a static route or listed
+// in the sitemap (see generate-sitemap.mjs).
 const staticRoutes = [
   '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
   '/media', '/readers', '/events', '/book-clubs', '/writing-resources', '/interview-resources', '/where-to-buy',
-  '/privacy-policy', '/terms', '/accessibility',
+  '/reader-circle', '/privacy-policy', '/terms', '/accessibility',
 ];
 
 let bookRoutes = [];

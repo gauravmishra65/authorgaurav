@@ -25,10 +25,13 @@ if (existsSync(envPath)) {
 
 const SITE_URL = 'https://authorgaurav.com';
 
+// /reader-circle/welcome is deliberately excluded — it's a post-signup
+// confirmation page (like a "thank you" page), not meant for organic
+// discovery/indexing (see the matching note in prerender.mjs).
 const staticRoutes = [
   '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
   '/media', '/readers', '/events', '/book-clubs', '/writing-resources', '/interview-resources', '/where-to-buy',
-  '/privacy-policy', '/terms', '/accessibility',
+  '/reader-circle', '/privacy-policy', '/terms', '/accessibility',
 ];
 
 let bookRoutes = [];

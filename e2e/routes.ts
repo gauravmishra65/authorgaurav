@@ -13,7 +13,7 @@
 export const routes = [
   '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
   '/media', '/readers', '/events', '/book-clubs', '/writing-resources', '/interview-resources', '/where-to-buy',
-  '/privacy-policy', '/terms', '/accessibility',
+  '/reader-circle', '/privacy-policy', '/terms', '/accessibility',
   '/books/the-shadow-code', '/books/offbeat-love', '/books/journey-of-grace',
   '/books/lalita-sahasranama', '/books/vishnu-sahasranama', '/books/anootha-pyar', '/books/nirdosh-gangster',
   '/blog/writing-love-across-two-worlds',
