@@ -33,6 +33,7 @@ const Accessibility = lazy(() => import('./pages/Accessibility'));
 // Admin is code-split out of the public bundle — regular visitors never
 // download the CRUD forms or the auth-gated layout.
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'));
 const AdminBooks = lazy(() => import('./pages/admin/AdminBooks'));
 const AdminTestimonials = lazy(() => import('./pages/admin/AdminTestimonials'));
 const AdminTestimonialSubmissions = lazy(() => import('./pages/admin/AdminTestimonialSubmissions'));
@@ -81,6 +82,7 @@ export default function App() {
 
         <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
           <Route index element={<Navigate to="/admin/books" replace />} />
+          <Route path="analytics" element={<Suspense fallback={<AdminFallback />}><AdminAnalytics /></Suspense>} />
           <Route path="books" element={<Suspense fallback={<AdminFallback />}><AdminBooks /></Suspense>} />
           <Route path="book-categories" element={<Suspense fallback={<AdminFallback />}><AdminBookCategories /></Suspense>} />
           <Route path="testimonials" element={<Suspense fallback={<AdminFallback />}><AdminTestimonials /></Suspense>} />

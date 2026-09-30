@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import AdminLogin from './AdminLogin';
 
 const links = [
+  { label: 'Analytics', to: '/admin/analytics' },
   { label: 'Books', to: '/admin/books' },
   { label: 'Book Categories', to: '/admin/book-categories' },
   { label: 'Testimonials', to: '/admin/testimonials' },

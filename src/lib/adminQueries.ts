@@ -326,3 +326,26 @@ export async function setContactMessageStatus(id: string, status: string): Promi
   const { error } = await supabase.from('authorgaurav_contact_messages').update({ status }).eq('id', id);
   if (error) throw error;
 }
+
+export interface AdminAnalyticsEventRow {
+  id: string;
+  event_name: string;
+  properties: Record<string, string | number | boolean | null> | null;
+  path: string | null;
+  created_at: string;
+}
+
+/** RLS on authorgaurav_analytics_events restricts SELECT to rows readable
+ * only when auth.uid() is in the admins table — same pattern as every
+ * other admin-only table — so this only ever returns real data when called
+ * from an authenticated admin session (see useAdminSession). */
+export async function fetchAnalyticsEvents(sinceDays: number): Promise<AdminAnalyticsEventRow[]> {
+  const since = new Date(Date.now() - sinceDays * 24 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await supabase
+    .from('authorgaurav_analytics_events')
+    .select('*')
+    .gte('created_at', since)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data as AdminAnalyticsEventRow[];
+}
