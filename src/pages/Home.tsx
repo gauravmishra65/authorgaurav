@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import BookCarousel from '../components/BookCarousel';
 import EmailStrip from '../components/EmailStrip';
@@ -113,6 +114,11 @@ export default function Home() {
           subheading="Receive new-release updates, sample chapters, behind-the-scenes writing notes and occasional subscriber-only resources."
           showGenrePreference
         />
+        <p className="text-center pb-10">
+          <Link to="/reader-circle" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors">
+            See Everything the Reader Circle Includes
+          </Link>
+        </p>
       </div>
     </>
   );
