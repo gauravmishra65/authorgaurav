@@ -10,14 +10,23 @@ interface BookCardProps {
   book: Book;
   /** Which listing this card renders in (e.g. "books-grid", "where-to-buy-grid", "about-page") — carried on the book_explore click event so entry-surface conversion can be compared. */
   source: string;
+  /** Show the full retailer-button row on this card. Only true on
+   * /where-to-buy, whose entire job is surfacing purchase options —
+   * everywhere else (the general /books catalog, About's representative
+   * titles) is a browsing/discovery context, and stacking up to 6-7
+   * retailer buttons per card there added visual noise without helping
+   * the "which book do I want" decision the master plan says a catalog
+   * grid should support; purchase complexity now lives only on each
+   * book's own page (and on /where-to-buy), not duplicated on every card. */
+  showRetailerButtons: boolean;
 }
 
-/** One book in the /books grid — cover, title, language/status badges, a
- * one-line description, buy options (same set as BookCarousel and
+/** One book in a catalog grid — cover, title, language/status badges, a
+ * one-line description, optionally buy options (same set as
  * BookPurchasePanel, via `getBuyOptions`), and View Book. Cover aspect
  * ratio is never stretched — BookCover already sizes by its own fixed
  * w/h classes. */
-export default function BookCard({ book, source }: BookCardProps) {
+export default function BookCard({ book, source, showRetailerButtons }: BookCardProps) {
   const buyOptions = getBuyOptions(book);
   const onExplore = () => trackEvent('book_explore', { book: book.slug, source });
 
@@ -33,7 +42,7 @@ export default function BookCard({ book, source }: BookCardProps) {
         {book.title}
       </Link>
       <p className="text-sm text-muted leading-relaxed line-clamp-2">{book.tagline}</p>
-      {(buyOptions.length > 0 || book.goodreadsUrl) && (
+      {showRetailerButtons && (buyOptions.length > 0 || book.goodreadsUrl) && (
         <div className="flex flex-wrap justify-center gap-1.5">
           {buyOptions.map((opt) => (
             <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={book.title} />

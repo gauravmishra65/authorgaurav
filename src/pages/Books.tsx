@@ -76,7 +76,7 @@ export default function Books() {
             <BookFilters label="Filter by genre" options={categoryOptions} value={category} onChange={setCategory} />
           </div>
 
-          <BookGrid books={filtered} source="books-grid" />
+          <BookGrid books={filtered} source="books-grid" showRetailerButtons={false} />
         </section>
       )}
 

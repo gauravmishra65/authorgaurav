@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
-import RetailerButton from './RetailerButton';
-import { getBuyOptions, type Book } from '../data/books';
+import type { Book } from '../data/books';
 import { trackEvent } from '../lib/analytics';
 
 interface BookCarouselProps {
@@ -11,7 +10,7 @@ interface BookCarouselProps {
 
 export default function BookCarousel({ books }: BookCarouselProps) {
   // `:hover`/`:focus-within` alone (in index.css) never fires on touch
-  // devices, so a phone tap on a cover or retailer button lands on a track
+  // devices, so a phone tap on a cover or "View Book" link lands on a track
   // that's still sliding underneath it. Pausing on pointerdown (which fires
   // before the synthetic click on a tap) freezes the track in place before
   // the tap resolves, on every pointer type, not just mouse hover.
@@ -66,11 +65,6 @@ export default function BookCarousel({ books }: BookCarouselProps) {
               )}
             </div>
             <p className="text-2xs text-muted leading-relaxed text-center line-clamp-2">{b.tagline}</p>
-            <div className="flex flex-wrap justify-center gap-1.5">
-              {getBuyOptions(b).map((opt) => (
-                <RetailerButton key={opt.label} label={opt.label} href={opt.href} variant="outline" bookTitle={b.title} />
-              ))}
-            </div>
             <Link to={`/books/${b.slug}`} onClick={() => trackEvent('book_explore', { book: b.slug, source: 'home-carousel' })} className="label-caps text-2xs text-ink/70 hover:text-gold-text transition-colors underline underline-offset-2">View Book</Link>
           </div>
         ))}
