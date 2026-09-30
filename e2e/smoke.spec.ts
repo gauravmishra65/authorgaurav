@@ -1,28 +1,45 @@
 import { expect, test } from '@playwright/test';
+import { routes, bookRoutes } from './routes';
 
-test('homepage loads with exactly one H1', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('h1')).toHaveCount(1);
-});
+// These three checks used to run on a hand-picked handful of routes each
+// (home-only H1, home+books overflow, a 5-route href="#" loop) — different
+// subsets for each check, so a page left out of one loop could regress
+// silently. Now all three run across every real public route.
+for (const route of routes) {
+  test(`exactly one H1 on ${route}`, async ({ page }) => {
+    await page.goto(route);
+    await page.waitForSelector('h1', { timeout: 10000 });
+    await expect(page.locator('h1')).toHaveCount(1);
+  });
+
+  test(`no href="#" anywhere on ${route}`, async ({ page }) => {
+    await page.goto(route);
+    const hrefs = await page.locator('a[href]').evaluateAll((els) => els.map((el) => el.getAttribute('href')));
+    expect(hrefs.filter((h) => h === '#')).toEqual([]);
+  });
+
+  test(`no horizontal overflow at 320px width on ${route}`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto(route);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
+    expect(overflow).toBe(true);
+  });
+}
+
+// Every sampled book page's canonical must be the trailing-slash form
+// matching the sitemap convention (used to be checked on offbeat-love only).
+for (const route of bookRoutes) {
+  test(`canonical tag is the trailing-slash form matching the sitemap convention on ${route}`, async ({ page }) => {
+    await page.goto(route);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href', { timeout: 10000 });
+    expect(canonical).toBe(`https://authorgaurav.com${route}/`);
+  });
+}
 
 test('an invalid URL reaches the branded 404 page, not a blank screen', async ({ page }) => {
   await page.goto('/this-route-does-not-exist-xyz');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.locator('body')).not.toBeEmpty();
-});
-
-test('no horizontal overflow at 320px width on the homepage', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 568 });
-  await page.goto('/');
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
-  expect(overflow).toBe(true);
-});
-
-test('no horizontal overflow at 320px width on the books page', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 568 });
-  await page.goto('/books');
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
-  expect(overflow).toBe(true);
 });
 
 test('the contact form honeypot is hidden from the accessibility tree', async ({ page }) => {
@@ -47,32 +64,6 @@ test('contact form shows a validation error on empty submit, never silently fail
   await page.getByRole('button', { name: /send/i }).click();
   await expect(page.getByRole('alert').first()).toBeVisible();
 });
-
-test('no retailer/buy link on the books page is a bare "#" placeholder', async ({ page }) => {
-  await page.goto('/books');
-  const hrefs = await page.locator('a').evaluateAll((els) =>
-    els.map((el) => el.getAttribute('href')).filter((h): h is string => !!h)
-  );
-  const placeholders = hrefs.filter((h) => h === '#');
-  expect(placeholders).toEqual([]);
-});
-
-for (const route of ['/', '/about', '/contact', '/media', '/book-clubs']) {
-  test(`no href="#" anywhere on ${route}`, async ({ page }) => {
-    await page.goto(route);
-    const hrefs = await page.locator('a[href]').evaluateAll((els) => els.map((el) => el.getAttribute('href')));
-    expect(hrefs.filter((h) => h === '#')).toEqual([]);
-  });
-}
-
-for (const route of ['/about', '/contact']) {
-  test(`no horizontal overflow at 320px width on ${route}`, async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 568 });
-    await page.goto(route);
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
-    expect(overflow).toBe(true);
-  });
-}
 
 test('Shadow Code purchase links are real https, open in a new tab, and never expose the opener', async ({ page }) => {
   await page.goto('/books/the-shadow-code');
@@ -116,12 +107,6 @@ test('sitemap.xml is served directly with a 200 and XML content', async ({ reque
   const body = await res.text();
   expect(body).toContain('<urlset');
   expect(body).toContain('https://authorgaurav.com/');
-});
-
-test('a book page canonical tag is the trailing-slash form matching the sitemap convention', async ({ page }) => {
-  await page.goto('/books/offbeat-love');
-  const canonical = await page.locator('link[rel="canonical"]').getAttribute('href', { timeout: 10000 });
-  expect(canonical).toBe('https://authorgaurav.com/books/offbeat-love/');
 });
 
 test('newsletter form shows a client-side error for an invalid email, without submitting to the server', async ({ page }) => {

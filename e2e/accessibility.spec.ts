@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
+import { routes } from './routes';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
@@ -14,18 +15,6 @@ const root = resolve(__dirname, '..');
 // whole run finishes.
 const resultsDir = resolve(root, 'reports', '.a11y-results');
 mkdirSync(resultsDir, { recursive: true });
-
-// Every major public route (mirrors scripts/prerender.mjs's staticRoutes,
-// plus one representative dynamic slug per family so Hindi/English book
-// pages and a real blog post are both covered without scanning every
-// single book/post individually).
-const routes = [
-  '/', '/books', '/about', '/blog', '/news', '/testimonials', '/start-here', '/write-together-hub', '/contact',
-  '/media', '/readers', '/events', '/book-clubs', '/writing-resources',
-  '/privacy-policy', '/terms', '/accessibility',
-  '/books/the-shadow-code', '/books/offbeat-love', '/books/journey-of-grace',
-  '/books/lalita-sahasranama', '/books/vishnu-sahasranama', '/books/anootha-pyar', '/books/nirdosh-gangster',
-];
 
 for (const route of routes) {
   test(`accessibility: ${route}`, async ({ page }) => {
