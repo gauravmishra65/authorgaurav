@@ -10,10 +10,8 @@ import PressStrip from '../components/PressStrip';
 import BookLaunchHero from '../components/BookLaunchHero';
 import Divider from '../components/Divider';
 import WhereToBuyButton from '../components/WhereToBuyButton';
-import MilestoneTicker from '../components/MilestoneTicker';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
-import { buildMilestoneParts } from '../lib/milestoneText';
 
 export default function Home() {
   const [filter, setFilter] = useState('All');
@@ -41,7 +39,6 @@ export default function Home() {
   const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
   const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
   const friendYouKeep = books?.find((b) => b.slug === 'the-friend-you-keep');
-  const milestoneParts = shadowCode ? buildMilestoneParts(shadowCode) : null;
 
   return (
     <>
@@ -51,13 +48,10 @@ export default function Home() {
       />
 
       {/* The author-portrait hero that used to live here moved to /about — this
-          page now opens directly with the milestone ticker and the featured
-          release(s). Kept as a screen-reader-only h1 so the page still has a
-          real top-level heading for SEO/accessibility. */}
+          page now opens directly with the featured release(s). Kept as a
+          screen-reader-only h1 so the page still has a real top-level
+          heading for SEO/accessibility. */}
       <h1 className="sr-only">Gaurav Mishra: stories of love, faith, ambition and the hidden systems that shape our lives.</h1>
-
-      {/* MILESTONE TICKER — first thing on the page, on purpose */}
-      {milestoneParts && shadowCode && <MilestoneTicker parts={milestoneParts} href={`/books/${shadowCode.slug}`} />}
 
       {/* FEATURED RELEASE(S) */}
       {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
