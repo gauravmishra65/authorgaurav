@@ -8,7 +8,7 @@ import BookFilters from '../components/BookFilters';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
 import { interviewExternalResources, interviewBookTools } from '../data/interviewResources';
-import { getVerifiedSocialLinks } from '../data/social';
+import { buildPersonStructuredData } from '../components/PersonStructuredData';
 import { canonicalUrl } from '../lib/url';
 import { trackEvent } from '../lib/analytics';
 
@@ -28,12 +28,7 @@ function buildJsonLd() {
         description: 'Official references, STAR-R tools, interview worksheets, hiring resources and updated links for readers of The Complete Interview Success Guide by Gaurav Mishra.',
         url: pageUrl,
       },
-      {
-        '@type': 'Person',
-        name: 'Gaurav Mishra',
-        url: canonicalUrl('/about'),
-        sameAs: getVerifiedSocialLinks().map((s) => s.href),
-      },
+      buildPersonStructuredData(),
       {
         '@type': 'Book',
         name: BOOK_TITLE,

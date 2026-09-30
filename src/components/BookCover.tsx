@@ -49,7 +49,7 @@ export default function BookCover({
       {imageSrc && !imgError ? (
         <img
           src={imageSrc}
-          alt={`${title} book cover`}
+          alt={`${title} by ${author} book cover`}
           width={imageWidth ?? pixelSizes[size].w}
           height={imageHeight ?? pixelSizes[size].h}
           className="w-full h-full object-contain object-center"

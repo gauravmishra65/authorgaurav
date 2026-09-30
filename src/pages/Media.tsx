@@ -8,16 +8,7 @@ import ReleaseDetails from '../components/ReleaseDetails';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
-
-// Length variants of the same already-approved About-page biography — no
-// new facts, just different amounts of the same confirmed material.
-const shortBio = 'Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. He is the founder of WriteTogetherHub.';
-
-const mediumBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. His books include the contemporary romance Offbeat Love, the techno-financial thriller Shadow Code, the travel memoir A Journey of Grace, and accessible Hindi renderings of the Vishnu and Lalita Sahasranama. He is also the founder of WriteTogetherHub, a community and guided-learning platform for new and returning writers.`;
-
-const longBio = `Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. His curiosity has led him to Offbeat Love, a contemporary romance about two people from different worlds who find one shared melody in the noise of Mumbai; to Shadow Code, a techno-financial thriller about the truths that hide inside algorithms and the people willing to chase them; to A Journey of Grace, a travel memoir about faith, the road, and the quiet conversations that change us; and back, again and again, to the devotional texts he grew up with, the Vishnu Sahasranama and the Lalita Sahasranama, rendered in accessible Hindi as living wisdom rather than ritual alone.
-
-He is also the founder of WriteTogetherHub, built to give new and returning writers the guidance, community, and encouragement he wished he'd had when he was starting out.`;
+import { AUTHOR_SHORT_BIO as shortBio, AUTHOR_MEDIUM_BIO as mediumBio, AUTHOR_LONG_BIO as longBio } from '../data/author';
 
 const interviewTopics = [
   'Writing across genres: romance, thriller, memoir, and devotional texts under one name',

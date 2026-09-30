@@ -7,10 +7,28 @@ import BookCard from '../components/BookCard';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
+import { buildPersonStructuredData } from '../components/PersonStructuredData';
+import { canonicalUrl } from '../lib/url';
 
 // One representative title per genre this genuinely spans — matches the
 // four books already named in the biography prose below, not a new claim.
 const selectedSlugs = ['the-shadow-code', 'offbeat-love', 'journey-of-grace', 'vishnu-sahasranama'];
+
+function buildJsonLd() {
+  const pageUrl = canonicalUrl('/about');
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        name: 'About Gaurav Mishra: A Writer Who Refuses to Stay in One Lane',
+        description: "Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. He's also the founder of WriteTogetherHub.",
+        url: pageUrl,
+      },
+      buildPersonStructuredData(),
+    ],
+  };
+}
 
 export default function About() {
   const [imgError, setImgError] = useState(false);
@@ -23,6 +41,7 @@ export default function About() {
       <Seo
         title="About Gaurav Mishra: A Writer Who Refuses to Stay in One Lane"
         description="Gaurav Mishra writes across romance, thriller, memoir, and devotion, all united by the belief that a good story can carry a reader anywhere. He's also the founder of WriteTogetherHub."
+        jsonLd={buildJsonLd()}
       />
 
       <section className="bg-ink bg-grain text-ivory">

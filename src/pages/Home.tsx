@@ -12,6 +12,22 @@ import Divider from '../components/Divider';
 import WhereToBuyButton from '../components/WhereToBuyButton';
 import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { buildPersonStructuredData } from '../components/PersonStructuredData';
+import { SITE_URL } from '../lib/url';
+
+function buildJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        name: 'Gaurav Mishra',
+        url: `${SITE_URL}/`,
+      },
+      buildPersonStructuredData(),
+    ],
+  };
+}
 
 export default function Home() {
   const [filter, setFilter] = useState('All');
@@ -45,6 +61,7 @@ export default function Home() {
       <Seo
         title="Gaurav Mishra | Author of Shadow Code, Offbeat Love and Spiritual Books"
         description="Explore books by Gaurav Mishra, including the techno-financial thriller Shadow Code, contemporary fiction and accessible spiritual books in Hindi and English."
+        jsonLd={buildJsonLd()}
       />
 
       {/* The author-portrait hero that used to live here moved to /about — this

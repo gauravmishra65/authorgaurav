@@ -7,7 +7,7 @@ import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { getBuyOptions } from '../data/books';
 import { groupBookstorePhotosByCity } from '../lib/bookstoreAvailability';
-import { getVerifiedSocialLinks } from '../data/social';
+import { buildPersonStructuredData } from '../components/PersonStructuredData';
 import { canonicalUrl } from '../lib/url';
 
 function buildJsonLd() {
@@ -21,12 +21,7 @@ function buildJsonLd() {
         description: 'Every book by Gaurav Mishra, and where to buy it: real online retailer links plus the physical bookstores currently stocking his books across India.',
         url: pageUrl,
       },
-      {
-        '@type': 'Person',
-        name: 'Gaurav Mishra',
-        url: canonicalUrl('/about'),
-        sameAs: getVerifiedSocialLinks().map((s) => s.href),
-      },
+      buildPersonStructuredData(),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
