@@ -2,7 +2,6 @@ import { ArrowRight, ExternalLink, BookOpen, Globe, Store, Users } from 'lucide-
 import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import ReleaseCountdown from './ReleaseCountdown';
-import ReleaseDetails from './ReleaseDetails';
 import RetailerButton from './RetailerButton';
 import { getBuyOptions, type Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
@@ -191,16 +190,6 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
       <div className="relative mx-auto max-w-3xl px-6 py-10 text-center">
         <p className="eyebrow text-gold-text mb-3">Synopsis</p>
         <p className="text-ivory/80 leading-relaxed max-w-2xl mx-auto">{book.synopsis}</p>
-      </div>
-
-      {/* Per-book "Reader Circle" teaser was removed — it just duplicated
-          the single canonical signup at the bottom of the homepage
-          (id="free-chapter"), once per featured book. That one section
-          is the merged destination for all of these. */}
-      <div className="hairline-solid w-full opacity-20" />
-
-      <div className="relative mx-auto max-w-4xl px-6 py-10">
-        <ReleaseDetails book={book} />
       </div>
 
       {bookstoreAvailabilityText && (
