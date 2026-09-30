@@ -14,10 +14,19 @@ function realBookFormats(book: Book): string[] {
   return formats;
 }
 
-/** Builds the Book + BreadcrumbList JSON-LD for a book page — extracted out
- * of BookDetail so the schema logic is testable/reusable on its own. Passed
- * to `Seo`'s `jsonLd` prop, which renders it via `StructuredData`. */
-export function buildBookStructuredData(book: Book): Record<string, unknown> {
+export interface FaqEntry {
+  q: string;
+  a: string;
+}
+
+/** Builds the Book + BreadcrumbList (+ FAQPage, when the page actually shows
+ * FAQ content) JSON-LD for a book page — extracted out of BookDetail so the
+ * schema logic is testable/reusable on its own. Passed to `Seo`'s `jsonLd`
+ * prop, which renders it via `StructuredData`. `faq` should only ever be the
+ * same real Q&A pairs already rendered visibly on the page (currently the
+ * Lalita/Vishnu Sahasranama "सामान्य प्रश्न" sections) — never invented
+ * purely to gain a rich-result eligibility. */
+export function buildBookStructuredData(book: Book, faq?: FaqEntry[]): Record<string, unknown> {
   const canonicalUrl = buildUrl(`/books/${book.slug}`);
   const formats = realBookFormats(book);
 
@@ -52,6 +61,16 @@ export function buildBookStructuredData(book: Book): Record<string, unknown> {
           { '@type': 'ListItem', position: 3, name: book.title, item: canonicalUrl },
         ],
       },
+      ...(faq && faq.length > 0
+        ? [{
+            '@type': 'FAQPage',
+            mainEntity: faq.map(({ q, a }) => ({
+              '@type': 'Question',
+              name: q,
+              acceptedAnswer: { '@type': 'Answer', text: a },
+            })),
+          }]
+        : []),
     ],
   };
 }

@@ -106,7 +106,7 @@ export default function BookDetail() {
         path={`/books/${book.slug}`}
         image={book.imageSrc}
         lang={book.language === 'Hindi' ? 'hi' : 'en'}
-        jsonLd={buildBookStructuredData(book)}
+        jsonLd={buildBookStructuredData(book, isLalita ? lalitaFaq : isVishnu ? vishnuFaq : undefined)}
       />
 
       {/* 19. Breadcrumbs, 1-7. Book hero (cover, genre/language, hook, purchase/sample/trailer) */}
