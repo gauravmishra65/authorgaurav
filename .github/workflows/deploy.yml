@@ -33,6 +33,27 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npx playwright install --with-deps chromium
+      # The chromium install above existed for a while with nothing actually
+      # calling test:e2e — the 125-test accessibility/smoke suite (0
+      # critical/serious violations across 27 routes) was running locally
+      # but had zero CI enforcement, so a real regression could merge
+      # silently. Needs the same Supabase env as build: Playwright's own
+      # webServer starts `npm run dev` fresh in CI (reuseExistingServer is
+      # false whenever process.env.CI is set — see playwright.config.ts),
+      # and the dev server fetches real book/blog/event data the same way
+      # the production build does.
+      - run: npm run test:e2e
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      # Content-completeness gate (featured book with no purchase link,
+      # missing SEO fields on a published book, a readerMagnets fileUrl
+      # pointing at a file that doesn't exist, etc.) — reads live Supabase
+      # data directly, doesn't need dist/ to exist yet.
+      - run: npm run validate:content
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: npm run build
         env:
           # Set both in repo Settings > Secrets and variables > Actions — the
@@ -40,6 +61,9 @@ jobs:
           # Supabase at runtime, so the build needs these to embed correctly.
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      # Link/asset/canonical/sitemap auditor — checks the *built* dist/
+      # output, so it must run after build, not before.
+      - run: npm run validate:links
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

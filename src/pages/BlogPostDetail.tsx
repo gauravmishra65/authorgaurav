@@ -1,7 +1,8 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import SocialShareButtons from '../components/SocialShareButtons';
+import Breadcrumbs from '../components/Breadcrumbs';
 import EmailStrip from '../components/EmailStrip';
 import { fetchBlogPosts } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
@@ -54,14 +55,19 @@ export default function BlogPostDetail() {
       <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-3xl px-6 pt-10 pb-2">
-          <Link to="/blog" className="inline-flex items-center gap-1.5 label-caps text-gold-lt/80 hover:text-gold-lt transition-colors">
-            <ArrowLeft size={13} /> All Posts
-          </Link>
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Blog', href: '/blog' },
+              { label: post.title },
+            ]}
+            className="text-gold-lt/80"
+          />
         </div>
         <div className="mx-auto max-w-3xl px-6 py-14">
           <p className="eyebrow text-gold-lt mb-4">{post.category}</p>
           <h1 className="font-display text-3xl md:text-5xl mb-4">{post.title}</h1>
-          <p className="text-ivory/70 text-sm">{post.date} · {post.readTime} read</p>
+          <p className="text-ivory/70 text-sm">By Gaurav Mishra · {post.date} · {post.readTime} read</p>
         </div>
       </section>
 
