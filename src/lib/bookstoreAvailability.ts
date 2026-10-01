@@ -49,20 +49,26 @@ export interface BookstoreCityGroup {
  * ("Store, City"), for the site-wide "Find in Bookstores" directory. Photos
  * with no city in their caption land in a final `city: null` group rather
  * than being dropped or assigned a guessed location.
+ *
+ * One photo per store name per city — a store that stocks two different
+ * books has two photo rows in the database (one per book), which otherwise
+ * rendered as the same store name twice in a row on this page. There's no
+ * real signal here (e.g. a verified branch name) to tell two same-named
+ * rows apart as different locations, so per the site's standing
+ * non-fabrication rule this collapses to one listing rather than guessing
+ * a distinguishing branch label. buildBookstoreAvailabilityText() above
+ * already does the equivalent dedup for the per-book sentence; this brings
+ * the city-grouped gallery in line with it.
  */
 export function groupBookstorePhotosByCity(photos: ReaderPhoto[]): BookstoreCityGroup[] {
   const byCity = new Map<string, ReaderPhoto[]>();
   const noCity: ReaderPhoto[] = [];
 
   for (const photo of photos) {
-    const [, city] = (photo.caption ?? '').split(',').map((s) => s.trim());
-    if (city) {
-      const list = byCity.get(city) ?? [];
-      list.push(photo);
-      byCity.set(city, list);
-    } else {
-      noCity.push(photo);
-    }
+    const [store, city] = (photo.caption ?? '').split(',').map((s) => s.trim());
+    const list = city ? (byCity.get(city) ?? []) : noCity;
+    if (!list.some((p) => (p.caption ?? '').split(',')[0].trim() === store)) list.push(photo);
+    if (city) byCity.set(city, list);
   }
 
   const groups: BookstoreCityGroup[] = [...byCity.entries()].map(([city, cityPhotos]) => ({ city, photos: cityPhotos }));

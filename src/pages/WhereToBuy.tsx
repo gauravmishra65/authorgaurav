@@ -3,6 +3,7 @@ import Section from '../components/Section';
 import SectionHeading from '../components/SectionHeading';
 import BookGrid from '../components/BookGrid';
 import EmailStrip from '../components/EmailStrip';
+import EmptyState from '../components/EmptyState';
 import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { getBuyOptions } from '../data/books';
@@ -58,10 +59,10 @@ export default function WhereToBuy() {
       <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
-          <p className="eyebrow text-gold-lt mb-4">Where to Buy</p>
-          <h1 className="font-display text-4xl md:text-5xl mb-4">Online &amp; in Bookstores</h1>
+          <p className="eyebrow text-gold-lt mb-4">Buy the Books</p>
+          <h1 className="font-display text-4xl md:text-5xl mb-4">Where to Buy</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Every book, with its real retailer links, plus the physical bookstores currently stocking Gaurav Mishra's books across India.
+            Choose a book, edition and retailer. Availability may vary by country and store.
           </p>
         </div>
       </section>
@@ -76,9 +77,22 @@ export default function WhereToBuy() {
         </Section>
       )}
 
+      {!loading && !error && cityGroups.length === 0 && (
+        <Section tone="cream" containerSize="wide">
+          <SectionHeading eyebrow="Find in Bookstores" title="On Shelves Across India" />
+          <EmptyState
+            heading="No confirmed bookstores yet"
+            message="Retail availability has not yet been confirmed for this location."
+          />
+        </Section>
+      )}
+
       {cityGroups.length > 0 && (
         <Section tone="cream" containerSize="wide">
           <SectionHeading eyebrow="Find in Bookstores" title="On Shelves Across India" />
+          <p className="text-center text-sm text-muted max-w-xl mx-auto -mt-6 mb-10">
+            Bookstore stock can change. Please contact the store before visiting.
+          </p>
           <div className="space-y-14">
             {cityGroups.map((group) => (
               <div key={group.city ?? '__other'}>

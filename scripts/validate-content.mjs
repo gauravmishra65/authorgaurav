@@ -66,15 +66,18 @@ async function main() {
 
   const headers = { apikey: VITE_SUPABASE_ANON_KEY };
 
-  const [booksRes, postsRes] = await Promise.all([
+  const [booksRes, postsRes, photosRes] = await Promise.all([
     fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_books?select=*`, { headers }),
     fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_blog_posts?select=*`, { headers }),
+    fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_reader_photos?select=*&kind=eq.bookstore`, { headers }),
   ]);
   if (!booksRes.ok) { console.error(`Failed to fetch books: ${booksRes.status}`); process.exitCode = 1; return; }
   if (!postsRes.ok) { console.error(`Failed to fetch blog posts: ${postsRes.status}`); process.exitCode = 1; return; }
+  if (!photosRes.ok) { console.error(`Failed to fetch reader photos: ${photosRes.status}`); process.exitCode = 1; return; }
 
   const books = await booksRes.json();
   const posts = await postsRes.json();
+  const bookstorePhotos = await photosRes.json();
 
   const issues = []; // { severity, subject, kind, detail }
 
@@ -96,6 +99,34 @@ async function main() {
 
     if (book.featured && !hasAnyBuyOption(book)) {
       addIssue(issues, 'fail', book.slug, 'featured-without-purchase-link', 'book is marked featured but has no real purchase/pre-order link (all buy_links/kindle_url/paperback_url are empty or "#")');
+    }
+
+    // Mirrors getBuyOptions()'s own reconciliation exactly — a buy_links
+    // entry labeled "Kindle" is a fallback that's superseded by kindle_url,
+    // never shown alongside it, so it's excluded here the same way or this
+    // would falsely flag every book that has one as a "duplicate".
+    const urlCounts = new Map();
+    const addUrl = (label, href) => {
+      if (!href || href === '#') return;
+      const entry = urlCounts.get(href) ?? [];
+      entry.push(label);
+      urlCounts.set(href, entry);
+    };
+    const buyLinks = book.buy_links ?? [];
+    for (const link of buyLinks) {
+      if (link.label === 'Kindle') continue;
+      addUrl(link.label, link.href);
+    }
+    const kindleHref = book.kindle_url || buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;
+    addUrl('Kindle', kindleHref);
+    addUrl('Paperback', book.paperback_url);
+    addUrl('Shopify', book.shopify_url);
+    addUrl('Shopee', book.shopee_url);
+    addUrl('Lazada', book.lazada_url);
+    for (const [href, labels] of urlCounts) {
+      if (labels.length > 1) {
+        addIssue(issues, 'fail', book.slug, 'duplicate-retailer-url', `the same URL (${href}) is used for ${labels.length} retailer entries (${labels.join(', ')}) — confirm these are meant to be separate retailers`);
+      }
     }
   }
   for (const [slug, count] of slugCounts) {
@@ -128,6 +159,26 @@ async function main() {
   }
   for (const [slug, count] of postSlugCounts) {
     if (count > 1) addIssue(issues, 'fail', slug, 'duplicate-post-slug', `slug "${slug}" used by ${count} blog post rows`);
+  }
+
+  // Mirrors the dedup groupBookstorePhotosByCity() applies on /where-to-buy:
+  // the same store name repeated in the same city is almost always one
+  // store that stocks more than one book (one photo row per book), not two
+  // branches — this is a warning, not a failure, in case a real second
+  // branch does exist and just needs a distinguishing name (e.g.
+  // "Bahrisons — Khan Market") added to its caption.
+  const storeCityCounts = new Map();
+  for (const photo of bookstorePhotos) {
+    const [store, city] = (photo.caption ?? '').split(',').map((s) => s.trim());
+    if (!store) continue;
+    const key = `${store}|${city ?? ''}`;
+    storeCityCounts.set(key, (storeCityCounts.get(key) ?? 0) + 1);
+  }
+  for (const [key, count] of storeCityCounts) {
+    if (count > 1) {
+      const [store, city] = key.split('|');
+      addIssue(issues, 'warn', store, 'duplicate-bookstore-listing', `"${store}"${city ? ` in ${city}` : ''} appears in ${count} reader-photo rows with no distinguishing branch name — confirm whether these are the same store (fine as-is) or different branches (add a branch name to each caption, e.g. "${store} — Khan Market")`);
+    }
   }
 
   // Static config files: social.ts and readerMagnets.ts are plain TS, parsed
