@@ -1,22 +1,21 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
-import BookCarousel from '../components/BookCarousel';
 import EmailStrip from '../components/EmailStrip';
-import WriteTogetherHub from '../components/WriteTogetherHub';
 import BlogPreview from '../components/BlogPreview';
 import NewsPreview from '../components/NewsPreview';
 import Testimonials from '../components/Testimonials';
 import PressStrip from '../components/PressStrip';
 import BookLaunchHero from '../components/BookLaunchHero';
-import Divider from '../components/Divider';
-import WhereToBuyButton from '../components/WhereToBuyButton';
-import { fetchBooks, fetchBookCategories } from '../lib/queries';
+import BookCard from '../components/BookCard';
+import SectionHeading from '../components/SectionHeading';
+import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { buildPersonStructuredData } from '../components/PersonStructuredData';
 import { SITE_URL } from '../lib/url';
 import { getFeaturedBook } from '../lib/releaseStatus';
 import { getTranslationEdition } from '../data/books';
+import { trackEvent } from '../lib/analytics';
 
 function buildJsonLd() {
   return {
@@ -32,31 +31,24 @@ function buildJsonLd() {
   };
 }
 
+// The same representative spread used on /about's "One World Per Book" —
+// kept in sync deliberately, so a reader who browses both pages sees a
+// consistent, curated picture of the catalog rather than two different
+// "selected books" lists.
+const selectedSlugs = ['the-shadow-code', 'offbeat-love', 'journey-of-grace', 'vishnu-sahasranama'];
+
+const readingMoods = ['Suspense & Mystery', 'Love & Relationships', 'Faith & Reflection', 'Life & Personal Growth'];
+
 export default function Home() {
-  const [filter, setFilter] = useState('All');
   // Deliberately not gating the whole page behind this fetch — the hero,
   // testimonials, news, and blog previews below don't need book data, so
   // they render (and fire their own queries) immediately instead of
   // waiting on this one to resolve first.
-  const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
-  const { data: categories } = useSupabaseData(fetchBookCategories, []);
-
-  // "Upcoming" is an additional lens (handled separately), not a category —
-  // the rest of the row mirrors the /books page's category tabs (from the
-  // authorgaurav_book_categories table) so the same options appear in both
-  // places, and "All" and the genre tabs always include upcoming books too
-  // (the "Coming Soon" badge on each card already distinguishes status), so
-  // nothing appears to vanish when switching between tabs.
-  const bookshelfFilters = ['All', 'Upcoming', ...(categories?.map((c) => c.label) ?? [])];
-
-  const filtered = !books ? [] : filter === 'Upcoming'
-    ? books.filter((b) => b.status === 'upcoming')
-    : filter === 'All'
-      ? books
-      : books.filter((b) => b.categories?.includes(categories?.find((c) => c.label === filter)?.tag ?? '__none__'));
+  const { data: books } = useSupabaseData(fetchBooks, []);
 
   const featuredBook = books ? getFeaturedBook(books) : undefined;
   const featuredTranslationEdition = featuredBook && books ? getTranslationEdition(featuredBook, books) : undefined;
+  const selectedBooks = books?.filter((b) => selectedSlugs.includes(b.slug)) ?? [];
 
   return (
     <>
@@ -66,49 +58,101 @@ export default function Home() {
         jsonLd={buildJsonLd()}
       />
 
-      {/* The author-portrait hero that used to live here moved to /about — this
-          page now opens directly with the featured release(s). Kept as a
-          screen-reader-only h1 so the page still has a real top-level
-          heading for SEO/accessibility. */}
-      <h1 className="sr-only">Gaurav Mishra: stories of love, faith, ambition and the hidden systems that shape our lives.</h1>
+      {/* HERO — a calm, editorial opening before the specific book promotion
+          below, replacing what used to be only a screen-reader-only h1. */}
+      <section className="bg-cream py-20 text-center">
+        <div className="mx-auto max-w-3xl px-6">
+          <h1 className="font-display text-4xl md:text-5xl text-ink mb-5 leading-tight">
+            Stories of suspense, love, faith and the choices that shape our lives.
+          </h1>
+          <p className="text-text/70 leading-relaxed text-lg mb-8 max-w-xl mx-auto">
+            Gaurav Mishra writes thrillers, contemporary fiction and spiritual books for readers drawn to suspense, relationships, reflection and meaning.
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-4 mb-5">
+            <Link to="/books" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
+            <Link to="/start-here" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here' })}>Start Here</Link>
+          </div>
+          <Link to="/reader-circle" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle' })}>
+            Join the Reader Circle
+          </Link>
+        </div>
+      </section>
 
       {/* FEATURED RELEASE — exactly one book, driven by the `featured` flag
           (see getFeaturedBook in lib/releaseStatus.ts), so this can never
           contradict the header CTA or Media's "Current Release" block. */}
       {featuredBook && <BookLaunchHero book={featuredBook} translationEdition={featuredTranslationEdition} />}
 
-      {/* THE BOOKSHELF */}
-      <section className="pt-20">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="eyebrow text-gold-text mb-3">The Bookshelf</p>
-          <h2 className="font-display text-3xl md:text-4xl text-ink">Explore every world</h2>
-          <Divider className="my-8!" />
+      <PressStrip />
 
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {bookshelfFilters.map((g) => (
-              <button key={g} onClick={() => setFilter(g)}
-                className={`label-caps px-4 py-2 rounded-full border transition-all ${filter === g ? 'bg-ink text-gold-lt border-gold' : 'bg-cream text-text/70 border-gold/25 hover:border-gold/60 hover:text-ink'}`}>
-                {g}
-              </button>
+      {/* START HERE teaser — a lighter pointer to the full /start-here
+          experience, not a reproduction of it. */}
+      <section className="bg-ink bg-grain text-ivory py-16 text-center">
+        <div className="mx-auto max-w-2xl px-6">
+          <SectionHeading title="Not sure where to begin?" tone="dark" />
+          <p className="text-ivory/75 leading-relaxed mb-7">
+            Choose the kind of reading you are in the mood for, and find a book that fits.
+          </p>
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {readingMoods.map((mood) => (
+              <span key={mood} className="label-caps text-2xs text-gold-lt/80 border border-gold/30 rounded-full px-3.5 py-1.5">{mood}</span>
             ))}
           </div>
-        </div>
-
-        {loading && <p className="py-16 text-center text-muted">Loading books…</p>}
-        {error && <p className="py-16 text-center text-rose">Couldn't load books: {error}</p>}
-        {!loading && !error && <BookCarousel books={filtered} />}
-
-        <div className="mx-auto max-w-6xl px-6 pb-20 pt-4 text-center">
-          <WhereToBuyButton source="home" subtext="Online & selected bookstores" />
+          <Link to="/start-here" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Find Your Next Read' })}>
+            Find Your Next Read <ArrowRight size={15} />
+          </Link>
         </div>
       </section>
 
+      {/* SELECTED BOOKS — a curated spread, not the full catalog (that's
+          what /books is for). Same four titles as About's "One World Per
+          Book" section. */}
+      {selectedBooks.length > 0 && (
+        <section className="py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <SectionHeading eyebrow="The Library" title="Explore the Books" />
+            <p className="text-text/70 leading-relaxed text-center max-w-xl mx-auto mb-12">
+              Fiction, thrillers, spiritual reading and stories drawn from different corners of life.
+            </p>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {selectedBooks.map((b) => <BookCard key={b.id} book={b} source="home-selected-books" showRetailerButtons={false} />)}
+            </div>
+            <p className="text-center mt-10">
+              <Link to="/books" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'View All Books' })}>View All Books</Link>
+            </p>
+          </div>
+        </section>
+      )}
+
       <Testimonials />
-      <PressStrip />
+
+      {/* ABOUT teaser — short on purpose; the full biography lives at /about. */}
+      <section className="bg-cream py-16 text-center">
+        <div className="mx-auto max-w-2xl px-6">
+          <SectionHeading title="About Gaurav" />
+          <p className="text-text/70 leading-relaxed mb-7">
+            Gaurav Mishra writes across genres, from contemporary fiction and financial thrillers to spiritual books. His work is shaped by curiosity about people, relationships, belief and the systems that influence everyday life.
+          </p>
+          <Link to="/about" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: "Read Gaurav's Story" })}>Read Gaurav's Story</Link>
+        </div>
+      </section>
+
       <NewsPreview />
       <BlogPreview />
 
-      <WriteTogetherHub />
+      {/* WRITETOGETHERHUB — a compact pointer, not the full three-card
+          section (that still lives in full at /write-together-hub and on
+          /writing-resources, via the shared WriteTogetherHub component). */}
+      <section className="bg-ink bg-grain text-ivory py-16 text-center">
+        <div className="mx-auto max-w-xl px-6">
+          <span className="inline-block rounded-full border border-gold/40 px-4 py-1.5 label-caps text-gold-lt mb-5">A Home for Writers</span>
+          <h2 className="font-display text-2xl md:text-3xl mb-4">WriteTogetherHub</h2>
+          <p className="text-ivory/75 leading-relaxed mb-7">
+            A free community and guided-learning platform for new and returning writers, founded by Gaurav.
+          </p>
+          <Link to="/write-together-hub" className="btn-caps btn-gold inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('writetogetherhub_click', { source: 'homepage-teaser' })}>Visit WriteTogetherHub</Link>
+        </div>
+      </section>
 
       <div id="free-chapter" className="scroll-mt-20">
         <EmailStrip
@@ -122,6 +166,17 @@ export default function Home() {
           </Link>
         </p>
       </div>
+
+      {/* FINAL CTA — a short closing nudge, not a new section's worth of content. */}
+      <section className="bg-cream py-16 text-center border-t border-gold/15">
+        <div className="mx-auto max-w-xl px-6">
+          <h2 className="font-display text-2xl md:text-3xl text-ink mb-7">Find your next book.</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/books" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Browse All Books' })}>Browse All Books</Link>
+            <Link to="/start-here" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here', source: 'final-cta' })}>Start Here</Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

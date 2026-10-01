@@ -49,7 +49,7 @@ export default function Testimonials() {
 
           <div className="carousel-track-ltr flex w-max py-2" style={{ animationDuration: `${duration}s` }}>
             {track.map((t, i) => (
-              <div key={i} aria-hidden={i >= featuredTestimonials.length} className="mr-6">
+              <div key={i} aria-hidden={i >= featuredTestimonials.length} {...(i >= featuredTestimonials.length ? { inert: true } : {})} className="mr-6">
                 <TestimonialCard t={t} />
               </div>
             ))}
