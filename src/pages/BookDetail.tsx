@@ -110,7 +110,7 @@ export default function BookDetail() {
       />
 
       {/* 19. Breadcrumbs, 1-7. Book hero (cover, genre/language, hook, purchase/sample/trailer) */}
-      <div className="bg-[var(--book-bg)] bg-grain">
+      <div className="bg-(--book-bg) bg-grain">
         <div className="mx-auto max-w-5xl px-6 pt-10 pb-2">
           <Breadcrumbs
             items={[
@@ -118,7 +118,7 @@ export default function BookDetail() {
               { label: 'Books', href: '/books' },
               { label: book.title },
             ]}
-            className="text-[var(--book-accent-text)]"
+            className="text-(--book-accent-text)"
           />
         </div>
       </div>
@@ -141,7 +141,7 @@ export default function BookDetail() {
 
       {/* Sales-milestone banner: any book with milestoneSalesCount set gets this; admin clears the field to turn it off between milestones */}
       {milestoneParts && (
-        <section className="bg-[var(--book-surface)]">
+        <section className="bg-(--book-surface)">
           <div className="mx-auto max-w-3xl px-6 py-14 text-center">
             <p className="eyebrow mb-3" style={{ color: 'var(--book-accent-text)' }}>Milestone</p>
             <p className="font-display text-4xl md:text-5xl mb-4" style={{ color: 'var(--book-accent-text)' }}>
@@ -158,7 +158,7 @@ export default function BookDetail() {
 
       {/* Lalita Sahasranama only: key-features section ahead of the generic synopsis */}
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-4xl px-6 py-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -178,7 +178,7 @@ export default function BookDetail() {
 
       {/* Vishnu Sahasranama only: key-features section (from the approved cover art) ahead of the generic synopsis */}
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-4xl px-6 py-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>इस पुस्तक की विशेषताएँ</p>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -208,7 +208,7 @@ export default function BookDetail() {
 
       {/* Offbeat Love only: atmosphere section ahead of the generic synopsis */}
       {isOffbeatLove && (
-        <section className="bg-[var(--book-surface)]">
+        <section className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>A Story Across Two Worlds</p>
             <p className="font-display text-2xl md:text-3xl leading-snug mb-5" style={{ color: '#672F3A' }}>
@@ -260,14 +260,14 @@ export default function BookDetail() {
       </section>
 
       {/* Secondary purchase path: every book page links to the consolidated directory alongside its own retailer buttons above */}
-      <section className="bg-[var(--book-bg)] px-6 py-12 text-center">
+      <section className="bg-(--book-bg) px-6 py-12 text-center">
         <p className="font-display text-xl mb-5" style={{ color: 'var(--book-text)' }}>Ready to read?</p>
         <WhereToBuyButton source={`book-detail:${book.slug}`} />
       </section>
 
       {/* Lalita Sahasranama only: सरल अर्थ / भावार्थ / दैनिक जीवन में प्रयोग / किन पाठकों के लिए उपयोगी */}
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-surface)]">
+        <section lang="hi" className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>सरल अर्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -278,7 +278,7 @@ export default function BookDetail() {
       )}
 
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>भावार्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -289,7 +289,7 @@ export default function BookDetail() {
       )}
 
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-surface)]">
+        <section lang="hi" className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>दैनिक जीवन में प्रयोग</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -300,7 +300,7 @@ export default function BookDetail() {
       )}
 
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>किन पाठकों के लिए उपयोगी</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -311,7 +311,7 @@ export default function BookDetail() {
       )}
 
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-surface)]">
+        <section lang="hi" className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>संकलनकर्ता की भूमिका</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -323,7 +323,7 @@ export default function BookDetail() {
 
       {/* Vishnu Sahasranama only: सरल अर्थ / किन पाठकों के लिए उपयोगी / दैनिक पाठ और चिंतन / संकलनकर्ता की भूमिका */}
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-surface)]">
+        <section lang="hi" className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>सरल अर्थ</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -334,7 +334,7 @@ export default function BookDetail() {
       )}
 
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>किन पाठकों के लिए उपयोगी</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -345,7 +345,7 @@ export default function BookDetail() {
       )}
 
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-surface)]">
+        <section lang="hi" className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>दैनिक पाठ और चिंतन</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -356,7 +356,7 @@ export default function BookDetail() {
       )}
 
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>संकलनकर्ता की भूमिका</p>
             <p className="leading-relaxed text-lg" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -392,7 +392,7 @@ export default function BookDetail() {
 
       {/* Any book with real bookstore photos on file gets this section — not tied to a specific book */}
       {bookstorePhotos.length > 0 && (
-        <section className="bg-[var(--book-surface)]">
+        <section className="bg-(--book-surface)">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <p className="eyebrow mb-4 text-center" style={{ color: 'var(--book-accent-text)' }}>Now in Stores</p>
             <h2 className="font-display text-2xl md:text-3xl text-center mb-4" style={{ color: 'var(--book-text)' }}>On Shelves Across India</h2>
@@ -405,10 +405,10 @@ export default function BookDetail() {
               {bookstorePhotos.map((photo) => (
                 <figure
                   key={photo.id}
-                  className="rounded-md border bg-[var(--book-bg)] overflow-hidden"
+                  className="rounded-md border bg-(--book-bg) overflow-hidden"
                   style={{ borderColor: 'color-mix(in srgb, var(--book-accent) 20%, transparent)' }}
                 >
-                  <div className="h-48 flex items-center justify-center bg-[var(--book-bg)] p-2">
+                  <div className="h-48 flex items-center justify-center bg-(--book-bg) p-2">
                     <img src={photo.imageSrc} alt={photo.caption || `${book.title} on a bookstore shelf in India`} className="max-h-full max-w-full object-contain" loading="lazy" />
                   </div>
                   {photo.caption && (
@@ -428,7 +428,7 @@ export default function BookDetail() {
 
       {/* Offbeat Love only: reader-fit + setting sections */}
       {isOffbeatLove && (
-        <section className="bg-[var(--book-bg)]">
+        <section className="bg-(--book-bg)">
           <div className="mx-auto max-w-4xl px-6 py-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>Why Romance Readers May Enjoy It</p>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -447,7 +447,7 @@ export default function BookDetail() {
       )}
 
       {isOffbeatLove && (
-        <section className="bg-[var(--book-surface)]">
+        <section className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>Setting &amp; Journey</p>
             <p className="leading-relaxed text-lg mb-6" style={{ color: 'color-mix(in srgb, var(--book-text) 85%, transparent)' }}>
@@ -469,7 +469,7 @@ export default function BookDetail() {
       )}
 
       {book.releaseDate && (
-        <section className="bg-[var(--book-bg)] bg-grain text-[var(--book-text)]">
+        <section className="bg-(--book-bg) bg-grain text-(--book-text)">
           <div className="hairline-solid w-full opacity-30" />
           <div className="mx-auto max-w-4xl px-6 py-16">
             <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent-text)' }}>Release Details</p>
@@ -489,7 +489,7 @@ export default function BookDetail() {
         <section lang={isHindiRelabel ? 'hi' : undefined} className="bg-cream">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <p className="eyebrow text-gold-text mb-3 text-center">{isHindiRelabel ? 'पाठकों की प्रतिक्रियाएँ' : 'What Readers Say'}</p>
-            <Divider className="!my-6" />
+            <Divider className="my-6!" />
             <div className="grid gap-6 md:grid-cols-2">
               {book.testimonials.map((t, i) => <BookReview key={i} review={t} />)}
             </div>
@@ -502,7 +502,7 @@ export default function BookDetail() {
 
       {/* Lalita Sahasranama only: सामान्य प्रश्न */}
       {isLalita && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
@@ -523,7 +523,7 @@ export default function BookDetail() {
 
       {/* Vishnu Sahasranama only: सामान्य प्रश्न */}
       {isVishnu && (
-        <section lang="hi" className="bg-[var(--book-bg)]">
+        <section lang="hi" className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 py-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>सामान्य प्रश्न</p>
             <div className="space-y-4">
@@ -544,7 +544,7 @@ export default function BookDetail() {
 
       {/* Offbeat Love only: reflective book-club discussion questions */}
       {isOffbeatLove && (
-        <section className="bg-[var(--book-bg)]">
+        <section className="bg-(--book-bg)">
           <div className="mx-auto max-w-2xl px-6 pt-16">
             <p className="eyebrow mb-8 text-center" style={{ color: 'var(--book-accent-text)' }}>Book-Club Questions</p>
             <div className="space-y-4">
@@ -565,7 +565,7 @@ export default function BookDetail() {
 
       {/* Interview Guide only: link to the dedicated, continuously-updated resources page */}
       {isInterviewGuide && (
-        <section className="bg-[var(--book-surface)]">
+        <section className="bg-(--book-surface)">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
             <p className="eyebrow mb-4" style={{ color: 'var(--book-accent-text)' }}>Go Deeper</p>
             <h2 className="font-display text-2xl mb-4" style={{ color: 'var(--book-text)' }}>Interview Resources &amp; Tools</h2>
@@ -574,7 +574,7 @@ export default function BookDetail() {
             </p>
             <Link
               to="/interview-resources"
-              className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3"
+              className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3"
               style={{ color: 'var(--book-accent-text)', borderColor: 'var(--book-accent)' }}
             >
               Explore Interview Resources <ArrowRight size={14} />
@@ -592,7 +592,7 @@ export default function BookDetail() {
       {books && (
         <section className="mx-auto max-w-5xl px-6 pb-16">
           <p className="eyebrow text-gold-text mb-3 text-center">More to Explore</p>
-          <Divider className="!my-6" />
+          <Divider className="my-6!" />
           <RelatedBooks book={book} allBooks={books} />
         </section>
       )}

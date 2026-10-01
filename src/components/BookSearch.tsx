@@ -13,15 +13,15 @@ export default function BookSearch({ value, onChange, id = 'book-search' }: Book
   return (
     <div className="mx-auto max-w-sm">
       <label htmlFor={id} className="sr-only">Search books by title</label>
-      <div className="flex items-center gap-2 rounded-sm border border-gold/30 bg-cream px-4 py-2.5 focus-within:border-gold">
-        <Search size={16} className="text-muted flex-shrink-0" aria-hidden="true" />
+      <div className="flex items-center gap-2 rounded-xs border border-gold/30 bg-cream px-4 py-2.5 focus-within:border-gold">
+        <Search size={16} className="text-muted shrink-0" aria-hidden="true" />
         <input
           id={id}
           type="search"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Search by title…"
-          className="w-full bg-transparent text-ink placeholder:text-muted/60 focus:outline-none"
+          className="w-full bg-transparent text-ink placeholder:text-muted/60 focus:outline-hidden"
         />
       </div>
     </div>

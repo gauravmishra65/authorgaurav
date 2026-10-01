@@ -55,7 +55,7 @@ export default function AdminBookCategories() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">Book Categories</h1>
-        <button onClick={openNew} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-4 py-2 text-2xs">
+        <button onClick={openNew} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
           <Plus size={14} /> Add Category
         </button>
       </div>
@@ -136,10 +136,10 @@ export default function AdminBookCategories() {
             {error && <p className="text-2xs text-rose">{error}</p>}
 
             <div className="flex gap-3 pt-2">
-              <button onClick={handleSave} disabled={saving || !editing.label || !editing.tag} className="btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs disabled:opacity-60">
+              <button onClick={handleSave} disabled={saving || !editing.label || !editing.tag} className="btn-caps btn-gold rounded-xs px-5 py-2.5 text-2xs disabled:opacity-60">
                 {saving ? 'Saving…' : 'Save'}
               </button>
-              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-sm px-5 py-2.5 text-2xs">Cancel</button>
+              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-xs px-5 py-2.5 text-2xs">Cancel</button>
             </div>
           </div>
         </div>

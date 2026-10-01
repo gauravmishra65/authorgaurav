@@ -81,10 +81,10 @@ export default function AdminBlogContent() {
       {saved && !error && <p className="text-2xs text-gold-text mt-3">Saved.</p>}
 
       <div className="flex gap-3 pt-4">
-        <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs disabled:opacity-60">
+        <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-xs px-5 py-2.5 text-2xs disabled:opacity-60">
           {saving ? 'Saving…' : 'Save Content'}
         </button>
-        <Link to="/admin/blog" className="btn-caps btn-gold-outline rounded-sm px-5 py-2.5 text-2xs">Done</Link>
+        <Link to="/admin/blog" className="btn-caps btn-gold-outline rounded-xs px-5 py-2.5 text-2xs">Done</Link>
       </div>
     </div>
   );

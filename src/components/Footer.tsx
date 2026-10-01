@@ -54,9 +54,9 @@ export default function Footer() {
           <div>
             <p className="label-caps text-gold-text mb-4">More Worlds</p>
             <ul className="space-y-2.5 text-sm">
-              <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="text-ivory/75 hover:text-gold-text transition-colors break-words">off-beat-love.com ↗</a></li>
-              <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="text-ivory/75 hover:text-gold-text transition-colors break-words">the-shadow-code.com ↗</a></li>
-              <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'footer' })} className="text-ivory/75 hover:text-gold-text transition-colors break-words">writetogetherhub.com ↗</a></li>
+              <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="text-ivory/75 hover:text-gold-text transition-colors wrap-break-word">off-beat-love.com ↗</a></li>
+              <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="text-ivory/75 hover:text-gold-text transition-colors wrap-break-word">the-shadow-code.com ↗</a></li>
+              <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'footer' })} className="text-ivory/75 hover:text-gold-text transition-colors wrap-break-word">writetogetherhub.com ↗</a></li>
             </ul>
           </div>
 

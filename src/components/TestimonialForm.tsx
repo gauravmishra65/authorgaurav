@@ -48,7 +48,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
             required
             value={bookId}
             onChange={(e) => setBookId(e.target.value)}
-            className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
+            className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden"
           >
             <option value="">Select a book…</option>
             {props.books.map((b) => <option key={b.id} value={b.id}>{b.title}</option>)}
@@ -69,7 +69,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
+            className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden"
           />
         </div>
         <div>
@@ -80,7 +80,7 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none"
+            className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden"
           />
           <p className="text-2xs text-muted mt-1.5">Kept private. Never shown publicly.</p>
         </div>
@@ -94,11 +94,11 @@ export default function TestimonialForm({ className = '', ...props }: Testimonia
           value={quote}
           onChange={(e) => setQuote(e.target.value)}
           placeholder="What did you think of the book?"
-          className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none resize-none"
+          className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-hidden resize-none"
         />
       </div>
       {status === 'error' && <p role="alert" className="text-sm text-rose">Something went wrong. Please try again.</p>}
-      <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold rounded-sm px-6 py-3 disabled:opacity-60">
+      <button type="submit" disabled={status === 'loading'} className="btn-caps btn-gold rounded-xs px-6 py-3 disabled:opacity-60">
         {status === 'loading' ? 'Submitting…' : 'Submit Feedback'}
       </button>
     </form>

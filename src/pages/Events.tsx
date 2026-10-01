@@ -58,7 +58,7 @@ export default function Events() {
 
             {past.length > 0 && (
               <>
-                <Divider className="!my-10" />
+                <Divider className="my-10!" />
                 <p className="eyebrow text-gold-text mb-6 text-center">Past Events</p>
                 <div className="grid gap-6 md:grid-cols-2">
                   {past.map((event) => <EventCard key={event.id} event={event} isPast />)}
@@ -76,7 +76,7 @@ export default function Events() {
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             {readerPhotos.map((photo) => (
               <figure key={photo.id} className="rounded-md border border-gold/15 bg-ivory overflow-hidden hover:border-gold/40 transition-colors">
-                <img src={photo.imageSrc} alt={photo.caption || photo.readerName || 'Reader with the book'} className="w-full aspect-[9/16] object-cover" loading="lazy" />
+                <img src={photo.imageSrc} alt={photo.caption || photo.readerName || 'Reader with the book'} className="w-full aspect-9/16 object-cover" loading="lazy" />
                 {(photo.caption || photo.readerName || photo.bookTitle) && (
                   <figcaption className="p-4">
                     {photo.caption && <p className="text-sm text-ink leading-relaxed">{photo.caption}</p>}

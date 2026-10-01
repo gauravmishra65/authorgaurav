@@ -154,7 +154,7 @@ export default function InterviewResources() {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <PrimaryButton to={BOOK_PATH}>Explore the Book</PrimaryButton>
-          <Link to={BOOK_PATH} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
+          <Link to={BOOK_PATH} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
             Buy the Book
           </Link>
         </div>

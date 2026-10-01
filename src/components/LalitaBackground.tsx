@@ -10,7 +10,7 @@ export default function LalitaBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       {/* Manuscript border: a thin double line inset from the section edge */}
-      <div className="absolute inset-3 md:inset-5 border border-[#8E2E36]/[0.12]" />
+      <div className="absolute inset-3 md:inset-5 border border-[#8E2E36]/12" />
       <div className="absolute inset-4 md:inset-6 border border-[#B88B45]/[0.14]" />
 
       {/* Concentric mandala / lotus-geometry motif, lower-right corner */}

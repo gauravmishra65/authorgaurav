@@ -26,7 +26,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen flex bg-cream">
-      <aside className="w-56 flex-shrink-0 bg-ink text-ivory flex flex-col">
+      <aside className="w-56 shrink-0 bg-ink text-ivory flex flex-col">
         <div className="px-5 py-6 border-b border-gold/20">
           <p className="font-display text-lg">Gaurav<span className="text-gold-text">Mishra</span></p>
           <p className="text-2xs text-ivory/50 mt-1">{session.user.email}</p>
@@ -39,7 +39,7 @@ export default function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <button onClick={() => supabase.auth.signOut()} className="m-4 btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs" style={{ color: 'var(--gold-lt)' }}>
+        <button onClick={() => supabase.auth.signOut()} className="m-4 btn-caps btn-gold-outline rounded-xs px-4 py-2 text-2xs" style={{ color: 'var(--gold-lt)' }}>
           Sign Out
         </button>
       </aside>

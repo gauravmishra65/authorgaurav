@@ -57,7 +57,7 @@ export default function StartHere() {
                   <Link
                     to={`/books/${book.slug}`}
                     onClick={() => trackEvent('start_here_book_click', { book: book.slug, path: eyebrow })}
-                    className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs mt-auto"
+                    className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs mt-auto"
                   >
                     Read More <ArrowRight size={13} />
                   </Link>
@@ -70,7 +70,7 @@ export default function StartHere() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-3xl px-6 pb-20 text-center">
-          <Divider className="!mb-10" />
+          <Divider className="mb-10!" />
           <p className="eyebrow text-gold-text mb-3">Not Sure Yet?</p>
           <h2 className="font-display text-2xl md:text-3xl text-ink mb-3">Get a free first chapter, no commitment</h2>
           <p className="text-muted mb-8 max-w-lg mx-auto">

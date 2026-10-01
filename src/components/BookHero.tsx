@@ -37,7 +37,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
     ? (isHindi ? 'संकलनकर्ता' : 'Compiled by')
     : (isHindi ? 'लेखक' : 'By');
   return (
-    <section className="relative bg-[var(--book-bg)] bg-grain text-[var(--book-text)]">
+    <section className="relative bg-(--book-bg) bg-grain text-(--book-text)">
       {background}
       <div className="hairline-solid w-full opacity-30" />
       <div className="relative mx-auto max-w-5xl px-6 py-14">
@@ -50,7 +50,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
           </div>
           <div>
             <div className="flex items-center gap-3 flex-wrap mb-3">
-              <p className="eyebrow text-[var(--book-accent-text)]">{eyebrowOverride ?? book.genre}</p>
+              <p className="eyebrow text-(--book-accent-text)">{eyebrowOverride ?? book.genre}</p>
               <LanguageBadge language={book.language} tone={book.textOnDark ? 'dark' : 'light'} />
               {book.status !== 'published' && (
                 <FormatBadge tone={book.textOnDark ? 'dark' : 'light'}>
@@ -72,7 +72,7 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
             </p>
             {/* TODO_CONTENT: subtitle is empty for every book today */}
             {book.subtitle && <p className="text-lg opacity-80 mb-3">{book.subtitle}</p>}
-            <p className="text-[var(--book-text)]/80 leading-relaxed text-lg italic mb-6">{book.tagline}</p>
+            <p className="text-(--book-text)/80 leading-relaxed text-lg italic mb-6">{book.tagline}</p>
 
             <BookPurchasePanel book={book} className="mb-4" buttonClassName={purchaseButtonClassName} />
 
@@ -80,19 +80,19 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
               <BookSample sampleUrl={book.sampleUrl} book={book.slug} />
               {/* TODO_CONTENT: no book has a trailer_url yet */}
               {book.trailerUrl && (
-                <a href={book.trailerUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('trailer_play', { book: book.slug })} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
+                <a href={book.trailerUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('trailer_play', { book: book.slug })} className="inline-flex items-center gap-1.5 label-caps text-(--book-accent-text) hover:text-(--book-secondary-accent) transition-colors">
                   <PlayCircle size={16} /> Watch Trailer
                 </a>
               )}
               {readerCircleHref && (
-                <a href={readerCircleHref} className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
+                <a href={readerCircleHref} className="inline-flex items-center gap-1.5 label-caps text-(--book-accent-text) hover:text-(--book-secondary-accent) transition-colors">
                   <Mail size={15} /> Join the Reader Circle
                 </a>
               )}
             </div>
 
             {book.bookWebsite && (
-              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-[var(--book-accent-text)] hover:text-[var(--book-secondary-accent)] transition-colors">
+              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-(--book-accent-text) hover:text-(--book-secondary-accent) transition-colors">
                 Visit the Book Website <ExternalLink size={13} />
               </a>
             )}

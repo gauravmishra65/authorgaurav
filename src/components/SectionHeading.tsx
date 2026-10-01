@@ -33,7 +33,7 @@ export default function SectionHeading({ eyebrow, title, align = 'center', to, t
           {toLabel} <ArrowRight size={14} />
         </Link>
       )}
-      {isCenter && <Divider className="!my-8" />}
+      {isCenter && <Divider className="my-8!" />}
     </div>
   );
 }

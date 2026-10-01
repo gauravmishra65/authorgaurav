@@ -12,11 +12,11 @@ export default function WriteTogetherHub() {
           <p className="max-w-2xl mx-auto text-ivory/80 leading-relaxed">
             I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out: guidance, community, and a place to grow their craft together.
           </p>
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-section' })} className="btn-caps btn-gold mt-7 inline-block rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-section' })} className="btn-caps btn-gold mt-7 inline-block rounded-xs px-6 py-3">
             Visit WriteTogetherHub
           </a>
         </div>
-        <Divider className="!my-12 opacity-60" />
+        <Divider className="my-12! opacity-60" />
         <div className="grid gap-6 md:grid-cols-3">
           {benefits.map((b) => (
             <div key={b.title} className="rounded-md border border-gold/20 bg-ink-soft/60 p-7 text-center transition-colors hover:border-gold/50">

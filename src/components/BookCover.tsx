@@ -47,7 +47,7 @@ export default function BookCover({
   };
 
   const inner = (
-    <div className={`book-tilt relative ${sizes[size]} rounded-md shadow-book overflow-hidden border border-black/10 flex-shrink-0 bg-gradient-to-br ${gradient}`}>
+    <div className={`book-tilt relative ${sizes[size]} rounded-md shadow-book overflow-hidden border border-black/10 shrink-0 bg-linear-to-br ${gradient}`}>
       {imageSrc && !imgError ? (
         <img
           src={imageSrc}
@@ -59,8 +59,8 @@ export default function BookCover({
           loading={priority ? 'eager' : 'lazy'}
         />
       ) : (
-        <div className={`w-full h-full bg-gradient-to-br ${gradient} flex flex-col items-center justify-between p-4 text-center`}>
-          <div className={`pointer-events-none absolute inset-2 rounded-sm border ${textOnDark ? 'border-gold-lt/40' : 'border-ink/15'}`} />
+        <div className={`w-full h-full bg-linear-to-br ${gradient} flex flex-col items-center justify-between p-4 text-center`}>
+          <div className={`pointer-events-none absolute inset-2 rounded-xs border ${textOnDark ? 'border-gold-lt/40' : 'border-ink/15'}`} />
           <div className="mt-4 w-12 hairline-solid" />
           <div className="flex-1 flex flex-col items-center justify-center gap-2 px-2">
             <h3

@@ -99,10 +99,10 @@ export default function AdminTestimonialSubmissions() {
                     />
                   </label>
                   <div className="flex gap-3">
-                    <button onClick={() => handleApprove(row)} disabled={busyId === row.id} className="btn-caps btn-gold rounded-sm px-4 py-2 text-2xs disabled:opacity-60">
+                    <button onClick={() => handleApprove(row)} disabled={busyId === row.id} className="btn-caps btn-gold rounded-xs px-4 py-2 text-2xs disabled:opacity-60">
                       {busyId === row.id ? 'Working…' : 'Approve & Publish'}
                     </button>
-                    <button onClick={() => handleReject(row)} disabled={busyId === row.id} className="btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs disabled:opacity-60">
+                    <button onClick={() => handleReject(row)} disabled={busyId === row.id} className="btn-caps btn-gold-outline rounded-xs px-4 py-2 text-2xs disabled:opacity-60">
                       Reject
                     </button>
                   </div>
@@ -122,7 +122,7 @@ export default function AdminTestimonialSubmissions() {
                       <p className="text-ink italic truncate">"{row.quote}"</p>
                       <p className="text-2xs text-muted">{row.name} · {bookTitle(row.book_id)}</p>
                     </div>
-                    <span className={`label-caps text-2xs border rounded-full px-2.5 py-0.5 flex-shrink-0 ${statusStyles[row.status]}`}>{row.status}</span>
+                    <span className={`label-caps text-2xs border rounded-full px-2.5 py-0.5 shrink-0 ${statusStyles[row.status]}`}>{row.status}</span>
                   </div>
                 </div>
               ))}

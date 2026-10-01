@@ -45,8 +45,8 @@ export default function News() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
           {filtered.map((n) => (
             <article key={n.id} className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
-              <div className={`h-44 bg-gradient-to-br ${n.gradient} relative`}>
-                <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/90 bg-ink/70 px-2.5 py-1 rounded-sm">{n.category}</span>
+              <div className={`h-44 bg-linear-to-br ${n.gradient} relative`}>
+                <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/90 bg-ink/70 px-2.5 py-1 rounded-xs">{n.category}</span>
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <p className="text-2xs text-muted mb-2">{n.date}</p>

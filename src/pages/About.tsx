@@ -49,7 +49,7 @@ export default function About() {
         <div className="mx-auto max-w-5xl px-6 py-20">
           <div className="grid items-center gap-12 md:grid-cols-[280px_1fr]">
             <div className="mx-auto">
-              <div className="aspect-[3/4] w-[260px] rounded-md border border-gold/25 shadow-book overflow-hidden bg-gradient-to-br from-ink-soft via-ink to-[#16243a]">
+              <div className="aspect-3/4 w-[260px] rounded-md border border-gold/25 shadow-book overflow-hidden bg-linear-to-br from-ink-soft via-ink to-[#16243a]">
                 {!imgError ? (
                   <img
                     src="/images/author/GM-Photo.jpg"
@@ -81,8 +81,8 @@ export default function About() {
                 A writer who refuses to stay in one lane: romance, thriller, memoir, devotion, all united by the belief that a good story can carry a reader anywhere.
               </p>
               <div className="flex flex-wrap gap-4 mb-4">
-                <Link to="/books" className="btn-caps btn-gold rounded-sm px-6 py-3" onClick={() => trackEvent('about_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
-                <Link to="/reader-circle" className="btn-caps btn-gold-outline rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }} onClick={() => trackEvent('about_cta_click', { label: 'Join the Reader Circle' })}>Join the Reader Circle</Link>
+                <Link to="/books" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('about_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
+                <Link to="/reader-circle" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" style={{ color: 'var(--gold-lt)' }} onClick={() => trackEvent('about_cta_click', { label: 'Join the Reader Circle' })}>Join the Reader Circle</Link>
               </div>
               <Link to="/start-here" className="inline-block label-caps text-2xs text-gold-lt/80 hover:text-gold-lt transition-colors">
                 New here? Start Here to find your first book →
@@ -122,13 +122,13 @@ export default function About() {
         <Divider />
 
         <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/books" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <Link to="/books" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
             <BookOpen size={16} /> Explore the Books
           </Link>
-          <Link to="/#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <Link to="/#free-chapter" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
             <Mail size={16} /> Get a Free Chapter
           </Link>
-          <Link to="/media#media-kit" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <Link to="/media#media-kit" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
             <FileText size={16} /> Media Kit
           </Link>
         </div>

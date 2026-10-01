@@ -80,7 +80,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="eyebrow text-gold-text mb-3">The Bookshelf</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Explore every world</h2>
-          <Divider className="!my-8" />
+          <Divider className="my-8!" />
 
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             {bookshelfFilters.map((g) => (

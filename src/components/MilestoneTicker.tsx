@@ -16,8 +16,8 @@ export default function MilestoneTicker({ parts, href }: MilestoneTickerProps) {
   const [paused, setPaused] = useState(false);
 
   const item = (
-    <Link to={href} className="inline-flex items-center gap-2 mr-16 flex-shrink-0 hover:text-gold-lt transition-colors">
-      <Trophy size={15} className="text-gold-lt flex-shrink-0" aria-hidden="true" />
+    <Link to={href} className="inline-flex items-center gap-2 mr-16 shrink-0 hover:text-gold-lt transition-colors">
+      <Trophy size={15} className="text-gold-lt shrink-0" aria-hidden="true" />
       <span className="whitespace-nowrap">
         {parts.before}
         <strong className="font-bold text-gold-lt">{parts.highlight}</strong>

@@ -67,7 +67,7 @@ export default function Testimonials() {
           <div className="text-center mb-10">
             <p className="eyebrow text-gold-text mb-3">Your Turn</p>
             <h2 className="font-display text-3xl md:text-4xl text-ink">Share Your Feedback</h2>
-            <Divider className="!my-8" />
+            <Divider className="my-8!" />
             <p className="text-muted leading-relaxed">
               Tell Gaurav what a book meant to you. Submissions are reviewed before appearing here, and your email is kept private.
             </p>

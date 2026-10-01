@@ -132,8 +132,8 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
         value={genrePreference}
         onChange={(e) => setGenrePreference(e.target.value)}
         className={layout === 'compact'
-          ? 'bg-transparent text-ivory text-sm w-full focus:outline-none border-b border-gold/40 pb-2'
-          : 'w-full rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink focus:border-gold focus:outline-none sm:w-auto'}
+          ? 'bg-transparent text-ivory text-sm w-full focus:outline-hidden border-b border-gold/40 pb-2'
+          : 'w-full rounded-xs border border-gold/40 bg-cream/90 px-4 py-3 text-ink focus:border-gold focus:outline-hidden sm:w-auto'}
       >
         <option value="">What do you love reading? (optional)</option>
         {genrePreferenceOptions.map((g) => <option key={g} value={g}>{g}</option>)}
@@ -166,7 +166,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
         required
         checked={consent}
         onChange={(e) => setConsent(e.target.checked)}
-        className="mt-0.5 h-3.5 w-3.5 accent-gold flex-shrink-0"
+        className="mt-0.5 h-3.5 w-3.5 accent-gold shrink-0"
       />
       <span>
         I'd like to receive email updates from Gaurav Mishra. See the{' '}
@@ -185,7 +185,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full border-b border-gold/40 pb-2 focus:outline-none"
+          className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full border-b border-gold/40 pb-2 focus:outline-hidden"
         />
         <label htmlFor={id} className="sr-only">Email address</label>
         <div className="flex items-center gap-2 border-b border-gold/40 pb-2">
@@ -199,7 +199,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
             placeholder="you@example.com"
             aria-invalid={!!emailError}
             aria-describedby={emailError ? `${id}-email-error` : undefined}
-            className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-none"
+            className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-hidden"
           />
         </div>
         {emailError && <p id={`${id}-email-error`} role="alert" className="text-sm text-rose">{emailError}</p>}
@@ -207,7 +207,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
         {honeypotField}
         {consentCheckbox}
         {status === 'error' && <p role="alert" className="text-sm text-rose">{errorMessage}</p>}
-        <button type="submit" disabled={status === 'loading' || !consent} className={`btn-caps btn-gold-outline px-4 py-2 rounded-sm disabled:opacity-60 ${layout === 'compact' ? 'w-full text-center' : 'self-start'}`}>
+        <button type="submit" disabled={status === 'loading' || !consent} className={`btn-caps btn-gold-outline px-4 py-2 rounded-xs disabled:opacity-60 ${layout === 'compact' ? 'w-full text-center' : 'self-start'}`}>
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>
       </form>
@@ -224,7 +224,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="flex-1 rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none"
+          className="flex-1 rounded-xs border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-hidden"
         />
         <label htmlFor={id} className="sr-only">Email address</label>
         <input
@@ -236,11 +236,11 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
           placeholder="you@example.com"
           aria-invalid={!!emailError}
           aria-describedby={emailError ? `${id}-email-error` : undefined}
-          className="flex-1 rounded-sm border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-none"
+          className="flex-1 rounded-xs border border-gold/40 bg-cream/90 px-4 py-3 text-ink placeholder:text-muted/60 focus:border-gold focus:outline-hidden"
         />
         {genreSelect}
         {honeypotField}
-        <button type="submit" disabled={status === 'loading' || !consent} className="btn-caps btn-gold rounded-sm px-6 py-3 whitespace-nowrap disabled:opacity-60">
+        <button type="submit" disabled={status === 'loading' || !consent} className="btn-caps btn-gold rounded-xs px-6 py-3 whitespace-nowrap disabled:opacity-60">
           {status === 'loading' ? 'Sending…' : buttonLabel}
         </button>
       </form>

@@ -62,7 +62,7 @@ export default function AdminAnalytics() {
             <button
               key={p}
               onClick={() => handlePeriodChange(p)}
-              className={`label-caps text-2xs px-3 py-1.5 rounded-sm border transition-colors ${days === p ? 'bg-ink text-ivory border-ink' : 'border-gold/30 text-muted hover:border-gold/60'}`}
+              className={`label-caps text-2xs px-3 py-1.5 rounded-xs border transition-colors ${days === p ? 'bg-ink text-ivory border-ink' : 'border-gold/30 text-muted hover:border-gold/60'}`}
             >
               Last {p}d
             </button>
