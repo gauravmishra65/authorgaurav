@@ -1,6 +1,6 @@
-# Vite v7 Migration Plan (Plan Only — Not Executed)
+# Vite v7 Migration Plan
 
-This document is a plan for a future migration, written against the app's actual current build setup (`vite.config.ts`, `vitest.config.ts`, `scripts/prerender.mjs`, `package.json`). **No upgrade has been performed as part of this change set** — `package.json` still pins `"vite": "^5.4.2"` (installed: `5.4.21`).
+**Executed** on branch `chore/vite-v7`, following the recommended approach below exactly: bumped `vite` to `7.3.6`, left `@vitejs/plugin-react` untouched (already compatible), and ran the full verification list. `npm audit` went from 2 reported vulnerabilities (4 underlying advisories) to **0**, confirming this plan's prediction that v7 alone — not v8 — was the real, minimal fix. As a side effect, the pre-existing `vitest`-nested-vite-8 version split (noted in "Current version and advisory context" below) also resolved itself: everything now dedupes to one `vite@7.3.6`, and the `Both esbuild and oxc options were set` warning that appeared on every test run is gone. Left for history below as-written.
 
 ## Current version and advisory context
 
