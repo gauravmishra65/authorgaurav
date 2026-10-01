@@ -4,7 +4,7 @@ import { Mail, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
 import { getVerifiedSocialLinks } from '../data/social';
-import { supabase, CONTACT_FORM_ENDPOINT, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { CONTACT_FORM_ENDPOINT, NEWSLETTER_ENDPOINT, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackEvent } from '../lib/analytics';
 
 const enquiryTypes = [
@@ -101,11 +101,19 @@ export default function Contact() {
       }
 
       if (form.circle) {
+        // Routed through the same newsletter-subscribe function every other
+        // signup on the site uses — this used to insert directly into the
+        // subscribers table, which skipped the Brevo sync entirely, so
+        // checking this box didn't actually do what the success message
+        // below claims. Checking this specific box is itself the consent
+        // for this specific purpose (distinct from the enquiry-consent
+        // checkbox above it, which only covers being contacted back).
         // Best-effort — a duplicate/failed subscribe shouldn't block "message sent".
-        await supabase.from('authorgaurav_newsletter_subscribers').insert({ email: form.email, source: 'contact-form' }).then(
-          () => {},
-          () => {},
-        );
+        await fetch(NEWSLETTER_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: SUPABASE_ANON_KEY },
+          body: JSON.stringify({ name: form.name, email: form.email, source: 'contact-form', consent: true }),
+        }).catch(() => {});
       }
 
       trackEvent('contact_submit', { enquiryType: enquiryTypes.find((t) => t.value === form.enquiryType)?.label });
