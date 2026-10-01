@@ -5,18 +5,38 @@ interface BookNewsletterCTAProps {
   book: Book;
 }
 
-const audienceCopy: Record<string, string> = {
-  Thriller: 'suspense, twists, and the next techno-financial thriller',
-  Romance: 'love stories and the next chapter of the heart',
-  Memoir: 'honest, reflective true stories',
-  Devotional: 'accessible spiritual reading for daily life',
+// Each genre gets its own question + follow-through rather than one
+// template with a swapped-in word — the brief this was built against
+// specifically calls out not repeating identical copy across book pages.
+const genreCopy: Record<string, { heading: string; subheading: string }> = {
+  Thriller: {
+    heading: 'Enjoy suspense and crime fiction?',
+    subheading: 'Join the Reader Circle for book news, behind-the-story notes and future thriller releases.',
+  },
+  Romance: {
+    heading: 'Enjoy contemporary love stories?',
+    subheading: 'Join the Reader Circle for new-book news, reading notes and occasional extras.',
+  },
+  Devotional: {
+    heading: 'Interested in devotional reading?',
+    subheading: 'Receive updates on spiritual books, reading notes and future editions.',
+  },
+  Memoir: {
+    heading: 'Enjoy honest, reflective true stories?',
+    subheading: 'Join the Reader Circle for new-book news, reading notes and occasional extras.',
+  },
+};
+
+const fallbackCopy = {
+  heading: 'Want more from Gaurav Mishra?',
+  subheading: 'Join the Reader Circle for new releases and behind-the-scenes notes.',
 };
 
 /** EmailStrip with genre-aware framing — same underlying form/integration,
  * just copy tailored to whichever book the reader was just looking at. */
 export default function BookNewsletterCTA({ book }: BookNewsletterCTAProps) {
   const category = book.categories?.[0] ?? book.genre;
-  const audience = audienceCopy[category] ?? 'new releases and behind-the-scenes notes';
+  const { heading, subheading } = genreCopy[category] ?? fallbackCopy;
 
   // Hindi books get Hindi marketing copy so the CTA doesn't read as an abrupt
   // switch back to English at the bottom of an otherwise Hindi page. The
@@ -31,10 +51,5 @@ export default function BookNewsletterCTA({ book }: BookNewsletterCTAProps) {
     );
   }
 
-  return (
-    <EmailStrip
-      heading={`Get a free chapter of ${book.title}`}
-      subheading={`One email a month, for readers who love ${audience}. Unsubscribe anytime.`}
-    />
-  );
+  return <EmailStrip heading={heading} subheading={subheading} />;
 }

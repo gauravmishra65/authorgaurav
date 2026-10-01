@@ -21,7 +21,7 @@ import OffbeatLoveBackground from '../components/OffbeatLoveBackground';
 import LalitaBackground from '../components/LalitaBackground';
 import VishnuBackground from '../components/VishnuBackground';
 import { getBookTheme } from '../data/bookThemes';
-import { fetchBooks, fetchReaderPhotos } from '../lib/queries';
+import { fetchBooks, fetchBlogPosts, fetchReaderPhotos } from '../lib/queries';
 import { buildBookstoreAvailabilityText } from '../lib/bookstoreAvailability';
 import { buildMilestoneParts } from '../lib/milestoneText';
 import { useSupabaseData } from '../lib/useSupabaseData';
@@ -75,6 +75,7 @@ export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: books, loading, error } = useSupabaseData(fetchBooks, []);
   const { data: allPhotos } = useSupabaseData(fetchReaderPhotos, []);
+  const { data: posts } = useSupabaseData(fetchBlogPosts, []);
   const book = books?.find((b) => b.slug === slug);
 
   useEffect(() => {
@@ -97,6 +98,11 @@ export default function BookDetail() {
   const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
   const bookstoreAvailabilityText = buildBookstoreAvailabilityText(book.title, bookstorePhotos);
   const milestoneParts = buildMilestoneParts(book);
+  // Reverse of JournalBookCTA's lookup (post -> book): here it's book -> any
+  // posts that named this book as their relatedLink. Real data only, same
+  // as the forward direction — a post's relatedLink has to actually match
+  // this book's slug, nothing inferred from genre/category.
+  const relatedPosts = (posts ?? []).filter((p) => p.relatedLink === book.slug);
 
   return (
     <BookThemeProvider theme={theme}>
@@ -597,6 +603,27 @@ export default function BookDetail() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <BookClubCTA bookTitle={book.title} />
       </section>
+
+      {/* 10. Related journal articles — only posts that genuinely named this
+          book via their own related_link field, never inferred from genre. */}
+      {relatedPosts.length > 0 && (
+        <section className="mx-auto max-w-3xl px-6 py-16">
+          <p className="eyebrow text-gold-text mb-3 text-center">From the Journal</p>
+          <Divider className="my-6!" />
+          <div className="space-y-5">
+            {relatedPosts.map((post) => (
+              <Link
+                key={post.id}
+                to={`/blog/${post.slug}`}
+                className="block rounded-md border border-gold/15 p-5 hover:border-gold/40 transition-colors"
+              >
+                <p className="font-display text-lg text-ink mb-1.5">{post.title}</p>
+                <p className="text-sm text-muted leading-relaxed">{post.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 16. Related books */}
       {books && (
