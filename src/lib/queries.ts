@@ -61,6 +61,8 @@ interface TestimonialRow {
   quote: string;
   name: string;
   source: string | null;
+  source_url: string | null;
+  date: string | null;
   featured: boolean;
   author_reply: string | null;
 }
@@ -118,7 +120,7 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
 export async function fetchBooks(): Promise<Book[]> {
   const [{ data: bookRows, error: booksError }, { data: testimonialRows, error: testimonialsError }] = await Promise.all([
     supabase.from('authorgaurav_books').select('*').order('sort_order'),
-    supabase.from('authorgaurav_testimonials').select('id, book_id, quote, name, source, featured, author_reply').order('sort_order'),
+    supabase.from('authorgaurav_testimonials').select('id, book_id, quote, name, source, source_url, date, featured, author_reply').eq('verified', true).order('sort_order'),
   ]);
 
   if (booksError) throw booksError;
@@ -128,7 +130,7 @@ export async function fetchBooks(): Promise<Book[]> {
   for (const t of (testimonialRows ?? []) as TestimonialRow[]) {
     if (!t.book_id) continue;
     const list = testimonialsByBook.get(t.book_id) ?? [];
-    list.push({ quote: t.quote, name: t.name, source: t.source ?? undefined, authorReply: t.author_reply ?? undefined });
+    list.push({ quote: t.quote, name: t.name, source: t.source ?? undefined, sourceUrl: t.source_url ?? undefined, date: t.date ?? undefined, authorReply: t.author_reply ?? undefined });
     testimonialsByBook.set(t.book_id, list);
   }
 
@@ -140,7 +142,7 @@ export interface FeaturedTestimonial extends Testimonial {
 }
 
 function mapTestimonialWithBook(row: {
-  quote: string; name: string; source: string | null; author_reply: string | null;
+  quote: string; name: string; source: string | null; source_url: string | null; date: string | null; author_reply: string | null;
   authorgaurav_books: { title: string }[] | { title: string } | null;
 }): FeaturedTestimonial {
   const bookTitle = Array.isArray(row.authorgaurav_books)
@@ -150,16 +152,24 @@ function mapTestimonialWithBook(row: {
     quote: row.quote,
     name: row.name,
     source: row.source ?? undefined,
+    sourceUrl: row.source_url ?? undefined,
+    date: row.date ?? undefined,
     authorReply: row.author_reply ?? undefined,
     book: bookTitle ?? '',
   };
 }
 
+// Both queries below filter on verified = true explicitly, even though the
+// "Public can read verified testimonials" RLS policy already enforces this
+// at the database level — kept here too so the rule ("public rendering
+// includes verified testimonials only") is visible in the code that
+// renders these, not only in a policy a future reader of this file won't see.
 export async function fetchFeaturedTestimonials(limit = 3): Promise<FeaturedTestimonial[]> {
   const { data, error } = await supabase
     .from('authorgaurav_testimonials')
-    .select('quote, name, source, author_reply, authorgaurav_books(title)')
+    .select('quote, name, source, source_url, date, author_reply, authorgaurav_books(title)')
     .eq('featured', true)
+    .eq('verified', true)
     .order('sort_order')
     .limit(limit);
 
@@ -167,11 +177,12 @@ export async function fetchFeaturedTestimonials(limit = 3): Promise<FeaturedTest
   return (data ?? []).map(mapTestimonialWithBook);
 }
 
-/** Every author-curated testimonial (the whole reader wall), newest-first for the /testimonials page. */
+/** Every author-curated, verified testimonial (the whole reader wall), newest-first for the /testimonials page. */
 export async function fetchAllTestimonials(): Promise<FeaturedTestimonial[]> {
   const { data, error } = await supabase
     .from('authorgaurav_testimonials')
-    .select('quote, name, source, author_reply, authorgaurav_books(title)')
+    .select('quote, name, source, source_url, date, author_reply, authorgaurav_books(title)')
+    .eq('verified', true)
     .order('sort_order');
 
   if (error) throw error;

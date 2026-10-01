@@ -71,6 +71,9 @@ export interface AdminTestimonialRow {
   quote: string;
   name: string;
   source: string | null;
+  source_url: string | null;
+  date: string | null;
+  verified: boolean;
   featured: boolean;
   sort_order: number;
   author_reply: string | null;

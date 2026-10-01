@@ -5,7 +5,7 @@ import {
   fetchAdminBooks, type AdminBookRow,
 } from '../../lib/adminQueries';
 
-const empty: Partial<AdminTestimonialRow> = { book_id: null, quote: '', name: '', source: '', featured: false, sort_order: 0, author_reply: null };
+const empty: Partial<AdminTestimonialRow> = { book_id: null, quote: '', name: '', source: '', source_url: null, date: null, verified: true, featured: false, sort_order: 0, author_reply: null };
 
 export default function AdminTestimonials() {
   const [rows, setRows] = useState<AdminTestimonialRow[]>([]);
@@ -64,7 +64,10 @@ export default function AdminTestimonials() {
             <div key={t.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0 gap-4">
               <div className="min-w-0">
                 <p className="text-ink italic truncate">"{t.quote}"</p>
-                <p className="text-2xs text-muted">{t.name}{t.source ? ` · ${t.source}` : ''} · {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}</p>
+                <p className="text-2xs text-muted">
+                  {t.name}{t.source ? ` · ${t.source}` : ''} · {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}
+                  {!t.verified && <span className="text-rose"> · Not verified (hidden from public pages)</span>}
+                </p>
               </div>
               <div className="flex gap-2 shrink-0">
                 <button onClick={() => setEditing(t)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
@@ -95,6 +98,16 @@ export default function AdminTestimonials() {
                 <input value={editing.source ?? ''} onChange={(e) => setEditing({ ...editing, source: e.target.value })} className="input" placeholder="Amazon, Goodreads…" />
               </label>
             </div>
+            <div className="grid grid-cols-2 gap-4">
+              <label className="block">
+                <span className="label-caps text-muted block mb-1.5 text-2xs">Source URL (optional)</span>
+                <input value={editing.source_url ?? ''} onChange={(e) => setEditing({ ...editing, source_url: e.target.value || null })} className="input" placeholder="https://amazon.in/review/…" />
+              </label>
+              <label className="block">
+                <span className="label-caps text-muted block mb-1.5 text-2xs">Date (optional)</span>
+                <input type="date" value={editing.date ?? ''} onChange={(e) => setEditing({ ...editing, date: e.target.value || null })} className="input" />
+              </label>
+            </div>
             <label className="block">
               <span className="label-caps text-muted block mb-1.5 text-2xs">Book</span>
               <select value={editing.book_id ?? ''} onChange={(e) => setEditing({ ...editing, book_id: e.target.value || null })} className="input">
@@ -105,6 +118,10 @@ export default function AdminTestimonials() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={editing.featured ?? false} onChange={(e) => setEditing({ ...editing, featured: e.target.checked })} className="h-4 w-4 accent-gold" />
               <span className="text-sm text-muted">Feature on home page ("What Readers Say")</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={editing.verified ?? true} onChange={(e) => setEditing({ ...editing, verified: e.target.checked })} className="h-4 w-4 accent-gold" />
+              <span className="text-sm text-muted">Verified — traced to a real reader, retailer review, or publication. Unchecking hides it from all public pages immediately.</span>
             </label>
             <label className="block">
               <span className="label-caps text-muted block mb-1.5 text-2xs">Author Reply (optional, shown publicly)</span>

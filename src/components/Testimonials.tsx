@@ -3,6 +3,7 @@ import { Quote, MessageCircle } from 'lucide-react';
 import { fetchFeaturedTestimonials, type FeaturedTestimonial } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import Divider from './Divider';
+import TestimonialMeta from './TestimonialMeta';
 
 function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
   return (
@@ -10,7 +11,7 @@ function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
       <Quote className="text-gold-text/50 mb-3" size={22} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted mb-3">
-        {t.name}{t.source ? ` · ${t.source}` : ''} · <span className="text-gold-text">{t.book}</span>
+        <TestimonialMeta t={t} bookLabel={<> · <span className="text-gold-text">{t.book}</span></>} />
       </figcaption>
       {t.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-3">

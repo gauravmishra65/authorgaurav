@@ -1,20 +1,22 @@
 import { MessageCircle, Quote } from 'lucide-react';
 import type { Testimonial } from '../data/books';
+import TestimonialMeta from './TestimonialMeta';
 
 interface BookReviewProps {
   review: Testimonial;
 }
 
-/** One reader review — real, admin-moderated testimonials only (see
- * authorgaurav_testimonials / authorgaurav_testimonial_submissions). No
- * ratings are shown because none are collected; nothing here is fabricated. */
+/** One reader review — real, verified testimonials only (see
+ * authorgaurav_testimonials / authorgaurav_testimonial_submissions; the
+ * `verified` column gates what the query ever returns). No ratings are
+ * shown because none are collected; nothing here is fabricated. */
 export default function BookReview({ review }: BookReviewProps) {
   return (
     <figure className="content-card p-7">
       <Quote className="text-gold-text/50 mb-3" size={20} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4 text-lg">"{review.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted">
-        {review.name}{review.source ? ` · ${review.source}` : ''}
+        <TestimonialMeta t={review} />
       </figcaption>
       {review.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-4">

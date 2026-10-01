@@ -66,18 +66,21 @@ async function main() {
 
   const headers = { apikey: VITE_SUPABASE_ANON_KEY };
 
-  const [booksRes, postsRes, photosRes] = await Promise.all([
+  const [booksRes, postsRes, photosRes, testimonialsRes] = await Promise.all([
     fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_books?select=*`, { headers }),
     fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_blog_posts?select=*`, { headers }),
     fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_reader_photos?select=*&kind=eq.bookstore`, { headers }),
+    fetch(`${VITE_SUPABASE_URL}/rest/v1/authorgaurav_testimonials?select=id,quote,name,source,verified`, { headers }),
   ]);
   if (!booksRes.ok) { console.error(`Failed to fetch books: ${booksRes.status}`); process.exitCode = 1; return; }
   if (!postsRes.ok) { console.error(`Failed to fetch blog posts: ${postsRes.status}`); process.exitCode = 1; return; }
   if (!photosRes.ok) { console.error(`Failed to fetch reader photos: ${photosRes.status}`); process.exitCode = 1; return; }
+  if (!testimonialsRes.ok) { console.error(`Failed to fetch testimonials: ${testimonialsRes.status}`); process.exitCode = 1; return; }
 
   const books = await booksRes.json();
   const posts = await postsRes.json();
   const bookstorePhotos = await photosRes.json();
+  const testimonials = await testimonialsRes.json();
 
   const issues = []; // { severity, subject, kind, detail }
 
@@ -178,6 +181,20 @@ async function main() {
     if (count > 1) {
       const [store, city] = key.split('|');
       addIssue(issues, 'warn', store, 'duplicate-bookstore-listing', `"${store}"${city ? ` in ${city}` : ''} appears in ${count} reader-photo rows with no distinguishing branch name — confirm whether these are the same store (fine as-is) or different branches (add a branch name to each caption, e.g. "${store} — Khan Market")`);
+    }
+  }
+
+  // "Public can read verified testimonials" RLS already means this anon-key
+  // query can only ever receive rows where verified = true — so a failure
+  // here would mean that RLS policy has regressed, not that an unverified
+  // testimonial merely exists (unverified rows stay invisible to this
+  // script by design; the admin panel is where the owner reviews those).
+  for (const t of testimonials) {
+    if (t.verified !== true) {
+      addIssue(issues, 'fail', t.id, 'unverified-testimonial-visible', `testimonial ${t.id} has verified !== true but was returned by the public-key query — the "Public can read verified testimonials" RLS policy has regressed`);
+    }
+    if (!t.source) {
+      addIssue(issues, 'warn', t.id, 'testimonial-missing-source', `testimonial by "${t.name}" has no source — every published quotation should be traceable to an actual reader, retailer review, publication, interviewer, or event`);
     }
   }
 

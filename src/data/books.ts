@@ -6,6 +6,8 @@ export interface Testimonial {
   quote: string;
   name: string;
   source?: string;
+  sourceUrl?: string;
+  date?: string;
   authorReply?: string;
 }
 
