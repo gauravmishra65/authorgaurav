@@ -1,6 +1,6 @@
-# React Router v7 Migration Plan (Plan Only — Not Executed)
+# React Router v7 Migration Plan
 
-This document is a plan for a future migration, written against the app's actual current routing code (`src/App.tsx`). **No upgrade has been performed as part of this change set** — `package.json` still pins `react-router-dom": "^6.26.1"`.
+**Executed** on branch `chore/react-router-v7`, following the recommended approach below exactly: verified on v6.30 with both `future.v7_*` flags enabled first (full suite green), then bumped to `react-router-dom@7.18.4` and removed the now-redundant future flags. No other code changes were needed, confirming this plan's own risk assessment. Full verification results are in that branch's commit message. Left for history below as-written.
 
 ## Current version and advisory context
 
