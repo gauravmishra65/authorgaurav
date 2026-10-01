@@ -30,9 +30,10 @@ export default function Books() {
     setPrevCategoryParam(categoryParam);
     setCategory(categoryParam ?? 'All');
   }
-  // Not a pill toggle (no second filter row) — just honors the Nav "Upcoming
-  // Books" dropdown link (`/books?status=Upcoming`) on initial load.
-  const status = searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All';
+  // Now a real pill toggle (see the Status row below) — still honors the Nav
+  // "Upcoming Books" dropdown link (`/books?status=Upcoming`) on initial load.
+  const [status, setStatus] = useState(searchParams.get('status') === 'Upcoming' ? 'Upcoming' : 'All');
+  const [language, setLanguage] = useState<'All' | 'English' | 'Hindi'>('All');
 
   const categoryOptions = ['All', ...(categories?.map((c) => c.label) ?? [])];
 
@@ -43,9 +44,10 @@ export default function Books() {
       if (query && !b.title.toLowerCase().includes(query.toLowerCase())) return false;
       if (tag && !(b.categories?.includes(tag) ?? b.genre === tag)) return false;
       if (status === 'Upcoming' && b.status === 'published') return false;
+      if (language !== 'All' && b.language !== language) return false;
       return true;
     });
-  }, [books, categories, query, category, status]);
+  }, [books, categories, query, category, status, language]);
 
   return (
     <>
@@ -58,9 +60,9 @@ export default function Books() {
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-10 text-center">
           <p className="eyebrow text-gold-lt mb-4">The Catalog</p>
-          <h1 className="font-display text-4xl md:text-5xl mb-4">The Books</h1>
+          <h1 className="font-display text-4xl md:text-5xl mb-4">Books by Gaurav Mishra</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed mb-8">
-            From romance to thriller to memoir to devotion, these are works that share one belief: a good story can carry a reader anywhere.
+            Thrillers, contemporary fiction, spiritual books and reflective writing. Browse by interest, language or publication status.
           </p>
           <WhereToBuyButton source="books" />
         </div>
@@ -74,6 +76,8 @@ export default function Books() {
           <div className="flex flex-col items-center gap-6 mb-12">
             <BookSearch value={query} onChange={setQuery} />
             <BookFilters label="Filter by genre" options={categoryOptions} value={category} onChange={setCategory} />
+            <BookFilters label="Filter by status" options={['All', 'Upcoming'] as const} value={status} onChange={setStatus} />
+            <BookFilters label="Filter by language" options={['All', 'English', 'Hindi'] as const} value={language} onChange={setLanguage} />
           </div>
 
           <BookGrid books={filtered} source="books-grid" showRetailerButtons={false} />

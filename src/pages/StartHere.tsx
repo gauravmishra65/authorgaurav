@@ -9,10 +9,41 @@ import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
 
+// Rebuilt around reader mood rather than genre labels — "Three genres, one
+// writer" undersold the catalog once a fourth, non-fiction-adjacent mood
+// (reflective/memoir reading) had a real book to point to. Each path keeps
+// the same shape (mood, one real book, a specific "Explore ___" CTA) so a
+// reader's click both names the mood (start_here_category) and the actual
+// book they're headed to (start_here_book_click) as two distinct signals.
 const paths = [
-  { slug: 'offbeat-love', eyebrow: 'If you love romance', reason: 'A heartfelt love story set to the pulse of Mumbai. Start here for music, family, and the courage to choose each other.' },
-  { slug: 'the-shadow-code', eyebrow: 'If you love mystery & thrillers', reason: 'A taut techno-thriller of secrets, surveillance, and a whistleblower who can’t stop what she started.' },
-  { slug: 'vishnu-sahasranama', eyebrow: 'If you want something spiritual', reason: 'A thousand names, one steady anchor: devotional reading for daily reflection.' },
+  {
+    mood: 'Suspense & Mystery',
+    question: 'I want something suspenseful.',
+    description: 'Stories built around secrets, crime, technology and difficult choices.',
+    slug: 'the-shadow-code',
+    cta: 'Explore the Thriller',
+  },
+  {
+    mood: 'Love & Relationships',
+    question: 'I want a story about people and relationships.',
+    description: 'Contemporary stories about connection, distance, love and the choices people make.',
+    slug: 'offbeat-love',
+    cta: 'Explore Love Stories',
+  },
+  {
+    mood: 'Faith & Reflection',
+    question: 'I want something spiritual.',
+    description: 'Accessible devotional reading for reflection, understanding and everyday practice.',
+    slug: 'vishnu-sahasranama',
+    cta: 'Explore Spiritual Books',
+  },
+  {
+    mood: 'Life & Personal Growth',
+    question: 'I want something reflective.',
+    description: 'Books about experience, perspective, personal journeys and the lessons we carry forward.',
+    slug: 'journey-of-grace',
+    cta: 'Explore Reflective Reading',
+  },
 ];
 
 export default function StartHere() {
@@ -24,7 +55,7 @@ export default function StartHere() {
     <>
       <Seo
         title="Start Here: New Reader's Guide | Gaurav Mishra"
-        description="New to Gaurav Mishra's books? Find the right first read, whether romance, mystery, or something spiritual, and get a free first chapter."
+        description="New to Gaurav Mishra's books? Choose the mood you're in — suspense, relationships, faith, or reflection — and find the book that fits."
         path="/start-here"
       />
 
@@ -32,9 +63,9 @@ export default function StartHere() {
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-4xl px-6 py-20 text-center">
           <p className="eyebrow text-gold-lt mb-4">New Here?</p>
-          <h1 className="font-display text-4xl md:text-5xl mb-4">Start With the Right Book For You</h1>
+          <h1 className="font-display text-4xl md:text-5xl mb-4">Where Should You Start?</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Three genres, one writer. Tell us what you're in the mood for, and we'll point you to the book that fits.
+            Different books suit different moods. Choose what you feel like reading today.
           </p>
         </div>
       </section>
@@ -44,22 +75,26 @@ export default function StartHere() {
 
       {books && (
         <section className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-10 md:grid-cols-3">
-            {paths.map(({ slug, eyebrow, reason }) => {
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {paths.map(({ mood, question, description, slug, cta }) => {
               const book = books.find((b) => b.slug === slug);
               if (!book) return null;
+              const handleClick = () => {
+                trackEvent('start_here_category', { mood });
+                trackEvent('start_here_book_click', { book: book.slug, mood });
+              };
               return (
-                <div key={slug} className="content-card flex flex-col items-center text-center p-8">
-                  <p className="label-caps text-gold-text mb-5">{eyebrow}</p>
-                  <BookCover {...book} size="md" href={`/books/${book.slug}`} onClick={() => trackEvent('start_here_book_click', { book: book.slug, path: eyebrow })} />
-                  <h2 className="font-display text-xl text-ink mt-6 mb-2">{book.title}</h2>
-                  <p className="text-sm text-muted leading-relaxed mb-6">{reason}</p>
+                <div key={slug} className="content-card flex flex-col items-center text-center p-7">
+                  <p className="label-caps text-2xs text-gold-text mb-3">{mood}</p>
+                  <h2 className="font-display text-lg text-ink mb-3 leading-snug">{question}</h2>
+                  <BookCover {...book} size="sm" href={`/books/${book.slug}`} onClick={handleClick} />
+                  <p className="text-sm text-muted leading-relaxed mt-5 mb-6">{description}</p>
                   <Link
                     to={`/books/${book.slug}`}
-                    onClick={() => trackEvent('start_here_book_click', { book: book.slug, path: eyebrow })}
+                    onClick={handleClick}
                     className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs mt-auto"
                   >
-                    Read More <ArrowRight size={13} />
+                    {cta} <ArrowRight size={13} />
                   </Link>
                 </div>
               );
@@ -71,7 +106,7 @@ export default function StartHere() {
       <section className="bg-cream">
         <div className="mx-auto max-w-3xl px-6 pb-20 text-center">
           <Divider className="mb-10!" />
-          <p className="eyebrow text-gold-text mb-3">Not Sure Yet?</p>
+          <p className="eyebrow text-gold-text mb-3">Still Deciding?</p>
           <h2 className="font-display text-2xl md:text-3xl text-ink mb-3">Get a free first chapter, no commitment</h2>
           <p className="text-muted mb-8 max-w-lg mx-auto">
             Tell us what you love reading and we'll send a free chapter to match, plus a note whenever a new book arrives.

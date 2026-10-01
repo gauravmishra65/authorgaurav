@@ -23,7 +23,7 @@ interface BookCardProps {
 
 /** One book in a catalog grid — cover, title, language/status badges, a
  * one-line description, optionally buy options (same set as
- * BookPurchasePanel, via `getBuyOptions`), and View Book. Cover aspect
+ * BookPurchasePanel, via `getBuyOptions`), and Explore Book. Cover aspect
  * ratio is never stretched — BookCover already sizes by its own fixed
  * w/h classes. */
 export default function BookCard({ book, source, showRetailerButtons }: BookCardProps) {
@@ -53,7 +53,7 @@ export default function BookCard({ book, source, showRetailerButtons }: BookCard
         </div>
       )}
       <Link to={`/books/${book.slug}`} onClick={onExplore} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2 mt-1">
-        View Book
+        Explore Book
       </Link>
     </div>
   );

@@ -468,7 +468,7 @@ export default function BookDetail() {
         </section>
       )}
 
-      {book.releaseDate && (
+      {book.releaseDate ? (
         <section className="bg-(--book-bg) bg-grain text-(--book-text)">
           <div className="hairline-solid w-full opacity-30" />
           <div className="mx-auto max-w-4xl px-6 py-16">
@@ -476,10 +476,20 @@ export default function BookDetail() {
             <ReleaseDetails book={book} className="mb-12" />
             {!released && (
               <>
-                <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent-text)' }}>The Code Will Be Revealed In</p>
+                <p className="eyebrow mb-6 text-center" style={{ color: 'var(--book-accent-text)' }}>Releasing In</p>
                 <ReleaseCountdown releaseDate={book.releaseDate} />
               </>
             )}
+          </div>
+        </section>
+      ) : book.status !== 'published' && (
+        // No confirmed date yet — an honest placeholder rather than a
+        // countdown or availability claim this book can't back up.
+        <section className="bg-(--book-bg) bg-grain text-(--book-text)">
+          <div className="hairline-solid w-full opacity-30" />
+          <div className="mx-auto max-w-2xl px-6 py-16 text-center">
+            <p className="eyebrow mb-3" style={{ color: 'var(--book-accent-text)' }}>Coming Soon</p>
+            <p style={{ color: 'var(--book-text)', opacity: 0.8 }}>Publication details will be added when confirmed.</p>
           </div>
         </section>
       )}

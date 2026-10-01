@@ -22,6 +22,7 @@ export type AnalyticsEvent =
   | 'book_explore'
   | 'related_book_click'
   | 'start_here_view'
+  | 'start_here_category'
   | 'start_here_book_click'
   | 'journal_book_click'
   | 'reader_circle_view'
