@@ -58,7 +58,9 @@ Fixed: "Current Release" was hardcoded to a specific book slug — a live bug (c
 
 ## 22–23. Visual QA / button-CTA consistency
 
-Not audited this round — would need a dedicated screenshot-review pass across breakpoints, which wasn't in scope for the bug-fix-oriented slices this engagement focused on.
+Audited this round via a real screenshot/DOM pass across breakpoints (desktop and 375px mobile) on every primary page. CTA button classes (`btn-gold`/`btn-gold-outline` sizing and spacing) are consistent across public pages; admin pages intentionally use a smaller, separate scale, and `/where-to-buy`'s retailer buttons are deliberately larger/distinct as the page's core purpose — neither is a bug.
+
+Found and fixed one real, concrete bug this pass turned up: the mobile nav drawer (built earlier this session as part of the primary/secondary nav restructure, #24) was hard-capped at `max-height: 32rem` (512px) with `overflow: hidden`, while background scroll is intentionally locked whenever the drawer is open. Confirmed via computed styles that the actual link list is 880px tall — meaning Reader Circle, News, Events, Contact, the "Explore Latest Book" button, and the social icons were all present in the DOM but **physically unreachable** by a real mobile touch/mouse user (no working scroll gesture could reach them). The existing e2e test for this drawer only checked open/close, not whether its full content was reachable, so this slipped through CI. Fixed by making the open drawer internally scrollable (`overflow-y: auto`, `max-height: min(32rem, 80vh)`) instead of hard-clipping it. Added a new regression test (`e2e/smoke.spec.ts`) that scrolls the drawer to its end and asserts the last link is actually rendered in the viewport there — verified it fails against the old CSS and passes with the fix, so a future addition to the "More" group can't silently reintroduce this.
 
 ## 24. Navigation
 

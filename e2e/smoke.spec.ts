@@ -101,6 +101,21 @@ test('mobile nav drawer opens as an accessible dialog and closes via its close b
   await expect(dialog).not.toBeVisible();
 });
 
+test('every mobile nav drawer link is actually reachable, not clipped past a scroll-locked overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Site navigation' });
+  // The last secondary link is the one most likely to be clipped off by a
+  // fixed-height panel as more links get added to the "More" group. Scroll
+  // the panel itself (not the page — background scroll is locked while the
+  // drawer is open) to its end, then confirm the link is actually rendered
+  // on screen there, not just present in the DOM past the clipped edge.
+  const contactLink = dialog.getByRole('link', { name: 'Contact' });
+  await dialog.evaluate((el) => { el.scrollTop = el.scrollHeight; });
+  await expect(contactLink).toBeInViewport();
+});
+
 test('sitemap.xml is served directly with a 200 and XML content', async ({ request }) => {
   const res = await request.get('/sitemap.xml');
   expect(res.status()).toBe(200);

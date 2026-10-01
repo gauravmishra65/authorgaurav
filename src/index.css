@@ -219,7 +219,8 @@ h1, h2, h3, h4 {
   transition: max-height 0.3s ease-out, visibility 0s linear 0.3s;
 }
 .mobile-nav-panel.is-open {
-  max-height: 32rem;
+  max-height: min(32rem, 80vh);
+  overflow-y: auto;
   visibility: visible;
   transition: max-height 0.3s ease-out, visibility 0s linear 0s;
 }
