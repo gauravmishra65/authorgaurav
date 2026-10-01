@@ -165,7 +165,7 @@ export default function AdminWebpConverter() {
                     <a
                       href={img.url}
                       download={img.downloadName}
-                      className="btn-caps btn-gold-outline inline-block rounded-sm px-3 py-1.5 text-2xs"
+                      className="btn-caps btn-gold-outline inline-block rounded-xs px-3 py-1.5 text-2xs"
                     >
                       Download
                     </a>

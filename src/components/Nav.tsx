@@ -104,7 +104,7 @@ export default function Nav() {
   const isSecondaryActive = secondaryLinks.some((l) => location.pathname === l.to);
 
   return (
-    <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-sm'}`}>
+    <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-xs'}`}>
       <div className="hairline-solid w-full opacity-40" />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
         <Link to="/" className="flex items-center shrink-0 rounded-md bg-ivory px-2.5 py-1.5" aria-label="Gaurav Mishra, home">
@@ -179,7 +179,7 @@ export default function Nav() {
 
         <div className="hidden xl:flex items-center gap-2.5">
           <SocialLinks size={15} iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-sm px-3.5 py-2 whitespace-nowrap">Explore Latest Book</Link>
+          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-xs px-3.5 py-2 whitespace-nowrap">Explore Latest Book</Link>
         </div>
 
         <button ref={toggleRef} className="xl:hidden text-ivory p-2 -mr-2" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>

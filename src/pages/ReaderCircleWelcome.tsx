@@ -43,7 +43,7 @@ export default function ReaderCircleWelcome() {
       </section>
 
       <section className="mx-auto max-w-2xl px-6 py-16 text-center">
-        <Divider className="!mb-10" />
+        <Divider className="mb-10!" />
 
         {relevantBook && (
           <div className="mb-10">
@@ -52,7 +52,7 @@ export default function ReaderCircleWelcome() {
             <Link
               to={`/books/${relevantBook.slug}`}
               onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: relevantBook.slug })}
-              className="btn-caps btn-gold-outline inline-block rounded-sm px-5 py-2.5 text-2xs"
+              className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
             >
               View the Book
             </Link>
@@ -65,7 +65,7 @@ export default function ReaderCircleWelcome() {
             <Link
               to="/books"
               onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: 'all-books' })}
-              className="btn-caps btn-gold-outline inline-block rounded-sm px-5 py-2.5 text-2xs"
+              className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
             >
               See All Books
             </Link>
@@ -94,7 +94,7 @@ export default function ReaderCircleWelcome() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent('reader_circle_welcome_click', { type: 'social', label: socialLink.label })}
-              className="btn-caps btn-gold-outline inline-block rounded-sm px-5 py-2.5 text-2xs"
+              className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
             >
               Follow on {socialLink.label}
             </a>

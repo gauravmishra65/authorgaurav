@@ -12,13 +12,13 @@ export default function NewsPreview() {
       <div className="text-center">
         <p className="eyebrow text-gold-text mb-3">News &amp; Events</p>
         <h2 className="font-display text-3xl md:text-4xl text-ink">What's happening</h2>
-        <Divider className="!my-8" />
+        <Divider className="my-8!" />
       </div>
       <div className="grid gap-8 md:grid-cols-3">
         {latest.map((n) => (
           <Link key={n.id} to="/news" className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
-            <div className={`h-40 bg-gradient-to-br ${n.gradient} relative`}>
-              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-sm">{n.category}</span>
+            <div className={`h-40 bg-linear-to-br ${n.gradient} relative`}>
+              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-xs">{n.category}</span>
             </div>
             <div className="p-5 flex flex-col flex-1">
               <p className="text-2xs text-muted mb-2">{n.date}</p>
@@ -29,7 +29,7 @@ export default function NewsPreview() {
         ))}
       </div>
       <div className="text-center mt-10">
-        <Link to="/news" className="btn-caps btn-gold-outline inline-block rounded-sm px-6 py-3">See All News</Link>
+        <Link to="/news" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">See All News</Link>
       </div>
     </section>
   );

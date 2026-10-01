@@ -18,14 +18,14 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col bg-ivory">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-dialog focus:top-3 focus:left-3 focus:rounded-sm focus:bg-ivory focus:px-4 focus:py-2 focus:label-caps focus:text-ink focus:shadow-luxury"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-dialog focus:top-3 focus:left-3 focus:rounded-xs focus:bg-ivory focus:px-4 focus:py-2 focus:label-caps focus:text-ink focus:shadow-luxury"
       >
         Skip to content
       </a>
       <ScrollToTop />
       <AnnouncementBar />
       <Nav />
-      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-hidden">
         <Suspense fallback={<PageFallback />}>
           <Outlet />
         </Suspense>

@@ -109,7 +109,7 @@ export default function Books() {
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Want a taste before you buy?</h2>
         <p className="text-muted mb-7 max-w-lg mx-auto">Get a free chapter delivered to your inbox, and a note when the next book arrives.</p>
-        <Link to="/contact" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+        <Link to="/contact" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
           Get in Touch <ArrowRight size={15} />
         </Link>
         <p className="mt-6">

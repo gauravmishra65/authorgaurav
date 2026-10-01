@@ -51,7 +51,7 @@ export default function AdminTestimonials() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">What Readers Say</h1>
-        <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-4 py-2 text-2xs">
+        <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
           <Plus size={14} /> Add Testimonial
         </button>
       </div>
@@ -66,7 +66,7 @@ export default function AdminTestimonials() {
                 <p className="text-ink italic truncate">"{t.quote}"</p>
                 <p className="text-2xs text-muted">{t.name}{t.source ? ` · ${t.source}` : ''} · {bookTitle(t.book_id)}{t.featured ? ' · Featured on home' : ''}</p>
               </div>
-              <div className="flex gap-2 flex-shrink-0">
+              <div className="flex gap-2 shrink-0">
                 <button onClick={() => setEditing(t)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(t.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
@@ -114,10 +114,10 @@ export default function AdminTestimonials() {
             {error && <p className="text-2xs text-rose">{error}</p>}
 
             <div className="flex gap-3 pt-2">
-              <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs disabled:opacity-60">
+              <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-xs px-5 py-2.5 text-2xs disabled:opacity-60">
                 {saving ? 'Saving…' : 'Save'}
               </button>
-              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-sm px-5 py-2.5 text-2xs">Cancel</button>
+              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-xs px-5 py-2.5 text-2xs">Cancel</button>
             </div>
           </div>
         </div>

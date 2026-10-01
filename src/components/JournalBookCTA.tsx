@@ -28,7 +28,7 @@ export default function JournalBookCTA({ relatedLink, books }: JournalBookCTAPro
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackEvent('journal_book_click', { link: 'writetogetherhub' })}
-          className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs"
+          className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs"
         >
           Visit WriteTogetherHub <ArrowRight size={13} />
         </a>
@@ -49,7 +49,7 @@ export default function JournalBookCTA({ relatedLink, books }: JournalBookCTAPro
         <Link
           to={`/books/${book.slug}`}
           onClick={() => trackEvent('journal_book_click', { link: book.slug })}
-          className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-2xs"
+          className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs"
         >
           Explore the Book <ArrowRight size={13} />
         </Link>

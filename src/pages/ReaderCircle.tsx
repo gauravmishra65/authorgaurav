@@ -40,7 +40,7 @@ export default function ReaderCircle() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="eyebrow text-gold-text mb-3 text-center">What You Choose</p>
-        <Divider className="!mb-10" />
+        <Divider className="mb-10!" />
         <div className="grid gap-6 sm:grid-cols-2">
           {segments.map((s) => (
             <div key={s.label} className="rounded-md border border-gold/20 bg-ivory p-6">
@@ -56,7 +56,7 @@ export default function ReaderCircle() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-          <Divider className="!mb-10" />
+          <Divider className="mb-10!" />
           <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold-text mb-6">
             <Mail size={14} aria-hidden="true" /> One email a month. No noise. Unsubscribe anytime.
           </div>

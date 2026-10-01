@@ -22,7 +22,7 @@ export default function WriteTogetherHubPage() {
           <p className="text-ivory/80 max-w-2xl mx-auto leading-relaxed mb-8">
             I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out: guidance, community, and a place to grow their craft together.
           </p>
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={15} />
           </a>
         </div>
@@ -32,7 +32,7 @@ export default function WriteTogetherHubPage() {
         <div className="text-center">
           <p className="eyebrow text-gold-text mb-3">Why It Exists</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Three things a writer needs</h2>
-          <Divider className="!my-8" />
+          <Divider className="my-8!" />
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {benefits.map((b) => (
@@ -50,7 +50,7 @@ export default function WriteTogetherHubPage() {
       <section className="bg-cream">
         <div className="mx-auto max-w-prose px-6 py-16">
           <p className="eyebrow text-gold-text mb-3 text-center">A Note from the Founder</p>
-          <Divider className="!my-6" />
+          <Divider className="my-6!" />
           <p className="text-text/85 leading-relaxed text-center">
             I remember what it felt like to start out: the uncertainty, the isolation, the gap between what I could imagine and what I could put on the page. WriteTogetherHub exists to close that gap, for the writer I was and the writers I hope to meet.
           </p>
@@ -62,10 +62,10 @@ export default function WriteTogetherHubPage() {
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Ready to grow your craft?</h2>
         <div className="flex flex-wrap justify-center gap-4">
-          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={15} />
           </a>
-          <Link to="/contact" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3">
+          <Link to="/contact" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
             <Mail size={15} /> Contact Gaurav
           </Link>
         </div>

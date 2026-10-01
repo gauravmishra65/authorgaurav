@@ -35,7 +35,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
   return (
     <section className="bg-ink bg-grain text-ivory relative overflow-hidden">
       <div className="hairline-solid w-full opacity-30" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-rose/10 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-rose/10 via-transparent to-transparent" />
 
       {/* Top row: countdown, then hero content, together in one unified block */}
       <div className="relative mx-auto max-w-6xl px-6 py-16">
@@ -68,7 +68,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
                     href={primaryBuyOption.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3"
+                    className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3"
                     onClick={() => {
                       trackEvent('retailer_click', { retailer: primaryBuyOption.label });
                       if (/amazon\./i.test(primaryBuyOption.href)) trackEvent('amazon_click', { retailer: primaryBuyOption.label });
@@ -78,7 +78,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
                   </a>
                 )}
                 {book.sampleUrl && (
-                  <a href={book.sampleUrl} target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
+                  <a href={book.sampleUrl} target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
                     Read a Sample <ExternalLink size={15} />
                   </a>
                 )}
@@ -135,11 +135,11 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
                 </span>
               )}
               <div className="flex flex-wrap gap-4 mt-2">
-                <Link to={`/books/${book.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3">
+                <Link to={`/books/${book.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
                   Learn More <ArrowRight size={15} />
                 </Link>
                 {book.bookWebsite && (
-                  <a href={book.bookWebsite} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-sm px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
+                  <a href={book.bookWebsite} className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
                     Visit the Official Site <ExternalLink size={15} />
                   </a>
                 )}

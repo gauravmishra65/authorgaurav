@@ -51,7 +51,7 @@ export default function AdminReaderPhotos() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">Reader Photos</h1>
-        <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-4 py-2 text-2xs">
+        <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
           <Plus size={14} /> Add Reader Photo
         </button>
       </div>
@@ -67,7 +67,7 @@ export default function AdminReaderPhotos() {
           {rows.map((p) => (
             <div key={p.id} className="flex items-center justify-between px-5 py-3 border-b border-gold/10 last:border-0 gap-4">
               <div className="flex items-center gap-4 min-w-0">
-                <img src={p.image_src} alt="" className="w-12 h-12 rounded-sm object-cover flex-shrink-0 bg-cream" />
+                <img src={p.image_src} alt="" className="w-12 h-12 rounded-xs object-cover shrink-0 bg-cream" />
                 <div className="min-w-0">
                   <p className="font-display text-ink truncate">
                     {p.kind === 'bookstore' ? 'Bookstore photo' : (p.reader_name || 'Unnamed reader')}
@@ -75,7 +75,7 @@ export default function AdminReaderPhotos() {
                   <p className="text-2xs text-muted truncate">{p.caption || '—'} · {bookTitle(p.book_id)}</p>
                 </div>
               </div>
-              <div className="flex gap-2 flex-shrink-0">
+              <div className="flex gap-2 shrink-0">
                 <button onClick={() => setEditing(p)} className="p-2 text-muted hover:text-gold-text"><Pencil size={16} /></button>
                 <button onClick={() => handleDelete(p.id)} className="p-2 text-muted hover:text-rose"><Trash2 size={16} /></button>
               </div>
@@ -126,10 +126,10 @@ export default function AdminReaderPhotos() {
             {error && <p className="text-2xs text-rose">{error}</p>}
 
             <div className="flex gap-3 pt-2">
-              <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-sm px-5 py-2.5 text-2xs disabled:opacity-60">
+              <button onClick={handleSave} disabled={saving} className="btn-caps btn-gold rounded-xs px-5 py-2.5 text-2xs disabled:opacity-60">
                 {saving ? 'Saving…' : 'Save'}
               </button>
-              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-sm px-5 py-2.5 text-2xs">Cancel</button>
+              <button onClick={() => setEditing(null)} className="btn-caps btn-gold-outline rounded-xs px-5 py-2.5 text-2xs">Cancel</button>
             </div>
           </div>
         </div>

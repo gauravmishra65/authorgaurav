@@ -6,7 +6,7 @@ import Divider from './Divider';
 
 function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
   return (
-    <figure className="content-card p-7 w-[320px] sm:w-[360px] flex-shrink-0">
+    <figure className="content-card p-7 w-[320px] sm:w-[360px] shrink-0">
       <Quote className="text-gold-text/50 mb-3" size={22} aria-hidden="true" />
       <blockquote className="text-text/85 leading-relaxed italic mb-4">"{t.quote}"</blockquote>
       <figcaption className="text-2xs label-caps text-muted mb-3">
@@ -40,12 +40,12 @@ export default function Testimonials() {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="eyebrow text-gold-text mb-3">What Readers Say</p>
           <h2 className="font-display text-3xl md:text-4xl text-ink">Words from the reader circle</h2>
-          <Divider className="!my-8" />
+          <Divider className="my-8!" />
         </div>
 
         <div className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-gradient-to-r from-cream to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-gradient-to-l from-cream to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-linear-to-r from-cream to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-linear-to-l from-cream to-transparent z-10" />
 
           <div className="carousel-track-ltr flex w-max py-2" style={{ animationDuration: `${duration}s` }}>
             {track.map((t, i) => (

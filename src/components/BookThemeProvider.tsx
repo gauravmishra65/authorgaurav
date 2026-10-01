@@ -9,7 +9,7 @@ interface BookThemeProviderProps {
 /** Applies a book's theme as CSS custom properties on a wrapping div — the
  * `--book-*` variable contract declared in index.css. Everything inside can
  * reference `var(--book-bg)`, `var(--book-accent)`, etc. via Tailwind
- * arbitrary values (`bg-[var(--book-bg)]`) without knowing which book it is. */
+ * arbitrary values (`bg-(--book-bg)`) without knowing which book it is. */
 export default function BookThemeProvider({ theme, children }: BookThemeProviderProps) {
   const style = {
     '--book-bg': theme.background,

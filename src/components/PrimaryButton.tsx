@@ -24,7 +24,7 @@ const sizeClasses = { sm: 'px-5 py-2.5', md: 'px-6 py-3' };
  * typed by hand across pages. */
 export default function PrimaryButton(props: PrimaryButtonProps) {
   const { size = 'md', className = '', children } = props;
-  const classes = `btn-caps btn-gold inline-flex items-center gap-2 rounded-sm ${sizeClasses[size]} ${className}`;
+  const classes = `btn-caps btn-gold inline-flex items-center gap-2 rounded-xs ${sizeClasses[size]} ${className}`;
 
   if ('to' in props && props.to) {
     return <Link to={props.to} className={classes} onClick={props.onClick} aria-label={props['aria-label']}>{children}</Link>;

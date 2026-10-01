@@ -33,8 +33,8 @@ export default function BookCarousel({ books }: BookCarouselProps) {
       onPointerLeave={() => setPaused(false)}
       onPointerCancel={() => setPaused(false)}
     >
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-gradient-to-r from-ivory to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-gradient-to-l from-ivory to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-linear-to-r from-ivory to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-linear-to-l from-ivory to-transparent z-10" />
 
       {/*
         No `gap` on the track: a flex gap only appears *between* items, so
@@ -52,7 +52,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
             key={`${b.id}-${i}`}
             aria-hidden={i >= books.length}
             {...(i >= books.length ? { inert: true } : {})}
-            className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36"
+            className="flex shrink-0 flex-col items-center gap-3 mr-10 w-36"
           >
             <BookCover {...b} size="xs" href={`/books/${b.slug}`} onClick={() => trackEvent('book_explore', { book: b.slug, source: 'home-carousel' })} />
             <div className="text-center">

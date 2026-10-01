@@ -159,7 +159,7 @@ export default function Contact() {
                   {form.circle ? ", and you have been added to the reader circle." : "."}
                 </p>
                 <button onClick={() => { setSubmitted(false); setForm(emptyForm('reader')); setErrors({}); }}
-                  className="btn-caps btn-gold-outline mt-6 rounded-sm px-5 py-2.5 text-2xs">
+                  className="btn-caps btn-gold-outline mt-6 rounded-xs px-5 py-2.5 text-2xs">
                   Send Another
                 </button>
               </div>
@@ -170,14 +170,14 @@ export default function Contact() {
                     <label htmlFor="name" className="form-label-caps text-muted block mb-2">Name</label>
                     <input id="name" type="text" value={form.name} onChange={(e) => update('name', e.target.value)}
                       aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined}
-                      className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
+                      className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden" />
                     {errors.name && <p id="name-error" role="alert" className="text-sm text-rose mt-1.5">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="form-label-caps text-muted block mb-2">Email</label>
                     <input id="email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)}
                       aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined}
-                      className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
+                      className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden" />
                     {errors.email && <p id="email-error" role="alert" className="text-sm text-rose mt-1.5">{errors.email}</p>}
                   </div>
                 </div>
@@ -186,12 +186,12 @@ export default function Contact() {
                   <div>
                     <label htmlFor="organisation" className="form-label-caps text-muted block mb-2">Organisation <span className="normal-case text-2xs">(optional)</span></label>
                     <input id="organisation" type="text" value={form.organisation} onChange={(e) => update('organisation', e.target.value)}
-                      className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
+                      className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden" />
                   </div>
                   <div>
                     <label htmlFor="enquiryType" className="form-label-caps text-muted block mb-2">Enquiry Type</label>
                     <select id="enquiryType" value={form.enquiryType} onChange={(e) => update('enquiryType', e.target.value as EnquiryValue)}
-                      className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none">
+                      className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden">
                       {enquiryTypes.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                     </select>
                   </div>
@@ -201,7 +201,7 @@ export default function Contact() {
                   <label htmlFor="subject" className="form-label-caps text-muted block mb-2">Subject</label>
                   <input id="subject" type="text" value={form.subject} onChange={(e) => update('subject', e.target.value)}
                     aria-invalid={!!errors.subject} aria-describedby={errors.subject ? 'subject-error' : undefined}
-                    className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none" />
+                    className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden" />
                   {errors.subject && <p id="subject-error" role="alert" className="text-sm text-rose mt-1.5">{errors.subject}</p>}
                 </div>
 
@@ -209,7 +209,7 @@ export default function Contact() {
                   <label htmlFor="message" className="form-label-caps text-muted block mb-2">Message</label>
                   <textarea id="message" rows={5} value={form.message} onChange={(e) => update('message', e.target.value)}
                     aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined}
-                    className="w-full rounded-sm border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-none resize-none" />
+                    className="w-full rounded-xs border border-gold/30 bg-cream px-4 py-3 text-ink focus:border-gold focus:outline-hidden resize-none" />
                   {errors.message && <p id="message-error" role="alert" className="text-sm text-rose mt-1.5">{errors.message}</p>}
                 </div>
 
@@ -236,7 +236,7 @@ export default function Contact() {
 
                 {submitError && <p role="alert" className="text-sm text-rose">{submitError}</p>}
 
-                <button type="submit" disabled={sending} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-sm px-6 py-3 disabled:opacity-60">
+                <button type="submit" disabled={sending} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3 disabled:opacity-60">
                   <Send size={15} /> {sending ? 'Sending…' : 'Send Message'}
                 </button>
               </form>

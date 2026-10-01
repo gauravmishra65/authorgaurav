@@ -103,7 +103,7 @@ export default function MobileNavigation({ open, onClose, primaryLinks, secondar
           </li>
         ))}
         <li className="pt-3">
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold inline-block rounded-sm px-4 py-2.5 text-2xs">Explore Latest Book</Link>
+          <Link to="/books/the-shadow-code" className="btn-caps btn-gold inline-block rounded-xs px-4 py-2.5 text-2xs">Explore Latest Book</Link>
         </li>
         <li className="pt-4">
           <SocialLinks size={17} iconClassName="text-ivory/60 hover:text-gold-lt transition-colors" />

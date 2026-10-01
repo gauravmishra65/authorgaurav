@@ -24,15 +24,15 @@ export default function AdminLogin() {
           <div>
             <label htmlFor="admin-email" className="label-caps text-ivory/70 block mb-2">Email</label>
             <input id="admin-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-sm border border-gold/30 bg-ink px-4 py-2.5 text-ivory focus:border-gold focus:outline-none" />
+              className="w-full rounded-xs border border-gold/30 bg-ink px-4 py-2.5 text-ivory focus:border-gold focus:outline-hidden" />
           </div>
           <div>
             <label htmlFor="admin-password" className="label-caps text-ivory/70 block mb-2">Password</label>
             <input id="admin-password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-sm border border-gold/30 bg-ink px-4 py-2.5 text-ivory focus:border-gold focus:outline-none" />
+              className="w-full rounded-xs border border-gold/30 bg-ink px-4 py-2.5 text-ivory focus:border-gold focus:outline-hidden" />
           </div>
           {error && <p className="text-2xs text-rose">{error}</p>}
-          <button type="submit" disabled={loading} className="btn-caps btn-gold w-full rounded-sm px-4 py-3 disabled:opacity-60">
+          <button type="submit" disabled={loading} className="btn-caps btn-gold w-full rounded-xs px-4 py-3 disabled:opacity-60">
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>

@@ -12,13 +12,13 @@ export default function BlogPreview() {
       <div className="text-center">
         <p className="eyebrow text-gold-text mb-3">Journal</p>
         <h2 className="font-display text-3xl md:text-4xl text-ink">From the Blog</h2>
-        <Divider className="!my-8" />
+        <Divider className="my-8!" />
       </div>
       <div className="grid gap-8 md:grid-cols-3">
         {latest.map((p) => (
           <Link key={p.id} to={`/blog/${p.slug}`} className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
-            <div className={`h-40 bg-gradient-to-br ${p.gradient} relative`}>
-              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-sm">{p.category}</span>
+            <div className={`h-40 bg-linear-to-br ${p.gradient} relative`}>
+              <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-xs">{p.category}</span>
             </div>
             <div className="p-5 flex flex-col flex-1">
               <p className="text-2xs text-muted mb-2">{p.date} · {p.readTime} read</p>
@@ -29,7 +29,7 @@ export default function BlogPreview() {
         ))}
       </div>
       <div className="text-center mt-10">
-        <Link to="/blog" className="btn-caps btn-gold-outline inline-block rounded-sm px-6 py-3">Read the Blog</Link>
+        <Link to="/blog" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">Read the Blog</Link>
       </div>
     </section>
   );

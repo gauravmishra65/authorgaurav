@@ -25,7 +25,7 @@ export default function AdminSubscribers() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">Newsletter Subscribers ({rows.length})</h1>
         {rows.length > 0 && (
-          <button onClick={exportCsv} className="btn-caps btn-gold-outline rounded-sm px-4 py-2 text-2xs">Export CSV</button>
+          <button onClick={exportCsv} className="btn-caps btn-gold-outline rounded-xs px-4 py-2 text-2xs">Export CSV</button>
         )}
       </div>
 
