@@ -51,7 +51,7 @@ export default function BookCarousel({ books }: BookCarouselProps) {
           <div
             key={`${b.id}-${i}`}
             aria-hidden={i >= books.length}
-            {...(i >= books.length ? { inert: '' } : {})}
+            {...(i >= books.length ? { inert: true } : {})}
             className="flex flex-shrink-0 flex-col items-center gap-3 mr-10 w-36"
           >
             <BookCover {...b} size="xs" href={`/books/${b.slug}`} onClick={() => trackEvent('book_explore', { book: b.slug, source: 'home-carousel' })} />

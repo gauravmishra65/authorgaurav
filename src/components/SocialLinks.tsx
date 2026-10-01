@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Instagram, Facebook, Youtube } from 'lucide-react';
 import { getVerifiedSocialLinks } from '../data/social';
 
