@@ -86,6 +86,33 @@ test('A Journey of Grace shows zero purchase links (no real retailer link exists
   await expect(buyLinks).toHaveCount(0);
 });
 
+test('an upcoming book shows "Coming Soon", never a purchase link or "Buy Now"', async ({ page }) => {
+  await page.goto('/books/the-zero-account');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Zero Account');
+  await expect(page.getByText('Coming Soon', { exact: true }).first()).toBeVisible();
+  const buyLinks = page.locator('a').filter({ hasText: /Amazon|Kindle|Paperback|Buy Now/i });
+  await expect(buyLinks).toHaveCount(0);
+});
+
+test('the header\'s explore CTA and the homepage hero point at the same featured book — never two different "current" books', async ({ page }) => {
+  await page.goto('/');
+  // Both the header CTA and hero heading depend on the same async book
+  // fetch resolving. Nav's and Home's fetches aren't guaranteed to settle
+  // at the same instant, and several other sections (e.g. WriteTogetherHub)
+  // share the hero's own "section.bg-ink h2" shape, so waiting on DOM
+  // position (`.first()`) can lock onto the wrong, already-mounted heading
+  // before the real one appears. Read the header's resolved title first,
+  // then assert a heading with that exact text exists — this is correct
+  // regardless of which fetch settles first.
+  const headerCta = page.getByRole('link', { name: /^Explore / }).first();
+  await expect(headerCta).not.toHaveText('Explore the Books', { timeout: 10000 });
+  const headerCtaText = await headerCta.textContent();
+  const featuredTitle = headerCtaText?.replace(/^Explore\s+/, '').trim();
+  expect(featuredTitle).toBeTruthy();
+
+  await expect(page.getByRole('heading', { level: 2, name: featuredTitle!, exact: true })).toBeVisible({ timeout: 10000 });
+});
+
 test('a Hindi book page renders with lang="hi" on the document', async ({ page }) => {
   await page.goto('/books/vishnu-sahasranama');
   await expect(page.locator('html')).toHaveAttribute('lang', 'hi', { timeout: 10000 });

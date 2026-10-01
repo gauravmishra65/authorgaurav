@@ -50,7 +50,11 @@ export interface Book {
    * not a retailer, so it's rendered separately from getBuyOptions() rather
    * than folded into the buy-links list. */
   goodreadsUrl?: string;
-  /** Gives the book a "New Release" ribbon and extra prominence in listings. */
+  /** Marks this as the single current marketing-priority book — drives the
+   * header CTA, the homepage hero, and Media's "Current Release" block
+   * (see `getFeaturedBook` in `lib/releaseStatus.ts`). Should be true on
+   * exactly one book at a time; the admin book editor doesn't enforce this
+   * automatically, so check for a stray second `true` after changing it. */
   featured?: boolean;
   /** Sales-milestone banner on the book page (e.g. "850+ copies sold in
    * September 2026"). Shown only when milestoneSalesCount is set — admin
@@ -105,4 +109,19 @@ export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paper
   if (book.shopeeUrl) options.push({ label: 'Shopee', href: book.shopeeUrl });
   if (book.lazadaUrl) options.push({ label: 'Lazada', href: book.lazadaUrl });
   return options;
+}
+
+// Same-story translation pairs (English slug -> Hindi slug). Each language
+// edition is its own separate row in authorgaurav_books with no relational
+// field linking them, so — unlike `getFeaturedBook`, which is fully data-
+// driven — this one small list stays an explicit, documented exception.
+// Add an entry whenever a new translated edition is published.
+const TRANSLATION_PAIRS: Record<string, string> = {
+  'the-shadow-code': 'shadow-code-hindi',
+  'the-zero-account': 'zero-account-hindi',
+};
+
+export function getTranslationEdition(book: Pick<Book, 'slug'>, books: Book[]): Book | undefined {
+  const siblingSlug = TRANSLATION_PAIRS[book.slug];
+  return siblingSlug ? books.find((b) => b.slug === siblingSlug) : undefined;
 }

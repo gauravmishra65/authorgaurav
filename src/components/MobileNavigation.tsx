@@ -16,13 +16,16 @@ interface MobileNavigationProps {
   /** Links tucked into the desktop "More" dropdown — rendered after primaryLinks under a small heading, since mobile has no dropdown to hide them in. */
   secondaryLinks: NavLink[];
   toggleButtonRef: RefObject<HTMLButtonElement | null>;
+  /** Same featured-book CTA as the desktop nav — see getFeaturedBook in lib/releaseStatus.ts. */
+  exploreCtaLabel: string;
+  exploreCtaHref: string;
 }
 
 /** Accessible mobile drawer: role="dialog", focus enters on open and is
  * trapped within the panel, Escape closes and returns focus to the toggle
  * button, background scroll is locked while open, and the panel is fully
  * out of the tab order (visibility:hidden, not just clipped) while closed. */
-export default function MobileNavigation({ open, onClose, primaryLinks, secondaryLinks, toggleButtonRef }: MobileNavigationProps) {
+export default function MobileNavigation({ open, onClose, primaryLinks, secondaryLinks, toggleButtonRef, exploreCtaLabel, exploreCtaHref }: MobileNavigationProps) {
   const location = useLocation();
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -103,7 +106,7 @@ export default function MobileNavigation({ open, onClose, primaryLinks, secondar
           </li>
         ))}
         <li className="pt-3">
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold inline-block rounded-xs px-4 py-2.5 text-2xs">Explore Latest Book</Link>
+          <Link to={exploreCtaHref} className="btn-caps btn-gold inline-block rounded-xs px-4 py-2.5 text-2xs">{exploreCtaLabel}</Link>
         </li>
         <li className="pt-4">
           <SocialLinks size={17} iconClassName="text-ivory/60 hover:text-gold-lt transition-colors" />

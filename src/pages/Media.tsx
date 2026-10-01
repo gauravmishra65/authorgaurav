@@ -8,19 +8,8 @@ import ReleaseDetails from '../components/ReleaseDetails';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
-import { isReleased } from '../lib/releaseStatus';
-import type { Book } from '../data/books';
+import { getFeaturedBook } from '../lib/releaseStatus';
 import { AUTHOR_SHORT_BIO as shortBio, AUTHOR_MEDIUM_BIO as mediumBio, AUTHOR_LONG_BIO as longBio } from '../data/author';
-
-/** The most recently released book, not a hardcoded slug — so this section
- * stays accurate as new books launch, without needing a code change here
- * every time. Only considers books that have actually released (a real
- * releaseDate that isReleased()), never an upcoming/preorder title. */
-function findCurrentRelease(books: Book[]): Book | undefined {
-  const released = books.filter((b) => b.releaseDate && isReleased(b.releaseDate));
-  if (released.length === 0) return undefined;
-  return released.reduce((latest, b) => (new Date(b.releaseDate!) > new Date(latest.releaseDate!) ? b : latest));
-}
 
 const interviewTopics = [
   'Writing across genres: romance, thriller, memoir, and devotional texts under one name',
@@ -31,7 +20,10 @@ const interviewTopics = [
 
 export default function Media() {
   const { data: books } = useSupabaseData(fetchBooks, []);
-  const currentRelease = books ? findCurrentRelease(books) : undefined;
+  // Same featured-book rule as the header and homepage hero — see
+  // getFeaturedBook in lib/releaseStatus.ts — so this can't name a
+  // different "current" book than the rest of the site.
+  const currentRelease = books ? getFeaturedBook(books) : undefined;
   const covers = books?.filter((b) => b.imageSrc) ?? [];
 
   return (

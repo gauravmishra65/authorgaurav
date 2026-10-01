@@ -175,7 +175,7 @@ export default function AdminBooks() {
               <Field label="Gradient (Tailwind classes)"><input value={editing.gradient ?? ''} onChange={(e) => setEditing({ ...editing, gradient: e.target.value })} className="input" /></Field>
               <Field label="Sort order"><input type="number" value={editing.sort_order ?? 0} onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })} className="input" /></Field>
               <Field label="Release date (optional)"><input type="date" value={editing.release_date ?? ''} onChange={(e) => setEditing({ ...editing, release_date: e.target.value || null })} className="input" /></Field>
-              <Field label="Featured (New Release ribbon)">
+              <Field label="Current marketing priority (header CTA + homepage hero — should be Yes on only one book)">
                 <select value={editing.featured ? 'true' : 'false'} onChange={(e) => setEditing({ ...editing, featured: e.target.value === 'true' })} className="input">
                   <option value="false">No</option>
                   <option value="true">Yes</option>

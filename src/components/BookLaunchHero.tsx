@@ -19,7 +19,11 @@ interface BookLaunchHeroProps {
 }
 
 export default function BookLaunchHero({ book, translationEdition }: BookLaunchHeroProps) {
-  const released = book.releaseDate ? isReleased(book.releaseDate) : false;
+  // Published books without a stored releaseDate (several don't have one)
+  // must still read as "Now Available", not "New Release" — status is the
+  // real source of truth here, releaseDate only matters for books that
+  // aren't out yet (to drive the countdown below).
+  const released = book.status === 'published' || (book.releaseDate ? isReleased(book.releaseDate) : false);
   const { data: allPhotos } = useSupabaseData(fetchReaderPhotos, []);
   const bookstorePhotos = (allPhotos ?? []).filter((p) => p.kind === 'bookstore' && p.bookTitle === book.title);
   const bookstoreAvailabilityText = buildBookstoreAvailabilityText(book.title, bookstorePhotos);

@@ -102,6 +102,25 @@ async function main() {
     if (count > 1) addIssue(issues, 'fail', slug, 'duplicate-book-slug', `slug "${slug}" used by ${count} book rows`);
   }
 
+  // `featured` is the single source of truth for "current release" — the
+  // header CTA, homepage hero, and Media's "Current Release" block all
+  // derive from it (getFeaturedBook in src/lib/releaseStatus.ts). More than
+  // one true would mean they could pick different books depending on
+  // array order; zero true is allowed (the date-based fallback applies).
+  const featuredSlugs = books.filter((b) => b.featured).map((b) => b.slug);
+  if (featuredSlugs.length > 1) {
+    addIssue(issues, 'fail', featuredSlugs.join(', '), 'multiple-featured-books', `${featuredSlugs.length} books are marked featured (${featuredSlugs.join(', ')}) — exactly one must be, or the header/hero/Media current-release block can disagree on which book is current`);
+  }
+
+  // An upcoming/preorder book must never be able to render a purchase CTA
+  // without a genuine link — mirrors getBuyOptions()'s own real/placeholder
+  // distinction so this can't silently drift from the UI's actual logic.
+  for (const book of books) {
+    if (book.status !== 'published' && hasAnyBuyOption(book)) {
+      addIssue(issues, 'warn', book.slug, 'upcoming-with-real-purchase-link', `${book.status} book has a real purchase link already — confirm the status should still be "${book.status}" rather than "preorder"/"published"`);
+    }
+  }
+
   const postSlugCounts = new Map();
   for (const post of posts) {
     postSlugCounts.set(post.slug, (postSlugCounts.get(post.slug) ?? 0) + 1);

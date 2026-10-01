@@ -3,8 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 import MobileNavigation from './MobileNavigation';
-import { fetchBookCategories } from '../lib/queries';
+import { fetchBookCategories, fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
+import { getFeaturedBook } from '../lib/releaseStatus';
 
 // Journal deliberately links to the existing, populated /blog route rather
 // than a new /journal URL — same content, different label, no risk to
@@ -52,6 +53,15 @@ export default function Nav() {
   // /admin/book-categories) so a new category shows up in this dropdown
   // automatically — no code change needed.
   const { data: categories } = useSupabaseData(fetchBookCategories, []);
+  const { data: books } = useSupabaseData(fetchBooks, []);
+  // Same featured-book rule as the homepage hero and Media's "Current
+  // Release" — see getFeaturedBook in lib/releaseStatus.ts. Falls back to
+  // the evergreen "Explore the Books" label while book data hasn't loaded
+  // yet, or if no book is marked featured at all, rather than naming a
+  // specific title that might not be the right one.
+  const featuredBook = books ? getFeaturedBook(books) : undefined;
+  const exploreCtaLabel = featuredBook ? `Explore ${featuredBook.title}` : 'Explore the Books';
+  const exploreCtaHref = featuredBook ? `/books/${featuredBook.slug}` : '/books';
   const booksMenuLinks = [
     { label: 'All Books', to: '/books' },
     ...(categories ?? []).map((c) => ({ label: c.navLabel, to: `/books?category=${c.label}` })),
@@ -179,7 +189,7 @@ export default function Nav() {
 
         <div className="hidden xl:flex items-center gap-2.5">
           <SocialLinks size={15} iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
-          <Link to="/books/the-shadow-code" className="btn-caps btn-gold rounded-xs px-3.5 py-2 whitespace-nowrap">Explore Latest Book</Link>
+          <Link to={exploreCtaHref} className="btn-caps btn-gold rounded-xs px-3.5 py-2 whitespace-nowrap">{exploreCtaLabel}</Link>
         </div>
 
         <button ref={toggleRef} className="xl:hidden text-ivory p-2 -mr-2" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
@@ -193,6 +203,8 @@ export default function Nav() {
         primaryLinks={[{ label: 'Home', to: '/' }, { label: 'Books', to: '/books' }, ...primaryLinks]}
         secondaryLinks={secondaryLinks}
         toggleButtonRef={toggleRef}
+        exploreCtaLabel={exploreCtaLabel}
+        exploreCtaHref={exploreCtaHref}
       />
     </header>
   );

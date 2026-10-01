@@ -15,6 +15,8 @@ import { fetchBooks, fetchBookCategories } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { buildPersonStructuredData } from '../components/PersonStructuredData';
 import { SITE_URL } from '../lib/url';
+import { getFeaturedBook } from '../lib/releaseStatus';
+import { getTranslationEdition } from '../data/books';
 
 function buildJsonLd() {
   return {
@@ -53,9 +55,8 @@ export default function Home() {
       ? books
       : books.filter((b) => b.categories?.includes(categories?.find((c) => c.label === filter)?.tag ?? '__none__'));
 
-  const shadowCode = books?.find((b) => b.slug === 'the-shadow-code') ?? books?.[0];
-  const shadowCodeHindi = books?.find((b) => b.slug === 'shadow-code-hindi');
-  const friendYouKeep = books?.find((b) => b.slug === 'the-friend-you-keep');
+  const featuredBook = books ? getFeaturedBook(books) : undefined;
+  const featuredTranslationEdition = featuredBook && books ? getTranslationEdition(featuredBook, books) : undefined;
 
   return (
     <>
@@ -71,9 +72,10 @@ export default function Home() {
           heading for SEO/accessibility. */}
       <h1 className="sr-only">Gaurav Mishra: stories of love, faith, ambition and the hidden systems that shape our lives.</h1>
 
-      {/* FEATURED RELEASE(S) */}
-      {shadowCode && shadowCode.releaseDate && <BookLaunchHero book={shadowCode} translationEdition={shadowCodeHindi} />}
-      {friendYouKeep && <BookLaunchHero book={friendYouKeep} />}
+      {/* FEATURED RELEASE — exactly one book, driven by the `featured` flag
+          (see getFeaturedBook in lib/releaseStatus.ts), so this can never
+          contradict the header CTA or Media's "Current Release" block. */}
+      {featuredBook && <BookLaunchHero book={featuredBook} translationEdition={featuredTranslationEdition} />}
 
       {/* THE BOOKSHELF */}
       <section className="pt-20">
