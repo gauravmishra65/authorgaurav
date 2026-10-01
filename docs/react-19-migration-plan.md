@@ -1,6 +1,6 @@
-# React 19 Migration Plan (Plan Only — Not Executed)
+# React 19 Migration Plan
 
-This document is a plan for a future migration, written against the app's actual current component code (all of `src/`), entry point (`src/main.tsx`), and test setup (`src/test/setup.ts`, `src/data/books.test.ts`). **No upgrade has been performed as part of this change set** — `package.json` still pins `"react": "^18.3.1"` / `"react-dom": "^18.3.1"` (installed: `18.3.1`).
+**Executed** on branch `chore/react-19`, following the recommended approach below: bumped `react`/`react-dom`/`@types/react`/`@types/react-dom` to `19.3.0` together with `lucide-react` to `0.577.0`, as planned. The risk assessment's zero-matches grep held for runtime behavior, but `npm run typecheck` surfaced 3 real type-level errors the grep didn't predict (all from @types/react 19's stricter typings, not from the runtime breaking-changes list this plan was grepped against) — fixed in `src/components/BookCarousel.tsx` (`inert` now typed as `boolean`, not `string`), `src/components/MobileNavigation.tsx` (a `RefObject` prop type needed `| null` to match `useRef`'s real nullable type), and `src/components/SocialLinks.tsx` (the removed global `JSX` namespace needed an explicit `import type { JSX } from 'react'`). One real, measurable cost found during verification: the main bundle grew from 476.68KB to 557.30KB raw (138.34KB→162.04KB gzip) — crossing Vite's 500KB warning threshold for the first time, a known React 19 architecture trade-off, not a bug. Left for history below as-written.
 
 ## Why this one is different from the react-router and Vite plans
 

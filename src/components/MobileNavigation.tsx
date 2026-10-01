@@ -15,7 +15,7 @@ interface MobileNavigationProps {
   primaryLinks: NavLink[];
   /** Links tucked into the desktop "More" dropdown — rendered after primaryLinks under a small heading, since mobile has no dropdown to hide them in. */
   secondaryLinks: NavLink[];
-  toggleButtonRef: RefObject<HTMLButtonElement>;
+  toggleButtonRef: RefObject<HTMLButtonElement | null>;
 }
 
 /** Accessible mobile drawer: role="dialog", focus enters on open and is
