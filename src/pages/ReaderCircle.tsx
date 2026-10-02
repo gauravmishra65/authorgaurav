@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
 import NewsletterForm from '../components/NewsletterForm';
@@ -58,7 +57,7 @@ export default function ReaderCircle() {
         <div className="mx-auto max-w-2xl px-6 py-16 text-center">
           <Divider className="mb-10!" />
           <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold-text mb-6">
-            <Mail size={14} aria-hidden="true" /> One email a month. No noise. Unsubscribe anytime.
+            One email a month. No noise. Unsubscribe anytime.
           </div>
           <NewsletterForm
             id="reader-circle-signup"

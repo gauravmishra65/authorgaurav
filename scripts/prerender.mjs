@@ -69,6 +69,11 @@ const baseUrl = server.resolvedUrls.local[0].replace(/\/$/, '');
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
+// Tells src/main.tsx to render straight into #root. Without this, routes
+// served through the SPA fallback would load the already-rendered homepage
+// (written to dist/index.html first) and the app would treat it as a snapshot
+// to keep on screen, capturing duplicated markup.
+await page.addInitScript(() => { window.__PRERENDER__ = true; });
 
 const failures = [];
 let count = 0;

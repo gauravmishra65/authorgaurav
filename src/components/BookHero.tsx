@@ -51,9 +51,9 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
           <div>
             <div className="flex items-center gap-3 flex-wrap mb-3">
               <p className="eyebrow text-(--book-accent-text)">{eyebrowOverride ?? book.genre}</p>
-              <LanguageBadge language={book.language} tone={book.textOnDark ? 'dark' : 'light'} />
+              <LanguageBadge language={book.language} tone="book" />
               {book.status !== 'published' && (
-                <FormatBadge tone={book.textOnDark ? 'dark' : 'light'}>
+                <FormatBadge tone="book">
                   {released ? 'Now Available' : book.status === 'preorder' ? 'Preorder' : 'Coming Soon'}
                 </FormatBadge>
               )}
@@ -86,14 +86,14 @@ export default function BookHero({ book, released, eyebrowOverride, background, 
               )}
               {readerCircleHref && (
                 <a href={readerCircleHref} className="inline-flex items-center gap-1.5 label-caps text-(--book-accent-text) hover:text-(--book-secondary-accent) transition-colors">
-                  <Mail size={15} /> Join the Reader Circle
+                  <Mail size={16} /> Join the Reader Circle
                 </a>
               )}
             </div>
 
             {book.bookWebsite && (
               <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 label-caps text-(--book-accent-text) hover:text-(--book-secondary-accent) transition-colors">
-                Visit the Book Website <ExternalLink size={13} />
+                Visit the Book Website <ExternalLink size={16} />
               </a>
             )}
           </div>

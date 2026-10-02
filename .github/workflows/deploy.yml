@@ -64,6 +64,11 @@ jobs:
       # Link/asset/canonical/sitemap auditor — checks the *built* dist/
       # output, so it must run after build, not before.
       - run: npm run validate:links
+      # Per-page SEO auditor (title, description, single canonical matching the
+      # sitemap, Open Graph, one H1, valid JSON-LD, no stray noindex) over the
+      # built pages. validate:production-seo is the live-site counterpart and
+      # is run by hand after a deploy, since nothing is live yet at this point.
+      - run: npm run validate:build-seo
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

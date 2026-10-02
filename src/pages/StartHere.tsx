@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import BookCover from '../components/BookCover';
 import Divider from '../components/Divider';
@@ -94,7 +94,7 @@ export default function StartHere() {
                     onClick={handleClick}
                     className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs mt-auto"
                   >
-                    {cta} <ArrowRight size={13} />
+                    {cta} <ArrowRight size={16} />
                   </Link>
                 </div>
               );
@@ -112,7 +112,7 @@ export default function StartHere() {
             Receive thoughtful updates about new books, the stories behind them and occasional extras for readers.
           </p>
           <div className="inline-flex items-center gap-2 label-caps text-2xs text-gold-text mb-6">
-            <Mail size={14} aria-hidden="true" /> One email a month. No noise. Unsubscribe anytime.
+            One email a month. No noise. Unsubscribe anytime.
           </div>
           <NewsletterForm id="start-here-signup" buttonLabel="Join the Reader Circle" source="start-here" showGenrePreference />
         </div>

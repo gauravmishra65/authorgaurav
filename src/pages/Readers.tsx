@@ -43,7 +43,7 @@ export default function Readers() {
                 <div className="flex flex-col items-center gap-2">
                   {b.sampleUrl && (
                     <SecondaryButton href={b.sampleUrl} external size="sm" onClick={() => trackEvent('sample_download', { book: b.slug })}>
-                      <Download size={13} /> Read a Sample
+                      <Download size={16} /> Read a Sample
                     </SecondaryButton>
                   )}
                   <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2">
@@ -68,7 +68,7 @@ export default function Readers() {
             <p className="font-display text-lg text-ink mb-2">Offbeat Love Discussion Guide</p>
             <p className="text-sm text-muted leading-relaxed mb-5">A worked example of reading-group questions. More guides are added on request via Book Clubs.</p>
             <SecondaryButton href="/resources/book-club-questions-offbeat-love.txt" size="sm" onClick={() => trackEvent('discussion_guide_download', { book: 'offbeat-love' })}>
-              <Download size={13} /> Download
+              <Download size={16} /> Download
             </SecondaryButton>
           </div>
           <div className="rounded-md border border-gold/20 bg-cream p-6 text-center">
@@ -84,7 +84,7 @@ export default function Readers() {
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-muted mb-8">Read what other readers think, or leave a review of your own on the platform where you bought the book.</p>
           <PrimaryButton to="/testimonials" size="sm" className="mb-8">
-            <MessageSquareQuote size={15} /> Reader Testimonials
+            <MessageSquareQuote size={16} /> Reader Testimonials
           </PrimaryButton>
           {withRealRetailer.length > 0 && (
             <ul className="space-y-2.5 text-sm">

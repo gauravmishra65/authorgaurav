@@ -46,7 +46,7 @@ export default function AdminNews() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">News &amp; Events</h1>
         <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
-          <Plus size={14} /> Add News Item
+          <Plus size={16} /> Add News Item
         </button>
       </div>
 

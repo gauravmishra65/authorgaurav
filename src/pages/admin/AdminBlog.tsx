@@ -47,7 +47,7 @@ export default function AdminBlog() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">Blog Posts</h1>
         <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
-          <Plus size={14} /> Add Post
+          <Plus size={16} /> Add Post
         </button>
       </div>
 
@@ -95,7 +95,7 @@ export default function AdminBlog() {
             </label>
             {editing.id && (
               <p className="text-2xs text-muted">
-                The full "Read More" article body is written on its own page. Save this post first, then use the <FileText size={11} className="inline -mt-0.5" aria-hidden="true" /> icon in the list to write or edit it.
+                The full "Read More" article body is written on its own page. Save this post first, then use the <FileText size={16} className="inline -mt-0.5" aria-hidden="true" /> icon in the list to write or edit it.
               </p>
             )}
             <div className="grid grid-cols-2 gap-4">

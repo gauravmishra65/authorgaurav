@@ -69,11 +69,11 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               <Link to={`/books/${book.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
-                Explore the Book <ArrowRight size={15} />
+                Explore the Book <ArrowRight size={16} />
               </Link>
               {book.sampleUrl && (
                 <a href={book.sampleUrl} target="_blank" rel="noopener noreferrer" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3" style={{ color: 'var(--gold-lt)' }}>
-                  Read a Sample <ExternalLink size={15} />
+                  Read a Sample <ExternalLink size={16} />
                 </a>
               )}
             </div>

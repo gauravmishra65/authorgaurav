@@ -55,7 +55,7 @@ export default function Blog() {
                 <h2 className="font-display text-xl text-ink mb-2 group-hover:text-gold-text transition-colors">{p.title}</h2>
                 <p className="text-sm text-muted leading-relaxed line-clamp-3 flex-1">{p.excerpt}</p>
                 <Link to={`/blog/${p.slug}`} className="mt-4 inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors text-2xs">
-                  Read more <ArrowRight size={13} />
+                  Read the Article <ArrowRight size={16} />
                 </Link>
               </div>
             </article>

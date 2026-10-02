@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { trackLoad } from './appReady';
 
 interface SupabaseDataState<T> {
   data: T | null;
@@ -11,6 +12,7 @@ export function useSupabaseData<T>(fetcher: () => Promise<T>, deps: unknown[] = 
 
   useEffect(() => {
     let cancelled = false;
+    const finished = trackLoad();
 
     fetcher()
       .then((result) => {
@@ -18,7 +20,8 @@ export function useSupabaseData<T>(fetcher: () => Promise<T>, deps: unknown[] = 
       })
       .catch((err) => {
         if (!cancelled) setState({ data: null, loading: false, error: err instanceof Error ? err.message : 'Something went wrong.' });
-      });
+      })
+      .finally(finished);
 
     return () => {
       cancelled = true;

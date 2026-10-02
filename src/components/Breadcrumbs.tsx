@@ -31,7 +31,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
                   {item.label}
                 </span>
               )}
-              {!isLast && <ChevronRight size={12} aria-hidden="true" className="opacity-50" />}
+              {!isLast && <ChevronRight size={16} aria-hidden="true" className="opacity-50" />}
             </li>
           );
         })}

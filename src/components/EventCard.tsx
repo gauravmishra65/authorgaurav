@@ -25,14 +25,14 @@ export default function EventCard({ event, isPast = false }: EventCardProps) {
       </div>
       <h3 className="font-display text-xl text-ink mb-2">{event.title}</h3>
       <p className="text-sm text-muted flex items-center gap-1.5 mb-1">
-        <CalendarDays size={14} aria-hidden="true" />
+        <CalendarDays size={16} aria-hidden="true" />
         {formatEventDate(event.eventDate)}
         {event.eventTime && ` · ${event.eventTime}`}
         {event.timezone && ` ${event.timezone}`}
       </p>
       {event.location && (
         <p className="text-sm text-muted flex items-center gap-1.5 mb-3">
-          <MapPin size={14} aria-hidden="true" /> {event.location}
+          <MapPin size={16} aria-hidden="true" /> {event.location}
         </p>
       )}
       <p className="text-sm text-text/85 leading-relaxed mb-5">{event.description}</p>
@@ -41,11 +41,11 @@ export default function EventCard({ event, isPast = false }: EventCardProps) {
         <div className="flex flex-wrap gap-3">
           {event.registrationUrl && (
             <PrimaryButton href={event.registrationUrl} external size="sm" onClick={() => trackEvent('event_registration_click', { event: event.slug })}>
-              Register <ExternalLink size={13} />
+              Register <ExternalLink size={16} />
             </PrimaryButton>
           )}
           <SecondaryButton onClick={() => downloadEventIcs(event)} size="sm" aria-label={`Add ${event.title} to calendar`}>
-            <Download size={13} /> Add to Calendar
+            <Download size={16} /> Add to Calendar
           </SecondaryButton>
         </div>
       )}

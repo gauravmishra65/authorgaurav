@@ -59,7 +59,7 @@ function ResourceCard({ resource }: { resource: (typeof interviewExternalResourc
         size="sm"
         onClick={() => trackEvent('interview_resource_click', { organization: resource.organization, title: resource.title })}
       >
-        {resource.buttonLabel} <ArrowUpRight size={14} />
+        {resource.buttonLabel} <ArrowUpRight size={16} />
       </SecondaryButton>
       {resource.note && <p className="text-2xs text-muted mt-4 leading-relaxed border-t border-gold/15 pt-3">{resource.note}</p>}
     </div>

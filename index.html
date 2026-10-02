@@ -12,8 +12,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://authorgaurav.com/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts are self-hosted (src/fonts.css, public/fonts). Only the two faces every page
+         paints above the fold are preloaded; the Devanagari faces download on demand. -->
+    <link rel="preload" href="/fonts/fraunces-normal-300-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Every page fetches its content (books/blog/testimonials/etc.) from
          Supabase immediately on load — preconnecting here lets the browser
          do the DNS/TLS handshake in parallel with JS parsing instead of
@@ -21,7 +23,6 @@
          below is Vite's own build-time env-variable substitution syntax for
          index.html, so this stays correct if the Supabase project changes. -->
     <link rel="preconnect" href="%VITE_SUPABASE_URL%" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet" />
     <!-- Person + WebSite JSON-LD used to be hardcoded here, present on every
          route (this file is the shared shell) and duplicating/conflicting
          with the page-specific structured data React injects via Seo's

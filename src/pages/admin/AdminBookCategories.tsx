@@ -56,7 +56,7 @@ export default function AdminBookCategories() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">Book Categories</h1>
         <button onClick={openNew} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
-          <Plus size={14} /> Add Category
+          <Plus size={16} /> Add Category
         </button>
       </div>
 

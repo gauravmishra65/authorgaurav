@@ -80,7 +80,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
             <dt className="label-caps text-2xs text-gold-lt/80 mb-1">Official Site</dt>
             <dd>
               <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-gold-lt hover:text-gold-text transition-colors">
-                Visit the Book Website <ExternalLink size={13} />
+                Visit the Book Website <ExternalLink size={16} />
               </a>
             </dd>
           </div>

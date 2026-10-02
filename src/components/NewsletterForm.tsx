@@ -117,7 +117,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
             download
             className="mt-4 inline-flex items-center gap-1.5 label-caps text-2xs text-gold-text hover:text-ink transition-colors"
           >
-            <Download size={14} /> Download your {magnet.label}
+            <Download size={16} /> Download your {magnet.label}
           </a>
         )}
       </div>
@@ -196,7 +196,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
+            placeholder="Your email"
             aria-invalid={!!emailError}
             aria-describedby={emailError ? `${id}-email-error` : undefined}
             className="bg-transparent text-ivory placeholder:text-ivory/40 text-sm w-full focus:outline-hidden"

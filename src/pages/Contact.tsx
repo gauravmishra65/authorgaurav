@@ -237,7 +237,7 @@ export default function Contact() {
                 {submitError && <p role="alert" className="text-sm text-rose">{submitError}</p>}
 
                 <button type="submit" disabled={sending} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3 disabled:opacity-60">
-                  <Send size={15} /> {sending ? 'Sending…' : 'Send Message'}
+                  <Send size={16} /> {sending ? 'Sending…' : 'Send Message'}
                 </button>
               </form>
             )}
@@ -253,9 +253,9 @@ export default function Contact() {
             <div className="rounded-md border border-gold/20 bg-cream p-6">
               <p className="label-caps text-gold-text mb-4">Links</p>
               <ul className="space-y-3 text-sm">
-                <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'contact' })} className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">WriteTogetherHub <ExternalLink size={13} /></a></li>
-                <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">off-beat-love.com <ExternalLink size={13} /></a></li>
-                <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">the-shadow-code.com <ExternalLink size={13} /></a></li>
+                <li><a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'contact' })} className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">WriteTogetherHub <ExternalLink size={16} /></a></li>
+                <li><a href="https://off-beat-love.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">off-beat-love.com <ExternalLink size={16} /></a></li>
+                <li><a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:text-gold-text transition-colors">the-shadow-code.com <ExternalLink size={16} /></a></li>
               </ul>
             </div>
             <div className="rounded-md border border-gold/20 bg-cream p-6">

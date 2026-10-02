@@ -99,7 +99,7 @@ export default function Home() {
             ))}
           </div>
           <Link to="/start-here" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Find Your Next Read' })}>
-            Find Your Next Read <ArrowRight size={15} />
+            Find Your Next Read <ArrowRight size={16} />
           </Link>
         </div>
       </section>

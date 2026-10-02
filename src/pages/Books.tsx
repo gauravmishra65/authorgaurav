@@ -96,13 +96,13 @@ export default function Books() {
               className="group rounded-md border border-gold/25 bg-ink p-8 text-center transition-all hover:-translate-y-1 hover:border-gold/50">
               <p className="font-display text-xl mb-2 group-hover:text-gold-lt transition-colors">Offbeat Love</p>
               <p className="text-sm text-ivory/70 mb-4">Visit the dedicated site for music, extras, and the world of the novel.</p>
-              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">off-beat-love.com <ExternalLink size={13} /></span>
+              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">off-beat-love.com <ExternalLink size={16} /></span>
             </a>
             <a href="https://the-shadow-code.com" target="_blank" rel="noopener noreferrer"
               className="group rounded-md border border-gold/25 bg-ink p-8 text-center transition-all hover:-translate-y-1 hover:border-gold/50">
               <p className="font-display text-xl mb-2 group-hover:text-gold-lt transition-colors">Shadow Code</p>
               <p className="text-sm text-ivory/70 mb-4">Visit the dedicated site for behind-the-scenes and the world of the thriller.</p>
-              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">the-shadow-code.com <ExternalLink size={13} /></span>
+              <span className="inline-flex items-center gap-1.5 label-caps text-gold-lt">the-shadow-code.com <ExternalLink size={16} /></span>
             </a>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Books() {
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Want a taste before you buy?</h2>
         <p className="text-muted mb-7 max-w-lg mx-auto">Read a sample where one's available, or see what other readers think before you choose.</p>
         <Link to="/readers" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
-          Browse Samples <ArrowRight size={15} />
+          Browse Samples <ArrowRight size={16} />
         </Link>
         <p className="mt-6">
           <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>

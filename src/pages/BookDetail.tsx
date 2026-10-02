@@ -259,7 +259,7 @@ export default function BookDetail() {
           <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
             <SocialShareButtons path={`/books/${book.slug}`} title={book.title} />
             <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
-              Back to All Books <ArrowRight size={13} />
+              Back to All Books <ArrowRight size={16} />
             </Link>
           </div>
         </div>
@@ -593,7 +593,7 @@ export default function BookDetail() {
               className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3"
               style={{ color: 'var(--book-accent-text)', borderColor: 'var(--book-accent)' }}
             >
-              Explore Interview Resources <ArrowRight size={14} />
+              Explore Interview Resources <ArrowRight size={16} />
             </Link>
           </div>
         </section>

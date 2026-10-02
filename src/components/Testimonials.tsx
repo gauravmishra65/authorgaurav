@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Quote, MessageCircle } from 'lucide-react';
+import { Quote, Pause, Play } from 'lucide-react';
 import { fetchFeaturedTestimonials, type FeaturedTestimonial } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import Divider from './Divider';
@@ -16,7 +17,7 @@ function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
       {t.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-3">
           <p className="label-caps text-2xs text-gold-text mb-1.5 inline-flex items-center gap-1.5">
-            <MessageCircle size={12} aria-hidden="true" /> Gaurav Replied
+            Gaurav Replied
           </p>
           <p className="text-sm text-text/80 leading-relaxed">{t.authorReply}</p>
         </div>
@@ -27,6 +28,7 @@ function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
 
 export default function Testimonials() {
   const { data: featuredTestimonials } = useSupabaseData(() => fetchFeaturedTestimonials(8), []);
+  const [paused, setPaused] = useState(false);
 
   if (!featuredTestimonials || featuredTestimonials.length === 0) return null;
 
@@ -44,11 +46,11 @@ export default function Testimonials() {
           <Divider className="my-8!" />
         </div>
 
-        <div className="relative overflow-hidden">
+        <div className="carousel-viewport relative overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-28 bg-linear-to-r from-cream to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-28 bg-linear-to-l from-cream to-transparent z-10" />
 
-          <div className="carousel-track-ltr flex w-max py-2" style={{ animationDuration: `${duration}s` }}>
+          <div className="carousel-track-ltr flex w-max py-2" style={{ animationDuration: `${duration}s`, animationPlayState: paused ? 'paused' : undefined }}>
             {track.map((t, i) => (
               <div key={i} aria-hidden={i >= featuredTestimonials.length} {...(i >= featuredTestimonials.length ? { inert: true } : {})} className="mr-6">
                 <TestimonialCard t={t} />
@@ -57,9 +59,18 @@ export default function Testimonials() {
           </div>
         </div>
 
-        <p className="text-center mt-10">
-          <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read More &amp; Share Your Feedback</Link>
-        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          <button
+            type="button"
+            onClick={() => setPaused((p) => !p)}
+            aria-pressed={paused}
+            className="carousel-pause inline-flex items-center gap-2 label-caps text-muted hover:text-ink transition-colors"
+          >
+            {paused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
+            {paused ? 'Play' : 'Pause'} scrolling
+          </button>
+          <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read All Testimonials</Link>
+        </div>
       </div>
     </section>
   );

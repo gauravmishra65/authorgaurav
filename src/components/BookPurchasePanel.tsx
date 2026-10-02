@@ -34,7 +34,7 @@ export default function BookPurchasePanel({ book, variant = 'solid', className =
       {book.formats && book.formats.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-3">
           {book.formats.map((f) => (
-            <FormatBadge key={f.name} tone={book.textOnDark ? 'dark' : 'light'}>{f.name}</FormatBadge>
+            <FormatBadge key={f.name} tone="book">{f.name}</FormatBadge>
           ))}
         </div>
       )}

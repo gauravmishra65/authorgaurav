@@ -17,7 +17,9 @@
     "test:e2e": "playwright test",
     "indexnow": "node scripts/indexnow-submit.mjs",
     "validate:links": "node scripts/validate-links.mjs",
-    "validate:content": "node scripts/validate-content.mjs"
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:build-seo": "node scripts/validate-build-seo.mjs",
+    "validate:production-seo": "node scripts/validate-production-seo.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.6",

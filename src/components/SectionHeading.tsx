@@ -30,7 +30,7 @@ export default function SectionHeading({ eyebrow, title, align = 'center', to, t
           to={to}
           className={`mt-4 inline-flex items-center gap-1.5 label-caps transition-colors ${isDark ? 'text-gold-lt hover:text-gold-text' : 'text-gold-text hover:text-ink'}`}
         >
-          {toLabel} <ArrowRight size={14} />
+          {toLabel} <ArrowRight size={16} />
         </Link>
       )}
       {isCenter && <Divider className="my-8!" />}

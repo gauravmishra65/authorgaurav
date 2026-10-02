@@ -1,4 +1,4 @@
-import { MessageCircle, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import type { Testimonial } from '../data/books';
 import TestimonialMeta from './TestimonialMeta';
 
@@ -21,7 +21,7 @@ export default function BookReview({ review }: BookReviewProps) {
       {review.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-4">
           <p className="label-caps text-2xs text-gold-text mb-1.5 inline-flex items-center gap-1.5">
-            <MessageCircle size={12} aria-hidden="true" /> Gaurav Replied
+            Gaurav Replied
           </p>
           <p className="text-sm text-text/80 leading-relaxed">{review.authorReply}</p>
         </div>

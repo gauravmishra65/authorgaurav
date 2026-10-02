@@ -98,7 +98,7 @@ export default function Media() {
               onClick={() => trackEvent('media_kit_download', { asset: 'author-photo' })}
               className="label-caps text-2xs text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1.5"
             >
-              <Download size={13} /> Download Photo
+              <Download size={16} /> Download Photo
             </a>
             {/* TODO_CONTENT: only a web-resolution (960×1440) author photo
              * exists today — no higher-resolution source is available to
@@ -111,7 +111,7 @@ export default function Media() {
                 <li key={b.id} className="flex items-center justify-between gap-3">
                   <span className="text-muted">{b.title}</span>
                   <a href={b.imageSrc} download onClick={() => trackEvent('media_kit_download', { asset: b.slug })} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1 shrink-0">
-                    <Download size={12} /> Download
+                    <Download size={16} /> Download
                   </a>
                 </li>
               ))}

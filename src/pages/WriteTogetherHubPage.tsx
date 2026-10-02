@@ -23,7 +23,7 @@ export default function WriteTogetherHubPage() {
             I built WriteTogetherHub to give writers and newcomers what I wished I had had starting out: guidance, community, and a place to grow their craft together.
           </p>
           <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
-            Visit WriteTogetherHub <ArrowRight size={15} />
+            Visit WriteTogetherHub <ArrowRight size={16} />
           </a>
         </div>
       </section>
@@ -63,10 +63,10 @@ export default function WriteTogetherHubPage() {
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Ready to grow your craft?</h2>
         <div className="flex flex-wrap justify-center gap-4">
           <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
-            Visit WriteTogetherHub <ArrowRight size={15} />
+            Visit WriteTogetherHub <ArrowRight size={16} />
           </a>
           <Link to="/contact" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
-            <Mail size={15} /> Contact Gaurav
+            <Mail size={16} /> Contact Gaurav
           </Link>
         </div>
       </section>

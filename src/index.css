@@ -22,10 +22,18 @@
   --font-devanagari-serif: 'Noto Serif Devanagari', Georgia, serif;
   --font-devanagari-sans: 'Noto Sans Devanagari', system-ui, sans-serif;
 
-  --text-2xs: 0.65rem;
-  --text-2xs--line-height: 1rem;
-  --text-xs: 0.75rem;
-  --text-xs--line-height: 1rem;
+  /* Smallest text on the site is 14px (0.875rem) — captions, metadata and
+     labels used to be 10-12px, below what's comfortably readable. Both small
+     steps now share the 14px floor; the tracking on the caps styles below was
+     tightened to keep their width from ballooning. */
+  --text-2xs: 0.875rem;
+  --text-2xs--line-height: 1.25rem;
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+  /* Descriptive body copy (card text, CTA subheads) used 14px. 15px on
+     desktop, 16px on mobile — see the mobile override below. */
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5rem;
 
   --shadow-book: 0 18px 40px -18px rgba(16, 24, 39, 0.5);
   --shadow-book-hover: 0 30px 50px -16px rgba(16, 24, 39, 0.55);
@@ -134,11 +142,11 @@ body {
 .eyebrow, .label-caps {
   font-family: 'Inter', system-ui, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.18em;
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
 }
-.label-caps { font-size: 0.65rem; letter-spacing: 0.22em; }
+.label-caps { font-size: 0.875rem; letter-spacing: 0.12em; }
 
 /* Buttons: kept visually distinct from .eyebrow/.label-caps (decorative
    captions can stay small) — buttons are interactive controls and need to
@@ -200,6 +208,28 @@ h1, h2, h3, h4 {
  * reading content, e.g. a book's synopsis) rather than every element under
  * lang="hi", so this can't cascade into buttons/badges/nav on Hindi pages. */
 [lang='hi'] .prose-literary p { line-height: 1.85; }
+
+/* Mobile reading floors: descriptive text is 16px; Hindi content sections
+   are 17px (Devanagari matras need the extra size to stay legible). The
+   Hindi override works by re-pointing the size tokens inside the section,
+   so anything explicitly larger (headings, lead paragraphs) is untouched
+   and English labels elsewhere on the page are unaffected. */
+@media (max-width: 767px) {
+  :root { --text-sm: 1rem; --text-sm--line-height: 1.5rem; }
+  html[lang='hi'] main,
+  section[lang='hi'] {
+    font-size: 1.0625rem;
+    --text-sm: 1.0625rem;
+    --text-sm--line-height: 1.75rem;
+    --text-base: 1.0625rem;
+    --text-base--line-height: 1.75rem;
+  }
+}
+
+/* Devanagari has no italic tradition — browsers synthesise a slant that
+   distorts the letterforms and headline strokes, so italics are switched
+   off wherever the content is Hindi. */
+[lang='hi'] em, [lang='hi'] i, [lang='hi'] .italic { font-style: normal; }
 
 .hairline { height: 1px; background: linear-gradient(to right, transparent, rgba(177,138,74,0.5), transparent); }
 .hairline-solid { height: 1px; background: rgba(177,138,74,0.35); }
@@ -309,7 +339,17 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-track { background: var(--ivory); }
 ::-webkit-scrollbar-thumb { background: rgba(177,138,74,0.4); border-radius: 6px; }
 
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  /* Auto-scrolling strips don't just run faster under reduced motion — they
+     stop. The viewport becomes manually scrollable instead, the looping
+     duplicate copy is dropped, and the pause control (pointless once
+     nothing moves) is hidden. */
+  .carousel-track, .carousel-track-ltr { animation: none !important; transform: none !important; }
+  .carousel-track > [inert], .carousel-track-ltr > [inert], .carousel-track > [aria-hidden='true'], .carousel-track-ltr > [aria-hidden='true'] { display: none; }
+  .carousel-viewport { overflow-x: auto; }
+  .carousel-pause { display: none; }
+}
 
 .fade-up { opacity: 0; animation: rise 0.8s ease forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }

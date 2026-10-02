@@ -1,4 +1,4 @@
-import { Quote, MessageCircle } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import Seo from '../components/Seo';
 import Divider from '../components/Divider';
 import TestimonialForm from '../components/TestimonialForm';
@@ -18,7 +18,7 @@ function TestimonialCard({ t }: { t: FeaturedTestimonial }) {
       {t.authorReply && (
         <div className="border-l-2 border-gold/40 pl-4 mt-4">
           <p className="label-caps text-2xs text-gold-text mb-1.5 inline-flex items-center gap-1.5">
-            <MessageCircle size={12} aria-hidden="true" /> Gaurav Replied
+            Gaurav Replied
           </p>
           <p className="text-sm text-text/80 leading-relaxed">{t.authorReply}</p>
         </div>

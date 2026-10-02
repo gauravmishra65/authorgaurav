@@ -45,7 +45,7 @@ export default function AdminBlogContent() {
       <div>
         <p className="text-rose mb-4">Couldn't find that post.</p>
         <Link to="/admin/blog" className="label-caps text-gold-text hover:text-ink transition-colors inline-flex items-center gap-1.5">
-          <ArrowLeft size={13} /> Back to Blog Posts
+          <ArrowLeft size={16} /> Back to Blog Posts
         </Link>
       </div>
     );
@@ -54,13 +54,13 @@ export default function AdminBlogContent() {
   return (
     <div>
       <Link to="/admin/blog" className="label-caps text-2xs text-muted hover:text-gold-text transition-colors inline-flex items-center gap-1.5 mb-4">
-        <ArrowLeft size={13} /> Back to Blog Posts
+        <ArrowLeft size={16} /> Back to Blog Posts
       </Link>
 
       <div className="flex items-center justify-between mb-2">
         <h1 className="font-display text-2xl text-ink">{post.title}</h1>
         <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="label-caps text-2xs text-muted hover:text-gold-text transition-colors inline-flex items-center gap-1.5">
-          View Live Page <ExternalLink size={12} />
+          View Live Page <ExternalLink size={16} />
         </a>
       </div>
       <p className="text-2xs text-muted mb-6">/blog/{post.slug} · {post.category}</p>

@@ -52,7 +52,7 @@ export default function AdminTestimonials() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl text-ink">What Readers Say</h1>
         <button onClick={() => setEditing(empty)} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-4 py-2 text-2xs">
-          <Plus size={14} /> Add Testimonial
+          <Plus size={16} /> Add Testimonial
         </button>
       </div>
 

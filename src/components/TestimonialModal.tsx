@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { X, MessageCircle } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { Book } from '../data/books';
 import TestimonialForm from './TestimonialForm';
 
@@ -52,12 +52,12 @@ export default function TestimonialModal({ book, className = '' }: TestimonialMo
 
   return (
     <>
-      <div className={`rounded-md border border-gold/30 bg-ivory/5 p-5 ${className}`}>
-        <p className="label-caps text-gold-lt mb-1.5 inline-flex items-center gap-1.5">
-          <MessageCircle size={13} aria-hidden="true" /> Loved This Book?
+      <div className={`rounded-md border border-(--book-accent-text)/40 p-5 ${className}`}>
+        <p className="label-caps text-(--book-accent-text) mb-1.5 inline-flex items-center gap-1.5">
+          Loved This Book?
         </p>
-        <p className="text-sm text-ivory/70 mb-4">Share your feedback. Gaurav reads every note, and often replies.</p>
-        <button ref={triggerRef} onClick={() => setOpen(true)} className="btn-caps btn-gold-outline rounded-xs px-4 py-2 text-2xs" style={{ color: 'var(--gold-lt)' }}>
+        <p className="text-sm text-(--book-muted) mb-4">Share your feedback. Gaurav reads every note, and often replies.</p>
+        <button ref={triggerRef} onClick={() => setOpen(true)} className="btn-caps btn-gold-outline rounded-xs px-4 py-2" style={{ color: 'var(--book-accent-text)', borderColor: 'var(--book-accent-text)' }}>
           Add a Testimonial
         </button>
       </div>

@@ -130,7 +130,7 @@ export default function Nav() {
               aria-current={location.pathname.startsWith('/books') ? 'page' : undefined}
               className={`nav-caps inline-flex items-center gap-1 transition-colors hover:text-gold-lt ${location.pathname.startsWith('/books') ? 'text-gold-lt' : 'text-ivory/75'}`}
             >
-              Books <ChevronDown size={14} className={`transition-transform ${booksMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+              Books <ChevronDown size={16} className={`transition-transform ${booksMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
             {booksMenuOpen && (
               <div role="menu" className="absolute left-0 top-full z-dropdown mt-2 min-w-[240px] rounded-md border border-gold/20 bg-charcoal shadow-luxury py-2">
@@ -167,7 +167,7 @@ export default function Nav() {
               aria-current={isSecondaryActive ? 'page' : undefined}
               className={`nav-caps inline-flex items-center gap-1 transition-colors hover:text-gold-lt ${isSecondaryActive ? 'text-gold-lt' : 'text-ivory/75'}`}
             >
-              More <ChevronDown size={14} className={`transition-transform ${moreMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+              More <ChevronDown size={16} className={`transition-transform ${moreMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
             {moreMenuOpen && (
               <div role="menu" className="absolute right-0 top-full z-dropdown mt-2 min-w-[200px] rounded-md border border-gold/20 bg-charcoal shadow-luxury py-2">
@@ -188,7 +188,7 @@ export default function Nav() {
         </ul>
 
         <div className="hidden xl:flex items-center gap-2.5">
-          <SocialLinks size={15} iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
+          <SocialLinks size={16} iconClassName="text-ivory/50 hover:text-gold-lt transition-colors" />
           <Link to={exploreCtaHref} className="btn-caps btn-gold rounded-xs px-3.5 py-2 whitespace-nowrap">{exploreCtaLabel}</Link>
         </div>
 

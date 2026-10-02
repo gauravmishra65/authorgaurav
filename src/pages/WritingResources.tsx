@@ -42,7 +42,7 @@ export default function WritingResources() {
               <h2 className="font-display text-lg text-ink mb-2">{g.title}</h2>
               <p className="text-sm text-muted leading-relaxed mb-5">{g.body}</p>
               <SecondaryButton href={g.file} size="sm">
-                <Download size={14} /> Download Checklist
+                <Download size={16} /> Download Checklist
               </SecondaryButton>
             </div>
           ))}

@@ -99,7 +99,7 @@ export default function ReaderCircleWelcome() {
               onClick={() => trackEvent('reader_circle_welcome_click', { type: 'resource', label: magnet.label })}
               className="inline-flex items-center gap-1.5 label-caps text-2xs text-gold-text hover:text-ink transition-colors"
             >
-              <Download size={14} /> Download your {magnet.label}
+              <Download size={16} /> Download your {magnet.label}
             </a>
           </div>
         )}

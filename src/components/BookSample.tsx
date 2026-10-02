@@ -15,7 +15,7 @@ export default function BookSample({ sampleUrl, book, className = '' }: BookSamp
   if (!sampleUrl) return null;
   return (
     <SecondaryButton href={sampleUrl} external className={className} onClick={() => trackEvent('sample_download', { book })}>
-      <BookOpen size={15} /> Read a Sample
+      <BookOpen size={16} /> Read a Sample
     </SecondaryButton>
   );
 }

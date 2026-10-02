@@ -60,7 +60,7 @@ export default function BookClubs() {
           </div>
           <div className="text-center">
             <SecondaryButton href="/resources/book-club-questions-offbeat-love.txt" onClick={() => trackEvent('discussion_guide_download', { book: 'offbeat-love' })}>
-              <Download size={15} /> Download These Questions
+              <Download size={16} /> Download These Questions
             </SecondaryButton>
           </div>
         </div>
