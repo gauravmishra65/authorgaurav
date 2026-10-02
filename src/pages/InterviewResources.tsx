@@ -12,7 +12,7 @@ import { buildPersonStructuredData } from '../components/PersonStructuredData';
 import { canonicalUrl } from '../lib/url';
 import { trackEvent } from '../lib/analytics';
 
-const BOOK_PATH = '/books/interview-guide';
+const BOOK_PATH = '/books/interview-guide/';
 const BOOK_TITLE = 'The Complete Interview Success Guide - 2026 Edition';
 
 const categoryOptions = ['All Resources', ...new Set(interviewExternalResources.map((r) => r.category))] as const;
@@ -80,7 +80,7 @@ export default function InterviewResources() {
       />
 
       <Section tone="dark">
-        <SectionHeading eyebrow="For Readers" title="Interview Resources & Tools" level="h1" />
+        <SectionHeading eyebrow="For Readers" title="Interview Resources & Tools" tone="dark" level="h1" />
         <p className="text-ivory/75 max-w-2xl mx-auto text-center leading-relaxed">
           Official references and practical worksheets that support {BOOK_TITLE}.
         </p>

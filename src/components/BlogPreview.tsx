@@ -16,7 +16,7 @@ export default function BlogPreview() {
       </div>
       <div className="grid gap-8 md:grid-cols-3">
         {latest.map((p) => (
-          <Link key={p.id} to={`/blog/${p.slug}`} className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
+          <Link key={p.id} to={`/blog/${p.slug}/`} className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
             <div className={`h-40 bg-linear-to-br ${p.gradient} relative`}>
               <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-xs">{p.category}</span>
             </div>
@@ -29,7 +29,7 @@ export default function BlogPreview() {
         ))}
       </div>
       <div className="text-center mt-10">
-        <Link to="/blog" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">Read the Blog</Link>
+        <Link to="/blog/" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">Read the Blog</Link>
       </div>
     </section>
   );

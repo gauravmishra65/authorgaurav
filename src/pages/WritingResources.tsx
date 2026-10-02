@@ -56,7 +56,7 @@ export default function WritingResources() {
 
       <section className="mx-auto max-w-3xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl text-ink mb-6">Here for the writing craft, but the stories are the main event.</h2>
-        <PrimaryButton to="/books">Explore the Books</PrimaryButton>
+        <PrimaryButton to="/books/">Explore the Books</PrimaryButton>
       </section>
     </>
   );

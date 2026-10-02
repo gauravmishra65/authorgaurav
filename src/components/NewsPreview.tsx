@@ -16,7 +16,7 @@ export default function NewsPreview() {
       </div>
       <div className="grid gap-8 md:grid-cols-3">
         {latest.map((n) => (
-          <Link key={n.id} to="/news" className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
+          <Link key={n.id} to="/news/" className="group flex flex-col rounded-md border border-gold/15 bg-cream overflow-hidden shadow-luxury transition-all hover:-translate-y-1 hover:shadow-book-hover">
             <div className={`h-40 bg-linear-to-br ${n.gradient} relative`}>
               <span className="absolute bottom-3 left-3 label-caps text-2xs text-ivory/85 bg-ink/70 px-2 py-1 rounded-xs">{n.category}</span>
             </div>
@@ -29,7 +29,7 @@ export default function NewsPreview() {
         ))}
       </div>
       <div className="text-center mt-10">
-        <Link to="/news" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">See All News</Link>
+        <Link to="/news/" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3">See All News</Link>
       </div>
     </section>
   );

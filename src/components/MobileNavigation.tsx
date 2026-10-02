@@ -2,6 +2,7 @@ import { useEffect, useRef, type RefObject } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { X } from 'lucide-react';
 import SocialLinks from './SocialLinks';
+import { samePath } from '../lib/url';
 
 interface NavLink {
   label: string;
@@ -90,7 +91,7 @@ export default function MobileNavigation({ open, onClose, primaryLinks, secondar
         </li>
         {primaryLinks.map((l) => (
           <li key={l.to}>
-            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
+            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${samePath(location.pathname, l.to) ? 'text-gold-lt' : 'text-ivory/75'}`}>
               {l.label}
             </Link>
           </li>
@@ -100,7 +101,7 @@ export default function MobileNavigation({ open, onClose, primaryLinks, secondar
         </li>
         {secondaryLinks.map((l) => (
           <li key={l.to}>
-            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}>
+            <Link to={l.to} className={`nav-caps block py-3.5 border-b border-gold/15 ${samePath(location.pathname, l.to) ? 'text-gold-lt' : 'text-ivory/75'}`}>
               {l.label}
             </Link>
           </li>

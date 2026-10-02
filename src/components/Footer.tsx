@@ -20,34 +20,34 @@ export default function Footer() {
           <div>
             <p className="label-caps text-gold-lt mb-4">Explore</p>
             <ul className="space-y-2.5 text-sm">
-              <li><Link to="/books" className="text-ivory/75 hover:text-ivory transition-colors">Books</Link></li>
-              <li><Link to="/where-to-buy" className="text-ivory/75 hover:text-ivory transition-colors">Where to Buy</Link></li>
-              <li><Link to="/about" className="text-ivory/75 hover:text-ivory transition-colors">About</Link></li>
-              <li><Link to="/start-here" className="text-ivory/75 hover:text-ivory transition-colors">Start Here (New Readers)</Link></li>
-              <li><Link to="/reader-circle" className="text-ivory/75 hover:text-ivory transition-colors">Reader Circle</Link></li>
-              <li><Link to="/writing-resources" className="text-ivory/75 hover:text-ivory transition-colors">Writing Resources</Link></li>
-              <li><Link to="/interview-resources" className="text-ivory/75 hover:text-ivory transition-colors">Interview Resources</Link></li>
-              <li><Link to="/contact" className="text-ivory/75 hover:text-ivory transition-colors">Contact</Link></li>
+              <li><Link to="/books/" className="text-ivory/75 hover:text-ivory transition-colors">Books</Link></li>
+              <li><Link to="/where-to-buy/" className="text-ivory/75 hover:text-ivory transition-colors">Where to Buy</Link></li>
+              <li><Link to="/about/" className="text-ivory/75 hover:text-ivory transition-colors">About</Link></li>
+              <li><Link to="/start-here/" className="text-ivory/75 hover:text-ivory transition-colors">Start Here (New Readers)</Link></li>
+              <li><Link to="/reader-circle/" className="text-ivory/75 hover:text-ivory transition-colors">Reader Circle</Link></li>
+              <li><Link to="/writing-resources/" className="text-ivory/75 hover:text-ivory transition-colors">Writing Resources</Link></li>
+              <li><Link to="/interview-resources/" className="text-ivory/75 hover:text-ivory transition-colors">Interview Resources</Link></li>
+              <li><Link to="/contact/" className="text-ivory/75 hover:text-ivory transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           <div>
             <p className="label-caps text-gold-lt mb-4">Readers</p>
             <ul className="space-y-2.5 text-sm">
-              <li><Link to="/testimonials" className="text-ivory/75 hover:text-ivory transition-colors">Reader Testimonials</Link></li>
-              <li><Link to="/readers" className="text-ivory/75 hover:text-ivory transition-colors">Readers</Link></li>
-              <li><Link to="/book-clubs" className="text-ivory/75 hover:text-ivory transition-colors">Book Clubs</Link></li>
-              <li><Link to="/write-together-hub" className="text-ivory/75 hover:text-ivory transition-colors">WriteTogetherHub</Link></li>
+              <li><Link to="/testimonials/" className="text-ivory/75 hover:text-ivory transition-colors">Reader Testimonials</Link></li>
+              <li><Link to="/readers/" className="text-ivory/75 hover:text-ivory transition-colors">Readers</Link></li>
+              <li><Link to="/book-clubs/" className="text-ivory/75 hover:text-ivory transition-colors">Book Clubs</Link></li>
+              <li><Link to="/write-together-hub/" className="text-ivory/75 hover:text-ivory transition-colors">WriteTogetherHub</Link></li>
             </ul>
           </div>
 
           <div>
             <p className="label-caps text-gold-lt mb-4">Media &amp; Journal</p>
             <ul className="space-y-2.5 text-sm">
-              <li><Link to="/blog" className="text-ivory/75 hover:text-ivory transition-colors">Journal</Link></li>
-              <li><Link to="/news" className="text-ivory/75 hover:text-ivory transition-colors">News</Link></li>
-              <li><Link to="/events" className="text-ivory/75 hover:text-ivory transition-colors">Events</Link></li>
-              <li><Link to="/media" className="text-ivory/75 hover:text-ivory transition-colors">Media</Link></li>
+              <li><Link to="/blog/" className="text-ivory/75 hover:text-ivory transition-colors">Journal</Link></li>
+              <li><Link to="/news/" className="text-ivory/75 hover:text-ivory transition-colors">News</Link></li>
+              <li><Link to="/events/" className="text-ivory/75 hover:text-ivory transition-colors">Events</Link></li>
+              <li><Link to="/media/" className="text-ivory/75 hover:text-ivory transition-colors">Media</Link></li>
             </ul>
           </div>
 
@@ -69,9 +69,9 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-gold/15 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-2xs text-ivory/55 tracking-wider">© 2026 Gaurav Mishra · authorgaurav.com</p>
           <div className="flex items-center gap-4 text-2xs">
-            <Link to="/privacy-policy" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Privacy</Link>
-            <Link to="/terms" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Terms</Link>
-            <Link to="/accessibility" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Accessibility</Link>
+            <Link to="/privacy-policy/" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Privacy</Link>
+            <Link to="/terms/" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Terms</Link>
+            <Link to="/accessibility/" className="text-ivory/55 hover:text-ivory transition-colors tracking-wider">Accessibility</Link>
           </div>
           <p className="text-2xs text-ivory/45 tracking-wider">Crafted with care for readers everywhere.</p>
         </div>

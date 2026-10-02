@@ -69,10 +69,10 @@ export default function Home() {
             Gaurav Mishra writes thrillers, contemporary fiction and spiritual books for readers drawn to suspense, relationships, reflection and meaning.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4 mb-5">
-            <Link to="/books" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
-            <Link to="/start-here" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here' })}>Start Here</Link>
+            <Link to="/books/" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Explore the Books' })}>Explore the Books</Link>
+            <Link to="/start-here/" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here' })}>Start Here</Link>
           </div>
-          <Link to="/reader-circle" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle' })}>
+          <Link to="/reader-circle/" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors" onClick={() => trackEvent('homepage_cta_click', { label: 'Join the Reader Circle' })}>
             Join the Reader Circle
           </Link>
         </div>
@@ -98,7 +98,7 @@ export default function Home() {
               <span key={mood} className="label-caps text-2xs text-gold-lt/80 border border-gold/30 rounded-full px-3.5 py-1.5">{mood}</span>
             ))}
           </div>
-          <Link to="/start-here" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Find Your Next Read' })}>
+          <Link to="/start-here/" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Find Your Next Read' })}>
             Find Your Next Read <ArrowRight size={16} />
           </Link>
         </div>
@@ -118,7 +118,7 @@ export default function Home() {
               {selectedBooks.map((b) => <BookCard key={b.id} book={b} source="home-selected-books" showRetailerButtons={false} />)}
             </div>
             <p className="text-center mt-10">
-              <Link to="/books" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'View All Books' })}>View All Books</Link>
+              <Link to="/books/" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'View All Books' })}>View All Books</Link>
             </p>
           </div>
         </section>
@@ -133,7 +133,7 @@ export default function Home() {
           <p className="text-text/70 leading-relaxed mb-7">
             Gaurav Mishra writes across genres, from contemporary fiction and financial thrillers to spiritual books. His work is shaped by curiosity about people, relationships, belief and the systems that influence everyday life.
           </p>
-          <Link to="/about" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: "Read Gaurav's Story" })}>Read Gaurav's Story</Link>
+          <Link to="/about/" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: "Read Gaurav's Story" })}>Read Gaurav's Story</Link>
         </div>
       </section>
 
@@ -150,7 +150,7 @@ export default function Home() {
           <p className="text-ivory/75 leading-relaxed mb-7">
             A free community and guided-learning platform for new and returning writers, founded by Gaurav.
           </p>
-          <Link to="/write-together-hub" className="btn-caps btn-gold inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('writetogetherhub_click', { source: 'homepage-teaser' })}>Visit WriteTogetherHub</Link>
+          <Link to="/write-together-hub/" className="btn-caps btn-gold inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('writetogetherhub_click', { source: 'homepage-teaser' })}>Visit WriteTogetherHub</Link>
         </div>
       </section>
 
@@ -161,7 +161,7 @@ export default function Home() {
           showGenrePreference
         />
         <p className="text-center pb-10">
-          <Link to="/reader-circle" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors">
+          <Link to="/reader-circle/" className="label-caps text-2xs text-gold-text hover:text-ink transition-colors">
             See Everything the Reader Circle Includes
           </Link>
         </p>
@@ -172,8 +172,8 @@ export default function Home() {
         <div className="mx-auto max-w-xl px-6">
           <h2 className="font-display text-2xl md:text-3xl text-ink mb-7">Find your next book.</h2>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/books" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Browse All Books' })}>Browse All Books</Link>
-            <Link to="/start-here" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here', source: 'final-cta' })}>Start Here</Link>
+            <Link to="/books/" className="btn-caps btn-gold rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Browse All Books' })}>Browse All Books</Link>
+            <Link to="/start-here/" className="btn-caps btn-gold-outline rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'Start Here', source: 'final-cta' })}>Start Here</Link>
           </div>
         </div>
       </section>

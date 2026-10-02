@@ -69,6 +69,14 @@ jobs:
       # built pages. validate:production-seo is the live-site counterpart and
       # is run by hand after a deploy, since nothing is live yet at this point.
       - run: npm run validate:build-seo
+      # Exercises the pre-rendered page -> live app swap (src/main.tsx) on the
+      # production build, which the dev-server e2e suite above never reaches:
+      # one H1 after the swap, no console errors, layout shift under 0.25,
+      # working menu and active-nav highlight on the canonical slashed URL.
+      - run: npm run test:e2e:prerendered
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

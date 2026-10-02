@@ -39,7 +39,7 @@ export default function NotFound() {
               <ul className="mt-4 mx-auto max-w-sm text-left rounded-md border border-gold/25 bg-ink-soft/60 overflow-hidden">
                 {matches.map((b) => (
                   <li key={b.id} className="border-b border-gold/10 last:border-0">
-                    <Link to={`/books/${b.slug}`} className="block px-4 py-2.5 text-ivory/85 hover:text-gold-lt hover:bg-ink/40 transition-colors">
+                    <Link to={`/books/${b.slug}/`} className="block px-4 py-2.5 text-ivory/85 hover:text-gold-lt hover:bg-ink/40 transition-colors">
                       {b.title}
                     </Link>
                   </li>
@@ -53,7 +53,7 @@ export default function NotFound() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <PrimaryButton to="/">Home</PrimaryButton>
-            <SecondaryButton to="/books">Browse All Books</SecondaryButton>
+            <SecondaryButton to="/books/">Browse All Books</SecondaryButton>
           </div>
         </div>
       </section>

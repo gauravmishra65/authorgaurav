@@ -90,6 +90,21 @@ export interface BuyOption {
   href: string;
 }
 
+/** Names an Amazon link by its marketplace - "Amazon-IN" for amazon.in /
+ * amzn.in, "Amazon-US" for amazon.com / amzn.com - so a reader can tell the
+ * two storefronts apart. Derived from the link itself rather than stored, so
+ * it can't drift out of step with the URL and covers links added later in
+ * /admin. Any other label, or an Amazon domain this doesn't recognise (say
+ * amazon.co.uk), is returned unchanged rather than guessed. */
+export function marketplaceLabel(label: string, href: string): string {
+  if (label.trim().toLowerCase() !== 'amazon') return label;
+  let host = '';
+  try { host = new URL(href).hostname.toLowerCase().replace(/^www\./, ''); } catch { return label; }
+  if (host === 'amazon.in' || host === 'amzn.in') return 'Amazon-IN';
+  if (host === 'amazon.com' || host === 'amzn.com') return 'Amazon-US';
+  return label;
+}
+
 // Retailer links in `buyLinks` are frequently left as `#` placeholders
 // before a real one is confirmed, while `kindleUrl`/`paperbackUrl` are the
 // fields actually kept up to date for those two formats — so a book can
@@ -102,7 +117,7 @@ export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paper
   const options: BuyOption[] = [];
   for (const link of book.buyLinks) {
     if (link.label === 'Kindle') continue;
-    if (link.href && link.href !== '#') options.push(link);
+    if (link.href && link.href !== '#') options.push({ ...link, label: marketplaceLabel(link.label, link.href) });
   }
   const kindleHref = book.kindleUrl || book.buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;
   if (kindleHref) options.push({ label: 'Kindle', href: kindleHref });

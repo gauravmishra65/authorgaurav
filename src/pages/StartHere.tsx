@@ -87,10 +87,10 @@ export default function StartHere() {
                 <div key={slug} className="content-card flex flex-col items-center text-center p-7">
                   <p className="label-caps text-2xs text-gold-text mb-3">{mood}</p>
                   <h2 className="font-display text-lg text-ink mb-3 leading-snug">{question}</h2>
-                  <BookCover {...book} size="sm" href={`/books/${book.slug}`} onClick={handleClick} />
+                  <BookCover {...book} size="sm" href={`/books/${book.slug}/`} onClick={handleClick} />
                   <p className="text-sm text-muted leading-relaxed mt-5 mb-6">{description}</p>
                   <Link
-                    to={`/books/${book.slug}`}
+                    to={`/books/${book.slug}/`}
                     onClick={handleClick}
                     className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs mt-auto"
                   >

@@ -8,5 +8,5 @@ export interface Announcement {
 export const activeAnnouncement: Announcement | null = {
   message: 'The Shadow Code available in Hindi & English - a new thriller from Gaurav Mishra.',
   ctaLabel: 'Discover the Book',
-  ctaHref: '/books/the-shadow-code',
+  ctaHref: '/books/the-shadow-code/',
 };

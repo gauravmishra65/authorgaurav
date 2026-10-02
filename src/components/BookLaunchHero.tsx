@@ -45,10 +45,10 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
           <div className="flex flex-col items-center md:items-start">
             {translationEdition && <p className="label-caps text-2xs text-gold-lt/70 mb-3">Choose Edition</p>}
             <div className="flex justify-center items-end gap-6 fade-up mx-auto md:mx-0">
-              <BookCover {...book} size="lg" href={`/books/${book.slug}`} priority />
+              <BookCover {...book} size="lg" href={`/books/${book.slug}/`} priority />
               {translationEdition && (
                 <div className="flex flex-col items-center gap-2">
-                  <BookCover {...translationEdition} size="md" href={`/books/${translationEdition.slug}`} />
+                  <BookCover {...translationEdition} size="md" href={`/books/${translationEdition.slug}/`} />
                   <span className="label-caps text-2xs text-gold-lt/80">Hindi Edition</span>
                 </div>
               )}
@@ -68,7 +68,7 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
             )}
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <Link to={`/books/${book.slug}`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
+              <Link to={`/books/${book.slug}/`} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
                 Explore the Book <ArrowRight size={16} />
               </Link>
               {book.sampleUrl && (

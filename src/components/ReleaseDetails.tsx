@@ -1,5 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-import type { Book } from '../data/books';
+import { marketplaceLabel, type Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 
 interface ReleaseDetailsProps {
@@ -17,7 +17,7 @@ function paperbackRetailerName(url: string): string {
   })();
   if (host.includes('notionpress')) return 'Notion Press';
   if (host.includes('rajmangalpublishers')) return 'Rajmangal Publishers';
-  if (host.includes('amazon')) return 'Amazon';
+  if (host.includes('amazon') || host.includes('amzn')) return marketplaceLabel('Amazon', url);
   if (host.includes('flipkart')) return 'Flipkart';
   return 'Publisher';
 }
@@ -31,7 +31,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
   const amazonPaperback = book.buyLinks.find((l) => l.label === 'Amazon' && l.href && l.href !== '#')?.href;
   const paperbackOptions = [
     book.paperbackUrl ? { label: paperbackRetailerName(book.paperbackUrl), href: book.paperbackUrl } : null,
-    amazonPaperback && amazonPaperback !== book.paperbackUrl ? { label: 'Amazon', href: amazonPaperback } : null,
+    amazonPaperback && amazonPaperback !== book.paperbackUrl ? { label: marketplaceLabel('Amazon', amazonPaperback), href: amazonPaperback } : null,
   ].filter((opt): opt is { label: string; href: string } => opt !== null);
 
   return (
@@ -50,14 +50,14 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
               <ul className="space-y-1">
                 {paperbackOptions.map((opt) => (
                   <li key={opt.label}>
-                    <a href={opt.href} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">
+                    <a href={opt.href} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-ivory transition-colors underline underline-offset-2">
                       Buy on {opt.label}
                     </a>
                   </li>
                 ))}
               </ul>
             ) : paperbackOptions.length === 1 ? (
-              <a href={paperbackOptions[0].href} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">Buy the Paperback</a>
+              <a href={paperbackOptions[0].href} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-ivory transition-colors underline underline-offset-2">Buy the Paperback</a>
             ) : book.releaseDate && !released ? (
               `Available ${formatReleaseDate(book.releaseDate)}`
             ) : (
@@ -69,7 +69,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
           <dt className="label-caps text-2xs text-gold-lt/80 mb-1">Kindle</dt>
           <dd className="text-ivory">
             {book.kindleUrl ? (
-              <a href={book.kindleUrl} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-gold-text transition-colors underline underline-offset-2">{released ? 'Buy on Kindle' : 'Pre-order on Kindle'}</a>
+              <a href={book.kindleUrl} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-ivory transition-colors underline underline-offset-2">{released ? 'Buy on Kindle' : 'Pre-order on Kindle'}</a>
             ) : (
               'Coming Soon'
             )}
@@ -79,7 +79,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
           <div>
             <dt className="label-caps text-2xs text-gold-lt/80 mb-1">Official Site</dt>
             <dd>
-              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-gold-lt hover:text-gold-text transition-colors">
+              <a href={book.bookWebsite} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-gold-lt hover:text-ivory transition-colors">
                 Visit the Book Website <ExternalLink size={16} />
               </a>
             </dd>

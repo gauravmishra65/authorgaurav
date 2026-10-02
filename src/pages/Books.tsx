@@ -113,11 +113,11 @@ export default function Books() {
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="font-display text-2xl md:text-3xl text-ink mb-4">Want a taste before you buy?</h2>
         <p className="text-muted mb-7 max-w-lg mx-auto">Read a sample where one's available, or see what other readers think before you choose.</p>
-        <Link to="/readers" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
+        <Link to="/readers/" className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
           Browse Samples <ArrowRight size={16} />
         </Link>
         <p className="mt-6">
-          <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>
+          <Link to="/testimonials/" className="label-caps text-gold-text hover:text-ink transition-colors">Read Reviews &amp; Share Your Feedback</Link>
         </p>
       </section>
     </>

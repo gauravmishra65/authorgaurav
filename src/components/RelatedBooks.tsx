@@ -27,7 +27,7 @@ export default function RelatedBooks({ book, allBooks, limit = 3 }: RelatedBooks
       {related.map((b) => (
         <Link
           key={b.id}
-          to={`/books/${b.slug}`}
+          to={`/books/${b.slug}/`}
           onClick={() => trackEvent('related_book_click', { from: book.slug, to: b.slug })}
           className="group flex flex-col items-center text-center gap-3"
         >

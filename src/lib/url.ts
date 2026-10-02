@@ -17,3 +17,10 @@ export function canonicalPath(path: string): string {
 export function canonicalUrl(path: string): string {
   return `${SITE_URL}${canonicalPath(path)}`;
 }
+
+/** True when two internal paths point at the same page regardless of a
+ * trailing slash - visitors land on the canonical slashed URL, while link
+ * definitions and older bookmarks may omit it. */
+export function samePath(a: string, b: string): boolean {
+  return canonicalPath(a) === canonicalPath(b);
+}

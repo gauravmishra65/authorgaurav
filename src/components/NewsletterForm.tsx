@@ -170,7 +170,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
       />
       <span>
         I'd like to receive email updates from Gaurav Mishra. See the{' '}
-        <Link to="/privacy-policy" className="underline hover:no-underline">Privacy Policy</Link>.
+        <Link to="/privacy-policy/" className="underline hover:no-underline">Privacy Policy</Link>.
       </span>
     </label>
   );

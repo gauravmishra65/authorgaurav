@@ -69,7 +69,7 @@ export default function Testimonials() {
             {paused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
             {paused ? 'Play' : 'Pause'} scrolling
           </button>
-          <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Read All Testimonials</Link>
+          <Link to="/testimonials/" className="label-caps text-gold-text hover:text-ink transition-colors">Read All Testimonials</Link>
         </div>
       </div>
     </section>

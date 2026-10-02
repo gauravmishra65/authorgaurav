@@ -6,6 +6,7 @@ import MobileNavigation from './MobileNavigation';
 import { fetchBookCategories, fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { getFeaturedBook } from '../lib/releaseStatus';
+import { samePath } from '../lib/url';
 
 // Journal deliberately links to the existing, populated /blog route rather
 // than a new /journal URL — same content, different label, no risk to
@@ -28,19 +29,19 @@ import { getFeaturedBook } from '../lib/releaseStatus';
 // entirely, since that's exactly the mistake that made News and Start Here
 // unreachable before. Mobile keeps every link, just grouped visually.
 const primaryLinks = [
-  { label: 'Start Here', to: '/start-here' },
-  { label: 'Journal', to: '/blog' },
-  { label: 'About', to: '/about' },
-  { label: 'Readers', to: '/readers' },
-  { label: 'Media', to: '/media' },
+  { label: 'Start Here', to: '/start-here/' },
+  { label: 'Journal', to: '/blog/' },
+  { label: 'About', to: '/about/' },
+  { label: 'Readers', to: '/readers/' },
+  { label: 'Media', to: '/media/' },
 ];
 
 const secondaryLinks = [
-  { label: 'Where to Buy', to: '/where-to-buy' },
-  { label: 'Reader Circle', to: '/reader-circle' },
-  { label: 'News', to: '/news' },
-  { label: 'Events', to: '/events' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Where to Buy', to: '/where-to-buy/' },
+  { label: 'Reader Circle', to: '/reader-circle/' },
+  { label: 'News', to: '/news/' },
+  { label: 'Events', to: '/events/' },
+  { label: 'Contact', to: '/contact/' },
 ];
 
 export default function Nav() {
@@ -61,11 +62,11 @@ export default function Nav() {
   // specific title that might not be the right one.
   const featuredBook = books ? getFeaturedBook(books) : undefined;
   const exploreCtaLabel = featuredBook ? `Explore ${featuredBook.title}` : 'Explore the Books';
-  const exploreCtaHref = featuredBook ? `/books/${featuredBook.slug}` : '/books';
+  const exploreCtaHref = featuredBook ? `/books/${featuredBook.slug}/` : '/books/';
   const booksMenuLinks = [
-    { label: 'All Books', to: '/books' },
+    { label: 'All Books', to: '/books/' },
     ...(categories ?? []).map((c) => ({ label: c.navLabel, to: `/books?category=${c.label}` })),
-    { label: 'Upcoming Books', to: '/books?status=Upcoming' },
+    { label: 'Upcoming Books', to: '/books/?status=Upcoming' },
   ];
   const toggleRef = useRef<HTMLButtonElement>(null);
   const booksMenuRef = useRef<HTMLLIElement>(null);
@@ -111,7 +112,7 @@ export default function Nav() {
     };
   }, [booksMenuOpen, moreMenuOpen]);
 
-  const isSecondaryActive = secondaryLinks.some((l) => location.pathname === l.to);
+  const isSecondaryActive = secondaryLinks.some((l) => samePath(location.pathname, l.to));
 
   return (
     <header className={`sticky top-0 z-header transition-all duration-300 ${scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(184,138,68,0.25)]' : 'bg-charcoal/85 backdrop-blur-xs'}`}>
@@ -152,8 +153,8 @@ export default function Nav() {
             <li key={l.to}>
               <Link
                 to={l.to}
-                aria-current={location.pathname === l.to ? 'page' : undefined}
-                className={`nav-caps transition-colors hover:text-gold-lt ${location.pathname === l.to ? 'text-gold-lt' : 'text-ivory/75'}`}
+                aria-current={samePath(location.pathname, l.to) ? 'page' : undefined}
+                className={`nav-caps transition-colors hover:text-gold-lt ${samePath(location.pathname, l.to) ? 'text-gold-lt' : 'text-ivory/75'}`}
               >
                 {l.label}
               </Link>
@@ -200,7 +201,7 @@ export default function Nav() {
       <MobileNavigation
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
-        primaryLinks={[{ label: 'Home', to: '/' }, { label: 'Books', to: '/books' }, ...primaryLinks]}
+        primaryLinks={[{ label: 'Home', to: '/' }, { label: 'Books', to: '/books/' }, ...primaryLinks]}
         secondaryLinks={secondaryLinks}
         toggleButtonRef={toggleRef}
         exploreCtaLabel={exploreCtaLabel}

@@ -15,7 +15,7 @@ export default function BookClubCTA({ bookTitle }: BookClubCTAProps) {
       <p className="text-muted text-sm mb-6 max-w-md mx-auto">
         Request an author appearance, in person or over video, or send a book-club enquiry.
       </p>
-      <SecondaryButton to="/book-clubs">Visit Book Clubs</SecondaryButton>
+      <SecondaryButton to="/book-clubs/">Visit Book Clubs</SecondaryButton>
     </div>
   );
 }

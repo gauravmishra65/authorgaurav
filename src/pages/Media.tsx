@@ -126,7 +126,7 @@ export default function Media() {
           <div className="mx-auto max-w-3xl px-6 py-16">
             <p className="eyebrow text-gold-lt mb-6 text-center">Current Release</p>
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start mb-8">
-              <BookCover {...currentRelease} size="sm" href={`/books/${currentRelease.slug}`} />
+              <BookCover {...currentRelease} size="sm" href={`/books/${currentRelease.slug}/`} />
               <div className="flex-1 text-center sm:text-left">
                 <h2 className="font-display text-2xl mb-3">{currentRelease.title}</h2>
                 <div className="flex flex-wrap gap-2 justify-center sm:justify-start mb-4">
@@ -183,7 +183,7 @@ export default function Media() {
       <Section tone="dark">
         <SectionHeading eyebrow="Get in Touch" title="Media Enquiries" tone="dark" />
         <div className="text-center">
-          <PrimaryButton to="/contact?type=media">Contact for Media or Interview</PrimaryButton>
+          <PrimaryButton to="/contact/?type=media">Contact for Media or Interview</PrimaryButton>
         </div>
       </Section>
     </>

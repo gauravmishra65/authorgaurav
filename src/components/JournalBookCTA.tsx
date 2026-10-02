@@ -47,7 +47,7 @@ export default function JournalBookCTA({ relatedLink, books }: JournalBookCTAPro
         <h2 className="font-display text-xl text-ink mb-2">{book.title}</h2>
         <p className="text-sm text-muted mb-4">{book.tagline}</p>
         <Link
-          to={`/books/${book.slug}`}
+          to={`/books/${book.slug}/`}
           onClick={() => trackEvent('journal_book_click', { link: book.slug })}
           className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-5 py-2.5 text-2xs"
         >

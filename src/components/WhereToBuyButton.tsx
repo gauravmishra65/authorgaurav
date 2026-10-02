@@ -19,7 +19,7 @@ export default function WhereToBuyButton({ source, subtext, className = '' }: Wh
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
       <Link
-        to="/where-to-buy"
+        to="/where-to-buy/"
         onClick={() => trackEvent('where_to_buy_click', { source })}
         aria-label="Where to buy Gaurav Mishra's books online and in bookstores"
         className="btn-caps btn-where-to-buy group inline-flex items-center gap-2 rounded-lg px-8 py-4 text-sm"

@@ -16,7 +16,7 @@
 // builds (static routes + book/blog slugs from Supabase) — single source of
 // truth, and it already excludes /admin/* and anything not meant to be
 // public.
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { chromium } from '@playwright/test';
@@ -64,6 +64,13 @@ const routes = [...staticRoutes, ...bookRoutes, ...blogRoutes];
 
 const GENERIC_TITLE = 'Gaurav Mishra | Author of Shadow Code, Offbeat Love and Spiritual Books';
 
+// GitHub Pages serves 404.html for any route that isn't pre-rendered (e.g.
+// /reader-circle/welcome/, /admin/*). It must be the EMPTY app shell, captured
+// now before the '/' route below overwrites dist/index.html with the rendered
+// homepage - otherwise those routes would flash a copy of the homepage (and
+// its data prefetch) before the right page appears.
+copyFileSync(join(dist, 'index.html'), join(dist, '404.html'));
+
 const server = await preview({ root, preview: { port: 4174, strictPort: true }, logLevel: 'error' });
 const baseUrl = server.resolvedUrls.local[0].replace(/\/$/, '');
 
@@ -78,8 +85,54 @@ await page.addInitScript(() => { window.__PRERENDER__ = true; });
 const failures = [];
 let count = 0;
 
+// Which Supabase REST reads each page makes, recorded during capture and
+// written back into the page as an early fetch (see src/lib/supabase.ts).
+const supabaseOrigin = VITE_SUPABASE_URL ? new URL(VITE_SUPABASE_URL).origin : null;
+let seenReads = new Set();
+page.on('request', (req) => {
+  if (supabaseOrigin && req.method() === 'GET' && req.url().startsWith(`${supabaseOrigin}/rest/v1/`)) seenReads.add(req.url());
+});
+
+function withPrefetch(html, urls) {
+  // Serialised by the browser as data-prefetch="" - match both forms, or each
+  // page would inherit the previous page's script (pages are captured through
+  // the SPA fallback, which serves the already-written homepage).
+  const stripped = html.replace(/<script data-prefetch(?:="")?>[\s\S]*?<\/script>/g, '');
+  if (!VITE_SUPABASE_ANON_KEY || urls.length === 0) return stripped;
+  const script =
+    '<script data-prefetch>if(!window.__PRERENDER__){window.__prefetch={};window.__prefetchAt=Date.now();(function(k,u){for(var i=0;i<u.length;i++){' +
+    "var p=fetch(u[i],{headers:{apikey:k,Authorization:'Bearer '+k}});p.catch(function(){});window.__prefetch[u[i]]=p}})(" +
+    `${JSON.stringify(VITE_SUPABASE_ANON_KEY)},${JSON.stringify(urls)})}</script>`;
+  // After <meta charset>, never before it: the charset declaration has to sit
+  // within the first 1024 bytes of the document or browsers may re-parse it.
+  return stripped.replace(/<meta charset[^>]*>/i, (m) => m + script);
+}
+
+// The pre-rendered page is already complete, so the app bundle isn't needed to
+// show it - but left in <head> it races the hero image, fonts and CSS for the
+// same bandwidth. Hold the entry script (and the chunk preloads the browser
+// added while capturing) until the page's own `load` event instead, with a
+// 5-second backstop so the app can never fail to start. During capture itself
+// (__PRERENDER__) it boots immediately, exactly as before.
+function withDeferredBoot(html) {
+  const entry = html.match(/<script type="module" crossorigin(?:="")? src="(\/assets\/index-[^"]+\.js)"><\/script>/);
+  if (!entry) return html;
+  const preloads = [...html.matchAll(/<link rel="modulepreload"[^>]*href="([^"]+)"[^>]*>/g)].map((m) => m[1]);
+  const stripped = html
+    .replace(/<script data-boot(?:="")?>[\s\S]*?<\/script>/g, '')
+    .replace(/<script type="module" crossorigin(?:="")? src="\/assets\/index-[^"]+\.js"><\/script>/g, '')
+    .replace(/<link rel="modulepreload"[^>]*>/g, '');
+  const boot =
+    `<script data-boot>(function(){var h=${JSON.stringify([...new Set(preloads)])},e=${JSON.stringify(entry[1])},s=false;` +
+    "function go(){if(s)return;s=true;for(var i=0;i<h.length;i++){var l=document.createElement('link');l.rel='modulepreload';l.crossOrigin='';l.href=h[i];document.head.appendChild(l)}" +
+    "var m=document.createElement('script');m.type='module';m.crossOrigin='';m.src=e;document.head.appendChild(m)}" +
+    "if(window.__PRERENDER__||document.readyState==='complete')go();else{addEventListener('load',go);setTimeout(go,5000)}})()</script>";
+  return stripped.replace(/<\/body>/i, boot + '</body>');
+}
+
 for (const route of routes) {
   try {
+    seenReads = new Set();
     await page.goto(baseUrl + route, { waitUntil: 'networkidle', timeout: 20000 });
     await page.waitForSelector('h1', { timeout: 10000 });
     // Non-homepage routes must not still be showing the generic fallback
@@ -90,7 +143,7 @@ for (const route of routes) {
       throw new Error(`still showing the generic homepage title after waiting — route-specific <Seo> never ran`);
     }
 
-    const html = await page.content();
+    const html = withDeferredBoot(withPrefetch(await page.content(), [...seenReads]));
     const outDir = route === '/' ? dist : join(dist, ...route.split('/').filter(Boolean));
     mkdirSync(outDir, { recursive: true });
     writeFileSync(join(outDir, 'index.html'), `<!doctype html>\n${html}`);

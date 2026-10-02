@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getBuyOptions } from './books';
+import { getBuyOptions, marketplaceLabel } from './books';
 
 // Regression coverage for a real bug found and fixed in this session:
 // buyLinks frequently carries a stale `#` placeholder for "Kindle" even when
@@ -55,5 +55,29 @@ describe('getBuyOptions', () => {
       paperbackUrl: undefined,
     });
     expect(options).toEqual([]);
+  });
+});
+
+describe('marketplaceLabel', () => {
+  it('names Amazon links by marketplace', () => {
+    expect(marketplaceLabel('Amazon', 'https://www.amazon.in/dp/B0HC7KM1D6')).toBe('Amazon-IN');
+    expect(marketplaceLabel('Amazon', 'https://amzn.in/d/061g8gGV')).toBe('Amazon-IN');
+    expect(marketplaceLabel('Amazon', 'https://www.amazon.com/dp/B0HBX88RSW')).toBe('Amazon-US');
+  });
+
+  it('leaves other labels and unrecognised Amazon domains unchanged', () => {
+    expect(marketplaceLabel('Flipkart', 'https://www.flipkart.com/x')).toBe('Flipkart');
+    expect(marketplaceLabel('Kindle', 'https://www.amazon.in/dp/X')).toBe('Kindle');
+    expect(marketplaceLabel('Amazon', 'https://www.amazon.co.uk/dp/X')).toBe('Amazon');
+    expect(marketplaceLabel('Amazon', 'not a url')).toBe('Amazon');
+  });
+
+  it('is applied to the Amazon entries in a book buy options', () => {
+    const options = getBuyOptions({
+      buyLinks: [{ label: 'Amazon', href: 'https://www.amazon.com/dp/B0HBX88RSW' }, { label: 'Flipkart', href: 'https://flipkart.example/b' }],
+      kindleUrl: undefined,
+      paperbackUrl: undefined,
+    });
+    expect(options.map((o) => o.label)).toEqual(['Amazon-US', 'Flipkart']);
   });
 });

@@ -113,7 +113,7 @@ for (const { route, file } of pages) {
         const normalized = pathOnly.endsWith('/') ? pathOnly : `${pathOnly}/`;
         if (!routeSet.has(normalized)) {
           addIssue('fail', route, 'missing-route', `${href} has no matching dist/<route>/index.html`);
-        } else if (pathOnly !== '/' && !href.endsWith('/')) {
+        } else if (pathOnly !== '/' && !pathOnly.endsWith('/')) {
           addIssue('warn', route, 'non-trailing-slash-internal-link', `${href} omits the trailing slash (still resolves, but via redirect rather than a direct 200)`);
         }
       }

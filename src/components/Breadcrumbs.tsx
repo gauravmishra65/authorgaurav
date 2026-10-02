@@ -23,11 +23,11 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
           return (
             <li key={item.label} className="flex items-center gap-1.5">
               {item.href && !isLast ? (
-                <Link to={item.href} className="opacity-70 hover:opacity-100 transition-opacity">
+                <Link to={item.href} className="hover:underline underline-offset-4 transition-colors">
                   {item.label}
                 </Link>
               ) : (
-                <span aria-current={isLast ? 'page' : undefined} className="opacity-70">
+                <span aria-current={isLast ? 'page' : undefined} className="font-semibold">
                   {item.label}
                 </span>
               )}

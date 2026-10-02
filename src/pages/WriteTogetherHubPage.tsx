@@ -65,7 +65,7 @@ export default function WriteTogetherHubPage() {
           <a href="https://writetogetherhub.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('writetogetherhub_click', { source: 'writetogetherhub-page' })} className="btn-caps btn-gold inline-flex items-center gap-2 rounded-xs px-6 py-3">
             Visit WriteTogetherHub <ArrowRight size={16} />
           </a>
-          <Link to="/contact" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
+          <Link to="/contact/" className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3">
             <Mail size={16} /> Contact Gaurav
           </Link>
         </div>

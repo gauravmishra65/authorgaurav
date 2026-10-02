@@ -46,7 +46,7 @@ export default function Readers() {
                       <Download size={16} /> Read a Sample
                     </SecondaryButton>
                   )}
-                  <Link to={`/books/${b.slug}`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2">
+                  <Link to={`/books/${b.slug}/`} className="label-caps text-2xs text-gold-text hover:text-ink transition-colors underline underline-offset-2">
                     View Book
                   </Link>
                 </div>
@@ -74,7 +74,7 @@ export default function Readers() {
           <div className="rounded-md border border-gold/20 bg-cream p-6 text-center">
             <p className="font-display text-lg text-ink mb-2">New to the Books?</p>
             <p className="text-sm text-muted leading-relaxed mb-5">Not sure where to start? Get a personal recommendation based on what you like to read.</p>
-            <SecondaryButton to="/start-here" size="sm">Start Here</SecondaryButton>
+            <SecondaryButton to="/start-here/" size="sm">Start Here</SecondaryButton>
           </div>
         </div>
       </Section>
@@ -83,7 +83,7 @@ export default function Readers() {
         <SectionHeading eyebrow="What Readers Say" title="Reviews & Retailer Links" />
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-muted mb-8">Read what other readers think, or leave a review of your own on the platform where you bought the book.</p>
-          <PrimaryButton to="/testimonials" size="sm" className="mb-8">
+          <PrimaryButton to="/testimonials/" size="sm" className="mb-8">
             <MessageSquareQuote size={16} /> Reader Testimonials
           </PrimaryButton>
           {withRealRetailer.length > 0 && (

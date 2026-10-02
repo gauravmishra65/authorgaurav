@@ -77,7 +77,7 @@ export default function BookClubs() {
               <opt.icon className="mx-auto mb-3 text-gold-text" size={26} aria-hidden="true" />
               <h3 className="font-display text-lg text-ink mb-2">{opt.title}</h3>
               <p className="text-sm text-muted leading-relaxed mb-5">{opt.body}</p>
-              <PrimaryButton to={`/contact?type=${opt.type}`} size="sm">Send a Request</PrimaryButton>
+              <PrimaryButton to={`/contact/?type=${opt.type}`} size="sm">Send a Request</PrimaryButton>
             </div>
           ))}
         </div>

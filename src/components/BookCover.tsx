@@ -21,6 +21,26 @@ interface BookCoverProps {
   onClick?: () => void;
 }
 
+// Covers named `<slug>-gaurav-mishra-book-cover.webp` have 160-640px-wide
+// siblings (scripts/make-cover-variants.mjs), so the browser can pick the
+// smallest one that is sharp at the size actually displayed instead of always
+// downloading the full-size file. Anything else (a cover uploaded under
+// another name) simply uses its single src, as before.
+const COVER_PATTERN = /^(\/images\/book-covers\/.+-gaurav-mishra-book-cover)\.webp$/;
+
+// Display widths per `size` - these mirror the width classes in `sizes` below.
+const coverSizesAttr = {
+  xs: '(min-width: 1024px) 140px, (min-width: 640px) 120px, 100px',
+  sm: '150px',
+  md: '(min-width: 1024px) 200px, (min-width: 640px) 160px, 110px',
+  lg: '240px',
+};
+
+function coverSrcSet(src: string): string | undefined {
+  const match = src.match(COVER_PATTERN);
+  return match ? [160, 240, 320, 480, 640].map((w) => `${match[1]}-${w}.webp ${w}w`).join(', ') : undefined;
+}
+
 const pixelSizes = {
   xs: { w: 140, h: 210 },
   sm: { w: 150, h: 225 },
@@ -51,12 +71,16 @@ export default function BookCover({
       {imageSrc && !imgError ? (
         <img
           src={imageSrc}
+          srcSet={coverSrcSet(imageSrc)}
+          sizes={coverSrcSet(imageSrc) ? coverSizesAttr[size] : undefined}
           alt={`${title} by ${author} book cover`}
           width={imageWidth ?? pixelSizes[size].w}
           height={imageHeight ?? pixelSizes[size].h}
           className="w-full h-full object-contain object-center"
           onError={() => setImgError(true)}
           loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : undefined}
+          decoding={priority ? 'sync' : 'async'}
         />
       ) : (
         <div className={`w-full h-full bg-linear-to-br ${gradient} flex flex-col items-center justify-between p-4 text-center`}>

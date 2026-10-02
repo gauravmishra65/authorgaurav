@@ -48,7 +48,7 @@ Target cadence: 2 substantial evergreen articles + 1 author/news update + 1 news
 
 - One real H1, a short opening, reading time and published date (all required by `BlogPostDetail.tsx`; an "Updated" date can be added later if a post is substantively revised — see the Phase 10 report for the one open item this needs).
 - `## Heading` lines for clear sections on longer pieces — supported by the content renderer now; none of the three short existing posts needed this, but anything this long will.
-- 2–3 real contextual internal links using natural anchor text (`[proper book formatting](/writing-resources)`, not keyword-stuffed phrases) — only link things the article already genuinely says.
+- 2–3 real contextual internal links using natural anchor text (`[proper book formatting](/writing-resources/)`, not keyword-stuffed phrases) — only link things the article already genuinely says.
 - Every Shadow Code article → `/books/the-shadow-code`; every Offbeat Love article → `/books/offbeat-love`; every Spiritual article → the specific devotional book it's about; every Writing article → `/writing-resources` or `/write-together-hub`. Set via `related_link` in `/admin`, which drives the existing end-of-article book/WriteTogetherHub card automatically.
 - Reader Circle CTA — already automatic at the bottom of every post.
 - Related articles — already automatic: any other post in the same category shows up, no manual curation needed.

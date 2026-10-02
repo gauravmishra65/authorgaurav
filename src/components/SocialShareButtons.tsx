@@ -49,7 +49,7 @@ export default function SocialShareButtons({ path, title, className = '' }: Soci
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 text-gold-lt hover:border-gold hover:text-gold-text transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-gold-text/40 text-gold-text hover:border-gold-text hover:text-ink transition-colors"
         >
           <Icon size={16} />
         </a>
@@ -58,7 +58,7 @@ export default function SocialShareButtons({ path, title, className = '' }: Soci
         type="button"
         onClick={handleCopy}
         aria-label="Copy link"
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 text-gold-lt hover:border-gold hover:text-gold-text transition-colors"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-gold-text/40 text-gold-text hover:border-gold-text hover:text-ink transition-colors"
       >
         {copied ? <Check size={16} /> : <Link2 size={16} />}
       </button>

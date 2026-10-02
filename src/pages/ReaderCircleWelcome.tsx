@@ -67,7 +67,7 @@ export default function ReaderCircleWelcome() {
                 </a>
               )}
               <Link
-                to={`/books/${relevantBook.slug}`}
+                to={`/books/${relevantBook.slug}/`}
                 onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: relevantBook.slug })}
                 className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
               >
@@ -81,7 +81,7 @@ export default function ReaderCircleWelcome() {
             <p className="label-caps text-gold-text text-2xs mb-2">While You Wait</p>
             <h2 className="font-display text-xl text-ink mb-3">Explore the Catalog</h2>
             <Link
-              to="/books"
+              to="/books/"
               onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: 'all-books' })}
               className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
             >
@@ -107,7 +107,7 @@ export default function ReaderCircleWelcome() {
         <div className="mb-10">
           <p className="label-caps text-gold-text text-2xs mb-2">Read More</p>
           <Link
-            to="/blog"
+            to="/blog/"
             onClick={() => trackEvent('reader_circle_welcome_click', { type: 'journal', label: 'journal' })}
             className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
           >

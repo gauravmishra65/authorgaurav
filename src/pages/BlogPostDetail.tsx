@@ -20,7 +20,7 @@ export default function BlogPostDetail() {
 
   const post = posts?.find((p) => p.slug === slug);
 
-  if (!post) return <Navigate to="/blog" replace />;
+  if (!post) return <Navigate to="/blog/" replace />;
 
   const canonicalUrl = buildUrl(`/blog/${post.slug}`);
   const blocks = parsePostContent(post.content ?? post.excerpt);
@@ -68,7 +68,7 @@ export default function BlogPostDetail() {
           <Breadcrumbs
             items={[
               { label: 'Home', href: '/' },
-              { label: 'Blog', href: '/blog' },
+              { label: 'Blog', href: '/blog/' },
               { label: post.title },
             ]}
             className="text-gold-lt/80"
@@ -97,7 +97,7 @@ export default function BlogPostDetail() {
 
         <div className="mt-12 flex items-center justify-between flex-wrap gap-4">
           <SocialShareButtons path={`/blog/${post.slug}`} title={post.title} />
-          <Link to="/blog" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
+          <Link to="/blog/" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
             Back to All Posts <ArrowRight size={16} />
           </Link>
         </div>
@@ -108,7 +108,7 @@ export default function BlogPostDetail() {
             <ul className="space-y-3">
               {relatedArticles.map((p) => (
                 <li key={p.slug}>
-                  <Link to={`/blog/${p.slug}`} className="text-ink hover:text-gold-text transition-colors underline underline-offset-2">
+                  <Link to={`/blog/${p.slug}/`} className="text-ink hover:text-gold-text transition-colors underline underline-offset-2">
                     {p.title}
                   </Link>
                 </li>

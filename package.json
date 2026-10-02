@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "images:webp": "node scripts/convert-covers-to-webp.mjs",
+    "images:variants": "node scripts/make-cover-variants.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "prebuild": "npm run sitemap",
     "build": "vite build && node scripts/prerender.mjs",
@@ -15,6 +16,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:prerendered": "playwright test -c playwright.prerendered.config.ts",
     "indexnow": "node scripts/indexnow-submit.mjs",
     "validate:links": "node scripts/validate-links.mjs",
     "validate:content": "node scripts/validate-content.mjs",

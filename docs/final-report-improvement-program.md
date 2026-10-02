@@ -1,6 +1,6 @@
 # authorgaurav.com Improvement Program: Final Report (Phases 1-12)
 
-This covers the whole twelve-phase program. Detail for each phase is in its own file under `docs/` (`phase-1-...` to `phase-11-...`); Phase 12's work is described in section 14-20 below. Everything stated as measured was measured on this machine against the production build or the live site; anything that could not be verified from a development environment is marked as such rather than assumed.
+This covers the whole twelve-phase program. Detail for each phase is in its own file under `docs/` (`phase-1-...` to `phase-11-...`); Phase 12's work is described in sections 14-20, and a follow-up round that executed the remaining engineering items is in section 25. How pages load (pre-render, swap, prefetch, deferred boot) is in `docs/performance-architecture.md`. Everything stated as measured was measured on this machine against the production build or the live site; anything that could not be verified from a development environment is marked as such rather than assumed.
 
 ## 1. Release-status inconsistencies corrected (Phase 1)
 
@@ -20,7 +20,7 @@ Books page: visible Upcoming and Language filters, an honest "Releasing In" / "P
 
 ## 5. Missing retailer links
 
-Of ten published books, nine have at least one working purchase link. **A Journey of Grace has none**: every stored link is a placeholder, and the page correctly shows no purchase buttons rather than a dead one. Upcoming titles have none by design. Also corrected: The Friend You Keep showed an Amazon and a Paperback button pointing at the identical URL (the redundant entry was removed with your approval; the paperback link is unchanged). Three malformed Goodreads URLs were repaired (one was two links pasted together and returned a 404).
+Of ten published books, nine have at least one working purchase link. **A Journey of Grace has none**: every stored link is a placeholder, and the page correctly shows no purchase buttons rather than a dead one. Upcoming titles have none by design. Also corrected: The Friend You Keep showed an Amazon and a Paperback button pointing at the identical URL (the redundant entry was removed with your approval; the paperback link is unchanged), and its Amazon.com link had been filed under the Lazada field, so a "Lazada" button sent readers to Amazon (moved to the Amazon slot, same URL). Three malformed Goodreads URLs were repaired (one was two links pasted together and returned a 404). Amazon buttons now name their marketplace: "Amazon-IN" for amazon.in and "Amazon-US" for amazon.com, derived from the link itself.
 
 ## 6. Where to Buy cleanup (Phase 6)
 
@@ -52,7 +52,7 @@ Headline and copy as briefed. The article template gained `## Heading` sections,
 
 ## 13. IndexNow status
 
-Implemented before this program and re-verified: `scripts/indexnow-submit.mjs` exists, and the key file is served live at `https://authorgaurav.com/2cde870b3d8e51281ed6a8d1146efaa6.txt` with matching content. It is manual by design (only genuinely changed URLs). No submission has been made during this program, because the changes are not deployed yet. After you deploy, submit the changed pages with `npm run indexnow -- <path> ...` from PowerShell.
+Implemented before this program and re-verified: `scripts/indexnow-submit.mjs` exists, and the key file is served live at `https://authorgaurav.com/2cde870b3d8e51281ed6a8d1146efaa6.txt` with matching content. It is manual by design (only genuinely changed URLs). After Phases 9-12 were deployed, 15 changed pages were submitted (home, Books, Start Here, About, Contact, Journal, Media, Where to Buy, Readers, Reader Circle, the Shadow Code and Offbeat Love pages, and the three Journal articles); IndexNow answered HTTP 202. That means "received", not "crawled" or "indexed" - what Bing and other participating engines do with it is theirs to decide. The follow-up round (section 25) changes page content again; once it is deployed, submit again with `npm run indexnow -- <path> ...` from PowerShell.
 
 ## 14. Background changes (Phase 12)
 
@@ -83,28 +83,40 @@ None needed. The header already matches the brief: Books, Start Here, Journal, A
 - Already in place and unchanged: skip link, visible focus outline, correct `lang="hi"` on Hindi content.
 - Not done: a manual screen-reader pass with real assistive technology.
 
-## 20. Performance results
+## 20. Performance results (updated)
 
-**Lighthouse itself could not be run here** (Chrome would not launch from the Lighthouse CLI in this environment), so no Lighthouse scores are claimed. Instead, Core Web Vitals were measured directly in a browser against the production build, using Lighthouse's mobile profile (1.6 Mbps, 150ms RTT, 4x CPU slowdown).
+Measured on the local production build (not yet the live site, which still has the previous build), two ways.
+
+**Lighthouse 12, mobile profile (simulated slow 4G, 4x CPU):**
+
+| Page | Performance | Accessibility | Best practices | SEO | LCP (simulated) | CLS |
+|---|---|---|---|---|---|---|
+| Home | 94 | 100 | 100 | 100 | 3.0s | 0.001 |
+| Books | 97 | 100 | 100 | 100 | 2.5s | 0.001 |
+| Shadow Code | 91 | 100 | 100 | 100 | 3.3s | 0 |
+| Offbeat Love | 91 | 100 | 100 | 100 | 3.3s | 0 |
+| Journal | 91 | 100 | 100 | 100 | 3.3s | 0.001 |
+
+Desktop preset: home and Shadow Code both score 100 / 100 / 100 / 100 (LCP 0.6s).
+
+**Direct browser measurement under the same throttling** (real page-load events rather than a model):
 
 | Mobile, throttled | LCP | CLS | TBT | INP (estimate) |
 |---|---|---|---|---|
-| Home | 3.8s | 0.001 | 270ms | 56ms |
-| Books | 1.4s | 0.002 | 146ms | 48ms |
-| Shadow Code | 3.5s | 0.000 | 218ms | 48ms |
-| Offbeat Love | 3.6s | 0.000 | 167ms | 64ms |
-| Journal | 1.9s | 0.001 | 181ms | 56ms |
-| Where to Buy | 1.5s | 0.001 | 151ms | 56ms |
+| Home | 2.0s | 0.001 | 219ms | 64ms |
+| Books | 1.3s | 0.001 | 165ms | 40ms |
+| Shadow Code | 1.5s | 0.000 | 188ms | 48ms |
+| Offbeat Love | 1.9s | 0.000 | 198ms | 40ms |
+| Journal | 1.2s | 0.001 | 299ms | 48ms |
+| Where to Buy | 1.3s | 0.000 | 156ms | 40ms |
 
-Desktop (unthrottled): LCP under 0.3s on the home, Books and Shadow Code pages; CLS 0.001-0.078.
+How to read these. Accessibility (100) and SEO (100) clear their 98 targets; best practices is 100. Cumulative layout shift and interaction metrics are well inside their targets. LCP is inside 2.5s on every page in the direct measurement, but Lighthouse's own simulation projects 2.5-3.3s: on localhost every resource finishes before its first paint, so its model counts all of them as dependencies of that paint. Of the five pages, only Books reaches the 95 performance target in Lighthouse (97); home is at 94 and the others at 91. No field data from real visitors exists, and the numbers should be re-taken against the live site after this round is deployed.
 
-The big finding: layout shift was 0.2-0.67 on most pages before, and is now at or near zero. The cause was architectural: each page is shipped as pre-rendered HTML, but React then wiped it and rebuilt it after fetching data, so the whole page vanished and reappeared. The static page now stays on screen while the live app renders invisibly, and the two are swapped in one step when its data has arrived (`src/main.tsx`, `src/lib/appReady.ts`, with unit tests). If the app is slow, a 4-second timeout swaps it in anyway.
+What moved them (details in `docs/performance-architecture.md`): the pre-rendered page now stays on screen while the app loads (layout shift 0.2-0.67 to about 0.00); the app's own JavaScript is requested after the page's `load` event instead of competing with the hero image; data requests start from the page's head and are shared instead of repeated; book covers have 160-640px variants (the hero cover went from 116KB to 46KB); the heading font holds its text until it loads so the pre-rendered and live headings paint identically; fonts are self-hosted. Along the way one regression of my own was caught by Lighthouse (the prefetch script had pushed `<meta charset>` past the first 1024 bytes) and fixed.
 
-**Not met: LCP of 2.5s or less on the home and book pages under this throttled profile (3.5-3.8s).** On a saturated slow link the cover image and heading wait behind JavaScript. Real devices on typical 4G will be faster than this profile, but I have no field data. Closing the rest of the gap means hydrating the page with its data embedded instead of refetching it, which is a larger change than polish and was not attempted. Interaction metrics (TBT, INP) are comfortably inside their targets.
+## 21. Link-validation results (updated)
 
-## 21. Link-validation results
-
-38 pages scanned, 0 failures. The 1,791 warnings are all one kind: internal links written without a trailing slash (for example `/books`) while canonical URLs use one; GitHub Pages redirects these. Not blocking, and not changed. A new `validate:build-seo` check (also now run in CI after the build) found 0 failures across all 38 built pages, with 16 warnings (long titles and a few short or long meta descriptions, listed in its output). `validate:production-seo` against the live site (the currently deployed version) returned 38 of 38 pages with a real HTTP 200 and 0 failures.
+`validate:links`: 38 pages scanned, 0 failures, **0 warnings** (it was 1,791 - all internal links written without the trailing slash the canonical URLs use). The validator also had a false positive on links with a query or hash after the slash, now fixed. `validate:build-seo` (also run in CI after the build): 38 of 38 built pages pass, with 16 warnings (long titles and a few short or long meta descriptions, listed in its output). `validate:production-seo` against the live site returned 38 of 38 pages with a real HTTP 200 and 0 failures.
 
 ## 22. Remaining factual information required from the author
 
@@ -115,20 +127,41 @@ The big finding: layout shift was 0.2-0.67 on most pages before, and is now at o
 - Verified LinkedIn, BookBub and YouTube profile URLs, if they exist. Not guessed, because "Gaurav Mishra" is a shared name (see item 23).
 - Themes, author's note and formats for each book, and country data per retailer, if the original brief's Format and Country grouping is still wanted.
 - Real interviews or press coverage when they exist.
-- Fuller meta descriptions for the five upcoming titles (two are under 40 characters).
+- Fuller meta descriptions for the five upcoming titles (two are under 40 characters), and a decision on the 16 title and description length warnings (for example the Shadow Code page title is 95 characters). These are your wording to decide, and are best settled before the pages are indexed.
+- Whether Kindle and Paperback buttons should also name their marketplace. Only Amazon was asked for, so Kindle and Paperback keep their plain labels.
 
 ## 23. Remaining owner actions
 
-1. **Deploy and confirm CI.** The last deploy run I could inspect (#137, before the retailer data fix) failed at `validate:content`. You told me you re-ran it; I could not see the result from here. Local `validate:content` now passes. After you push, confirm the run is green.
-2. After deploying: run `npm run validate:production-seo`, then submit the changed pages with `npm run indexnow`.
-3. Set up Google Search Console and Bing Webmaster Tools from the two checklists; submit the sitemap; request indexing for the listed pages. Indexing is Google's and Bing's schedule, not something this site can force.
+1. **Push and confirm CI for the follow-up round.** CI run #138 (Phases 9-12) passed and deployed. The follow-up round in section 25 is committed locally and **not pushed**; it adds a production-build test step and 28 contrast tests to the pipeline, so confirm the run is green after you push.
+2. **After deploying that round:** run `npm run validate:production-seo`, re-run Lighthouse against the live site, and submit the changed pages with `npm run indexnow` again.
+3. Set up Google Search Console and Bing Webmaster Tools from the two checklists; submit the sitemap; request indexing for the listed pages. Indexing is Google's and Bing's schedule, not something this site can force. Check Bing's IndexNow section a day or two after setup to see whether the 202 submission turned into crawls.
 4. Fix the **Goodreads author link**: the author link on every book's Goodreads page resolves to an unrelated "Gaurav Mishra" (an Indian Polity exam-prep author), so use Goodreads' Author Program to claim your own profile.
 5. Decide whether to keep the six-month editorial calendar as it stands; each article still needs your writing and review (the spiritual ones in particular need accuracy checking).
-6. A database migration (`add_verification_fields_to_testimonials`) and several data fixes were applied directly to the live Supabase project during the program; they take effect immediately and are independent of any git push.
-7. Everything described here is committed locally and has **not been pushed**.
+6. Several database changes were applied directly to the live Supabase project during the program (a testimonials migration, retailer-link fixes, sample links, article links); they took effect immediately and are independent of any git push.
 
 ## 24. Final website quality assessment
 
-What the evidence supports: the site is consistent about which book is current; it no longer promises a free chapter, a sample or a review it cannot deliver; its contact, purchase and press surfaces contain only verifiable facts; every public page has one H1, valid structured data, a matching canonical and a real HTTP 200; text is readable at every size tested; the pages no longer jump while loading; and the automated checks (typecheck, lint, 13 unit tests, 132 end-to-end tests, 28-route axe scan, content, link and SEO validators) all pass from a clean install.
+What the evidence supports: the site is consistent about which book is current; it no longer promises a free chapter, a sample or a review it cannot deliver; its contact, purchase and press surfaces contain only verifiable facts; every public page has one H1, valid structured data, a matching canonical and a real HTTP 200; text is readable at every size tested and measured for contrast; the pages no longer jump while loading and reach their main content quickly under throttling; Lighthouse gives accessibility, best-practices and SEO scores of 100; and the automated checks (typecheck, lint, 16 unit tests, 160 end-to-end tests including contrast, 12 production-build tests, the content, link and SEO validators) all pass.
 
-What it does not yet demonstrate: Lighthouse scores (not measurable here), mobile LCP inside 2.5s on a slow connection for the home and book pages, any field data from real users, search visibility (nothing has been submitted or indexed by this program), or a manual assistive-technology review. Several content gaps in item 22 are the author's to fill, and the site's strength in discoverability depends mostly on what gets written and earned from here, not on further code changes.
+What it does not yet demonstrate: performance at 95 or above on every page (Books reaches it; the others are 91-94 on Lighthouse's mobile simulation), any field data from real users, search visibility (the changed pages were submitted to IndexNow and accepted, but nothing is known to be indexed), or a manual assistive-technology review. Several content gaps in item 22 are the author's to fill, and the site's discoverability depends mostly on what gets written and earned from here, not on further code changes.
+
+## 25. Follow-up round: the remaining engineering items, executed
+
+After the report above was first written, the engineering items it listed as "could do next" were carried out. Content and account items cannot be done from here and stay in sections 22-23.
+
+**Done**
+
+- **Internal links:** 92 link definitions in 27 files now use the trailing slash the canonical URLs use. Link warnings fell from 1,791 to 0. This also fixed a real production bug: the nav highlights the current page by comparing paths, and visitors land on the slashed URL, so the highlight silently never matched on a direct load. The comparison is now slash-insensitive and covered by a test.
+- **Contrast regression test:** `e2e/contrast.spec.ts` measures every visible text node on all 28 routes. It failed on five pages at first and found real defects, all fixed: breadcrumbs dimmed below readable contrast on dark book pages; the Interview Resources page heading rendered ink-on-ink (invisible); blog and book share buttons in the light gold on a cream page; and four more links that hovered to the dark gold on a dark background (announcement bar, Media release block, dark section headings, header social icons).
+- **Production-build test:** `e2e-prerendered/swap.spec.ts` (`npm run test:e2e:prerendered`, now a CI step) covers the page-swap path the dev-server suite never reached.
+- **Mobile LCP:** self-hosted heading font held until loaded, early shared data requests, responsive cover images, high fetch priority on the hero cover, app script requested after `load`, and an empty-shell 404 page. Results in item 20.
+- **Real Lighthouse numbers:** obtained (item 20) after finding the debugging-port approach worked once run outside a wrapper script.
+- **Amazon-IN / Amazon-US labels** on every Amazon buy button, plus the mis-filed Lazada link described in item 5.
+- This report's stale statements corrected.
+
+**Deliberately not done**
+
+- **Title and description wording** (16 length warnings): your wording to decide, and churn after indexing is best avoided.
+- **An `updated_date` column for the Journal:** a database change with no current use, since no article has been revised.
+- **Format and Country grouping on Where to Buy:** still no data to group by.
+- **A manual screen-reader pass and field performance data:** need a person and real traffic.

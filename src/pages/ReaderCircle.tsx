@@ -66,7 +66,7 @@ export default function ReaderCircle() {
             showGenrePreference
             onSuccess={(genrePreference) => {
               const params = genrePreference ? `?interest=${encodeURIComponent(genrePreference)}` : '';
-              navigate(`/reader-circle/welcome${params}`);
+              navigate(`/reader-circle/welcome${params}/`);
             }}
           />
         </div>

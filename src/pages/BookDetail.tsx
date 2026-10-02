@@ -85,7 +85,7 @@ export default function BookDetail() {
   if (loading) return <div className="py-32 text-center text-muted">Loading…</div>;
   if (error) return <div className="py-32 text-center text-rose">Couldn't load this book: {error}</div>;
 
-  if (!book) return <Navigate to="/books" replace />;
+  if (!book) return <Navigate to="/books/" replace />;
 
   const released = book.releaseDate ? isReleased(book.releaseDate) : false;
   const theme = getBookTheme(book.slug);
@@ -121,7 +121,7 @@ export default function BookDetail() {
           <Breadcrumbs
             items={[
               { label: 'Home', href: '/' },
-              { label: 'Books', href: '/books' },
+              { label: 'Books', href: '/books/' },
               { label: book.title },
             ]}
             className="text-(--book-accent-text)"
@@ -258,7 +258,7 @@ export default function BookDetail() {
 
           <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
             <SocialShareButtons path={`/books/${book.slug}`} title={book.title} />
-            <Link to="/books" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
+            <Link to="/books/" className="inline-flex items-center gap-1.5 label-caps text-gold-text hover:text-ink transition-colors">
               Back to All Books <ArrowRight size={16} />
             </Link>
           </div>
@@ -510,7 +510,7 @@ export default function BookDetail() {
               {book.testimonials.map((t, i) => <BookReview key={i} review={t} />)}
             </div>
             <p className="text-center mt-10">
-              <Link to="/testimonials" className="label-caps text-gold-text hover:text-ink transition-colors">Share Your Own Feedback</Link>
+              <Link to="/testimonials/" className="label-caps text-gold-text hover:text-ink transition-colors">Share Your Own Feedback</Link>
             </p>
           </div>
         </section>
@@ -589,7 +589,7 @@ export default function BookDetail() {
               Official references and practical worksheets that support this book, kept current on a dedicated resources page.
             </p>
             <Link
-              to="/interview-resources"
+              to="/interview-resources/"
               className="btn-caps btn-gold-outline inline-flex items-center gap-2 rounded-xs px-6 py-3"
               style={{ color: 'var(--book-accent-text)', borderColor: 'var(--book-accent)' }}
             >
@@ -614,7 +614,7 @@ export default function BookDetail() {
             {relatedPosts.map((post) => (
               <Link
                 key={post.id}
-                to={`/blog/${post.slug}`}
+                to={`/blog/${post.slug}/`}
                 className="block rounded-md border border-gold/15 p-5 hover:border-gold/40 transition-colors"
               >
                 <p className="font-display text-lg text-ink mb-1.5">{post.title}</p>
