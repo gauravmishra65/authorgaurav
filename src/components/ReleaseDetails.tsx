@@ -1,5 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-import { marketplaceLabel, type Book } from '../data/books';
+import { getAmazonLinks, marketplaceLabel, type Book } from '../data/books';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 
 interface ReleaseDetailsProps {
@@ -25,14 +25,13 @@ function paperbackRetailerName(url: string): string {
 export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsProps) {
   const released = book.releaseDate ? isReleased(book.releaseDate) : false;
 
-  // Most books have a single paperback link. A few (Shadow Code) have a real,
-  // separate Amazon listing in `buyLinks` too — surface both under Paperback
-  // rather than only ever showing one, so neither retailer gets hidden.
-  const amazonPaperback = book.buyLinks.find((l) => l.label === 'Amazon' && l.href && l.href !== '#')?.href;
+  // Most books have a single paperback link. A few (Shadow Code) also have real
+  // Amazon listings (Amazon-IN and/or Amazon-US) — surface all of them under
+  // Paperback rather than only ever showing one, so no retailer gets hidden.
   const paperbackOptions = [
-    book.paperbackUrl ? { label: paperbackRetailerName(book.paperbackUrl), href: book.paperbackUrl } : null,
-    amazonPaperback && amazonPaperback !== book.paperbackUrl ? { label: marketplaceLabel('Amazon', amazonPaperback), href: amazonPaperback } : null,
-  ].filter((opt): opt is { label: string; href: string } => opt !== null);
+    ...(book.paperbackUrl ? [{ label: paperbackRetailerName(book.paperbackUrl), href: book.paperbackUrl }] : []),
+    ...getAmazonLinks(book).filter((l) => l.href !== book.paperbackUrl),
+  ];
 
   return (
     <div className={`rounded-md border border-gold/25 bg-ink-soft/60 p-6 sm:p-8 ${className}`}>
@@ -49,7 +48,7 @@ export default function ReleaseDetails({ book, className = '' }: ReleaseDetailsP
             {paperbackOptions.length > 1 ? (
               <ul className="space-y-1">
                 {paperbackOptions.map((opt) => (
-                  <li key={opt.label}>
+                  <li key={opt.href}>
                     <a href={opt.href} target="_blank" rel="noopener noreferrer" className="text-gold-lt hover:text-ivory transition-colors underline underline-offset-2">
                       Buy on {opt.label}
                     </a>

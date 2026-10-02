@@ -9,9 +9,9 @@ const emptyBook: Partial<AdminBookRow> = {
   slug: '', title: '', title_html: null, subtitle: null, author: 'Gaurav Mishra', tagline: '', synopsis: '',
   genre: 'Fiction', categories: null, language: 'English', status: 'published', gradient: 'from-ink via-rose to-amber-400', text_on_dark: true,
   image_src: '', image_width: undefined, image_height: undefined, book_website: '',
-  buy_links: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
+  buy_links: [{ label: 'Flipkart', href: '#' }, { label: 'Kindle', href: '#' }],
   sort_order: 0,
-  release_date: null, kindle_url: null, paperback_url: null, shopify_url: null, shopee_url: null, lazada_url: null, goodreads_url: null, featured: false,
+  release_date: null, amazon_in_url: null, amazon_us_url: null, kindle_url: null, paperback_url: null, shopify_url: null, shopee_url: null, lazada_url: null, goodreads_url: null, featured: false,
   milestone_sales_count: null, milestone_month_label: null, milestone_store_count: null,
   original_language: null, translated_titles: null, author_note: null, isbn10: null, isbn13: null,
   page_count: null, formats: null, sample_url: null, trailer_url: null, themes: null,
@@ -181,6 +181,8 @@ export default function AdminBooks() {
                   <option value="true">Yes</option>
                 </select>
               </Field>
+              <Field label="Amazon-IN URL (amazon.in, optional)"><input value={editing.amazon_in_url ?? ''} onChange={(e) => setEditing({ ...editing, amazon_in_url: e.target.value.trim() || null })} className="input" placeholder="https://www.amazon.in/dp/…" /></Field>
+              <Field label="Amazon-US URL (amazon.com, optional)"><input value={editing.amazon_us_url ?? ''} onChange={(e) => setEditing({ ...editing, amazon_us_url: e.target.value.trim() || null })} className="input" placeholder="https://www.amazon.com/dp/…" /></Field>
               <Field label="Kindle URL (optional)"><input value={editing.kindle_url ?? ''} onChange={(e) => setEditing({ ...editing, kindle_url: e.target.value || null })} className="input" /></Field>
               <Field label="Paperback URL (optional)"><input value={editing.paperback_url ?? ''} onChange={(e) => setEditing({ ...editing, paperback_url: e.target.value || null })} className="input" /></Field>
               <Field label="Shopify URL (optional)"><input value={editing.shopify_url ?? ''} onChange={(e) => setEditing({ ...editing, shopify_url: e.target.value || null })} className="input" /></Field>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getBuyOptions, marketplaceLabel } from './books';
+import { getAmazonLinks, getBuyOptions, getReviewLink, marketplaceLabel } from './books';
 
 // Regression coverage for a real bug found and fixed in this session:
 // buyLinks frequently carries a stale `#` placeholder for "Kindle" even when
@@ -79,5 +79,55 @@ describe('marketplaceLabel', () => {
       paperbackUrl: undefined,
     });
     expect(options.map((o) => o.label)).toEqual(['Amazon-US', 'Flipkart']);
+  });
+});
+
+describe('Amazon-IN / Amazon-US fields', () => {
+  const none = { buyLinks: [], kindleUrl: undefined, paperbackUrl: undefined };
+
+  it('turns each dedicated field into its own button, India first', () => {
+    const options = getBuyOptions({ ...none, amazonUsUrl: 'https://www.amazon.com/dp/US1', amazonInUrl: 'https://www.amazon.in/dp/IN1' });
+    expect(options).toEqual([
+      { label: 'Amazon-IN', href: 'https://www.amazon.in/dp/IN1' },
+      { label: 'Amazon-US', href: 'https://www.amazon.com/dp/US1' },
+    ]);
+  });
+
+  it('shows only the marketplace that has a link', () => {
+    expect(getBuyOptions({ ...none, amazonInUrl: 'https://www.amazon.in/dp/IN1' }).map((o) => o.label)).toEqual(['Amazon-IN']);
+    expect(getBuyOptions({ ...none, amazonUsUrl: 'https://www.amazon.com/dp/US1' }).map((o) => o.label)).toEqual(['Amazon-US']);
+  });
+
+  it('does not repeat a legacy Amazon entry that matches a dedicated field', () => {
+    const options = getBuyOptions({
+      ...none,
+      buyLinks: [{ label: 'Amazon', href: 'https://www.amazon.com/dp/US1' }, { label: 'Flipkart', href: 'https://flipkart.example/b' }],
+      amazonUsUrl: 'https://www.amazon.com/dp/US1',
+    });
+    expect(options.map((o) => o.label)).toEqual(['Amazon-US', 'Flipkart']);
+  });
+
+  it('lets the dedicated field win over a different legacy link on the same marketplace', () => {
+    const links = getAmazonLinks({ buyLinks: [{ label: 'Amazon', href: 'https://www.amazon.in/dp/OLD' }], amazonInUrl: 'https://www.amazon.in/dp/NEW' });
+    expect(links).toEqual([{ label: 'Amazon-IN', href: 'https://www.amazon.in/dp/NEW' }]);
+  });
+
+  it('still shows a legacy Amazon-US entry next to a dedicated Amazon-IN field', () => {
+    const links = getAmazonLinks({ buyLinks: [{ label: 'Amazon', href: 'https://www.amazon.com/dp/US1' }], amazonInUrl: 'https://www.amazon.in/dp/IN1' });
+    expect(links.map((l) => l.label)).toEqual(['Amazon-IN', 'Amazon-US']);
+  });
+
+  it('ignores placeholder (#) legacy Amazon entries', () => {
+    expect(getAmazonLinks({ buyLinks: [{ label: 'Amazon', href: '#' }] })).toEqual([]);
+  });
+});
+
+describe('getReviewLink', () => {
+  it('prefers an Amazon listing, then the first real retailer link, and never invents one', () => {
+    expect(getReviewLink({ buyLinks: [{ label: 'Flipkart', href: 'https://flipkart.example/b' }], amazonUsUrl: 'https://www.amazon.com/dp/US1' }))
+      .toEqual({ label: 'Amazon-US', href: 'https://www.amazon.com/dp/US1' });
+    expect(getReviewLink({ buyLinks: [{ label: 'Amazon', href: '#' }, { label: 'Flipkart', href: 'https://flipkart.example/b' }] }))
+      .toEqual({ label: 'Flipkart', href: 'https://flipkart.example/b' });
+    expect(getReviewLink({ buyLinks: [{ label: 'Amazon', href: '#' }] })).toBeUndefined();
   });
 });

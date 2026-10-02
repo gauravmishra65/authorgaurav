@@ -34,7 +34,7 @@ function addIssue(issues, severity, subject, kind, detail) {
 // public/resources mirror). Update both if the real logic changes.
 function hasAnyBuyOption(book) {
   const buyLinks = book.buy_links ?? [];
-  const realBuyLink = buyLinks.some((l) => l.label !== 'Kindle' && l.href && l.href !== '#');
+  const realBuyLink = Boolean(book.amazon_in_url || book.amazon_us_url) || buyLinks.some((l) => l.label !== 'Kindle' && l.href && l.href !== '#');
   const realKindle = Boolean(book.kindle_url) || buyLinks.some((l) => l.label === 'Kindle' && l.href && l.href !== '#');
   const realPaperback = Boolean(book.paperback_url);
   return realBuyLink || realKindle || realPaperback;
@@ -111,6 +111,7 @@ async function main() {
     // never intentional.
     const urlFields = {
       goodreads_url: book.goodreads_url, book_website: book.book_website, sample_url: book.sample_url,
+      amazon_in_url: book.amazon_in_url, amazon_us_url: book.amazon_us_url,
       kindle_url: book.kindle_url, paperback_url: book.paperback_url, shopify_url: book.shopify_url,
       shopee_url: book.shopee_url, lazada_url: book.lazada_url,
     };
@@ -136,8 +137,13 @@ async function main() {
       urlCounts.set(href, entry);
     };
     const buyLinks = book.buy_links ?? [];
+    addUrl('Amazon-IN', book.amazon_in_url);
+    addUrl('Amazon-US', book.amazon_us_url);
     for (const link of buyLinks) {
       if (link.label === 'Kindle') continue;
+      // A legacy "Amazon" entry that repeats a dedicated column is superseded
+      // by it (see getAmazonLinks), not a second retailer.
+      if (link.label.trim().toLowerCase() === 'amazon' && (link.href === book.amazon_in_url || link.href === book.amazon_us_url)) continue;
       addUrl(link.label, link.href);
     }
     const kindleHref = book.kindle_url || buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;

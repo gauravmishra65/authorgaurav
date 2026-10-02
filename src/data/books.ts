@@ -43,6 +43,12 @@ export interface Book {
   testimonials?: Testimonial[];
   /** ISO date (YYYY-MM-DD) the book releases or released. Drives the countdown/"Now Available" state. */
   releaseDate?: string;
+  /** Amazon India (amazon.in) and Amazon US (amazon.com) listings, kept as
+   * separate fields so each storefront has its own button and its own admin
+   * input. Older data stored a single "Amazon" entry inside `buyLinks`; see
+   * `getAmazonLinks` for how both are reconciled. */
+  amazonInUrl?: string;
+  amazonUsUrl?: string;
   kindleUrl?: string;
   paperbackUrl?: string;
   shopifyUrl?: string;
@@ -105,6 +111,36 @@ export function marketplaceLabel(label: string, href: string): string {
   return label;
 }
 
+const isRealHref = (href: string | undefined): href is string => Boolean(href) && href !== '#';
+const isAmazonEntry = (link: { label: string }) => link.label.trim().toLowerCase() === 'amazon';
+
+/** Every real Amazon listing for a book, Amazon-IN first, then Amazon-US.
+ * `amazonInUrl` / `amazonUsUrl` are the source of truth. A legacy "Amazon"
+ * entry in `buyLinks` is still honoured so nothing disappears while old data
+ * is being moved, but only when it adds something: it is skipped if it is the
+ * same URL as a dedicated field, or on a marketplace that already has one. */
+export function getAmazonLinks(book: Pick<Book, 'buyLinks' | 'amazonInUrl' | 'amazonUsUrl'>): BuyOption[] {
+  const links: BuyOption[] = [];
+  if (book.amazonInUrl) links.push({ label: 'Amazon-IN', href: book.amazonInUrl });
+  if (book.amazonUsUrl) links.push({ label: 'Amazon-US', href: book.amazonUsUrl });
+  for (const link of book.buyLinks) {
+    if (!isAmazonEntry(link) || !isRealHref(link.href)) continue;
+    const label = marketplaceLabel(link.label, link.href);
+    if (links.some((l) => l.href === link.href || l.label === label)) continue;
+    links.push({ label, href: link.href });
+  }
+  return links;
+}
+
+/** The link a reader should use to leave a review: an Amazon listing if there
+ * is one, otherwise the first real retailer link. */
+export function getReviewLink(book: Pick<Book, 'buyLinks' | 'amazonInUrl' | 'amazonUsUrl'>): BuyOption | undefined {
+  const amazon = getAmazonLinks(book)[0];
+  if (amazon) return amazon;
+  const other = book.buyLinks.find((l) => isRealHref(l.href));
+  return other ? { label: marketplaceLabel(other.label, other.href), href: other.href } : undefined;
+}
+
 // Retailer links in `buyLinks` are frequently left as `#` placeholders
 // before a real one is confirmed, while `kindleUrl`/`paperbackUrl` are the
 // fields actually kept up to date for those two formats — so a book can
@@ -113,11 +149,11 @@ export function marketplaceLabel(label: string, href: string): string {
 // fields into a single, real, honest list of buy options — used by
 // BookCarousel, BookCard, and BookPurchasePanel so every page shows the
 // exact same options for a given book.
-export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paperbackUrl' | 'shopifyUrl' | 'shopeeUrl' | 'lazadaUrl'>): BuyOption[] {
-  const options: BuyOption[] = [];
+export function getBuyOptions(book: Pick<Book, 'buyLinks' | 'kindleUrl' | 'paperbackUrl' | 'shopifyUrl' | 'shopeeUrl' | 'lazadaUrl' | 'amazonInUrl' | 'amazonUsUrl'>): BuyOption[] {
+  const options: BuyOption[] = getAmazonLinks(book);
   for (const link of book.buyLinks) {
-    if (link.label === 'Kindle') continue;
-    if (link.href && link.href !== '#') options.push({ ...link, label: marketplaceLabel(link.label, link.href) });
+    if (link.label === 'Kindle' || isAmazonEntry(link)) continue;
+    if (isRealHref(link.href)) options.push({ ...link, label: marketplaceLabel(link.label, link.href) });
   }
   const kindleHref = book.kindleUrl || book.buyLinks.find((l) => l.label === 'Kindle' && l.href !== '#')?.href;
   if (kindleHref) options.push({ label: 'Kindle', href: kindleHref });

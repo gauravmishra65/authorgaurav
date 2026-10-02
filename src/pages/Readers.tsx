@@ -7,13 +7,17 @@ import EmptyState from '../components/EmptyState';
 import EmailStrip from '../components/EmailStrip';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
+import { getReviewLink } from '../data/books';
 import { fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { trackEvent } from '../lib/analytics';
 
 export default function Readers() {
   const { data: books } = useSupabaseData(fetchBooks, []);
-  const withRealRetailer = books?.filter((b) => b.buyLinks.some((l) => l.href && l.href !== '#')) ?? [];
+  const reviewLinks = (books ?? []).flatMap((b) => {
+    const link = getReviewLink(b);
+    return link ? [{ book: b, link }] : [];
+  });
 
   return (
     <>
@@ -86,18 +90,15 @@ export default function Readers() {
           <PrimaryButton to="/testimonials/" size="sm" className="mb-8">
             <MessageSquareQuote size={16} /> Reader Testimonials
           </PrimaryButton>
-          {withRealRetailer.length > 0 && (
+          {reviewLinks.length > 0 && (
             <ul className="space-y-2.5 text-sm">
-              {withRealRetailer.map((b) => {
-                const link = b.buyLinks.find((l) => l.href && l.href !== '#')!;
-                return (
-                  <li key={b.id}>
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-gold-text transition-colors">
-                      Review <em>{b.title}</em> on {link.label}
-                    </a>
-                  </li>
-                );
-              })}
+              {reviewLinks.map(({ book: b, link }) => (
+                <li key={b.id}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-gold-text transition-colors">
+                    Review <em>{b.title}</em> on {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           )}
         </div>

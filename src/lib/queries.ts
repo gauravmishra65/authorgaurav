@@ -30,6 +30,8 @@ interface BookRow {
   book_website: string | null;
   buy_links: { label: string; href: string }[];
   release_date: string | null;
+  amazon_in_url: string | null;
+  amazon_us_url: string | null;
   kindle_url: string | null;
   paperback_url: string | null;
   shopify_url: string | null;
@@ -91,6 +93,8 @@ function mapBook(row: BookRow, testimonials: Testimonial[]): Book {
     buyLinks: row.buy_links,
     testimonials,
     releaseDate: row.release_date ?? undefined,
+    amazonInUrl: row.amazon_in_url ?? undefined,
+    amazonUsUrl: row.amazon_us_url ?? undefined,
     kindleUrl: row.kindle_url ?? undefined,
     paperbackUrl: row.paperback_url ?? undefined,
     shopifyUrl: row.shopify_url ?? undefined,

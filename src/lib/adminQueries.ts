@@ -22,6 +22,8 @@ export interface AdminBookRow {
   buy_links: { label: string; href: string }[];
   sort_order: number;
   release_date: string | null;
+  amazon_in_url: string | null;
+  amazon_us_url: string | null;
   kindle_url: string | null;
   paperback_url: string | null;
   shopify_url: string | null;
