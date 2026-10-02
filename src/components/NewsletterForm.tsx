@@ -110,7 +110,7 @@ export default function NewsletterForm({ id, layout = 'banner', buttonLabel = 'S
     ) : (
       <div className={`mx-auto max-w-md rounded-md border border-gold/40 bg-cream/80 px-6 py-6 text-ink ${className}`}>
         <p className="font-display text-lg">You're on the list.</p>
-        <p className="text-sm text-muted mt-1">Check your inbox for the free chapter, and welcome to the reader circle.</p>
+        <p className="text-sm text-muted mt-1">Welcome to the Reader Circle. New-book news and occasional reading notes will arrive by email.</p>
         {magnet?.fileUrl && (
           <a
             href={magnet.fileUrl}

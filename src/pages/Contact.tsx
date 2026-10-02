@@ -129,7 +129,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact Gaurav Mishra: Say Hello, Share a Note, Join the Reader Circle"
-        description="Get in touch with author Gaurav Mishra. Send a message, request a free chapter, or join the reader circle for monthly letters and new-release alerts."
+        description="Get in touch with author Gaurav Mishra. Send a message, or join the Reader Circle for monthly letters and new-release alerts."
         path="/contact"
       />
 
@@ -221,7 +221,7 @@ export default function Contact() {
 
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" checked={form.circle} onChange={(e) => update('circle', e.target.checked)} className="mt-1 h-4 w-4 accent-gold" />
-                  <span className="text-sm text-muted">Add me to the reader circle. I'd like the free chapter and monthly letters.</span>
+                  <span className="text-sm text-muted">Add me to the Reader Circle for new-book news and occasional letters.</span>
                 </label>
 
                 <div>

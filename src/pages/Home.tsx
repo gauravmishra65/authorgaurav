@@ -154,10 +154,10 @@ export default function Home() {
         </div>
       </section>
 
-      <div id="free-chapter" className="scroll-mt-20">
+      <div id="reader-circle" className="scroll-mt-20">
         <EmailStrip
           heading="Join Gaurav's Reader Circle"
-          subheading="Receive new-release updates, sample chapters, behind-the-scenes writing notes and occasional subscriber-only resources."
+          subheading="Receive new-release updates, behind-the-scenes writing notes and occasional subscriber-only resources."
           showGenrePreference
         />
         <p className="text-center pb-10">

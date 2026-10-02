@@ -11,9 +11,14 @@ import { trackEvent } from '../lib/analytics';
 // honest way to pick one over the other, so that case (and Writing
 // resources/All updates, which aren't about a single book at all) falls
 // through to the generic "Explore the Books" link instead of guessing.
-const interestToBook: Record<string, { slug: string; title: string }> = {
+//
+// `sampleUrl` is only set where a real, verified chapter excerpt exists to
+// link to — confirmed by visiting the site directly. Offbeat Love's own
+// site has a real "Read Chapter 1" page; Shadow Code's site only has a
+// marketing synopsis, no actual book prose, so it has no sampleUrl here.
+const interestToBook: Record<string, { slug: string; title: string; sampleUrl?: string }> = {
   Thrillers: { slug: 'the-shadow-code', title: 'Shadow Code' },
-  Romance: { slug: 'offbeat-love', title: 'Offbeat Love' },
+  Romance: { slug: 'offbeat-love', title: 'Offbeat Love', sampleUrl: 'https://off-beat-love.com/preview' },
 };
 
 export default function ReaderCircleWelcome() {
@@ -37,7 +42,7 @@ export default function ReaderCircleWelcome() {
           <p className="eyebrow text-gold-lt mb-4">Welcome</p>
           <h1 className="font-display text-4xl md:text-5xl mb-4">You're In the Reader Circle</h1>
           <p className="text-ivory/75 max-w-xl mx-auto leading-relaxed">
-            Check your inbox for the free chapter. From here, one email a month — no noise, unsubscribe anytime.
+            You are now part of the Reader Circle. New-book news and occasional reading notes will arrive by email — no noise, unsubscribe anytime.
           </p>
         </div>
       </section>
@@ -49,13 +54,26 @@ export default function ReaderCircleWelcome() {
           <div className="mb-10">
             <p className="label-caps text-gold-text text-2xs mb-2">While You Wait</p>
             <h2 className="font-display text-xl text-ink mb-3">Explore {relevantBook.title}</h2>
-            <Link
-              to={`/books/${relevantBook.slug}`}
-              onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: relevantBook.slug })}
-              className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
-            >
-              View the Book
-            </Link>
+            <div className="flex flex-wrap justify-center gap-3">
+              {relevantBook.sampleUrl && (
+                <a
+                  href={relevantBook.sampleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('reader_circle_welcome_click', { type: 'sample', label: relevantBook.slug })}
+                  className="btn-caps btn-gold inline-block rounded-xs px-5 py-2.5 text-2xs"
+                >
+                  Read a Sample from {relevantBook.title}
+                </a>
+              )}
+              <Link
+                to={`/books/${relevantBook.slug}`}
+                onClick={() => trackEvent('reader_circle_welcome_click', { type: 'book', label: relevantBook.slug })}
+                className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
+              >
+                View the Book
+              </Link>
+            </div>
           </div>
         )}
         {!relevantBook && (
@@ -85,6 +103,17 @@ export default function ReaderCircleWelcome() {
             </a>
           </div>
         )}
+
+        <div className="mb-10">
+          <p className="label-caps text-gold-text text-2xs mb-2">Read More</p>
+          <Link
+            to="/blog"
+            onClick={() => trackEvent('reader_circle_welcome_click', { type: 'journal', label: 'journal' })}
+            className="btn-caps btn-gold-outline inline-block rounded-xs px-5 py-2.5 text-2xs"
+          >
+            Visit the Journal
+          </Link>
+        </div>
 
         {socialLink && (
           <div>

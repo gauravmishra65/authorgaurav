@@ -14,8 +14,8 @@ interface EmailStripProps {
 
 export default function EmailStrip({
   variant = 'light',
-  heading = 'Get a free chapter and new-release alerts',
-  subheading = 'One email a month. No noise. Unsubscribe anytime.',
+  heading = 'Join the Reader Circle',
+  subheading = 'Receive thoughtful updates about new books, the stories behind them and occasional extras for readers.',
   showGenrePreference = false,
   id = 'strip-email',
   source = 'email-strip',
@@ -30,7 +30,7 @@ export default function EmailStrip({
         <h2 className="font-display text-2xl md:text-3xl mb-2">{heading}</h2>
         <p className={`text-sm mb-7 ${isDark ? 'text-ivory/70' : 'text-muted'}`}>{subheading}</p>
 
-        <NewsletterForm id={id} buttonLabel="Get the Chapter" source={source} showGenrePreference={showGenrePreference} />
+        <NewsletterForm id={id} buttonLabel="Join the Reader Circle" source={source} showGenrePreference={showGenrePreference} />
       </div>
     </section>
   );
