@@ -23,10 +23,10 @@ export default function Blog() {
       <section className="bg-ink bg-grain text-ivory">
         <div className="hairline-solid w-full opacity-30" />
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
-          <p className="eyebrow text-gold-lt mb-4">The Journal</p>
-          <h1 className="font-display text-4xl md:text-5xl mb-4">From the Blog</h1>
+          <p className="eyebrow text-gold-lt mb-4">Notes &amp; Essays</p>
+          <h1 className="font-display text-4xl md:text-5xl mb-4">Journal</h1>
           <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Notes on the writing life: craft, the stories behind the books, and reflections on the hymns that keep me grounded.
+            Notes on books, writing, relationships, faith and the ideas behind the stories.
           </p>
         </div>
       </section>

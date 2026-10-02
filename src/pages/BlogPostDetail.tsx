@@ -8,6 +8,7 @@ import EmailStrip from '../components/EmailStrip';
 import { fetchBlogPosts, fetchBooks } from '../lib/queries';
 import { useSupabaseData } from '../lib/useSupabaseData';
 import { canonicalUrl as buildUrl } from '../lib/url';
+import { parsePostContent, renderInlineLinks } from '../lib/postContent';
 
 export default function BlogPostDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -22,7 +23,13 @@ export default function BlogPostDetail() {
   if (!post) return <Navigate to="/blog" replace />;
 
   const canonicalUrl = buildUrl(`/blog/${post.slug}`);
-  const paragraphs = (post.content ?? post.excerpt).split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const blocks = parsePostContent(post.content ?? post.excerpt);
+  // Same category, most recent first, excluding this post — a real signal
+  // already in the data (category), not a separate curated field, so this
+  // can never point at a stale or invented "related" post.
+  const relatedArticles = (posts ?? [])
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 3);
 
   return (
     <>
@@ -39,6 +46,7 @@ export default function BlogPostDetail() {
               description: post.excerpt,
               author: { '@type': 'Person', name: 'Gaurav Mishra' },
               datePublished: post.date,
+              ...(post.updatedDate ? { dateModified: post.updatedDate } : {}),
               articleSection: post.category,
               url: canonicalUrl,
             },
@@ -69,13 +77,20 @@ export default function BlogPostDetail() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <p className="eyebrow text-gold-lt mb-4">{post.category}</p>
           <h1 className="font-display text-3xl md:text-5xl mb-4">{post.title}</h1>
-          <p className="text-ivory/70 text-sm">By Gaurav Mishra · {post.date} · {post.readTime} read</p>
+          <p className="text-ivory/70 text-sm">
+            By Gaurav Mishra · {post.date} · {post.readTime} read
+            {post.updatedDate && ` · Updated ${post.updatedDate}`}
+          </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-prose px-6 py-16">
         <div className="prose-literary">
-          {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+          {blocks.map((b, i) =>
+            b.type === 'heading'
+              ? <h2 key={i}>{b.text}</h2>
+              : <p key={i}>{renderInlineLinks(b.text)}</p>,
+          )}
         </div>
 
         {post.relatedLink && books && <JournalBookCTA relatedLink={post.relatedLink} books={books} />}
@@ -86,6 +101,21 @@ export default function BlogPostDetail() {
             Back to All Posts <ArrowRight size={13} />
           </Link>
         </div>
+
+        {relatedArticles.length > 0 && (
+          <div className="mt-16 pt-10 border-t border-gold/20">
+            <p className="label-caps text-gold-text text-2xs mb-5">More in {post.category}</p>
+            <ul className="space-y-3">
+              {relatedArticles.map((p) => (
+                <li key={p.slug}>
+                  <Link to={`/blog/${p.slug}`} className="text-ink hover:text-gold-text transition-colors underline underline-offset-2">
+                    {p.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </section>
 
       <EmailStrip id="article-email" source="article" />
