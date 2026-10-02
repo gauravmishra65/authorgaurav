@@ -99,7 +99,19 @@ Measured two ways, and then re-measured on the live site once the follow-up roun
 
 The 75 on the first home run came with a 630ms blocking time and a 6.0s speed index that the next two runs did not reproduce (96 and 89), so treat it as a cold-start outlier, not a typical score, but it is a real run and is shown. Accessibility, best practices and SEO were 100 on every live run. Live desktop was not re-run. Live production SEO validation passed 38 of 38 pages.
 
-The live book pages are the weak spot (84-88): Lighthouse attributes about 1.1-1.4s of their LCP to the hero cover not starting to download until well after the server responds. A follow-up fix (a preload hint for the hero cover in the page head, below) was built and measured on the local build, where it raised Shadow Code from 91 to 95, Offbeat Love from 91 to 93 and home from 94 to 95. It is committed locally and not yet deployed, so those live scores have not been re-taken.
+The live book pages are the weak spot (84-88): Lighthouse attributes about 1.1-1.4s of their LCP to the hero cover not starting to download until well after the server responds. A follow-up fix (a preload hint for the hero cover in the page head, below) was built and measured on the local build, where it raised Shadow Code from 91 to 95, Offbeat Love from 91 to 93 and home from 94 to 95.
+
+**Live site after the preload deployed (CI run #140), 3 Lighthouse mobile runs per page:**
+
+| Page | Performance (each run) | Accessibility / Best practices / SEO |
+|---|---|---|
+| Home | 90, 89, 90 | 100 / 100 / 100 |
+| Books | 98, 97, 99 | 100 / 100 / 100 |
+| Shadow Code | 87, 99, 87 | 100 / 100 / 100 |
+| Offbeat Love | 88, 97, 88 | 100 / 100 / 100 |
+| Journal | 84, 91, 97 | 100 / 100 / 100 |
+
+The preload works as intended: the cover now starts downloading together with the stylesheet and fonts, right after the HTML arrives. The live scores split into two groups, though. When the page's HTML arrives quickly (about 10ms on the fast Shadow Code run) the book pages score 97-99; when it arrives slowly (about 275ms on the slow one) they stay at 87-88, exactly where they were before the preload. That delay is the hosting platform's response time, not something the site's code controls, so the local gain did not carry over reliably. One Journal run (84) had a long main-thread stall the other two did not repeat.
 
 **Local production build, measured before that last change:**
 
@@ -128,7 +140,7 @@ Desktop preset: home and Shadow Code both score 100 / 100 / 100 / 100 (LCP 0.6s)
 
 How to read these. Accessibility (100) and SEO (100) clear their 98 targets; best practices is 100. Cumulative layout shift and interaction metrics are well inside their targets. LCP is inside 2.5s on every page in the direct measurement, but Lighthouse's own simulation projects 2.5-3.3s: on localhost every resource finishes before its first paint, so its model counts all of them as dependencies of that paint. Of the five pages, only Books reaches the 95 performance target in Lighthouse (97); home is at 94 and the others at 91. No field data from real visitors exists.
 
-What moved them (details in `docs/performance-architecture.md`): the pre-rendered page now stays on screen while the app loads (layout shift 0.2-0.67 to about 0.00); the app's own JavaScript is requested after the page's `load` event instead of competing with the hero image; data requests start from the page's head and are shared instead of repeated; book covers have 160-640px variants (the hero cover went from 116KB to 46KB); the heading font holds its text until it loads so the pre-rendered and live headings paint identically; fonts are self-hosted; and (not yet deployed) the hero cover is preloaded from the page head. Along the way one regression of my own was caught by Lighthouse (the prefetch script had pushed `<meta charset>` past the first 1024 bytes) and fixed.
+What moved them (details in `docs/performance-architecture.md`): the pre-rendered page now stays on screen while the app loads (layout shift 0.2-0.67 to about 0.00); the app's own JavaScript is requested after the page's `load` event instead of competing with the hero image; data requests start from the page's head and are shared instead of repeated; book covers have 160-640px variants (the hero cover went from 116KB to 46KB); the heading font holds its text until it loads so the pre-rendered and live headings paint identically; fonts are self-hosted; and the hero cover is preloaded from the page head. Along the way one regression of my own was caught by Lighthouse (the prefetch script had pushed `<meta charset>` past the first 1024 bytes) and fixed.
 
 ## 21. Link-validation results (updated)
 
@@ -148,18 +160,17 @@ What moved them (details in `docs/performance-architecture.md`): the pre-rendere
 
 ## 23. Remaining owner actions
 
-1. **Push the hero-preload commit and confirm CI.** CI run #139 (the follow-up round in section 25) passed and deployed, including its new production-build test step and 28 contrast tests. One further small change (the hero-cover preload) is committed locally and **not pushed**.
-2. **After deploying it:** re-run Lighthouse on the live book pages and submit those pages to IndexNow again.
-3. Set up Google Search Console and Bing Webmaster Tools from the two checklists; submit the sitemap; request indexing for the listed pages. Indexing is Google's and Bing's schedule, not something this site can force. Check Bing's IndexNow section a day or two after setup to see whether the 202 submission turned into crawls.
-4. Fix the **Goodreads author link**: the author link on every book's Goodreads page resolves to an unrelated "Gaurav Mishra" (an Indian Polity exam-prep author), so use Goodreads' Author Program to claim your own profile.
-5. Decide whether to keep the six-month editorial calendar as it stands; each article still needs your writing and review (the spiritual ones in particular need accuracy checking).
-6. Several database changes were applied directly to the live Supabase project during the program (a testimonials migration, retailer-link fixes, sample links, article links); they took effect immediately and are independent of any git push.
+1. **Nothing is waiting to be pushed or deployed.** CI runs #139 (the follow-up round in section 25) and #140 (the hero-cover preload) both passed and deployed; the live SEO check, live Lighthouse and an IndexNow submission (home and the 15 book pages, HTTP 200) were all re-run after #140.
+2. Set up Google Search Console and Bing Webmaster Tools from the two checklists; submit the sitemap; request indexing for the listed pages. Indexing is Google's and Bing's schedule, not something this site can force. Check Bing's IndexNow section a day or two after setup to see whether the 202 submission turned into crawls.
+3. Fix the **Goodreads author link**: the author link on every book's Goodreads page resolves to an unrelated "Gaurav Mishra" (an Indian Polity exam-prep author), so use Goodreads' Author Program to claim your own profile.
+4. Decide whether to keep the six-month editorial calendar as it stands; each article still needs your writing and review (the spiritual ones in particular need accuracy checking).
+5. Several database changes were applied directly to the live Supabase project during the program (a testimonials migration, retailer-link fixes, sample links, article links); they took effect immediately and are independent of any git push.
 
 ## 24. Final website quality assessment
 
 What the evidence supports: the site is consistent about which book is current; it no longer promises a free chapter, a sample or a review it cannot deliver; its contact, purchase and press surfaces contain only verifiable facts; every public page has one H1, valid structured data, a matching canonical and a real HTTP 200; text is readable at every size tested and measured for contrast; the pages no longer jump while loading and reach their main content quickly under throttling; Lighthouse gives accessibility, best-practices and SEO scores of 100 on the live site in every run; and the automated checks (typecheck, lint, 16 unit tests, 160 end-to-end tests including contrast, 12 production-build tests, the content, link and SEO validators) all pass.
 
-What it does not yet demonstrate: performance at 95 or above on every page (on the live site Books reaches it, home sometimes does, and the book pages score 84-88; the preload fix that should lift them is built but not yet deployed), any field data from real users, search visibility (the changed pages were submitted to IndexNow twice and accepted both times, but nothing is known to be indexed), or a manual assistive-technology review. Several content gaps in item 22 are the author's to fill, and the site's discoverability depends mostly on what gets written and earned from here, not on further code changes.
+What it does not yet demonstrate: performance at 95 or above on every page (on the live site Books reaches it every time; home scores about 90; the book pages score 97-99 when the host answers quickly and 87-88 when it does not, even with the hero-cover preload deployed), any field data from real users, search visibility (the changed pages were submitted to IndexNow twice and accepted both times, but nothing is known to be indexed), or a manual assistive-technology review. Several content gaps in item 22 are the author's to fill, and the site's discoverability depends mostly on what gets written and earned from here, not on further code changes.
 
 ## 25. Follow-up round: the remaining engineering items, executed
 
@@ -170,7 +181,7 @@ After the report above was first written, the engineering items it listed as "co
 - **Internal links:** 92 link definitions in 27 files now use the trailing slash the canonical URLs use. Link warnings fell from 1,791 to 0. This also fixed a real production bug: the nav highlights the current page by comparing paths, and visitors land on the slashed URL, so the highlight silently never matched on a direct load. The comparison is now slash-insensitive and covered by a test.
 - **Contrast regression test:** `e2e/contrast.spec.ts` measures every visible text node on all 28 routes. It failed on five pages at first and found real defects, all fixed: breadcrumbs dimmed below readable contrast on dark book pages; the Interview Resources page heading rendered ink-on-ink (invisible); blog and book share buttons in the light gold on a cream page; and four more links that hovered to the dark gold on a dark background (announcement bar, Media release block, dark section headings, header social icons).
 - **Production-build test:** `e2e-prerendered/swap.spec.ts` (`npm run test:e2e:prerendered`, now a CI step) covers the page-swap path the dev-server suite never reached.
-- **Mobile LCP:** self-hosted heading font held until loaded, early shared data requests, responsive cover images, high fetch priority on the hero cover, app script requested after `load`, and an empty-shell 404 page. A later live Lighthouse check showed the book pages still lagging, which led to a preload hint for the hero cover (built and measured locally, not yet deployed). Results in item 20.
+- **Mobile LCP:** self-hosted heading font held until loaded, early shared data requests, responsive cover images, high fetch priority on the hero cover, app script requested after `load`, and an empty-shell 404 page. A later live Lighthouse check showed the book pages still lagging, which led to a preload hint for the hero cover (deployed in run #140; it lifts the book pages when the host responds quickly but not when it is slow). Results in item 20.
 - **Real Lighthouse numbers:** obtained (item 20) after finding the debugging-port approach worked once run outside a wrapper script.
 - **Amazon-IN / Amazon-US labels** on every Amazon buy button, plus the mis-filed Lazada link described in item 5.
 - This report's stale statements corrected.
