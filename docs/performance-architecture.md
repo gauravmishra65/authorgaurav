@@ -12,14 +12,16 @@ The site is a React single-page app hosted on GitHub Pages, but every public pag
 
 4. **Deferred boot** (`withDeferredBoot` in `prerender.mjs`). The app bundle isn't needed to show a pre-rendered page, so its `<script type="module">` and chunk preloads are removed from `<head>` and requested on the page's `load` event instead (5-second backstop), so they stop competing with the hero image, fonts and CSS. During capture it boots immediately.
 
-5. **404 shell.** `dist/404.html` is the empty app shell, saved before the homepage snapshot overwrites `dist/index.html`. Routes that aren't pre-rendered (`/reader-circle/welcome/`, `/admin/*`) get it and render straight away, instead of flashing a copy of the homepage.
+5. **Hero preload** (`withHeroPreload` in `prerender.mjs`). The hero cover is the largest paint but sits in `<body>`, so the browser finds it late. The first image the app marked `fetchpriority="high"` is also declared in `<head>` as `<link rel="preload" as="image" data-hero imagesrcset=... imagesizes=...>` with the same `srcset`/`sizes`, so the same file is fetched once, immediately.
+
+6. **404 shell.** `dist/404.html` is the empty app shell, saved before the homepage snapshot overwrites `dist/index.html`. Routes that aren't pre-rendered (`/reader-circle/welcome/`, `/admin/*`) get it and render straight away, instead of flashing a copy of the homepage.
 
 ## Rules that keep it working
 
 - Don't call `createRoot(...).render()` onto a non-empty `#root` without the swap logic.
 - Anything fetched for a page should go through `useSupabaseData` so the swap waits for it.
 - `<meta charset>` must stay within the first 1024 bytes - the prefetch script is deliberately inserted after it.
-- The strip patterns in `prerender.mjs` match both `data-prefetch` and `data-prefetch=""`, because the browser serialises the attribute the second way. Pages are captured through the SPA fallback (which serves the already-written homepage), so unstripped scripts would pile up on every page.
+- The strip patterns in `prerender.mjs` (`data-prefetch`, `data-boot`, `data-hero`) match both the bare attribute and `=""`, because the browser serialises the attribute the second way. Pages are captured through the SPA fallback (which serves the already-written homepage), so unstripped scripts would pile up on every page.
 - Fraunces uses `font-display: block`, not `swap` (`src/fonts.css`): the static and live headings must paint identically, or the swap registers as a new, larger "largest paint".
 - Cover images: `npm run images:variants` generates the 160-640px `.webp` siblings `BookCover` builds its `srcset` from. Run it after adding or replacing a cover.
 

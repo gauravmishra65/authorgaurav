@@ -108,6 +108,26 @@ function withPrefetch(html, urls) {
   return stripped.replace(/<meta charset[^>]*>/i, (m) => m + script);
 }
 
+// The hero cover is the page's largest paint, but it only appears in <body>, so
+// the browser learns about it after the stylesheet and fonts have already been
+// queued. A preload in <head> (with the same srcset/sizes, so the same file is
+// chosen) starts it immediately instead. Pages get exactly one, taken from the
+// first image the app marked fetchpriority="high".
+function withHeroPreload(html) {
+  const stripped = html.replace(/<link[^>]*data-hero[^>]*>/g, '');
+  const img = stripped.match(/<img\b[^>]*\bfetchpriority="high"[^>]*>/);
+  if (!img) return stripped;
+  const attr = (name) => (img[0].match(new RegExp('\\s' + name + '="([^"]*)"')) ?? [])[1];
+  const src = attr('src');
+  if (!src) return stripped;
+  const srcset = attr('srcset');
+  const link =
+    `<link rel="preload" as="image" fetchpriority="high" data-hero href="${src}"` +
+    (srcset ? ` imagesrcset="${srcset}" imagesizes="${attr('sizes') ?? '100vw'}"` : '') +
+    '>';
+  return stripped.replace(/<meta charset[^>]*>/i, (m) => m + link);
+}
+
 // The pre-rendered page is already complete, so the app bundle isn't needed to
 // show it - but left in <head> it races the hero image, fonts and CSS for the
 // same bandwidth. Hold the entry script (and the chunk preloads the browser
@@ -143,7 +163,7 @@ for (const route of routes) {
       throw new Error(`still showing the generic homepage title after waiting — route-specific <Seo> never ran`);
     }
 
-    const html = withDeferredBoot(withPrefetch(await page.content(), [...seenReads]));
+    const html = withDeferredBoot(withHeroPreload(withPrefetch(await page.content(), [...seenReads])));
     const outDir = route === '/' ? dist : join(dist, ...route.split('/').filter(Boolean));
     mkdirSync(outDir, { recursive: true });
     writeFileSync(join(outDir, 'index.html'), `<!doctype html>\n${html}`);
