@@ -104,6 +104,26 @@ async function main() {
       addIssue(issues, 'fail', book.slug, 'featured-without-purchase-link', 'book is marked featured but has no real purchase/pre-order link (all buy_links/kindle_url/paperback_url are empty or "#")');
     }
 
+    // Catches exactly the kind of accidental paste/concatenation bug found
+    // live during the Phase 11 audit (a goodreads_url with the same URL
+    // pasted twice back-to-back, and another with a stray leading space) —
+    // a URL field with surrounding whitespace or two "http" protocols is
+    // never intentional.
+    const urlFields = {
+      goodreads_url: book.goodreads_url, book_website: book.book_website, sample_url: book.sample_url,
+      kindle_url: book.kindle_url, paperback_url: book.paperback_url, shopify_url: book.shopify_url,
+      shopee_url: book.shopee_url, lazada_url: book.lazada_url,
+    };
+    for (const [field, value] of Object.entries(urlFields)) {
+      if (!value) continue;
+      if (value !== value.trim()) {
+        addIssue(issues, 'fail', book.slug, 'malformed-url', `${field} has leading/trailing whitespace: "${value}"`);
+      }
+      if ((value.match(/https?:\/\//g) ?? []).length > 1) {
+        addIssue(issues, 'fail', book.slug, 'malformed-url', `${field} looks like two URLs concatenated together: "${value}"`);
+      }
+    }
+
     // Mirrors getBuyOptions()'s own reconciliation exactly — a buy_links
     // entry labeled "Kindle" is a fallback that's superseded by kindle_url,
     // never shown alongside it, so it's excluded here the same way or this

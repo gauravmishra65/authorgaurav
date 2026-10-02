@@ -17,21 +17,32 @@ This entire checklist requires access to the real Google account that owns (or w
 
 ## 3. Request indexing for key pages
 
-Google will discover pages from the sitemap on its own schedule, but you can nudge the important ones sooner:
+Google will discover pages from the sitemap on its own schedule, but you can nudge the important ones sooner. Use the **URL Inspection** tool (search bar at the top of Search Console) for each of these — the set the improvement program specifically calls out:
 
-1. Use the **URL Inspection** tool (search bar at the top of Search Console) for each of these:
    - `https://authorgaurav.com/`
    - `https://authorgaurav.com/books/`
+   - `https://authorgaurav.com/start-here/`
    - `https://authorgaurav.com/books/the-shadow-code/`
    - `https://authorgaurav.com/books/offbeat-love/`
+   - `https://authorgaurav.com/books/lalita-sahasranama/`
+   - `https://authorgaurav.com/books/vishnu-sahasranama/`
+   - `https://authorgaurav.com/media/`
    - `https://authorgaurav.com/about/`
-2. For each, if it shows "URL is not on Google," click **Request Indexing**. This queues a crawl — it isn't instant, and Google may still take its own time.
-3. Do **not** repeat this for every single page on the site in one sitting — Search Console rate-limits indexing requests, and it isn't necessary since the sitemap covers everything.
+   - `https://authorgaurav.com/blog/` (the Journal)
+   - `https://authorgaurav.com/where-to-buy/`
 
-## 4. Confirm canonical and mobile usability
+For each, if it shows "URL is not on Google," click **Request Indexing**. This queues a crawl — it isn't instant, and Google may still take its own time. Do **not** repeat this for every single page on the site in one sitting — Search Console rate-limits indexing requests, and it isn't necessary since the sitemap covers everything.
 
-1. In the **URL Inspection** results for a couple of pages above, check the "Coverage" section confirms the canonical URL Google selected matches the page's own `<link rel="canonical">` tag (this project's `src/lib/url.ts`/`Seo.tsx` already keep canonical, sitemap, and og:url in agreement — see `docs/accessibility-test-results.md` and the link-validation report for the verified state as of this pass).
-2. Check the **Mobile Usability** report (under Experience) after the site has been crawled a few times — it should show no errors, given the site has already been tested at 320px+ viewports.
+## 4. Work through the full URL Inspection report, not just canonical
+
+For each page above, the URL Inspection tool's result covers several distinct checks — look at all of them, not just the top line:
+
+1. **Google-selected canonical** vs **User-declared canonical** — these should match. This project's `src/lib/url.ts`/`Seo.tsx` already emit one consistent canonical per page (trailing-slash form, matching the sitemap), so a mismatch here would mean Google is choosing a different URL than the one declared — worth investigating if it happens, not expected.
+2. **Page fetch** — should show "Successful." A failure here usually means a temporary crawl issue; re-request indexing after confirming the page loads normally in a browser.
+3. **Rendered content** — Search Console can show you the DOM Google actually saw after rendering. This site pre-renders static HTML for every public route (`scripts/prerender.mjs`), so the rendered content should already include the real page text, not just an empty app shell — a quick way to confirm pre-rendering is working as intended.
+4. **Mobile usability** — should show no errors, given the site has already been tested at 320px+ viewports (see `reports/` accessibility results).
+5. **Structured data** — the report should show the `Person`, `Book`, `BlogPosting`, `BreadcrumbList`, `Event`, or `FAQPage` structured data each page actually emits (see `PersonStructuredData.tsx`, `BookStructuredData.tsx`, `EventStructuredData.tsx`, and each page's `jsonLd` prop) with no errors or warnings. If a page shows "no structured data detected" where one of these should exist, that's worth investigating — it would mean the JSON-LD didn't render into the page Google fetched.
+6. **Indexing status** — the actual outcome (indexed / not indexed / crawled, not indexed, etc.) and Google's stated reason if not indexed. **Do not promise this will happen immediately** — indexing timing is entirely Google's own schedule, sometimes hours, sometimes weeks, and nothing in this checklist or the codebase can force it faster.
 
 ## 5. Ongoing hygiene
 

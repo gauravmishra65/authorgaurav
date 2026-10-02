@@ -1,5 +1,5 @@
 import { getVerifiedSocialLinks } from '../data/social';
-import { AUTHOR_SHORT_BIO, AUTHOR_PORTRAIT_PATH, AUTHOR_OWNED_SITES } from '../data/author';
+import { AUTHOR_SHORT_BIO, AUTHOR_PORTRAIT_PATH, AUTHOR_OWNED_SITES, AUTHOR_VERIFIED_PROFILES } from '../data/author';
 import { SITE_URL, canonicalUrl } from '../lib/url';
 
 /** The single Person node for Gaurav Mishra as an entity — reused wherever a
@@ -16,6 +16,6 @@ export function buildPersonStructuredData(): Record<string, unknown> {
     image: `${SITE_URL}${AUTHOR_PORTRAIT_PATH}`,
     jobTitle: 'Author',
     description: AUTHOR_SHORT_BIO,
-    sameAs: [...AUTHOR_OWNED_SITES, ...getVerifiedSocialLinks().map((s) => s.href)],
+    sameAs: [...AUTHOR_OWNED_SITES, ...AUTHOR_VERIFIED_PROFILES, ...getVerifiedSocialLinks().map((s) => s.href)],
   };
 }

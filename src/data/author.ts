@@ -22,3 +22,16 @@ export const AUTHOR_OWNED_SITES = [
   'https://the-shadow-code.com',
   'https://writetogetherhub.com',
 ];
+
+// Verified third-party author/retailer profiles that belong in Person.sameAs
+// for entity recognition, but aren't "follow me" social links (so they don't
+// belong in social.ts's socialLinks, which drives the header/footer icon
+// rows and has no icon for a retailer profile) and aren't owned sites either.
+// Each entry here was checked live during the Phase 11 author-entity audit —
+// same portrait, a bio matching AUTHOR_SHORT_BIO, and real listed titles —
+// not the generic Amazon search result. A same-name Goodreads author profile
+// was found NOT to be a match (a different, unrelated "Gaurav Mishra") and
+// is deliberately not included here; see docs/search-engine-distribution.md.
+export const AUTHOR_VERIFIED_PROFILES = [
+  'https://www.amazon.in/stores/author/B0H34FKXHP',
+];
