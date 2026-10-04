@@ -113,7 +113,7 @@ export default function Home() {
               Fiction, thrillers, spiritual reading and stories drawn from different corners of life.
             </p>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {selectedBooks.map((b) => <BookCard key={b.id} book={b} source="home-selected-books" showRetailerButtons={false} />)}
+              {selectedBooks.map((b) => <BookCard key={b.id} book={b} source="home-selected-books" showRetailerButtons={false} showSalesBadge />)}
             </div>
             <p className="text-center mt-10">
               <Link to="/books/" className="btn-caps btn-gold-outline inline-block rounded-xs px-6 py-3" onClick={() => trackEvent('homepage_cta_click', { label: 'View All Books' })}>View All Books</Link>

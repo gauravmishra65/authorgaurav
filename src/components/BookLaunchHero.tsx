@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BookCover from './BookCover';
 import ReleaseCountdown from './ReleaseCountdown';
+import SalesBadge from './SalesBadge';
 import { formatReleaseDate, isReleased } from '../lib/releaseStatus';
 import type { Book } from '../data/books';
 
@@ -43,9 +44,12 @@ export default function BookLaunchHero({ book, translationEdition }: BookLaunchH
 
         <div className="grid items-center gap-12 md:grid-cols-[auto_1fr]">
           <div className="flex flex-col items-center md:items-start">
-            {translationEdition && <p className="label-caps text-2xs text-gold-lt/70 mb-3">Choose Edition</p>}
+            {translationEdition && <p className="label-caps text-2xs text-gold-lt/70 mb-7">Choose Edition</p>}
             <div className="flex justify-center items-end gap-6 fade-up mx-auto md:mx-0">
-              <BookCover {...book} size="lg" href={`/books/${book.slug}/`} priority />
+              <div className="relative">
+                <BookCover {...book} size="lg" href={`/books/${book.slug}/`} priority />
+                <SalesBadge book={book} />
+              </div>
               {translationEdition && (
                 <div className="flex flex-col items-center gap-2">
                   <BookCover {...translationEdition} size="md" href={`/books/${translationEdition.slug}/`} />

@@ -4,6 +4,7 @@ import BookCover from './BookCover';
 import LanguageBadge from './LanguageBadge';
 import FormatBadge from './FormatBadge';
 import RetailerButton from './RetailerButton';
+import SalesBadge from './SalesBadge';
 import { trackEvent } from '../lib/analytics';
 
 interface BookCardProps {
@@ -19,6 +20,8 @@ interface BookCardProps {
    * grid should support; purchase complexity now lives only on each
    * book's own page (and on /where-to-buy), not duplicated on every card. */
   showRetailerButtons: boolean;
+  /** Overlay the "N+ Sold" star on the cover when the book has a sales milestone set. Off by default; the homepage turns it on. */
+  showSalesBadge?: boolean;
 }
 
 /** One book in a catalog grid — cover, title, language/status badges, a
@@ -26,13 +29,16 @@ interface BookCardProps {
  * BookPurchasePanel, via `getBuyOptions`), and Explore Book. Cover aspect
  * ratio is never stretched — BookCover already sizes by its own fixed
  * w/h classes. */
-export default function BookCard({ book, source, showRetailerButtons }: BookCardProps) {
+export default function BookCard({ book, source, showRetailerButtons, showSalesBadge = false }: BookCardProps) {
   const buyOptions = getBuyOptions(book);
   const onExplore = () => trackEvent('book_explore', { book: book.slug, source });
 
   return (
     <div className="flex flex-col items-center text-center gap-3 p-5 rounded-md border border-gold/15 bg-ivory hover:border-gold/40 hover:-translate-y-1 transition-all">
-      <BookCover {...book} size="md" href={`/books/${book.slug}/`} onClick={onExplore} />
+      <div className="relative">
+        <BookCover {...book} size="md" href={`/books/${book.slug}/`} onClick={onExplore} />
+        {showSalesBadge && <SalesBadge book={book} size="sm" />}
+      </div>
       <div className="flex items-center gap-2 flex-wrap justify-center">
         <LanguageBadge language={book.language} />
         <FormatBadge>{book.categories?.[0] ?? book.genre}</FormatBadge>
