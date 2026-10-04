@@ -31,11 +31,9 @@ function buildJsonLd() {
   };
 }
 
-// The same representative spread used on /about's "One World Per Book" —
-// kept in sync deliberately, so a reader who browses both pages sees a
-// consistent, curated picture of the catalog rather than two different
-// "selected books" lists.
-const selectedSlugs = ['the-shadow-code', 'offbeat-love', 'journey-of-grace', 'vishnu-sahasranama'];
+// The curated books shown in "Explore the Books". /about keeps its own
+// "Selected Books" list; the two are no longer identical.
+const selectedSlugs = ['the-shadow-code', 'offbeat-love', 'the-friend-you-keep', 'interview-guide'];
 
 const readingMoods = ['Suspense & Mystery', 'Love & Relationships', 'Faith & Reflection', 'Life & Personal Growth'];
 
