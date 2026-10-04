@@ -44,6 +44,20 @@ const paths = [
     slug: 'journey-of-grace',
     cta: 'Explore Reflective Reading',
   },
+  {
+    mood: 'Friendship & Connection',
+    question: 'I want to build better friendships.',
+    description: 'Practical reflections on recognising trustworthy people, deepening connections and becoming a more dependable friend, in life and at work.',
+    slug: 'the-friend-you-keep',
+    cta: 'Explore Friendship',
+  },
+  {
+    mood: 'Career & Interviews',
+    question: 'I want to prepare for an interview.',
+    description: 'A practical handbook for job seekers: answer frameworks, 64 tough questions, worksheets and interview-day cheat sheets.',
+    slug: 'interview-guide',
+    cta: 'Explore the Interview Guide',
+  },
 ];
 
 export default function StartHere() {
@@ -55,7 +69,7 @@ export default function StartHere() {
     <>
       <Seo
         title="Start Here: New Reader's Guide | Gaurav Mishra"
-        description="New to Gaurav Mishra's books? Choose the mood you're in — suspense, relationships, faith, or reflection — and find the book that fits."
+        description="New to Gaurav Mishra's books? Choose the mood you're in — suspense, relationships, faith, reflection, friendship, or careers — and find the book that fits."
         path="/start-here"
       />
 
@@ -75,7 +89,7 @@ export default function StartHere() {
 
       {books && (
         <section className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {paths.map(({ mood, question, description, slug, cta }) => {
               const book = books.find((b) => b.slug === slug);
               if (!book) return null;
