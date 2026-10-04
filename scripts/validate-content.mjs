@@ -154,6 +154,14 @@ async function main() {
     addUrl('Lazada', book.lazada_url);
     for (const [href, labels] of urlCounts) {
       if (labels.length > 1) {
+        // A paperback sold through Amazon legitimately shares its URL with that
+        // marketplace's button, so this one pairing is flagged for a look but
+        // does not block a deploy. Any other repeat is still a failure.
+        const paperbackOnAmazon = labels.length === 2 && labels.includes('Paperback') && labels.some((l) => l === 'Amazon-IN' || l === 'Amazon-US');
+        if (paperbackOnAmazon) {
+          addIssue(issues, 'warn', book.slug, 'paperback-same-as-amazon', `the Paperback and ${labels.find((l) => l !== 'Paperback')} buttons use the same URL (${href}) - both are shown; clear one if that is not intended`);
+          continue;
+        }
         addIssue(issues, 'fail', book.slug, 'duplicate-retailer-url', `the same URL (${href}) is used for ${labels.length} retailer entries (${labels.join(', ')}) — confirm these are meant to be separate retailers`);
       }
     }
