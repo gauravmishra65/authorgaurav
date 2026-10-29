@@ -31,6 +31,8 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Accessibility = lazy(() => import('./pages/Accessibility'));
+const GauravJyotish = lazy(() => import('./pages/GauravJyotish'));
+const GauravJyotishPrivacy = lazy(() => import('./pages/GauravJyotishPrivacy'));
 
 // Admin is code-split out of the public bundle — regular visitors never
 // download the CRUD forms or the auth-gated layout.
@@ -81,6 +83,8 @@ export default function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/accessibility" element={<Accessibility />} />
+          <Route path="/gaurav-jyotish" element={<GauravJyotish />} />
+          <Route path="/gaurav-jyotish-privacy" element={<GauravJyotishPrivacy />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

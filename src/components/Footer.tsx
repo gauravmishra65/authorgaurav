@@ -27,6 +27,7 @@ export default function Footer() {
               <li><Link to="/reader-circle/" className="text-ivory/75 hover:text-ivory transition-colors">Reader Circle</Link></li>
               <li><Link to="/writing-resources/" className="text-ivory/75 hover:text-ivory transition-colors">Writing Resources</Link></li>
               <li><Link to="/interview-resources/" className="text-ivory/75 hover:text-ivory transition-colors">Interview Resources</Link></li>
+              <li><Link to="/gaurav-jyotish/" className="text-ivory/75 hover:text-ivory transition-colors">Gaurav Jyotish App</Link></li>
               <li><Link to="/contact/" className="text-ivory/75 hover:text-ivory transition-colors">Contact</Link></li>
             </ul>
           </div>

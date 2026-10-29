@@ -412,3 +412,88 @@ h1, h2, h3, h4 {
   pointer-events: none;
   background: radial-gradient(ellipse 55% 60% at 88% 8%, rgba(211,171,110,0.16), transparent 65%);
 }
+
+/* Gaurav Jyotish app page (/gaurav-jyotish) - the app's own palette, scoped to
+   .jyotish so the rest of the site keeps its tokens. Saffron on cream is
+   4.5:1, so it is only used for small labels in bold/uppercase. */
+.jyotish {
+  --jy-indigo: #0e0a2e;
+  --jy-indigo-lt: #36207a;
+  --jy-gold: #f6b347;
+  --jy-gold-dk: #e07b1f;
+  --jy-saffron: #b4530a;
+  --jy-cream: #f7f3ec;
+}
+/* Letter-spacing pulls Devanagari conjuncts apart. */
+.jyotish[lang='hi'] .eyebrow,
+.jyotish[lang='hi'] .btn-caps { letter-spacing: normal; text-transform: none; }
+.jy-hero {
+  background: radial-gradient(120% 90% at 18% 0%, var(--jy-indigo-lt) 0%, var(--jy-indigo) 62%);
+  color: var(--jy-cream);
+}
+.jy-band { background: var(--jy-indigo); color: var(--jy-cream); }
+.jy-cream { background: var(--jy-cream); color: var(--color-text); }
+.jy-eyebrow-light { color: var(--jy-saffron); }
+.jy-eyebrow-dark { color: var(--jy-gold); }
+
+/* Tap targets are at least 48px (3rem) tall. */
+.jy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, background 0.25s ease;
+}
+.jy-btn-gold {
+  background: linear-gradient(180deg, var(--jy-gold) 0%, var(--jy-gold-dk) 100%);
+  color: var(--jy-indigo);
+}
+.jy-btn-gold:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 10px 24px -10px rgba(246, 179, 71, 0.7); }
+.jy-btn-ghost { border: 1px solid rgba(246, 179, 71, 0.65); color: var(--jy-gold); }
+.jy-btn-ghost:hover { background: rgba(246, 179, 71, 0.12); }
+.jy-btn-soon { border: 1px dashed rgba(247, 243, 236, 0.45); color: rgba(247, 243, 236, 0.9); cursor: default; }
+.jy-soon-tag {
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(246, 179, 71, 0.18);
+  color: var(--jy-gold);
+  padding: 0.1rem 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+.jy-card {
+  background: #fff;
+  border: 1px solid rgba(54, 32, 122, 0.12);
+  border-radius: 1rem;
+  box-shadow: 0 8px 28px rgba(14, 10, 46, 0.07);
+}
+.jy-card-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(246, 179, 71, 0.22);
+  border-radius: 1rem;
+}
+.jy-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  border-radius: 0.85rem;
+  background: linear-gradient(145deg, var(--jy-indigo-lt), var(--jy-indigo));
+  color: var(--jy-gold);
+}
+.jy-phone {
+  border-radius: 1.9rem;
+  border: 6px solid #2f2477;
+  background: var(--jy-indigo);
+  box-shadow: 0 0 0 1px rgba(246, 179, 71, 0.35), 0 24px 50px -18px rgba(14, 10, 46, 0.65);
+  overflow: hidden;
+}
+.jy-scroller { scrollbar-width: thin; scrollbar-color: rgba(54, 32, 122, 0.5) transparent; }
+.jyotish details > summary { list-style: none; }
+.jyotish details > summary::-webkit-details-marker { display: none; }

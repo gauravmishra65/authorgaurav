@@ -41,6 +41,7 @@ const secondaryLinks = [
   { label: 'Reader Circle', to: '/reader-circle/' },
   { label: 'News', to: '/news/' },
   { label: 'Events', to: '/events/' },
+  { label: 'Gaurav Jyotish', to: '/gaurav-jyotish/' },
   { label: 'Contact', to: '/contact/' },
 ];
 

@@ -145,6 +145,7 @@ before enabling it.
 | `journal_book_click` | The end-of-article CTA on a blog post is clicked (only renders when that post's `related_link` is set in `/admin`) | `link` (a book slug, or `writetogetherhub`) |
 | `reader_circle_view` | The `/reader-circle` page mounts | — |
 | `reader_circle_welcome_click` | A CTA on `/reader-circle/welcome` is clicked (the book/resource/social suggestion after a real Reader Circle signup) | `type` (`book`, `resource`, or `social`), `label` |
+| `jyotish_demo_click` | The "Try the free demo" button on `/gaurav-jyotish` is clicked (opens the visitor's email app with a pre-filled demo request) | `lang` (`en` or `hi`) |
 
 No event ever carries an email address, name, message body, or anything
 matching `/email|name|message|password|token/i` — `trackEvent()` strips any
